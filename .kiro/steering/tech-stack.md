@@ -4,7 +4,7 @@
 
 | Concern | Technology |
 |---------|------------|
-| Framework | Spring Boot 3.x (Java 21) |
+| Framework | Spring Boot 3.x (Java 17) |
 | Security | Spring Security + JWT (RS256 access tokens, HttpOnly refresh cookies) |
 | Batch Processing | Spring Batch (email polling, archival, scheduled jobs) |
 | Database | PostgreSQL 16 (prod), H2 (dev/test) |
