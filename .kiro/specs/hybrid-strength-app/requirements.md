@@ -92,8 +92,8 @@ HybridStrength is a unified training platform for hybrid athletes, CrossFitters,
 1. WHEN a User saves a generated or manually created Workout, THE Workout_Creator_Service SHALL persist it to the Workout data store associated with that User's identity.
 2. THE Workout_Creator_Service SHALL allow a User to update the name, description, and Section content of any Workout owned by that User.
 3. WHEN a User deletes a Workout, THE Workout_Creator_Service SHALL remove it from the Vault and SHALL return a 404 Not Found for any subsequent fetch of that Workout.
-4. IF a User attempts to modify or delete a Workout owned by a different User, THEN THE Workout_Creator_Service SHALL return a 403 Forbidden response.
-5. WHEN a User clones a Workout, THE Workout_Creator_Service SHALL create a new independent copy of that Workout in the User's Vault with a distinct identifier.
+4. IF a User attempts to read, modify, or delete a Workout or Program owned by a different User, THEN THE Workout_Creator_Service SHALL return a 403 Forbidden response.
+5. THE Workout_Creator_Service SHALL only return Workouts and Programs associated with the authenticated User's identity; Workouts and Programs are private and SHALL NOT be visible to other Users.
 6. THE Workout_Creator_Service SHALL allow a User to view the full details of any Workout in their Vault, including all Sections and Exercises.
 
 ---
@@ -120,10 +120,12 @@ HybridStrength is a unified training platform for hybrid athletes, CrossFitters,
 1. WHEN a User starts a Workout, THE Workout_Coach_UI SHALL enter Theater Mode, displaying only the current Section, its Exercises, and the active timer.
 2. THE Session_Service SHALL detect the Section type and configure the timer accordingly: countdown for AMRAP, stopwatch for Strength, and interval for Tabata and EMOM.
 3. WHILE a Session is active, THE Workout_Coach_UI SHALL display navigation controls to move to the next or previous Section.
-4. WHEN a User checks off an Exercise within a Section, THE Session_Service SHALL record the completion and SHALL automatically start the configured rest timer for that Exercise.
-5. WHEN the rest timer expires, THE Workout_Coach_UI SHALL display a visual and audible notification to resume the next Exercise.
-6. WHILE a Session is active, THE Session_Service SHALL persist the current Session state to the Workout session data store after each Section completion, so that the Session can be resumed if the application closes.
-7. WHEN a User reopens the application with an incomplete Session, THE Workout_Coach_UI SHALL offer a "Resume Session" action that restores the Session to the last persisted state.
+4. WHEN a User checks off an Exercise within a Section, THE Session_Service SHALL record the completion and SHALL automatically start the rest timer for that Exercise, using the default duration defined in the Exercise definition.
+5. THE Workout_Coach_UI SHALL allow a User to adjust the rest timer duration during an active Session; the adjusted duration SHALL apply to the current rest period only and SHALL NOT modify the Exercise definition.
+6. WHEN the rest timer expires, THE Workout_Coach_UI SHALL display a visual and audible notification to resume the next Exercise.
+7. WHILE a Session is active, THE Workout_Coach_UI SHALL display a "Next Up" indicator showing the name of the next Exercise within the current Section and, where applicable, the name of the next Section.
+8. WHILE a Session is active, THE Session_Service SHALL persist the current Session state to the Workout session data store after each Section completion, so that the Session can be resumed if the application closes.
+9. WHEN a User reopens the application with an incomplete Session, THE Workout_Coach_UI SHALL offer a "Resume Session" action that restores the Session to the last persisted state.
 
 ---
 
@@ -135,7 +137,7 @@ HybridStrength is a unified training platform for hybrid athletes, CrossFitters,
 
 1. WHEN a User completes a Strength Exercise set, THE Session_Service SHALL accept and persist the weight lifted, number of repetitions, and RPE value for that set.
 2. WHEN a User completes an AMRAP, EMOM, or For Time Section, THE Session_Service SHALL accept and persist the CrossFit Score (rounds completed, additional reps, and total time where applicable).
-3. THE Session_Service SHALL accept voice input for Section score logging and SHALL transcribe the spoken score into the corresponding structured Performance Log fields.
+3. DURING an active AMRAP Section, THE Workout_Coach_UI SHALL display a tap-based round counter that increments the round count with each tap, and SHALL provide a field for the User to log additional reps at the end of the Section.
 4. WHEN a User ends a Session, THE Session_Service SHALL mark the Session as complete and SHALL publish a SessionCompleted event to the message broker for consumption by the Progress_Tracker_Service.
 5. IF a User attempts to end a Session with no logged data, THEN THE Session_Service SHALL prompt the User to confirm before marking the Session as complete.
 
@@ -148,10 +150,11 @@ HybridStrength is a unified training platform for hybrid athletes, CrossFitters,
 #### Acceptance Criteria
 
 1. WHEN a User completes a Session that is part of a Program, THE Session_Service SHALL advance the Program's current day pointer to the next scheduled Workout.
-2. WHEN a User views the home screen, THE Workout_Coach_UI SHALL display the next scheduled Program Workout as a "Next Step" indicator.
+2. WHEN a User views the home screen, THE Workout_Coach_UI SHALL display the next scheduled Program Workout as a "Next Step" indicator, showing the Program name, current week number, day number, and Workout name alongside a "Start" action.
 3. WHEN a User completes the final Session of a Program, THE Session_Service SHALL mark the Program as complete and SHALL notify the User via the UI.
 4. THE Session_Service SHALL allow a User to start a new standalone Workout or a new Program independently of any active Program.
 5. WHILE a Program is active, THE Session_Service SHALL allow a User to continue the current Program from the home screen with a single action.
+6. WHEN a User navigates away from a Workout Details screen or cancels before starting a Session, THE Session_Service SHALL NOT advance or terminate the User's active Program state.
 
 ---
 
@@ -203,7 +206,7 @@ HybridStrength is a unified training platform for hybrid athletes, CrossFitters,
 
 1. WHEN a User logs in, THE Workout_Coach_UI SHALL display the home screen with the following primary actions: "New Workout", "My Performance", and "Workout" (resume or start).
 2. WHEN an active Program exists for the User, THE Workout_Coach_UI SHALL display the next scheduled Program day as the "Next Step" indicator on the home screen.
-3. THE Workout_Coach_UI SHALL NOT be implemented as a Single Page Application using React, Angular, or Vue SPA patterns.
+3. THE Workout_Coach_UI SHALL be implemented using React 18 with Next.js (App Router, SSR-first); it SHALL NOT be implemented as a client-side Single Page Application where all routing and rendering occurs in the browser.
 4. WHEN a User navigates between views, THE Workout_Coach_UI SHALL maintain authentication state without requiring re-login for the duration of the JWT validity period.
 
 ---
@@ -214,11 +217,12 @@ HybridStrength is a unified training platform for hybrid athletes, CrossFitters,
 
 #### Acceptance Criteria
 
-1. THE Workout_Creator_Service SHALL own and manage the Workout data store exclusively; no other service SHALL write directly to it.
-2. THE Session_Service SHALL own and manage the Workout session data store and SHALL publish domain events to RabbitMQ for cross-service communication.
-3. THE Progress_Tracker_Service SHALL consume SessionCompleted events from RabbitMQ and SHALL maintain its own read-optimised Performance data store.
-4. THE Auth_Service SHALL own and manage the User data store; all other services SHALL validate identity via JWT verification only.
-5. WHEN a SessionCompleted event cannot be delivered to RabbitMQ, THE Session_Service SHALL retry delivery using an exponential backoff strategy with a maximum of 5 attempts before logging the failure for manual intervention.
+1. THE Workout_Creator_Service SHALL own and manage the Workout data store exclusively; no other service SHALL read from or write directly to it.
+2. THE Session_Service SHALL retrieve Workout and Program definitions by calling the Workout_Creator_Service API; THE Session_Service SHALL NOT query the Workout data store directly.
+3. THE Session_Service SHALL own and manage the Workout session data store and SHALL publish domain events to RabbitMQ for cross-service communication.
+4. THE Progress_Tracker_Service SHALL consume SessionCompleted events from RabbitMQ and SHALL maintain its own read-optimised Performance data store.
+5. THE Auth_Service SHALL own and manage the User data store; all other services SHALL validate identity via JWT verification only.
+6. WHEN a SessionCompleted event cannot be delivered to RabbitMQ, THE Session_Service SHALL retry delivery using an exponential backoff strategy with a maximum of 5 attempts before logging the failure for manual intervention.
 
 ---
 
