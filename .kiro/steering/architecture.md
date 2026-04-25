@@ -12,7 +12,7 @@ Hexagonal architecture (ports and adapters) applied within each microservice. Mi
 | `workout-creator-service` | AI workout/program generation via Gemini, Vault CRUD, search |
 | `workout-session-service` | Theater Mode, live logging, session state, program progression |
 | `progress-tracker-service` | Analytics, dashboards, benchmarks, heat map |
-| `workout-coach-ui` | Next.js SSR frontend, all user-facing views |
+| `workout-coach-ui` | React SPA frontend (Vite + React Router), all user-facing views |
 
 ## Hexagonal Architecture Rules
 
@@ -57,7 +57,7 @@ application/     # Use case implementations — orchestrates domain and ports
 
 ## Frontend Architecture
 
-- Next.js App Router with SSR-first rendering
-- Pages are server-rendered by default
-- Client components (`"use client"`) used only where interactivity is required (e.g. Theater Mode timers, AMRAP lap counter)
-- No global client-side routing as the primary navigation pattern
+- React 18 SPA with Vite as the build tool and dev server
+- React Router v6 for all client-side routing
+- All components are client-rendered
+- Deployed as static files (e.g. behind a CDN or served from a simple HTTP server)

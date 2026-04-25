@@ -8,7 +8,7 @@ hybrid-strength/
 ├── workout-creator-service/    # Spring Boot — AI generation, Vault CRUD, search
 ├── workout-session-service/    # Spring Boot — Theater Mode, logging, program progression
 ├── progress-tracker-service/   # Spring Boot — analytics, benchmarks, heat map
-├── workout-coach-ui/           # Next.js 18 (App Router, SSR-first) — all user-facing views
+├── workout-coach-ui/           # React 18 SPA (Vite + React Router) — all user-facing views
 ├── docker/                     # Docker Compose and init scripts for local dev
 ├── docs/                       # Additional documentation
 └── .kiro/
@@ -114,29 +114,36 @@ src/test/resources/
 
 ```
 workout-coach-ui/
-├── app/                        # Next.js App Router pages (SSR by default)
-│   ├── layout.tsx
-│   ├── page.tsx                # Home screen
-│   ├── workout/
-│   │   ├── new/                # New workout / Gemini generation
-│   │   ├── [id]/               # Workout details
-│   │   └── session/            # Theater Mode (client component)
-│   ├── performance/            # Progress dashboard
-│   └── auth/
-│       ├── login/
-│       └── register/
-├── components/                 # Shared UI components
-│   ├── ui/                     # Primitives (buttons, inputs, cards)
-│   └── layout/                 # Navigation, headers, wrappers
-├── features/                   # Feature-based client modules
-│   ├── theater/                # Theater Mode timer, lap counter, rest timer
-│   ├── vault/                  # Vault search and filter
-│   ├── progress/               # Dashboard charts and heat map
-│   └── auth/                   # Login and registration forms
-├── hooks/                      # Custom React hooks
-├── lib/                        # API client layer and utilities
-├── types/                      # TypeScript type definitions
-└── public/                     # Static assets
+├── index.html                  # Vite entry point
+├── src/
+│   ├── main.tsx                # App bootstrap and router setup
+│   ├── App.tsx                 # Root component with route definitions
+│   ├── pages/                  # Route-level page components
+│   │   ├── Home.tsx
+│   │   ├── workout/
+│   │   │   ├── NewWorkout.tsx
+│   │   │   ├── WorkoutDetail.tsx
+│   │   │   └── WorkoutSession.tsx   # Theater Mode
+│   │   ├── performance/
+│   │   │   └── Dashboard.tsx
+│   │   └── auth/
+│   │       ├── Login.tsx
+│   │       └── Register.tsx
+│   ├── components/             # Shared UI components
+│   │   ├── ui/                 # Primitives (buttons, inputs, cards)
+│   │   └── layout/             # Navigation, headers, wrappers
+│   ├── features/               # Feature-based client modules
+│   │   ├── theater/            # Theater Mode timer, lap counter, rest timer
+│   │   ├── vault/              # Vault search and filter
+│   │   ├── progress/           # Dashboard charts and heat map
+│   │   └── auth/               # Login and registration forms
+│   ├── hooks/                  # Custom React hooks
+│   ├── lib/                    # API client layer and utilities
+│   └── types/                  # TypeScript type definitions
+├── public/                     # Static assets
+├── vite.config.ts
+├── tsconfig.json
+└── package.json
 ```
 
 ---
@@ -152,7 +159,7 @@ workout-coach-ui/
 | `workout-creator-service` | AI generation, Vault CRUD, search and filter |
 | `workout-session-service` | Theater Mode, live logging, program progression |
 | `progress-tracker-service` | Dashboard, benchmarks, muscle heat map |
-| `workout-coach-ui` | Home screen, navigation, SSR frontend |
+| `workout-coach-ui` | Home screen, navigation, SPA frontend |
 
 Master spec: `hybrid-strength-app/` — full platform requirements, source of truth before split.
 
@@ -165,4 +172,4 @@ Master spec: `hybrid-strength-app/` — full platform requirements, source of tr
 - **No cross-service DB access** — services communicate via REST API or RabbitMQ events only.
 - **Hexagonal layers** within each feature: `domain` → `ports` → `application` → `adapters`. Domain has zero framework imports.
 - **Flyway migration numbering** uses reserved ranges per service (see table above) to avoid conflicts when services share a migration history in dev.
-- **Client components** in Next.js are limited to interactive features (Theater Mode, timers, lap counter). All other pages are server components by default.
+- **Client components** — all React components are client-rendered in the SPA. No server/client component distinction.

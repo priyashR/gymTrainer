@@ -18,8 +18,9 @@
 
 | Concern | Technology |
 |---------|------------|
-| Framework | React 18 + Next.js (App Router, SSR-first) |
-| Build Tool | Vite (component tooling); Next.js handles page bundling |
+| Framework | React 18 (SPA) |
+| Build Tool | Vite |
+| Routing | React Router v6 (client-side) |
 | Language | TypeScript |
 | WebSocket Client | @stomp/stompjs |
 

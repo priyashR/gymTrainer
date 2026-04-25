@@ -40,7 +40,7 @@ Every service must have tests at three levels: unit, property-based, and integra
 
 - Test individual components in isolation
 - Focus on user interactions and rendered output — not implementation details
-- Mock API calls and server state
+- Mock API calls and external dependencies
 - Required for all interactive client components (Theater Mode timer, lap counter, rest timer)
 
 ### E2E Tests (Playwright)

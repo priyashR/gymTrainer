@@ -12,11 +12,10 @@ inclusion: always
 - PostgreSQL as the database
 
 ## Frontend
-- React 18 with Next.js (App Router, SSR-first)
-- Not a Single Page Application — pages are server-rendered by default
-- Client-side interactivity used only where required (e.g. Theater Mode timers, lap counters)
+- React 18 Single Page Application (SPA) — all rendering is client-side
+- Vite as the build tool and dev server
+- React Router v6 for client-side routing
 - TypeScript throughout
-- Build tool: Vite (for component-level tooling); Next.js handles page bundling
 
 ## Additional Standards
 - Full standards doc to be added

@@ -1,0 +1,5 @@
+/Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/property/RegistrationPropertyTest.java
+/Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/property/fake/FakeBcryptPasswordEncoder.java
+/Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/property/fake/InMemoryUserRepository.java
+/Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/unit/LoginServiceTest.java
+/Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/unit/RegisterUserServiceTest.java
