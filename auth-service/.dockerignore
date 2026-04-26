@@ -1,0 +1,5 @@
+target/
+.git/
+.kiro/
+*.md
+.jqwik-database

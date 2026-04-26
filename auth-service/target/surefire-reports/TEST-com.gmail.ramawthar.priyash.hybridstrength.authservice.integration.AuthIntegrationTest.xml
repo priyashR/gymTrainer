@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.gmail.ramawthar.priyash.hybridstrength.authservice.integration.AuthIntegrationTest" time="15.13" tests="7" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/priyashr/git/gymApp/auth-service/target/test-classes:/Users/priyashr/git/gymApp/auth-service/target/classes:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/priyashr/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/priyashr/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/priyashr/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/priyashr/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/priyashr/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/priyashr/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/priyashr/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/priyashr/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/priyashr/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/priyashr/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/priyashr/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/priyashr/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/priyashr/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/priyashr/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/priyashr/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/priyashr/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.3/jackson-dataformat-toml-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-database-postgresql/10.20.1/flyway-database-postgresql-10.20.1.jar:/Users/priyashr/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/priyashr/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/priyashr/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.47/nimbus-jose-jwt-9.47.jar:/Users/priyashr/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/priyashr/.m2/repository/net/logstash/logback/logstash-logback-encoder/8.0/logstash-logback-encoder-8.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/priyashr/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/priyashr/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/priyashr/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/priyashr/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/priyashr/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/priyashr/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/priyashr/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/priyashr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/priyashr/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/priyashr/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/priyashr/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/priyashr/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/priyashr/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik/1.9.2/jqwik-1.9.2.jar:/Users/priyashr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-api/1.9.2/jqwik-api-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-time/1.9.2/jqwik-time-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-engine/1.9.2/jqwik-engine-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-web/1.9.2/jqwik-web-1.9.2.jar:/Users/priyashr/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/priyashr/.m2/repository/org/testcontainers/testcontainers/1.20.4/testcontainers-1.20.4.jar:/Users/priyashr/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest-core/2.2/hamcrest-core-2.2.jar:/Users/priyashr/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/priyashr/.m2/repository/org/apache/commons/commons-compress/1.24.0/commons-compress-1.24.0.jar:/Users/priyashr/.m2/repository/org/rnorth/duct-tape/duct-tape/1.0.8/duct-tape-1.0.8.jar:/Users/priyashr/.m2/repository/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar:/Users/priyashr/.m2/repository/com/github/docker-java/docker-java-api/3.4.0/docker-java-api-3.4.0.jar:/Users/priyashr/.m2/repository/com/github/docker-java/docker-java-transport-zerodep/3.4.0/docker-java-transport-zerodep-3.4.0.jar:/Users/priyashr/.m2/repository/com/github/docker-java/docker-java-transport/3.4.0/docker-java-transport-3.4.0.jar:/Users/priyashr/.m2/repository/net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar:/Users/priyashr/.m2/repository/org/testcontainers/junit-jupiter/1.20.4/junit-jupiter-1.20.4.jar:/Users/priyashr/.m2/repository/org/testcontainers/postgresql/1.20.4/postgresql-1.20.4.jar:/Users/priyashr/.m2/repository/org/testcontainers/jdbc/1.20.4/jdbc-1.20.4.jar:/Users/priyashr/.m2/repository/org/testcontainers/database-commons/1.20.4/database-commons-1.20.4.jar:"/>
+    <property name="java.vm.vendor" value="Microsoft"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://www.microsoft.com"/>
+    <property name="catalina.useNaming" value="false"/>
+    <property name="user.timezone" value="Africa/Johannesburg"/>
+    <property name="org.jboss.logging.provider" value="slf4j"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="APPLICATION_NAME" value="auth-service"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="GB"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/microsoft-17.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/priyashr/git/gymApp/auth-service/target/surefire/surefirebooter-20260425113604142_3.jar /Users/priyashr/git/gymApp/auth-service/target/surefire 2026-04-25T11-36-04_042-jvmRun1 surefire-20260425113604142_1tmp surefire_0-20260425113604142_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/priyashr/git/gymApp/auth-service/target/test-classes:/Users/priyashr/git/gymApp/auth-service/target/classes:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/priyashr/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/priyashr/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/priyashr/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/priyashr/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/priyashr/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/priyashr/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/priyashr/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/priyashr/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/priyashr/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/priyashr/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/priyashr/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/priyashr/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/priyashr/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/priyashr/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/priyashr/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/priyashr/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.3/jackson-dataformat-toml-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-database-postgresql/10.20.1/flyway-database-postgresql-10.20.1.jar:/Users/priyashr/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/priyashr/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/priyashr/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.47/nimbus-jose-jwt-9.47.jar:/Users/priyashr/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/priyashr/.m2/repository/net/logstash/logback/logstash-logback-encoder/8.0/logstash-logback-encoder-8.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/priyashr/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/priyashr/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/priyashr/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/priyashr/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/priyashr/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/priyashr/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/priyashr/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/priyashr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/priyashr/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/priyashr/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/priyashr/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/priyashr/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/priyashr/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik/1.9.2/jqwik-1.9.2.jar:/Users/priyashr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-api/1.9.2/jqwik-api-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-time/1.9.2/jqwik-time-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-engine/1.9.2/jqwik-engine-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-web/1.9.2/jqwik-web-1.9.2.jar:/Users/priyashr/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/priyashr/.m2/repository/org/testcontainers/testcontainers/1.20.4/testcontainers-1.20.4.jar:/Users/priyashr/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest-core/2.2/hamcrest-core-2.2.jar:/Users/priyashr/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/priyashr/.m2/repository/org/apache/commons/commons-compress/1.24.0/commons-compress-1.24.0.jar:/Users/priyashr/.m2/repository/org/rnorth/duct-tape/duct-tape/1.0.8/duct-tape-1.0.8.jar:/Users/priyashr/.m2/repository/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar:/Users/priyashr/.m2/repository/com/github/docker-java/docker-java-api/3.4.0/docker-java-api-3.4.0.jar:/Users/priyashr/.m2/repository/com/github/docker-java/docker-java-transport-zerodep/3.4.0/docker-java-transport-zerodep-3.4.0.jar:/Users/priyashr/.m2/repository/com/github/docker-java/docker-java-transport/3.4.0/docker-java-transport-3.4.0.jar:/Users/priyashr/.m2/repository/net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar:/Users/priyashr/.m2/repository/org/testcontainers/junit-jupiter/1.20.4/junit-jupiter-1.20.4.jar:/Users/priyashr/.m2/repository/org/testcontainers/postgresql/1.20.4/postgresql-1.20.4.jar:/Users/priyashr/.m2/repository/org/testcontainers/jdbc/1.20.4/jdbc-1.20.4.jar:/Users/priyashr/.m2/repository/org/testcontainers/database-commons/1.20.4/database-commons-1.20.4.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/priyashr"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2022-04-19"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/microsoft-17.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/priyashr/git/gymApp/auth-service"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="/Users/priyashr/git/gymApp/auth-service/target/surefire/surefirebooter-20260425113604142_3.jar"/>
+    <property name="polyglot.engine.WarnInterpreterOnly" value="false"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="17.0.3+7-LTS"/>
+    <property name="user.name" value="priyashr"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="12.7.6"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Microsoft-33154"/>
+    <property name="localRepository" value="/Users/priyashr/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/microsoft/openjdk/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/"/>
+    <property name="catalina.home" value="/private/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/tomcat.0.16032919088375724207"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
+    <property name="java.version" value="17.0.3"/>
+    <property name="user.dir" value="/Users/priyashr/git/gymApp/auth-service"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="62893"/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
+    <property name="catalina.base" value="/private/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/tomcat.0.16032919088375724207"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/priyashr/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Microsoft"/>
+    <property name="java.vm.version" value="17.0.3+7-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="61.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[auth-service] "/>
+  </properties>
+  <testcase name="refresh_OldTokenAfterRotation_Returns401" classname="com.gmail.ramawthar.priyash.hybridstrength.authservice.integration.AuthIntegrationTest" time="1.786">
+    <system-out><![CDATA[11:36:19.633 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.gmail.ramawthar.priyash.hybridstrength.authservice.integration.AuthIntegrationTest]: AuthIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:36:19.872 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.gmail.ramawthar.priyash.hybridstrength.authservice.AuthServiceApplication for test class com.gmail.ramawthar.priyash.hybridstrength.authservice.integration.AuthIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.4)
+
+11:36:21.198 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+11:36:21.412 [main] INFO  c.g.r.p.h.a.i.AuthIntegrationTest - Starting AuthIntegrationTest using Java 17.0.3 with PID 62893 (started by priyashr in /Users/priyashr/git/gymApp/auth-service)
+11:36:21.412 [main] DEBUG c.g.r.p.h.a.i.AuthIntegrationTest - Running with Spring Boot v3.4.4, Spring v6.2.5
+11:36:21.414 [main] INFO  c.g.r.p.h.a.i.AuthIntegrationTest - The following 1 profile is active: "integration"
+11:36:22.836 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+11:36:22.951 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 101 ms. Found 2 JPA repository interfaces.
+11:36:23.930 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+11:36:23.951 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
+11:36:23.965 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+11:36:23.968 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.39]
+11:36:24.057 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+11:36:24.059 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2482 ms
+11:36:24.963 [main] DEBUG c.g.r.p.h.a.c.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+11:36:25.474 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+11:36:25.792 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@dddcd91
+11:36:25.794 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+11:36:25.855 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:30432/auth_test (PostgreSQL 16.13)
+11:36:26.013 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.058s)
+11:36:26.085 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 002
+11:36:26.091 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+11:36:26.205 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+11:36:26.278 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.11.Final
+11:36:26.332 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+11:36:26.535 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+11:36:26.687 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.13
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+11:36:27.822 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+11:36:27.878 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+11:36:28.580 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 9a64681f-f8e9-4bd7-aa44-8b07f06be2bd
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+11:36:28.610 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+11:36:29.428 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
+11:36:29.441 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 59179 (http) with context path '/'
+11:36:29.452 [main] INFO  c.g.r.p.h.a.i.AuthIntegrationTest - Started AuthIntegrationTest in 9.314 seconds (process running for 25.225)
+11:36:29.648 [http-nio-auto-1-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+11:36:29.648 [http-nio-auto-1-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+11:36:29.651 [http-nio-auto-1-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+11:36:29.775 [http-nio-auto-1-exec-1] INFO  c.g.r.p.h.a.r.a.i.RegistrationController - Registration request received for email: user-d83145fc-5df6-4cfe-9e7b-38f164bf3e25@example.com
+11:36:29.775 [http-nio-auto-1-exec-1] DEBUG c.g.r.p.h.a.r.a.RegisterUserService - Processing registration request for email: user-d83145fc-5df6-4cfe-9e7b-38f164bf3e25@example.com
+Hibernate: 
+    select
+        uje1_0.id 
+    from
+        users uje1_0 
+    where
+        uje1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        uje1_0.id,
+        uje1_0.created_at,
+        uje1_0.email,
+        uje1_0.password_hash,
+        uje1_0.role,
+        uje1_0.updated_at 
+    from
+        users uje1_0 
+    where
+        uje1_0.id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (created_at, email, password_hash, role, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+11:36:30.520 [http-nio-auto-1-exec-1] INFO  c.g.r.p.h.a.r.a.RegisterUserService - User registered successfully with id: 8a8afc78-7ab0-4d3a-b39e-99eb138342e5
+11:36:30.520 [http-nio-auto-1-exec-1] INFO  c.g.r.p.h.a.r.a.i.RegistrationController - User registered successfully with id: 8a8afc78-7ab0-4d3a-b39e-99eb138342e5
+11:36:30.566 [http-nio-auto-1-exec-2] INFO  c.g.r.p.h.a.a.a.i.AuthenticationController - Login request received
+11:36:30.566 [http-nio-auto-1-exec-2] DEBUG c.g.r.p.h.a.a.a.LoginService - Processing login request for email: user-d83145fc-5df6-4cfe-9e7b-38f164bf3e25@example.com
+Hibernate: 
+    select
+        uje1_0.id,
+        uje1_0.created_at,
+        uje1_0.email,
+        uje1_0.password_hash,
+        uje1_0.role,
+        uje1_0.updated_at 
+    from
+        users uje1_0 
+    where
+        uje1_0.email=?
+Hibernate: 
+    select
+        rtje1_0.id,
+        rtje1_0.created_at,
+        rtje1_0.expires_at,
+        rtje1_0.token_hash,
+        rtje1_0.user_id 
+    from
+        refresh_tokens rtje1_0 
+    where
+        rtje1_0.id=?
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token_hash, user_id, id) 
+    values
+        (?, ?, ?, ?, ?)
+11:36:31.073 [http-nio-auto-1-exec-2] INFO  c.g.r.p.h.a.a.a.LoginService - User logged in successfully with id: 8a8afc78-7ab0-4d3a-b39e-99eb138342e5
+11:36:31.075 [http-nio-auto-1-exec-2] INFO  c.g.r.p.h.a.a.a.i.AuthenticationController - Login successful
+11:36:31.124 [http-nio-auto-1-exec-3] INFO  c.g.r.p.h.a.a.a.i.AuthenticationController - Token refresh request received
+11:36:31.124 [http-nio-auto-1-exec-3] DEBUG c.g.r.p.h.a.a.a.RefreshTokenService - Processing token refresh request
+Hibernate: 
+    select
+        rtje1_0.id,
+        rtje1_0.created_at,
+        rtje1_0.expires_at,
+        rtje1_0.token_hash,
+        rtje1_0.user_id 
+    from
+        refresh_tokens rtje1_0 
+    where
+        rtje1_0.token_hash=?
+Hibernate: 
+    select
+        uje1_0.id,
+        uje1_0.created_at,
+        uje1_0.email,
+        uje1_0.password_hash,
+        uje1_0.role,
+        uje1_0.updated_at 
+    from
+        users uje1_0 
+    where
+        uje1_0.id=?
+Hibernate: 
+    select
+        rtje1_0.id,
+        rtje1_0.created_at,
+        rtje1_0.expires_at,
+        rtje1_0.token_hash,
+        rtje1_0.user_id 
+    from
+        refresh_tokens rtje1_0 
+    where
+        rtje1_0.user_id=?
+Hibernate: 
+    delete 
+    from
+        refresh_tokens 
+    where
+        id=?
+Hibernate: 
+    select
+        rtje1_0.id,
+        rtje1_0.created_at,
+        rtje1_0.expires_at,
+        rtje1_0.token_hash,
+        rtje1_0.user_id 
+    from
+        refresh_tokens rtje1_0 
+    where
+        rtje1_0.id=?
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token_hash, user_id, id) 
+    values
+        (?, ?, ?, ?, ?)
+11:36:31.194 [http-nio-auto-1-exec-3] INFO  c.g.r.p.h.a.a.a.RefreshTokenService - Token refreshed successfully for userId: 8a8afc78-7ab0-4d3a-b39e-99eb138342e5
+11:36:31.194 [http-nio-auto-1-exec-3] INFO  c.g.r.p.h.a.a.a.i.AuthenticationController - Token refresh successful
+11:36:31.207 [http-nio-auto-1-exec-4] INFO  c.g.r.p.h.a.a.a.i.AuthenticationController - Token refresh request received
+11:36:31.207 [http-nio-auto-1-exec-4] DEBUG c.g.r.p.h.a.a.a.RefreshTokenService - Processing token refresh request
+Hibernate: 
+    select
+        rtje1_0.id,
+        rtje1_0.created_at,
+        rtje1_0.expires_at,
+        rtje1_0.token_hash,
+        rtje1_0.user_id 
+    from
+        refresh_tokens rtje1_0 
+    where
+        rtje1_0.token_hash=?
+11:36:31.212 [http-nio-auto-1-exec-4] WARN  c.g.r.p.h.a.a.a.RefreshTokenService - Token refresh rejected — token not found
+]]></system-out>
+  </testcase>
+  <testcase name="accessProtected_NoToken_Returns401Unauthorised" classname="com.gmail.ramawthar.priyash.hybridstrength.authservice.integration.AuthIntegrationTest" time="0.339"/>
+  <testcase name="fullHappyPath_RegisterLoginRefreshAccess_Succeeds" classname="com.gmail.ramawthar.priyash.hybridstrength.authservice.integration.AuthIntegrationTest" time="1.223">
+    <system-out><![CDATA[11:36:31.650 [http-nio-auto-1-exec-6] INFO  c.g.r.p.h.a.r.a.i.RegistrationController - Registration request received for email: user-c129dae6-c5fc-4efc-96ea-126dea2fd561@example.com
+11:36:31.650 [http-nio-auto-1-exec-6] DEBUG c.g.r.p.h.a.r.a.RegisterUserService - Processing registration request for email: user-c129dae6-c5fc-4efc-96ea-126dea2fd561@example.com
+Hibernate: 
+    select
+        uje1_0.id 
+    from
+        users uje1_0 
+    where
+        uje1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        uje1_0.id,
+        uje1_0.created_at,
+        uje1_0.email,
+        uje1_0.password_hash,
+        uje1_0.role,
+        uje1_0.updated_at 
+    from
+        users uje1_0 
+    where
+        uje1_0.id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (created_at, email, password_hash, role, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+11:36:32.187 [http-nio-auto-1-exec-6] INFO  c.g.r.p.h.a.r.a.RegisterUserService - User registered successfully with id: 65a3d1cb-ceb6-47e4-8336-ddade2c72743
+11:36:32.187 [http-nio-auto-1-exec-6] INFO  c.g.r.p.h.a.r.a.i.RegistrationController - User registered successfully with id: 65a3d1cb-ceb6-47e4-8336-ddade2c72743
+11:36:32.196 [http-nio-auto-1-exec-7] INFO  c.g.r.p.h.a.a.a.i.AuthenticationController - Login request received
+11:36:32.196 [http-nio-auto-1-exec-7] DEBUG c.g.r.p.h.a.a.a.LoginService - Processing login request for email: user-c129dae6-c5fc-4efc-96ea-126dea2fd561@example.com
+Hibernate: 
+    select
+        uje1_0.id,
+        uje1_0.created_at,
+        uje1_0.email,
+        uje1_0.password_hash,
+        uje1_0.role,
+        uje1_0.updated_at 
+    from
+        users uje1_0 
+    where
+        uje1_0.email=?
+Hibernate: 
+    select
+        rtje1_0.id,
+        rtje1_0.created_at,
+        rtje1_0.expires_at,
+        rtje1_0.token_hash,
+        rtje1_0.user_id 
+    from
+        refresh_tokens rtje1_0 
+    where
+        rtje1_0.id=?
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token_hash, user_id, id) 
+    values
+        (?, ?, ?, ?, ?)
+11:36:32.721 [http-nio-auto-1-exec-7] INFO  c.g.r.p.h.a.a.a.LoginService - User logged in successfully with id: 65a3d1cb-ceb6-47e4-8336-ddade2c72743
+11:36:32.721 [http-nio-auto-1-exec-7] INFO  c.g.r.p.h.a.a.a.i.AuthenticationController - Login successful
+11:36:32.734 [http-nio-auto-1-exec-8] DEBUG c.g.r.p.h.a.c.s.JwtAuthenticationFilter - Authenticated user: 65a3d1cb-ceb6-47e4-8336-ddade2c72743
+11:36:32.743 [http-nio-auto-1-exec-8] ERROR c.g.r.p.h.a.c.e.GlobalExceptionHandler - Unhandled exception on GET /api/v1/protected/test
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/v1/protected/test.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at com.gmail.ramawthar.priyash.hybridstrength.authservice.common.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:58)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+11:36:32.761 [http-nio-auto-1-exec-9] INFO  c.g.r.p.h.a.a.a.i.AuthenticationController - Token refresh request received
+11:36:32.761 [http-nio-auto-1-exec-9] DEBUG c.g.r.p.h.a.a.a.RefreshTokenService - Processing token refresh request
+Hibernate: 
+    select
+        rtje1_0.id,
+        rtje1_0.created_at,
+        rtje1_0.expires_at,
+        rtje1_0.token_hash,
+        rtje1_0.user_id 
+    from
+        refresh_tokens rtje1_0 
+    where
+        rtje1_0.token_hash=?
+Hibernate: 
+    select
+        uje1_0.id,
+        uje1_0.created_at,
+        uje1_0.email,
+        uje1_0.password_hash,
+        uje1_0.role,
+        uje1_0.updated_at 
+    from
+        users uje1_0 
+    where
+        uje1_0.id=?
+Hibernate: 
+    select
+        rtje1_0.id,
+        rtje1_0.created_at,
+        rtje1_0.expires_at,
+        rtje1_0.token_hash,
+        rtje1_0.user_id 
+    from
+        refresh_tokens rtje1_0 
+    where
+        rtje1_0.user_id=?
+Hibernate: 
+    delete 
+    from
+        refresh_tokens 
+    where
+        id=?
+Hibernate: 
+    select
+        rtje1_0.id,
+        rtje1_0.created_at,
+        rtje1_0.expires_at,
+        rtje1_0.token_hash,
+        rtje1_0.user_id 
+    from
+        refresh_tokens rtje1_0 
+    where
+        rtje1_0.id=?
+Hibernate: 
+    insert 
+    into
+        refresh_tokens
+        (created_at, expires_at, token_hash, user_id, id) 
+    values
+        (?, ?, ?, ?, ?)
+11:36:32.796 [http-nio-auto-1-exec-9] INFO  c.g.r.p.h.a.a.a.RefreshTokenService - Token refreshed successfully for userId: 65a3d1cb-ceb6-47e4-8336-ddade2c72743
+11:36:32.796 [http-nio-auto-1-exec-9] INFO  c.g.r.p.h.a.a.a.i.AuthenticationController - Token refresh successful
+11:36:32.804 [http-nio-auto-1-exec-10] DEBUG c.g.r.p.h.a.c.s.JwtAuthenticationFilter - Authenticated user: 65a3d1cb-ceb6-47e4-8336-ddade2c72743
+11:36:32.806 [http-nio-auto-1-exec-10] ERROR c.g.r.p.h.a.c.e.GlobalExceptionHandler - Unhandled exception on GET /api/v1/protected/test
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/v1/protected/test.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at com.gmail.ramawthar.priyash.hybridstrength.authservice.common.security.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:58)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1743)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+]]></system-out>
+  </testcase>
+  <testcase name="accessProtected_InvalidToken_Returns401Unauthorised" classname="com.gmail.ramawthar.priyash.hybridstrength.authservice.integration.AuthIntegrationTest" time="0.04">
+    <system-out><![CDATA[11:36:32.846 [http-nio-auto-1-exec-1] DEBUG c.g.r.p.h.a.a.a.o.JwtTokenProvider - Token validation failed: Invalid serialized unsecured/JWS/JWE object: Too many part delimiters
+]]></system-out>
+  </testcase>
+  <testcase name="login_WrongPassword_Returns401Unauthorised" classname="com.gmail.ramawthar.priyash.hybridstrength.authservice.integration.AuthIntegrationTest" time="1.192">
+    <system-out><![CDATA[11:36:32.913 [http-nio-auto-1-exec-2] INFO  c.g.r.p.h.a.r.a.i.RegistrationController - Registration request received for email: user-f6a5ba2f-d84f-49f9-bd69-e0d799927a64@example.com
+11:36:32.913 [http-nio-auto-1-exec-2] DEBUG c.g.r.p.h.a.r.a.RegisterUserService - Processing registration request for email: user-f6a5ba2f-d84f-49f9-bd69-e0d799927a64@example.com
+Hibernate: 
+    select
+        uje1_0.id 
+    from
+        users uje1_0 
+    where
+        uje1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        uje1_0.id,
+        uje1_0.created_at,
+        uje1_0.email,
+        uje1_0.password_hash,
+        uje1_0.role,
+        uje1_0.updated_at 
+    from
+        users uje1_0 
+    where
+        uje1_0.id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (created_at, email, password_hash, role, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+11:36:33.477 [http-nio-auto-1-exec-2] INFO  c.g.r.p.h.a.r.a.RegisterUserService - User registered successfully with id: 3c468d46-48be-48c3-9428-8a2b55a79022
+11:36:33.477 [http-nio-auto-1-exec-2] INFO  c.g.r.p.h.a.r.a.i.RegistrationController - User registered successfully with id: 3c468d46-48be-48c3-9428-8a2b55a79022
+11:36:33.488 [http-nio-auto-1-exec-3] INFO  c.g.r.p.h.a.a.a.i.AuthenticationController - Login request received
+11:36:33.488 [http-nio-auto-1-exec-3] DEBUG c.g.r.p.h.a.a.a.LoginService - Processing login request for email: user-f6a5ba2f-d84f-49f9-bd69-e0d799927a64@example.com
+Hibernate: 
+    select
+        uje1_0.id,
+        uje1_0.created_at,
+        uje1_0.email,
+        uje1_0.password_hash,
+        uje1_0.role,
+        uje1_0.updated_at 
+    from
+        users uje1_0 
+    where
+        uje1_0.email=?
+11:36:34.037 [http-nio-auto-1-exec-3] WARN  c.g.r.p.h.a.a.a.LoginService - Login rejected — wrong password for email: user-f6a5ba2f-d84f-49f9-bd69-e0d799927a64@example.com
+]]></system-out>
+  </testcase>
+  <testcase name="contextLoads_WithFlywayMigrations_ApplicationStartsSuccessfully" classname="com.gmail.ramawthar.priyash.hybridstrength.authservice.integration.AuthIntegrationTest" time="0.052"/>
+  <testcase name="register_DuplicateEmail_Returns409Conflict" classname="com.gmail.ramawthar.priyash.hybridstrength.authservice.integration.AuthIntegrationTest" time="0.458">
+    <system-out><![CDATA[11:36:34.135 [http-nio-auto-1-exec-4] INFO  c.g.r.p.h.a.r.a.i.RegistrationController - Registration request received for email: user-759b1755-1258-4edf-b016-279629f06b92@example.com
+11:36:34.136 [http-nio-auto-1-exec-4] DEBUG c.g.r.p.h.a.r.a.RegisterUserService - Processing registration request for email: user-759b1755-1258-4edf-b016-279629f06b92@example.com
+Hibernate: 
+    select
+        uje1_0.id 
+    from
+        users uje1_0 
+    where
+        uje1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        uje1_0.id,
+        uje1_0.created_at,
+        uje1_0.email,
+        uje1_0.password_hash,
+        uje1_0.role,
+        uje1_0.updated_at 
+    from
+        users uje1_0 
+    where
+        uje1_0.id=?
+Hibernate: 
+    insert 
+    into
+        users
+        (created_at, email, password_hash, role, updated_at, id) 
+    values
+        (?, ?, ?, ?, ?, ?)
+11:36:34.536 [http-nio-auto-1-exec-4] INFO  c.g.r.p.h.a.r.a.RegisterUserService - User registered successfully with id: 653fb808-4c7b-4536-9f68-ef97b3916702
+11:36:34.536 [http-nio-auto-1-exec-4] INFO  c.g.r.p.h.a.r.a.i.RegistrationController - User registered successfully with id: 653fb808-4c7b-4536-9f68-ef97b3916702
+11:36:34.543 [http-nio-auto-1-exec-5] INFO  c.g.r.p.h.a.r.a.i.RegistrationController - Registration request received for email: user-759b1755-1258-4edf-b016-279629f06b92@example.com
+11:36:34.543 [http-nio-auto-1-exec-5] DEBUG c.g.r.p.h.a.r.a.RegisterUserService - Processing registration request for email: user-759b1755-1258-4edf-b016-279629f06b92@example.com
+Hibernate: 
+    select
+        uje1_0.id 
+    from
+        users uje1_0 
+    where
+        uje1_0.email=? 
+    fetch
+        first ? rows only
+11:36:34.550 [http-nio-auto-1-exec-5] WARN  c.g.r.p.h.a.r.a.RegisterUserService - Registration rejected — duplicate email: user-759b1755-1258-4edf-b016-279629f06b92@example.com
+]]></system-out>
+  </testcase>
+</testsuite>

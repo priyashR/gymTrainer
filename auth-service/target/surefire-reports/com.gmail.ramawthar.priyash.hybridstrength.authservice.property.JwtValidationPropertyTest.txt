@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.gmail.ramawthar.priyash.hybridstrength.authservice.property.JwtValidationPropertyTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.548 s -- in com.gmail.ramawthar.priyash.hybridstrength.authservice.property.JwtValidationPropertyTest

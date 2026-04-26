@@ -16,10 +16,15 @@
 /Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/authentication/ports/outbound/PasswordEncoder.java
 /Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/authentication/ports/outbound/RefreshTokenRepository.java
 /Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/authentication/ports/outbound/TokenProvider.java
+/Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/common/dto/ErrorResponse.java
+/Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/common/dto/ValidationErrorResponse.java
 /Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/common/exception/DuplicateEmailException.java
+/Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/common/exception/GlobalExceptionHandler.java
 /Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/common/exception/InvalidCredentialsException.java
 /Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/common/exception/InvalidRefreshTokenException.java
+/Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/common/security/JwtAuthenticationFilter.java
 /Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/config/JwtConfig.java
+/Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/config/SecurityConfig.java
 /Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/registration/adapters/inbound/RegistrationController.java
 /Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/registration/adapters/inbound/dto/RegisterRequest.java
 /Users/priyashr/git/gymApp/auth-service/src/main/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/registration/adapters/inbound/dto/RegisterResponse.java

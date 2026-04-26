@@ -110,16 +110,16 @@ Incremental implementation of the Auth Service MVP1 following hexagonal architec
     - Test successful login, wrong password rejection, unknown email rejection
     - Mock all outbound ports
     - _Requirements: 1.3_
-  - [ ]* 7.4 Write unit tests for `RefreshTokenService`
+  - [x] 7.4 Write unit tests for `RefreshTokenService`
     - Test successful refresh, expired token rejection, invalid token rejection, token rotation
     - Mock RefreshTokenRepository and TokenProvider
     - _Requirements: 1.4_
-  - [ ]* 7.5 Write property test: Login produces valid JWT (Property 3)
+  - [x] 7.5 Write property test: Login produces valid JWT (Property 3)
     - **Property 3: Login produces valid JWT**
     - For any registered user with correct credentials, login returns non-null access token that is parseable, contains correct sub/email claims, and has future expiry
     - `@Property(tries = 100)` in `AuthenticationPropertyTest`
     - **Validates: Requirements 1.3**
-  - [ ]* 7.6 Write property test: Token refresh produces new access token (Property 4)
+  - [x] 7.6 Write property test: Token refresh produces new access token (Property 4)
     - **Property 4: Token refresh produces new access token**
     - For any user with valid refresh token, refresh returns new valid JWT with correct sub claim, and old refresh token is invalidated
     - `@Property(tries = 100)` in `AuthenticationPropertyTest`
@@ -133,56 +133,56 @@ Incremental implementation of the Auth Service MVP1 following hexagonal architec
     - POST `/api/v1/auth/refresh` — reads refresh token from HttpOnly cookie, returns new AccessTokenResponse + rotated cookie
     - _Requirements: 1.3, 1.4_
 
-- [ ] 8. Checkpoint — Verify registration and authentication flows compile
+- [x] 8. Checkpoint — Verify registration and authentication flows compile
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 9. Implement security layer
-  - [ ] 9.1 Implement `JwtAuthenticationFilter` in `common/security/`
+- [x] 9. Implement security layer
+  - [x] 9.1 Implement `JwtAuthenticationFilter` in `common/security/`
     - Extends OncePerRequestFilter: extract Bearer token, validate via TokenProvider, set SecurityContext
     - Does not throw on invalid token — lets Spring Security return 401
     - _Requirements: 1.5_
-  - [ ] 9.2 Implement `SecurityConfig` in `config/`
+  - [x] 9.2 Implement `SecurityConfig` in `config/`
     - SecurityFilterChain bean: STATELESS sessions, CSRF disabled, public endpoints (/register, /login, /refresh), all others authenticated
     - Register JwtAuthenticationFilter before UsernamePasswordAuthenticationFilter
     - Configure AuthenticationEntryPoint to return standard ErrorResponse JSON for 401
     - CORS explicitly configured
     - _Requirements: 1.5_
-  - [ ]* 9.3 Write unit tests for `JwtTokenProvider`
+  - [x] 9.3 Write unit tests for `JwtTokenProvider`
     - Test token generation, claim extraction, validation of valid/invalid/expired tokens
     - _Requirements: 1.3, 1.5_
-  - [ ]* 9.4 Write property test: Invalid tokens are rejected (Property 5)
+  - [x] 9.4 Write property test: Invalid tokens are rejected (Property 5)
     - **Property 5: Invalid tokens are rejected**
     - For any string that is not a validly-signed, non-expired JWT (random strings, empty strings, expired tokens, wrong-key tokens), validateAccessToken returns false
     - `@Property(tries = 100)` in `JwtValidationPropertyTest`
     - **Validates: Requirements 1.5**
 
-- [ ] 10. Implement exception handling
-  - [ ] 10.1 Create custom exceptions in `common/exception/`
+- [x] 10. Implement exception handling
+  - [x] 10.1 Create custom exceptions in `common/exception/`
     - `DuplicateEmailException`, `InvalidCredentialsException`, `InvalidRefreshTokenException`
     - _Requirements: 1.2, 1.3, 1.4, 1.5_
-  - [ ] 10.2 Create shared DTOs in `common/dto/`
+  - [x] 10.2 Create shared DTOs in `common/dto/`
     - `ErrorResponse` and `ValidationErrorResponse` records matching api-standards.md shape
     - _Requirements: 1.2, 1.5_
-  - [ ] 10.3 Implement `GlobalExceptionHandler` in `common/exception/`
+  - [x] 10.3 Implement `GlobalExceptionHandler` in `common/exception/`
     - `@RestControllerAdvice`: map DuplicateEmailException → 409, InvalidCredentialsException → 401, InvalidRefreshTokenException → 401, MethodArgumentNotValidException → 400 with field errors, generic Exception → 500
     - Never expose stack traces or internal details
     - _Requirements: 1.2, 1.5_
 
-- [ ] 11. Implement password encoding property test
-  - [ ]* 11.1 Write property test: Password hashing round-trip (Property 6)
+- [x] 11. Implement password encoding property test
+  - [x] 11.1 Write property test: Password hashing round-trip (Property 6)
     - **Property 6: Password hashing round-trip with cost factor invariant**
     - For any raw password, encode produces hash where matches(raw, hash) is true, hash ≠ raw, and bcrypt prefix indicates cost factor ≥ 12
     - `@Property(tries = 100)` in `PasswordEncodingPropertyTest`
     - **Validates: Requirements 1.6**
 
-- [ ] 12. Integration tests
-  - [ ]* 12.1 Write integration test suite `AuthIntegrationTest`
+- [x] 12. Integration tests
+  - [x] 12.1 Write integration test suite `AuthIntegrationTest`
     - `@SpringBootTest(webEnvironment = RANDOM_PORT)` with Testcontainers PostgreSQL 16
     - Test scenarios: register → login → access protected endpoint → refresh → access again; duplicate email → 409; wrong password → 401; no token → 401; expired token → 401
     - Verify Flyway migrations run on startup
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 2.2, 2.3_
 
-- [ ] 13. Final checkpoint — Ensure all tests pass
+- [x] 13. Final checkpoint — Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

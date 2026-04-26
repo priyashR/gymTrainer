@@ -1,0 +1,9 @@
+com/gmail/ramawthar/priyash/hybridstrength/authservice/property/PasswordEncodingPropertyTest.class
+com/gmail/ramawthar/priyash/hybridstrength/authservice/property/fake/FakeBcryptPasswordEncoder.class
+com/gmail/ramawthar/priyash/hybridstrength/authservice/property/RegistrationPropertyTest.class
+com/gmail/ramawthar/priyash/hybridstrength/authservice/property/fake/InMemoryUserRepository.class
+com/gmail/ramawthar/priyash/hybridstrength/authservice/unit/LoginServiceTest.class
+com/gmail/ramawthar/priyash/hybridstrength/authservice/unit/RegisterUserServiceTest.class
+com/gmail/ramawthar/priyash/hybridstrength/authservice/unit/JwtTokenProviderTest.class
+com/gmail/ramawthar/priyash/hybridstrength/authservice/property/JwtValidationPropertyTest.class
+com/gmail/ramawthar/priyash/hybridstrength/authservice/integration/AuthIntegrationTest.class

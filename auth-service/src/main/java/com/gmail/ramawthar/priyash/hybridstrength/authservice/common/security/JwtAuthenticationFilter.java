@@ -1,0 +1,68 @@
+package com.gmail.ramawthar.priyash.hybridstrength.authservice.common.security;
+
+import com.gmail.ramawthar.priyash.hybridstrength.authservice.authentication.ports.outbound.TokenProvider;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.lang.NonNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.UUID;
+
+/**
+ * Extracts and validates the JWT Bearer token from the Authorization header.
+ * On success, sets the SecurityContext with the authenticated user's ID.
+ * On failure (missing, malformed, expired), does nothing — Spring Security
+ * will reject the request with 401 via the configured AuthenticationEntryPoint.
+ */
+@Component
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
+    private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
+    private static final String AUTHORIZATION_HEADER = "Authorization";
+    private static final String BEARER_PREFIX = "Bearer ";
+
+    private final TokenProvider tokenProvider;
+
+    public JwtAuthenticationFilter(TokenProvider tokenProvider) {
+        this.tokenProvider = tokenProvider;
+    }
+
+    @Override
+    protected void doFilterInternal(@NonNull HttpServletRequest request,
+                                    @NonNull HttpServletResponse response,
+                                    @NonNull FilterChain filterChain) throws ServletException, IOException {
+
+        String token = extractToken(request);
+
+        if (token != null && tokenProvider.validateAccessToken(token)) {
+            UUID userId = tokenProvider.extractUserId(token);
+
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(userId, null, Collections.emptyList());
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            log.debug("Authenticated user: {}", userId);
+        }
+
+        filterChain.doFilter(request, response);
+    }
+
+    private String extractToken(HttpServletRequest request) {
+        String header = request.getHeader(AUTHORIZATION_HEADER);
+        if (header != null && header.startsWith(BEARER_PREFIX)) {
+            return header.substring(BEARER_PREFIX.length());
+        }
+        return null;
+    }
+}

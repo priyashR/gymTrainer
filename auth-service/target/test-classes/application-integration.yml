@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:30432/auth_test
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  flyway:
+    enabled: true
+    clean-disabled: false
+    locations: classpath:db/migration
+
+logging:
+  level:
+    "[com.gmail.ramawthar.priyash.hybridstrength.authservice]": DEBUG

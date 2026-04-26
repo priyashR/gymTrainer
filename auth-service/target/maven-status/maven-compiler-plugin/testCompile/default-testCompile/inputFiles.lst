@@ -1,5 +1,12 @@
+/Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/integration/AuthIntegrationTest.java
+/Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/property/AuthenticationPropertyTest.java
+/Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/property/JwtValidationPropertyTest.java
+/Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/property/PasswordEncodingPropertyTest.java
 /Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/property/RegistrationPropertyTest.java
 /Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/property/fake/FakeBcryptPasswordEncoder.java
+/Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/property/fake/InMemoryRefreshTokenRepository.java
 /Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/property/fake/InMemoryUserRepository.java
+/Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/unit/JwtTokenProviderTest.java
 /Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/unit/LoginServiceTest.java
+/Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/unit/RefreshTokenServiceTest.java
 /Users/priyashr/git/gymApp/auth-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/authservice/unit/RegisterUserServiceTest.java

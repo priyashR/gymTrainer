@@ -2,8 +2,6 @@ package com.gmail.ramawthar.priyash.hybridstrength.authservice.registration.adap
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -20,7 +18,6 @@ import com.gmail.ramawthar.priyash.hybridstrength.authservice.registration.domai
 class UserJpaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(nullable = false, unique = true)
