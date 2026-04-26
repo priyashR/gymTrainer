@@ -1,5 +1,15 @@
-target/
+target/classes/
+target/test-classes/
+target/surefire-reports/
+target/maven-status/
+target/generated-sources/
+target/generated-test-sources/
 .git/
 .kiro/
 *.md
 .jqwik-database
+src/
+.mvn/
+mvnw
+mvnw.cmd
+pom.xml
