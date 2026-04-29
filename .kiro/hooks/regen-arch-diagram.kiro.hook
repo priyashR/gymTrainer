@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Regenerate Architecture Diagram",
+  "description": "Manually trigger to regenerate the Hybrid Strength architecture diagram in FigJam, reflecting any new services, communication patterns, or infrastructure changes.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the current project architecture by reading the steering files (architecture.md, structure.md) and scanning the codebase for any new services, communication patterns, databases, or infrastructure components. Then regenerate the Hybrid Strength architecture diagram in FigJam using the generate_diagram tool from the Figma power. The diagram should show all microservices, their REST/WebSocket/RabbitMQ communication patterns, databases, and external APIs. Use the planKey \"team::1631223846169089061\". Update the existing FigJam board at fileKey \"ZyBHe6f5cIsdD34h6XrLE6\" if possible, otherwise create a new one."
+  }
+}
