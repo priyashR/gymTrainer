@@ -23,6 +23,7 @@
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "axios-mock-adapter": "^2.1.0",
     "fast-check": "^3.23.2",
     "jsdom": "^25.0.1",
     "msw": "^2.7.0",

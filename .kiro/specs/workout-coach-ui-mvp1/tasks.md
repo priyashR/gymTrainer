@@ -69,25 +69,25 @@ Implement the first frontend deliverable for HybridStrength: a React 18 SPA with
     - Minimum 100 iterations
     - **Validates: Requirements 1.1**
 
-  - [ ]* 3.5 Write property test: Successful login stores token and sets authenticated state
+  - [x] 3.5 Write property test: Successful login stores token and sets authenticated state
     - **Property 2: Successful login stores token and sets authenticated state**
     - Test file: `src/features/auth/__tests__/authState.property.test.ts`
     - Use `fast-check` to generate arbitrary `AccessTokenResponse` values; verify that after login, `isAuthenticated === true` and `accessToken` matches the response
     - Minimum 100 iterations
     - **Validates: Requirements 1.3**
 
-  - [ ]* 3.6 Write property test: Logout clears auth state
+  - [x] 3.6 Write property test: Logout clears auth state
     - **Property 4: Logout clears auth state**
     - Test file: `src/features/auth/__tests__/authState.property.test.ts`
     - Use `fast-check` to generate arbitrary auth states where `isAuthenticated === true`; verify that after `logout()`, `accessToken` is `null` and `isAuthenticated` is `false`
     - Minimum 100 iterations
     - **Validates: Requirements 1.5**
 
-- [ ] 4. Checkpoint — Core auth logic
+- [x] 4. Checkpoint — Core auth logic
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 5. Implement page components
-  - [ ] 5.1 Implement Login page (`src/pages/auth/Login.tsx`)
+- [x] 5. Implement page components
+  - [x] 5.1 Implement Login page (`src/pages/auth/Login.tsx`)
     - Email and password fields with client-side validation (email format, password non-empty)
     - Submit via `useAuth().login()`
     - Display inline field errors and error banner for server errors (invalid credentials, network errors)
@@ -96,7 +96,7 @@ Implement the first frontend deliverable for HybridStrength: a React 18 SPA with
     - If already authenticated: redirect to `/`
     - _Requirements: 1.2, 1.3_
 
-  - [ ] 5.2 Implement Registration page (`src/pages/auth/Register.tsx`)
+  - [x] 5.2 Implement Registration page (`src/pages/auth/Register.tsx`)
     - Email and password fields with client-side validation (email format, password ≥ 8 characters)
     - Submit via `useAuth().register()`
     - Display inline field errors and error banner for server errors (duplicate email, validation errors)
@@ -105,87 +105,87 @@ Implement the first frontend deliverable for HybridStrength: a React 18 SPA with
     - If already authenticated: redirect to `/`
     - _Requirements: 1.1_
 
-  - [ ] 5.3 Implement Home page (`src/pages/Home.tsx`)
+  - [x] 5.3 Implement Home page (`src/pages/Home.tsx`)
     - Display three action cards: "New Workout", "My Performance", "Workout"
     - Each card is a `<Link>` to `/new-workout`, `/my-performance`, `/workout` respectively
     - Show user email and a logout button
     - _Requirements: 2.1, 2.2_
 
-  - [ ] 5.4 Implement ComingSoon stub page (`src/pages/ComingSoon.tsx`)
+  - [x] 5.4 Implement ComingSoon stub page (`src/pages/ComingSoon.tsx`)
     - Accept a `title` prop or read from route params/state
     - Display "Coming Soon" message and a link back to home
     - _Requirements: 2.2_
 
-  - [ ]* 5.5 Write property test: Protected routes redirect unauthenticated users
+  - [x] 5.5 Write property test: Protected routes redirect unauthenticated users
     - **Property 5: Protected routes redirect unauthenticated users**
     - Test file: `src/components/layout/__tests__/protectedRoute.property.test.ts`
     - Use `fast-check` to generate arbitrary route paths (excluding `/login` and `/register`); verify that `ProtectedRoute` redirects to `/login` when `isAuthenticated === false` and `isLoading === false`
     - Minimum 100 iterations
     - **Validates: Requirements 1.6**
 
-  - [ ]* 5.6 Write property test: Auth state persists across navigation
+  - [x] 5.6 Write property test: Auth state persists across navigation
     - **Property 6: Auth state persists across navigation**
     - Test file: `src/features/auth/__tests__/authState.property.test.ts`
     - Use `fast-check` to generate pairs of protected route paths; verify that navigating between them does not change `isAuthenticated` or `accessToken`
     - Minimum 100 iterations
     - **Validates: Requirements 2.4**
 
-- [ ] 6. Wire up routing in App.tsx
-  - [ ] 6.1 Implement `src/main.tsx` with `BrowserRouter` and `ReactDOM.createRoot`
+- [x] 6. Wire up routing in App.tsx
+  - [x] 6.1 Implement `src/main.tsx` with `BrowserRouter` and `ReactDOM.createRoot`
     - _Requirements: 2.3_
 
-  - [ ] 6.2 Implement `src/App.tsx` with route definitions
+  - [x] 6.2 Implement `src/App.tsx` with route definitions
     - Wrap all routes in `AuthProvider`
     - Public routes: `/login` → `Login`, `/register` → `Register` (redirect to `/` if authenticated)
     - Protected routes (wrapped in `ProtectedRoute`): `/` → `Home`, `/new-workout` → `ComingSoon`, `/my-performance` → `ComingSoon`, `/workout` → `ComingSoon`
     - _Requirements: 1.6, 2.1, 2.2, 2.3_
 
-- [ ] 7. Checkpoint — Full UI wired
+- [x] 7. Checkpoint — Full UI wired
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 8. Implement interceptor property test and unit tests
-  - [ ]* 8.1 Write property test: 401 interceptor triggers refresh and retries
+- [x] 8. Implement interceptor property test and unit tests
+  - [x] 8.1 Write property test: 401 interceptor triggers refresh and retries
     - **Property 3: 401 interceptor triggers refresh and retries the original request**
     - Test file: `src/lib/__tests__/interceptor.property.test.ts`
     - Use `fast-check` to generate arbitrary protected endpoint paths (excluding auth endpoints); verify that a 401 response triggers a refresh call and the original request is retried with the new token
     - Minimum 100 iterations
     - **Validates: Requirements 1.4**
 
-  - [ ]* 8.2 Write unit tests for Login page
+  - [x] 8.2 Write unit tests for Login page
     - Test successful submission and redirect
     - Test display of server error (invalid credentials)
     - Test client-side validation (empty fields)
     - _Requirements: 1.2_
 
-  - [ ]* 8.3 Write unit tests for Registration page
+  - [x] 8.3 Write unit tests for Registration page
     - Test successful submission and redirect to `/login`
     - Test display of server error (duplicate email)
     - Test client-side validation (invalid email, short password)
     - _Requirements: 1.1_
 
-  - [ ]* 8.4 Write unit tests for Home page
+  - [x] 8.4 Write unit tests for Home page
     - Verify three action cards render with correct labels and links
     - Verify logout button calls `logout()`
     - _Requirements: 2.1, 2.2_
 
-  - [ ]* 8.5 Write unit tests for ComingSoon page
+  - [x] 8.5 Write unit tests for ComingSoon page
     - Verify "Coming Soon" message renders
     - Verify back/home link is present
     - _Requirements: 2.2_
 
-  - [ ]* 8.6 Write unit tests for AuthContext
+  - [x] 8.6 Write unit tests for AuthContext
     - Test login sets token and `isAuthenticated`
     - Test logout clears token
     - Test silent refresh on mount (success and failure paths)
     - _Requirements: 1.3, 1.4, 1.5_
 
-  - [ ]* 8.7 Write unit tests for `extractApiError` utility
+  - [x] 8.7 Write unit tests for `extractApiError` utility
     - Test parsing `ApiErrorResponse` shape
     - Test parsing `ValidationErrorResponse` shape
     - Test handling network errors (no response)
     - _Requirements: 1.1, 1.2_
 
-- [ ] 9. Final checkpoint — All tests pass
+- [x] 9. Final checkpoint — All tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes
