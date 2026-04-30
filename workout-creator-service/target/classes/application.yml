@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: workout-creator-service
+  profiles:
+    active: dev
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8082
+  error:
+    include-message: never
+    include-stacktrace: never
+
+gemini:
+  api-key: ${GEMINI_API_KEY:not-set}
+  base-url: https://generativelanguage.googleapis.com/v1beta
+  model: gemini-2.0-flash
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      gemini:
+        sliding-window-size: 10
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 30s
+        permitted-number-of-calls-in-half-open-state: 3
+  timelimiter:
+    instances:
+      gemini:
+        timeout-duration: 10s

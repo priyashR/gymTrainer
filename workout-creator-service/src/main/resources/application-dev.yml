@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:30432/workout_creator_service
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+
+logging:
+  level:
+    com.gmail.ramawthar.priyash.hybridstrength.workoutcreator: DEBUG
+    org.springframework.security: DEBUG
