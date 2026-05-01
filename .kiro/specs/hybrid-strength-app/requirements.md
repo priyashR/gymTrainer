@@ -211,6 +211,24 @@ HybridStrength is a unified training platform for hybrid athletes, CrossFitters,
 
 ---
 
+### Requirement 15: Workout and Program Upload
+
+**User Story:** As a User, I want to upload a workout or program from a JSON file, so that I can import training content I have created or received outside the platform.
+
+#### Acceptance Criteria
+
+1. WHEN a User uploads a valid JSON file containing a single Workout, THE Workout_Creator_Service SHALL parse the file, validate it against the Workout upload schema, and persist it to the User's Vault.
+2. WHEN a User uploads a valid JSON file containing a Program of 1 to 4 weeks, THE Workout_Creator_Service SHALL parse the file, validate it against the Program upload schema, and persist it to the User's Vault.
+3. WHEN an uploaded file fails schema validation, THE Workout_Creator_Service SHALL return a 400 Bad Request response with field-level error detail identifying each invalid or missing field.
+4. WHEN an uploaded file is not valid JSON, THE Workout_Creator_Service SHALL return a 400 Bad Request response with a descriptive error message.
+5. WHEN an upload is successful, THE Workout_Creator_Service SHALL return a 201 Created response containing the persisted Workout or Program, including its assigned identifier.
+6. THE Workout_Creator_Service SHALL enforce a maximum upload file size of 1 MB; files exceeding this limit SHALL be rejected with a 400 Bad Request response.
+7. WHEN a User uploads a Workout or Program, THE Workout_Creator_Service SHALL associate it with the authenticated User's identity; uploaded content SHALL be subject to the same ownership and visibility rules as Vault items (Requirement 4).
+8. THE Workout_Coach_UI SHALL provide a file picker that accepts only `.json` files and SHALL display a confirmation message on successful upload or a field-level error summary on failure.
+9. FOR ALL valid uploaded Workout JSON objects, parsing then formatting then parsing SHALL produce an equivalent Workout domain object (round-trip property, consistent with Requirement 3.4).
+
+---
+
 ### Requirement 13: Data Integrity and Service Isolation
 
 **User Story:** As a platform operator, I want each microservice to own its data, so that services can be deployed and scaled independently.
