@@ -64,104 +64,104 @@ Implement the AI-powered Workout and Program generation service following hexago
     - Include schema constraints for expected Gemini response format
     - _Requirements: 1.6_
 
-  - [ ]* 3.4 Write property test for PromptBuilder
+  - [x] 3.4 Write property test for PromptBuilder
     - **Property 4: Prompt contains all requested training styles**
     - **Validates: Requirements 1.6**
 
-- [ ] 4. Implement WorkoutParser and WorkoutFormatter
-  - [ ] 4.1 Implement `WorkoutParser` in the domain layer
+- [x] 4. Implement WorkoutParser and WorkoutFormatter
+  - [x] 4.1 Implement `WorkoutParser` in the domain layer
     - Parse sanitised Gemini text into Workout (for DAY scope) or Program (for WEEK/FOUR_WEEK scope)
     - Throw checked `ParsingException` with human-readable message on failure
     - Stateless utility — no framework imports
     - _Requirements: 2.1, 2.2_
 
-  - [ ] 4.2 Implement `WorkoutFormatter` in the domain layer
+  - [x] 4.2 Implement `WorkoutFormatter` in the domain layer
     - Format Workout or Program domain object into human-readable text representation
     - Include all Section names, SectionTypes, Exercise names, sets, reps, weight, restSeconds in output
     - Stateless utility — no framework imports
     - _Requirements: 3.1, 3.3_
 
-  - [ ]* 4.3 Write property test for parse-format round trip
+  - [x] 4.3 Write property test for parse-format round trip
     - **Property 5: Parse–format round trip**
     - **Validates: Requirements 2.1, 3.1, 3.2**
 
-  - [ ]* 4.4 Write property test for formatted output completeness
+  - [x] 4.4 Write property test for formatted output completeness
     - **Property 7: Formatted output contains all domain fields**
     - **Validates: Requirements 3.3**
 
-  - [ ]* 4.5 Write unit tests for WorkoutParser
+  - [x] 4.5 Write unit tests for WorkoutParser
     - Test specific parsing examples for each SectionType (STRENGTH, AMRAP, EMOM, TABATA, FOR_TIME, ACCESSORY)
     - Test malformed input, empty input, missing sections
     - _Requirements: 2.1, 2.2_
 
-  - [ ]* 4.6 Write unit tests for WorkoutFormatter
+  - [x] 4.6 Write unit tests for WorkoutFormatter
     - Test formatting examples for each SectionType
     - Test edge cases: empty sections, missing optional fields (null weight, null restSeconds)
     - _Requirements: 3.1, 3.3_
 
-- [ ] 5. Checkpoint — Ensure all domain tests pass
+- [x] 5. Checkpoint — Ensure all domain tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 6. Implement ports and application service
-  - [ ] 6.1 Create inbound port `GenerateWorkoutUseCase`
+- [x] 6. Implement ports and application service
+  - [x] 6.1 Create inbound port `GenerateWorkoutUseCase`
     - Define interface with `GenerationResult generate(GenerationCommand command)` method in `generation/ports/inbound/`
     - _Requirements: 1.1_
 
-  - [ ] 6.2 Create outbound port `GeminiClient`
+  - [x] 6.2 Create outbound port `GeminiClient`
     - Define interface with `String generate(String prompt)` method in `generation/ports/outbound/`
     - Document that it throws `GeminiUnavailableException` on failure
     - _Requirements: 6.1_
 
-  - [ ] 6.3 Implement `GenerationService` application service
+  - [x] 6.3 Implement `GenerationService` application service
     - Implement `GenerateWorkoutUseCase` — orchestrate PromptBuilder, GeminiClient, ContentSanitiser, WorkoutParser
     - On successful parse: return GenerationResult with raw text + parsed domain object + null parsingError
     - On parse failure: catch ParsingException, return GenerationResult with raw text + null domain objects + error message
     - _Requirements: 1.1, 2.1, 2.2, 5.1, 5.2, 5.3, 5.4_
 
-  - [ ]* 6.4 Write unit tests for GenerationService
+  - [x] 6.4 Write unit tests for GenerationService
     - Mock GeminiClient — test success path, parse failure path, Gemini error path
     - Verify scope DAY returns workout, scope WEEK/FOUR_WEEK returns program
     - Verify parse failure returns 200-style result with raw text and error message
     - _Requirements: 1.1, 5.1, 5.2, 5.3, 5.4_
 
-  - [ ]* 6.5 Write property tests for GenerationService
+  - [x] 6.5 Write property tests for GenerationService
     - **Property 1: Scope determines result type**
     - **Property 9: Successful generation result structure**
     - **Property 10: Failed parse result structure**
     - **Validates: Requirements 1.1, 1.5, 5.1, 5.2, 5.3, 5.4**
 
-- [ ] 7. Implement inbound adapter (REST controller) and DTOs
-  - [ ] 7.1 Create request/response DTOs
+- [x] 7. Implement inbound adapter (REST controller) and DTOs
+  - [x] 7.1 Create request/response DTOs
     - Create `GenerateRequest` record with Jakarta Bean Validation: `@NotBlank description`, `@NotNull scope`, `@NotEmpty trainingStyles`
     - Add custom validation: DAY scope requires exactly one training style
     - Create `GenerateResponse` record with rawGeminiResponse, WorkoutDto, ProgramDto, parsingError
     - Create `WorkoutDto`, `ProgramDto`, `SectionDto`, `ExerciseDto` for API response mapping
     - _Requirements: 1.2, 1.4_
 
-  - [ ] 7.2 Implement `GenerationController`
+  - [x] 7.2 Implement `GenerationController`
     - `POST /api/v1/workouts/generate` — validate request, extract userId from JWT, map to GenerationCommand, call use case, map result to GenerateResponse, return 200 OK
     - _Requirements: 1.1, 1.3_
 
-  - [ ]* 7.3 Write property tests for request validation
+  - [x] 7.3 Write property tests for request validation
     - **Property 2: Invalid requests are rejected**
     - **Property 3: DAY scope requires exactly one training style**
     - **Validates: Requirements 1.2, 1.4**
 
-- [ ] 8. Implement outbound adapter (Gemini REST client) and error handling
-  - [ ] 8.1 Implement `GeminiRestClient` outbound adapter
+- [x] 8. Implement outbound adapter (Gemini REST client) and error handling
+  - [x] 8.1 Implement `GeminiRestClient` outbound adapter
     - Implement `GeminiClient` port using Spring `RestClient`
     - Annotate with `@CircuitBreaker(name = "gemini")` and `@TimeLimiter(name = "gemini")`
     - Fallback method throws `GeminiUnavailableException`
     - _Requirements: 6.1, 6.2, 6.3, 6.4_
 
-  - [ ] 8.2 Implement `GlobalExceptionHandler` and exception classes
+  - [x] 8.2 Implement `GlobalExceptionHandler` and exception classes
     - Create `GeminiUnavailableException` — mapped to 502 Bad Gateway
     - Create `GlobalExceptionHandler` with `@RestControllerAdvice` — handle validation errors (400), GeminiUnavailableException (502), authentication errors (401), and catch-all (500)
     - Use standard `ErrorResponse` and `ValidationErrorResponse` shapes from api-standards
     - _Requirements: 1.2, 6.1, 6.2_
 
-- [ ] 9. Implement Flyway database migrations
-  - [ ] 9.1 Create Flyway migration scripts V100–V104
+- [x] 9. Implement Flyway database migrations
+  - [x] 9.1 Create Flyway migration scripts V100–V104
     - `V100__create_workouts_table.sql` — workouts table with user_id index
     - `V101__create_sections_table.sql` — sections table with workout_id FK and index
     - `V102__create_exercises_table.sql` — exercises table with section_id FK and index
@@ -169,10 +169,10 @@ Implement the AI-powered Workout and Program generation service following hexago
     - `V104__create_program_workouts_table.sql` — program_workouts join table with unique constraint on (program_id, day_number)
     - _Requirements: 7.2, 7.3, 7.5_
 
-- [ ] 10. Checkpoint — Ensure all unit and property tests pass
+- [x] 10. Checkpoint — Ensure all unit and property tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 11. Integration tests
+- [x] 11. Integration tests
   - [ ]* 11.1 Write Flyway migration integration test
     - Verify all V100–V104 migrations apply cleanly against Testcontainers PostgreSQL
     - Verify tables exist with correct columns, foreign keys, and indexes

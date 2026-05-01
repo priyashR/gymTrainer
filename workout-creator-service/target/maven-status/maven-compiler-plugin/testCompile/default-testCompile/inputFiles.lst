@@ -1,2 +1,13 @@
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/integration/FlywayMigrationIntegrationTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/integration/GenerationIntegrationTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/integration/TestJwtHelper.java
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/ContentSanitiserPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/GenerationPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/PromptBuilderPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/RequestValidationPropertyTest.java
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/SectionTimingPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/WorkoutFormatterPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/WorkoutParserFormatterPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/GenerationServiceTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/WorkoutFormatterTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/WorkoutParserTest.java
