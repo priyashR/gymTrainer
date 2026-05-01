@@ -25,14 +25,16 @@ Every service must have tests at three levels: unit, property-based, and integra
   - Any function with a formal invariant defined in the requirements
 - Properties should be defined in a dedicated `*PropertyTest` class per domain
 
-### Integration Tests (Testcontainers + @SpringBootTest)
+### Integration Tests (@SpringBootTest against local dev instances)
 
-- Use real PostgreSQL and RabbitMQ via Testcontainers — no mocks for infrastructure
+- Use the running local dev instances of PostgreSQL and RabbitMQ (see `docker/`) — ~~Testcontainers~~ not used due to local environment constraints
+- No mocks for infrastructure — tests hit real services
 - Test full request/response cycles through the HTTP layer
 - Test RabbitMQ message publishing and consumption end-to-end
 - Use `@SpringBootTest(webEnvironment = RANDOM_PORT)` with `TestRestTemplate` or `WebTestClient`
 - One integration test suite per service covering the primary happy paths and key failure scenarios
 - Flyway migrations must run successfully as part of the integration test startup
+- Connection details configured in `application-test.yml` pointing at the local dev instances
 
 ## Frontend Testing
 

@@ -560,9 +560,9 @@ void registrationRoundTrip(@ForAll @Email String email, @ForAll @StringLength(mi
 
 Property tests use in-memory fakes (not mocks) for outbound ports to test real behavior without Spring context.
 
-#### 3. Integration Tests (Testcontainers + @SpringBootTest)
+#### 3. Integration Tests (@SpringBootTest against local dev PostgreSQL)
 
-Full request/response cycle tests against real PostgreSQL via Testcontainers.
+Full request/response cycle tests against the running local dev PostgreSQL instance (~~Testcontainers~~ not used due to local environment constraints).
 
 | Test Suite | Scenarios |
 |------------|-----------|
@@ -575,7 +575,7 @@ Full request/response cycle tests against real PostgreSQL via Testcontainers.
 
 Configuration:
 - `@SpringBootTest(webEnvironment = RANDOM_PORT)` with `WebTestClient`
-- Testcontainers PostgreSQL 16
+- Connects to local dev PostgreSQL instance via `application-test.yml`
 - `@Transactional` rollback or explicit teardown between tests
 - Flyway migrations validated as part of context startup
 

@@ -30,7 +30,7 @@
 |-------|------------|
 | Unit Tests | JUnit 5 + Mockito |
 | Property-Based Tests | jqwik (minimum 100 iterations per property) |
-| Integration Tests | Testcontainers (PostgreSQL, RabbitMQ) + @SpringBootTest |
+| Integration Tests | @SpringBootTest connecting to the local dev instances of PostgreSQL and RabbitMQ (see `docker/` for the dev stack) — ~~Testcontainers~~ not used due to local environment constraints |
 | Frontend Unit | Vitest + React Testing Library |
 | E2E | Playwright |
 

@@ -77,7 +77,7 @@ The same structure applies to each backend service, with feature packages matchi
 src/test/java/com/gmail/ramawthar/priyash/hybridstrength/<service>/
 ├── unit/              # Unit tests (JUnit 5 + Mockito) — domain and use cases
 ├── property/          # Property-based tests (jqwik)
-└── integration/       # Integration tests (Testcontainers + @SpringBootTest)
+└── integration/       # Integration tests (@SpringBootTest against local dev instances)
 ```
 
 ---
