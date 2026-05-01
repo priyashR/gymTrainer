@@ -186,31 +186,55 @@ The Workout Upload feature allows authenticated Users to import training content
 
 ---
 
-### Requirement 7: Upload UI — File Picker and Feedback
+### Requirement 7: Upload UI — File Picker, Preview, and Confirmation
 
-**User Story:** As a User, I want a file picker in the UI that guides me through uploading a JSON file and clearly communicates the result, so that I can import content without needing to use the API directly.
+**User Story:** As a User, I want to preview the parsed program before saving it, and optionally edit the JSON on the fly, so that I can review and tweak the content before it lands in my Vault.
 
 #### Acceptance Criteria
 
 1. THE Workout_Coach_UI SHALL provide a file picker control that accepts only files with the `.json` extension; files of other types SHALL be rejected by the control before any upload request is made.
 
-2. WHEN a User selects a `.json` file and confirms the upload, THE Workout_Coach_UI SHALL submit the file to `/api/v1/uploads/programs`.
+2. THE Workout_Coach_UI SHALL display the maximum allowed file size (1 MB) as a hint adjacent to the file picker control.
 
-3. WHEN the upload endpoint returns a 201 Created response, THE Workout_Coach_UI SHALL display a confirmation message identifying the uploaded program by its `program_metadata.program_name` and providing a navigation action to view it in the Vault.
+3. WHEN a User selects a valid `.json` file, THE Workout_Coach_UI SHALL parse the file client-side and display a structured preview of the program before any request is sent to the backend. The preview SHALL show:
+   - `program_metadata.program_name`, `goal`, `duration_weeks`, and `equipment_profile`
+   - A collapsible breakdown of each week, day, and block with movement names, sets, reps, and weight
 
-4. WHEN the upload endpoint returns a 400 Bad Request response with an `errors` array, THE Workout_Coach_UI SHALL display a field-level error summary listing each failing field path and its associated message.
+4. WHEN the preview is displayed, THE Workout_Coach_UI SHALL present two actions: "Save to Vault" and "Edit JSON".
 
-5. WHEN the upload endpoint returns a 400 Bad Request response with a single `message` (non-JSON or size violation), THE Workout_Coach_UI SHALL display that message to the User.
+5. WHEN a User selects "Edit JSON", THE Workout_Coach_UI SHALL display an inline JSON editor pre-populated with the raw file content, allowing the User to modify any field before saving.
 
-6. WHEN the upload endpoint returns a 401 Unauthorised response, THE Workout_Coach_UI SHALL redirect the User to the login screen.
+6. WHEN a User makes edits in the JSON editor and selects "Preview", THE Workout_Coach_UI SHALL re-parse the edited JSON client-side and refresh the structured preview; if the edited JSON is not valid, THE Workout_Coach_UI SHALL display an inline parse error without clearing the editor content.
 
-7. WHILE an upload request is in progress, THE Workout_Coach_UI SHALL display a loading indicator and SHALL disable the upload action to prevent duplicate submissions.
+7. WHEN a User selects "Save to Vault" (from either the preview or after editing), THE Workout_Coach_UI SHALL submit the current JSON to `/api/v1/uploads/programs`.
 
-8. THE Workout_Coach_UI SHALL display the maximum allowed file size (1 MB) as a hint adjacent to the file picker control.
+8. WHILE an upload request is in progress, THE Workout_Coach_UI SHALL display a loading indicator and SHALL disable the "Save to Vault" action to prevent duplicate submissions.
+
+9. WHEN the upload endpoint returns a 201 Created response, THE Workout_Coach_UI SHALL display a confirmation message identifying the program by its `program_metadata.program_name` and providing a navigation action to view it in the Vault.
+
+10. WHEN the upload endpoint returns a 400 Bad Request response with an `errors` array, THE Workout_Coach_UI SHALL display a field-level error summary listing each failing field path and its associated message, and SHALL return the User to the edit view with the JSON editor open.
+
+11. WHEN the upload endpoint returns a 400 Bad Request response with a single `message` (non-JSON or size violation), THE Workout_Coach_UI SHALL display that message to the User.
+
+12. WHEN the upload endpoint returns a 401 Unauthorised response, THE Workout_Coach_UI SHALL redirect the User to the login screen.
 
 ---
 
-### Requirement 8: Upload API Error Response Consistency
+### Requirement 9: Upload Preview Validation — Backend
+
+**User Story:** As a User, I want the preview to reflect any server-side validation errors before I commit to saving, so that I can fix issues in the editor before they reach the Vault.
+
+#### Acceptance Criteria
+
+1. THE Workout_Creator_Service SHALL expose a POST endpoint at `/api/v1/uploads/programs/validate` that accepts a Program JSON body, validates it against the Upload_Schema, and returns the validation result without persisting anything.
+
+2. WHEN the submitted JSON passes all schema validation rules, THE `/api/v1/uploads/programs/validate` endpoint SHALL return a 200 OK response with a body of `{ "valid": true }`.
+
+3. WHEN the submitted JSON fails schema validation, THE `/api/v1/uploads/programs/validate` endpoint SHALL return a 200 OK response with a body of `{ "valid": false, "errors": [...] }` using the same field-level error shape as the upload endpoint.
+
+4. THE validate endpoint SHALL require a valid JWT; requests without a valid JWT SHALL return a 401 Unauthorised response.
+
+5. THE validate endpoint SHALL enforce the same 1 MB size limit as the upload endpoint.
 
 **User Story:** As a developer integrating with the upload API, I want all error responses to follow the platform's standard error shape, so that error handling is consistent across the application.
 
