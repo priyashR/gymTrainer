@@ -156,3 +156,38 @@ d
 1. THE Workout_Coach_UI SHALL provide a heat map view that renders a body diagram with muscle groups shaded proportionally to their training volume, using data fetched from the Progress_Tracker_Service.
 2. THE Workout_Coach_UI SHALL provide time window controls allowing the User to select 7 days, 30 days, or 90 days for the heat map calculation; the default SHALL be 30 days.
 3. WHEN a User changes the time window, THE Workout_Coach_UI SHALL re-fetch the muscle activation data and update the heat map without a full page reload.
+
+
+---
+
+### Requirement 10: Program Upload — File Picker, Preview, and Vault Save
+
+**User Story:** As a User, I want to upload a JSON program file, preview the parsed content, optionally edit it, and then save it to my Vault, so that I can import training content I created outside the platform.
+
+#### Acceptance Criteria
+
+1. THE Workout_Coach_UI SHALL provide an upload entry point accessible from the Vault view, allowing a User to import a program from a `.json` file.
+
+2. THE Workout_Coach_UI SHALL provide a file picker control that accepts only files with the `.json` extension; files of other types SHALL be rejected before any parsing or network request is made. The control SHALL display a hint indicating the maximum allowed file size of 1 MB.
+
+3. WHEN a User selects a valid `.json` file, THE Workout_Coach_UI SHALL parse the file client-side and display a structured preview showing:
+   - `program_metadata.program_name`, `goal`, `duration_weeks`, and `equipment_profile`
+   - A collapsible breakdown of each week, day, and block with movement names, sets, reps, and prescribed weight
+
+4. WHEN the preview is displayed, THE Workout_Coach_UI SHALL present two actions: "Save to Vault" and "Edit JSON".
+
+5. WHEN a User selects "Edit JSON", THE Workout_Coach_UI SHALL display an inline JSON editor pre-populated with the raw file content, allowing the User to modify any field before saving.
+
+6. WHEN a User edits the JSON and selects "Preview", THE Workout_Coach_UI SHALL re-parse the edited content client-side and refresh the structured preview; if the edited JSON is not valid, THE Workout_Coach_UI SHALL display an inline parse error without clearing the editor content.
+
+7. WHEN a User selects "Save to Vault" (from either the preview or after editing), THE Workout_Coach_UI SHALL submit the current JSON to the Workout_Creator_Service upload endpoint.
+
+8. WHILE an upload request is in progress, THE Workout_Coach_UI SHALL display a loading indicator and SHALL disable the "Save to Vault" action to prevent duplicate submissions.
+
+9. WHEN the upload succeeds, THE Workout_Coach_UI SHALL display a confirmation message identifying the program by its `program_metadata.program_name` and providing a navigation action to view it in the Vault.
+
+10. WHEN the upload returns field-level validation errors, THE Workout_Coach_UI SHALL display an error summary listing each failing field path and its message, and SHALL return the User to the edit view with the JSON editor open.
+
+11. WHEN the upload returns a non-JSON or size violation error, THE Workout_Coach_UI SHALL display the error message to the User.
+
+12. WHEN the upload returns a 401 Unauthorised response, THE Workout_Coach_UI SHALL redirect the User to the login view.
