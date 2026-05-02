@@ -211,21 +211,42 @@ HybridStrength is a unified training platform for hybrid athletes, CrossFitters,
 
 ---
 
-### Requirement 15: Workout and Program Upload
+### Requirement 15: Workout and Program Upload (via UI)
 
 **User Story:** As a User, I want to upload a workout or program from a JSON file, so that I can import training content I have created or received outside the platform.
 
 #### Acceptance Criteria
 
-1. WHEN a User uploads a valid JSON file containing a single Workout, THE Workout_Creator_Service SHALL parse the file, validate it against the Workout upload schema, and persist it to the User's Vault.
-2. WHEN a User uploads a valid JSON file containing a Program of 1 to 4 weeks, THE Workout_Creator_Service SHALL parse the file, validate it against the Program upload schema, and persist it to the User's Vault.
-3. WHEN an uploaded file fails schema validation, THE Workout_Creator_Service SHALL return a 400 Bad Request response with field-level error detail identifying each invalid or missing field.
-4. WHEN an uploaded file is not valid JSON, THE Workout_Creator_Service SHALL return a 400 Bad Request response with a descriptive error message.
-5. WHEN an upload is successful, THE Workout_Creator_Service SHALL return a 201 Created response containing the persisted Workout or Program, including its assigned identifier.
-6. THE Workout_Creator_Service SHALL enforce a maximum upload file size of 1 MB; files exceeding this limit SHALL be rejected with a 400 Bad Request response.
-7. WHEN a User uploads a Workout or Program, THE Workout_Creator_Service SHALL associate it with the authenticated User's identity; uploaded content SHALL be subject to the same ownership and visibility rules as Vault items (Requirement 4).
-8. THE Workout_Coach_UI SHALL provide a file picker that accepts only `.json` files and SHALL display a confirmation message on successful upload or a field-level error summary on failure.
-9. FOR ALL valid uploaded Workout JSON objects, parsing then formatting then parsing SHALL produce an equivalent Workout domain object (round-trip property, consistent with Requirement 3.4).
+1. WHEN a User submits a POST request to `/api/v1/uploads/programs` with a valid Program JSON file not exceeding 1 MB, THE Workout_Creator_Service SHALL parse the file, validate it against the Upload_Schema, persist the resulting Program to the User's Vault, and return a 201 Created response containing the persisted Program including its assigned identifier and program name. A single-week program (`duration_weeks: 1`) is the canonical representation of a standalone workout day collection; there is no separate single-workout upload endpoint.
+2. WHEN an uploaded file fails schema validation, THE Workout_Creator_Service SHALL return a 400 Bad Request response with field-level error detail identifying each invalid or missing field.
+3. WHEN an uploaded file is not valid JSON, THE Workout_Creator_Service SHALL return a 400 Bad Request response with the message `"Uploaded file is not valid JSON"`.
+4. THE Workout_Creator_Service SHALL enforce a maximum upload file size of 1 MB; files exceeding this limit SHALL be rejected with a 400 Bad Request response before parsing begins.
+5. WHEN a User uploads a Program, THE Workout_Creator_Service SHALL associate it with the authenticated User's identity resolved from the JWT subject claim; uploaded content SHALL be subject to the same ownership and visibility rules as Vault items (Requirement 4). THE Workout_Creator_Service SHALL record the content source as `UPLOADED` to distinguish it from `AI_GENERATED` and `MANUAL` content.
+6. THE Workout_Creator_Service SHALL expose a validate-only endpoint at `/api/v1/uploads/programs/validate` that checks the Upload_Schema without persisting anything.
+7. THE Workout_Coach_UI SHALL provide a file picker that accepts only `.json` files, a client-side structured preview, and an optional inline JSON editor before submission; it SHALL display a confirmation message on successful upload or a field-level error summary on failure.
+8. FOR ALL valid uploaded Program JSON objects, parsing then formatting then parsing SHALL produce an equivalent Program domain object (round-trip property, consistent with Requirement 3.4).
+
+> Full Upload_Schema definition, field constraints, UI behaviour, and round-trip property details are specified in the `workout-creator-service-upload` sub-spec.
+
+---
+
+### Requirement 16: Workout and Program Ingest via Email [TODO]
+
+> **TODO**: This requirement is deferred. Implementation should begin only after the file upload feature (Requirement 15) is complete and stable.
+
+**User Story:** As a User, I want to email a Workout or Program JSON to the app's dedicated address, so that I can import training content without logging into the UI.
+
+#### Acceptance Criteria
+
+1. THE platform SHALL provide a dedicated inbound email address (e.g. `vault@hybridstrength.app`) that the Workout_Creator_Service monitors for incoming messages.
+2. WHEN an email is received at the inbound address, THE Workout_Creator_Service SHALL identify the sending User by matching the `From` address against the email address registered as the User's username in the Auth_Service; IF no matching User is found, THE Workout_Creator_Service SHALL discard the message and SHALL NOT send a reply.
+3. THE Workout_Creator_Service SHALL accept the Program JSON payload either as the plain-text or HTML body of the email, or as a `.json` file attachment; IF both are present, the attachment SHALL take precedence.
+4. WHEN the extracted JSON passes all Upload_Schema validation rules, THE Workout_Creator_Service SHALL persist the Program to the identified User's Vault and SHALL send a confirmation email to the source address containing the program name and a link to view it in the Vault. Ingested Programs SHALL be recorded with content source `EMAIL_INGESTED`.
+5. WHEN the extracted JSON fails schema validation, THE Workout_Creator_Service SHALL send an error email to the source address listing each failing field path and its associated message, and SHALL NOT persist any partial content.
+6. WHEN the email body and any attachments contain no parseable JSON, THE Workout_Creator_Service SHALL send an error email to the source address with the message `"No valid JSON content found in your email. Please include a JSON body or attach a .json file."`.
+7. WHEN the JSON payload exceeds 1 MB, THE Workout_Creator_Service SHALL send an error email to the source address with the message `"Attached file exceeds the maximum allowed size of 1 MB."` and SHALL NOT attempt to parse the content.
+8. THE Workout_Creator_Service SHALL process each inbound email at most once; duplicate delivery SHALL be handled idempotently using the email message identifier.
+9. THE Workout_Creator_Service SHALL NOT expose the inbound email processing mechanism to unauthenticated callers; the email polling or webhook handler SHALL be an internal adapter with no public REST endpoint.
 
 ---
 

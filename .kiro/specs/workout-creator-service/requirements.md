@@ -66,6 +66,43 @@ The Workout Creator Service is responsible for AI-powered Workout and Program ge
 
 ---
 
+### Requirement 3b: Workout and Program File Upload (via UI)
+
+**User Story:** As a User, I want to upload a Workout or Program JSON file through the app, so that I can import training content I created externally into my Vault.
+
+#### Acceptance Criteria
+
+1. WHEN a User submits a POST request to `/api/v1/uploads/programs` with a valid Program JSON file not exceeding 1 MB, THE Workout_Creator_Service SHALL parse, validate, persist, and return a 201 Created response with the saved Program.
+2. THE Workout_Creator_Service SHALL associate the uploaded content with the authenticated User's identity from the JWT subject claim.
+3. THE Workout_Creator_Service SHALL enforce a maximum upload file size of 1 MB and reject non-JSON content types with a 400 Bad Request.
+4. THE Workout_Creator_Service SHALL expose a validate-only endpoint at `/api/v1/uploads/programs/validate` that checks the schema without persisting anything.
+5. THE Workout_Coach_UI SHALL provide a file picker, client-side preview, and optional JSON editor before submission.
+
+> Full upload schema, field constraints, UI behaviour, and round-trip property are specified in the `workout-creator-service-upload` sub-spec.
+
+---
+
+### Requirement 3c: Workout and Program Ingest via Email [TODO]
+
+> **TODO**: This requirement is deferred. Implementation should begin only after the file upload feature (Requirement 3b) is complete and stable.
+
+**User Story:** As a User, I want to email a Workout or Program JSON to the app's dedicated address, so that I can import training content without logging into the UI.
+
+#### Acceptance Criteria
+
+1. THE platform SHALL provide a dedicated inbound email address (e.g. `vault@hybridstrength.app`) that the Workout_Creator_Service monitors for incoming messages.
+2. WHEN an email is received at the inbound address, THE Workout_Creator_Service SHALL identify the sending User by matching the `From` address against the email address registered as the User's username in the Auth Service; IF no matching User is found, THE Workout_Creator_Service SHALL discard the message and SHALL NOT send a reply.
+3. THE Workout_Creator_Service SHALL accept the Program JSON payload either as the plain-text or HTML body of the email, or as a `.json` file attachment; IF both are present, the attachment SHALL take precedence.
+4. WHEN the extracted JSON passes all Upload_Schema validation rules, THE Workout_Creator_Service SHALL persist the Program to the identified User's Vault and SHALL send a confirmation email to the source address containing the program name and a link to view it in the Vault.
+5. WHEN the extracted JSON fails schema validation, THE Workout_Creator_Service SHALL send an error email to the source address listing each failing field path and its associated message, and SHALL NOT persist any partial content.
+6. WHEN the email body and any attachments contain no parseable JSON, THE Workout_Creator_Service SHALL send an error email to the source address with the message `"No valid JSON content found in your email. Please include a JSON body or attach a .json file."`.
+7. WHEN the JSON payload exceeds 1 MB, THE Workout_Creator_Service SHALL send an error email to the source address with the message `"Attached file exceeds the maximum allowed size of 1 MB."` and SHALL NOT attempt to parse the content.
+8. THE Workout_Creator_Service SHALL apply the same ownership and visibility rules to email-ingested content as to uploaded and AI-generated content; ingested Programs SHALL be recorded with content source `EMAIL_INGESTED`.
+9. THE Workout_Creator_Service SHALL process each inbound email at most once; duplicate delivery SHALL be handled idempotently using the email message identifier.
+10. THE Workout_Creator_Service SHALL NOT expose the inbound email processing mechanism to unauthenticated callers; the email polling or webhook handler SHALL be an internal adapter with no public REST endpoint.
+
+---
+
 ### Requirement 4: Data Ownership and Schema Management
 
 **User Story:** As a platform operator, I want the Workout Creator Service to own its data exclusively, so that it can be deployed and scaled independently.
