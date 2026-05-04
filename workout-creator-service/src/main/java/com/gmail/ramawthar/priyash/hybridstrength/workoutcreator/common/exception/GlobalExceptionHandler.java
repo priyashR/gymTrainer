@@ -1,0 +1,84 @@
+package com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.exception;
+
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.dto.ErrorResponse;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.dto.ValidationErrorResponse;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.dto.ValidationErrorResponse.FieldError;
+import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.time.Instant;
+import java.util.List;
+
+/**
+ * Centralised exception handler for the Workout Creator Service.
+ * Maps domain exceptions to the platform standard error shapes defined in api-standards.md.
+ * Never exposes stack traces, internal class names, or SQL in responses.
+ */
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    /**
+     * Handles upload schema validation failures — returns 400 with an {@code errors} array.
+     * Each entry carries the failing field path (dot-notation) and a descriptive message.
+     */
+    @ExceptionHandler(UploadValidationException.class)
+    public ResponseEntity<ValidationErrorResponse> handleUploadValidation(
+            UploadValidationException ex, HttpServletRequest request) {
+
+        List<FieldError> fieldErrors = ex.getErrors().stream()
+                .map(e -> new FieldError(e.field(), e.message()))
+                .toList();
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ValidationErrorResponse body = new ValidationErrorResponse(
+                status.value(),
+                "Validation Failed",
+                fieldErrors,
+                request.getRequestURI(),
+                Instant.now()
+        );
+        return ResponseEntity.status(status).body(body);
+    }
+
+    /**
+     * Handles wrong Content-Type — returns 400 per Requirement 6.2.
+     * Spring would normally return 415 Unsupported Media Type, but the spec requires 400.
+     */
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public ResponseEntity<ErrorResponse> handleUnsupportedMediaType(
+            HttpMediaTypeNotSupportedException ex, HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ErrorResponse body = new ErrorResponse(
+                status.value(),
+                status.getReasonPhrase(),
+                "Content-Type must be application/json",
+                request.getRequestURI(),
+                Instant.now()
+        );
+        return ResponseEntity.status(status).body(body);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleGeneric(Exception ex, HttpServletRequest request) {
+        log.error("Unhandled exception on {} {}", request.getMethod(), request.getRequestURI(), ex);
+
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        ErrorResponse body = new ErrorResponse(
+                status.value(),
+                status.getReasonPhrase(),
+                "An unexpected error occurred",
+                request.getRequestURI(),
+                Instant.now()
+        );
+        return ResponseEntity.status(status).body(body);
+    }
+}

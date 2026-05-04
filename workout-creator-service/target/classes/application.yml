@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: workout-creator-service
+  profiles:
+    active: dev
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8082
+  error:
+    include-message: never
+    include-stacktrace: never

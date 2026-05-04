@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.integration.upload.UploadIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.94 s -- in com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.integration.upload.UploadIntegrationTest
