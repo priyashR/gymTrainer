@@ -131,10 +131,15 @@ class UploadErrorResponseShapePropertyTest {
      * For any request to the validate endpoint that produces an error (4xx),
      * the response body must conform to the platform standard error shape and
      * must not leak internal implementation details.
+     *
+     * <p>Note: the validate endpoint intentionally returns 200 for malformed JSON and
+     * schema violations (with {@code valid: false}). This property only covers requests
+     * that produce genuine 4xx responses: missing JWT, empty body, wrong Content-Type,
+     * and oversized body.
      */
     @Property(tries = 100)
     void validateEndpoint_anyErrorResponse_conformsToPlatformShape(
-            @ForAll("errorTriggeringRequests") ErrorRequest errorRequest) {
+            @ForAll("validateErrorTriggeringRequests") ErrorRequest errorRequest) {
 
         ResponseEntity<Map> response = restTemplate.postForEntity(
                 validateUrl(), errorRequest.toHttpEntity(), Map.class);
@@ -234,9 +239,11 @@ class UploadErrorResponseShapePropertyTest {
                 .isNotNull();
 
         // No stack trace leakage — these keys must not appear in the response body
-        assertThat(body).as("Response must not contain 'trace' (stack trace leak)").doesNotContainKey("trace");
-        assertThat(body).as("Response must not contain 'stackTrace'").doesNotContainKey("stackTrace");
-        assertThat(body).as("Response must not contain 'exception'").doesNotContainKey("exception");
+        @SuppressWarnings("unchecked")
+        Map<String, Object> typedBody = (Map<String, Object>) body;
+        assertThat(typedBody).as("Response must not contain 'trace' (stack trace leak)").doesNotContainKey("trace");
+        assertThat(typedBody).as("Response must not contain 'stackTrace'").doesNotContainKey("stackTrace");
+        assertThat(typedBody).as("Response must not contain 'exception'").doesNotContainKey("exception");
 
         // No internal identifiers in string fields — check message and error fields
         assertNoInternalDetails(body.get("message"));
@@ -309,6 +316,23 @@ class UploadErrorResponseShapePropertyTest {
                 emptyBlocksRequest(),
                 emptyMovementsRequest(),
                 crossFitMissingModalityTypeRequest()
+        );
+    }
+
+    /**
+     * Generates requests that produce genuine 4xx responses on the validate endpoint.
+     * The validate endpoint returns 200 for malformed JSON and schema violations
+     * (with {@code valid: false}), so those cases are excluded here.
+     * Only infrastructure-level errors produce 4xx on the validate endpoint:
+     * missing JWT (401), empty body (400), wrong Content-Type (400), oversized body (400).
+     */
+    @Provide
+    Arbitrary<ErrorRequest> validateErrorTriggeringRequests() {
+        return Arbitraries.oneOf(
+                missingJwtRequest(),
+                oversizedBodyRequest(),
+                wrongContentTypeRequest(),
+                emptyBodyRequest()
         );
     }
 

@@ -20,6 +20,7 @@
     <properties>
         <java.version>17</java.version>
         <jqwik.version>1.9.2</jqwik.version>
+        <jqwik-spring.version>0.12.0</jqwik-spring.version>
         <nimbus-jose-jwt.version>9.47</nimbus-jose-jwt.version>
         <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
     </properties>
@@ -130,7 +131,7 @@
         <dependency>
             <groupId>net.jqwik</groupId>
             <artifactId>jqwik-spring</artifactId>
-            <version>${jqwik.version}</version>
+            <version>${jqwik-spring.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -195,29 +195,29 @@ Implement the upload feature across `workout-creator-service` (backend) and `wor
     - `@Property(tries = 100)` — validate endpoint returns `{ valid: true }` iff JSON passes all schema rules; returns `{ valid: false, errors: [...] }` with ≥1 error otherwise; nothing persisted in either case
     - _Requirements: 9.2, 9.3_
 
-- [ ] 8. Checkpoint — Ensure all backend tests pass
+- [x] 8. Checkpoint — Ensure all backend tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 9. Add frontend TypeScript types and API client
-  - [ ] 9.1 Create `src/types/upload.ts` in `workout-coach-ui`
+- [x] 9. Add frontend TypeScript types and API client
+  - [x] 9.1 Create `src/types/upload.ts` in `workout-coach-ui`
     - Define all types from the design: `ProgramMetadata`, `WarmCoolEntry`, `Movement`, `Block`, `Day`, `Week`, `ParsedProgram`, `UploadProgramResponse`, `ValidateUploadResponse`
     - _Requirements: 7.3, 7.9, 7.10_
 
-  - [ ] 9.2 Create `src/features/upload/uploadApi.ts`
+  - [x] 9.2 Create `src/features/upload/uploadApi.ts`
     - `validateProgram(json: string): Promise<ValidateUploadResponse>` — POST to `/api/v1/uploads/programs/validate`
     - `uploadProgram(json: string): Promise<UploadProgramResponse>` — POST to `/api/v1/uploads/programs` with `Content-Type: application/json`
     - Both use the shared `apiClient` (Axios instance with JWT interceptor)
     - _Requirements: 7.7, 7.12_
 
-- [ ] 10. Implement frontend upload feature module
-  - [ ] 10.1 Create `src/features/upload/useUpload.ts`
+- [x] 10. Implement frontend upload feature module
+  - [x] 10.1 Create `src/features/upload/useUpload.ts`
     - State machine: `idle → file_selected → previewing → editing → uploading → success | error`
     - `UploadState` union type as defined in the design
     - Handle all API error shapes: 401 → redirect to `/login`; 400 with `errors` array → `error` state with `FieldError[]`; 400 with `message` → `error` state with string; network error → generic message
     - Client-side JSON parse errors caught with `try/catch` around `JSON.parse()`, displayed inline
     - _Requirements: 7.3, 7.5, 7.6, 7.8, 7.9, 7.10, 7.11, 7.12_
 
-  - [ ]* 10.2 Write unit tests for `useUpload`
+  - [x] 10.2 Write unit tests for `useUpload`
     - Located in `src/features/upload/__tests__/useUpload.test.ts`
     - Verify button is disabled during upload (Property 8)
     - Verify transition to `error` state on 400 response
@@ -225,56 +225,56 @@ Implement the upload feature across `workout-creator-service` (backend) and `wor
     - Verify redirect on 401
     - _Requirements: 7.8, 7.9, 7.10, 7.11, 7.12_
 
-  - [ ] 10.3 Create `src/features/upload/FilePicker.tsx`
+  - [x] 10.3 Create `src/features/upload/FilePicker.tsx`
     - File input accepting only `.json` extension
     - Display 1 MB size hint adjacent to the control
     - Reject non-`.json` files before any request is made
     - _Requirements: 7.1, 7.2_
 
-  - [ ] 10.4 Create `src/features/upload/ProgramPreview.tsx`
+  - [x] 10.4 Create `src/features/upload/ProgramPreview.tsx`
     - Display `program_name`, `goal`, `duration_weeks`, `equipment_profile` from `program_metadata`
     - Collapsible breakdown of each week, day, and block with movement names, sets, reps, weight
     - "Save to Vault" and "Edit JSON" action buttons
     - Disable "Save to Vault" and show loading indicator while upload is in progress
     - _Requirements: 7.3, 7.4, 7.8_
 
-  - [ ]* 10.5 Write unit tests for `ProgramPreview`
+  - [x] 10.5 Write unit tests for `ProgramPreview`
     - Located in `src/features/upload/__tests__/ProgramPreview.test.tsx`
     - Verify `program_name`, `goal`, `duration_weeks`, `equipment_profile` are rendered
     - Verify week/day/block breakdown is rendered
     - Verify "Save to Vault" and "Edit JSON" buttons are present
     - _Requirements: 7.3, 7.4_
 
-  - [ ]* 10.6 Write property test for preview metadata display
+  - [x] 10.6 Write property test for preview metadata display
     - **Property 9: Client-side preview displays required metadata fields**
     - **Validates: Requirements 7.3**
     - Using `@fast-check/vitest` with `numRuns: 100`
     - For any valid `ProgramMetadata` object, the rendered preview always displays `program_name`, `goal`, `duration_weeks`, and `equipment_profile`
     - _Requirements: 7.3_
 
-  - [ ] 10.7 Create `src/features/upload/JsonEditor.tsx`
+  - [x] 10.7 Create `src/features/upload/JsonEditor.tsx`
     - Textarea pre-populated with raw JSON content
     - "Preview" button to re-parse and refresh the structured preview
     - Display inline parse error on invalid JSON without clearing editor content
     - _Requirements: 7.5, 7.6_
 
-  - [ ]* 10.8 Write unit tests for `JsonEditor`
+  - [x] 10.8 Write unit tests for `JsonEditor`
     - Located in `src/features/upload/__tests__/JsonEditor.test.tsx`
     - Verify pre-population with raw JSON
     - Verify inline parse error shown on invalid JSON without clearing content
     - _Requirements: 7.5, 7.6_
 
-  - [ ] 10.9 Create `src/features/upload/UploadPage.tsx`
+  - [x] 10.9 Create `src/features/upload/UploadPage.tsx`
     - Route-level page component composing `FilePicker`, `ProgramPreview`, and `JsonEditor`
     - Driven by `useUpload` state machine
     - Display confirmation message with `program_name` and navigation to Vault on success (201)
     - _Requirements: 7.3, 7.4, 7.5, 7.9_
 
-  - [ ] 10.10 Register `/upload` route in `App.tsx` under `ProtectedRoute`
+  - [x] 10.10 Register `/upload` route in `App.tsx` under `ProtectedRoute`
     - Add `<Route path="/upload" element={<ProtectedRoute><UploadPage /></ProtectedRoute>} />`
     - _Requirements: 7.1_
 
-- [ ] 11. Final checkpoint — Ensure all tests pass
+- [x] 11. Final checkpoint — Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

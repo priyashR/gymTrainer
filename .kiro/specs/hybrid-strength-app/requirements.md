@@ -250,6 +250,45 @@ HybridStrength is a unified training platform for hybrid athletes, CrossFitters,
 
 ---
 
+### Requirement 17: Workout Photo Upload and AI Processing [TODO]
+
+> **TODO**: This requirement is deferred. Implementation should begin only after the file upload feature (Requirement 15) is complete and stable.
+
+**User Story:** As a User, I want to upload a photo of a workout (e.g., a whiteboard, a handwritten plan, or a screenshot), so that the app can extract the workout content automatically and save it to my Vault without manual data entry.
+
+#### Acceptance Criteria
+
+1. THE Workout_Creator_Service SHALL expose an endpoint that accepts image uploads (JPEG, PNG, HEIC) not exceeding 5 MB.
+2. WHEN a User submits a valid image, THE Workout_Creator_Service SHALL send the image to the Gemini API with a structured prompt instructing Gemini to extract the workout content and return it as a JSON object conforming to the Upload_Schema.
+3. WHEN Gemini returns a valid JSON response that passes Upload_Schema validation, THE Workout_Creator_Service SHALL persist the resulting Program to the User's Vault and return a 201 Created response containing the persisted Program including its assigned identifier and program name. The content source SHALL be recorded as `PHOTO_EXTRACTED`.
+4. WHEN Gemini returns a JSON response that fails Upload_Schema validation, THE Workout_Creator_Service SHALL return a 422 Unprocessable Entity response with field-level error detail, indicating that the AI could not produce a valid workout structure from the image.
+5. WHEN Gemini cannot interpret the image content (e.g., the image is blurry, unrelated to fitness, or contains no recognisable workout structure), THE Workout_Creator_Service SHALL return a 422 Unprocessable Entity response with a descriptive message explaining that no workout could be extracted.
+6. IF the Gemini service returns an error or times out after 10 seconds, THEN THE Workout_Creator_Service SHALL return a 502 Bad Gateway response and SHALL NOT persist any partial content.
+7. THE Workout_Creator_Service SHALL validate the uploaded file's MIME type and reject non-image files with a 400 Bad Request response before sending anything to Gemini.
+8. THE Workout_Coach_UI SHALL provide a photo upload interface (file picker and camera capture on mobile) that displays a preview of the extracted workout JSON for User confirmation before persisting to the Vault.
+9. THE Workout_Creator_Service SHALL wrap the Gemini API call with a Resilience4j circuit breaker to prevent cascading failures.
+
+---
+
+### Requirement 18: Workout Ingest via Email — Photo and JSON Support [TODO]
+
+> **TODO**: This requirement is deferred. Implementation should begin only after the photo upload feature (Requirement 17) and email JSON ingest (Requirement 16) are complete and stable.
+
+**User Story:** As a User, I want to email photos of workouts or JSON representations to the app's dedicated address, so that I can import training content from any device without logging into the UI.
+
+#### Acceptance Criteria
+
+1. THE platform SHALL accept emails at the dedicated inbound address (e.g. `vault@hybridstrength.app`) containing image attachments (JPEG, PNG, HEIC) in addition to JSON payloads as defined in Requirement 16.
+2. WHEN an email contains one or more image attachments, THE Workout_Creator_Service SHALL send each image to the Gemini API for workout extraction using the same processing pipeline as Requirement 17.
+3. WHEN Gemini successfully extracts a valid workout from an image attachment, THE Workout_Creator_Service SHALL persist the resulting Program to the identified User's Vault with content source `EMAIL_PHOTO_EXTRACTED` and SHALL send a confirmation email to the source address containing the program name and a link to view it in the Vault.
+4. WHEN an email contains both a JSON payload and image attachments, THE JSON payload SHALL take precedence; image attachments SHALL be processed only if no valid JSON is found in the email body or `.json` attachments.
+5. WHEN Gemini cannot extract a valid workout from an attached image, THE Workout_Creator_Service SHALL send an error email to the source address explaining that the image could not be interpreted as a workout, and SHALL NOT persist any partial content.
+6. THE Workout_Creator_Service SHALL enforce a maximum image attachment size of 5 MB per image; images exceeding this limit SHALL be skipped with a note in the confirmation or error email.
+7. WHEN an email contains multiple image attachments, THE Workout_Creator_Service SHALL process each image independently, persisting each successfully extracted workout as a separate Program in the User's Vault.
+8. THE Workout_Creator_Service SHALL apply the same User identification rules as Requirement 16 (matching the `From` address against registered email addresses) and the same idempotency guarantees (processing each email at most once).
+
+---
+
 ### Requirement 13: Data Integrity and Service Isolation
 
 **User Story:** As a platform operator, I want each microservice to own its data, so that services can be deployed and scaled independently.

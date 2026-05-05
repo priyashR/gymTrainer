@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -42,6 +43,30 @@ public class GlobalExceptionHandler {
                 status.value(),
                 "Validation Failed",
                 fieldErrors,
+                request.getRequestURI(),
+                Instant.now()
+        );
+        return ResponseEntity.status(status).body(body);
+    }
+
+    /**
+     * Handles empty or unreadable request body — returns 400 per Requirements 2.5 and 6.3.
+     * Spring throws this when {@code @RequestBody} cannot read the body (empty body or
+     * syntactically invalid JSON that Jackson cannot parse at all).
+     */
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handleMessageNotReadable(
+            HttpMessageNotReadableException ex, HttpServletRequest request) {
+
+        String message = ex.getMessage() != null && ex.getMessage().contains("Required request body is missing")
+                ? "Request body must not be empty"
+                : "Uploaded file is not valid JSON";
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ErrorResponse body = new ErrorResponse(
+                status.value(),
+                status.getReasonPhrase(),
+                message,
                 request.getRequestURI(),
                 Instant.now()
         );

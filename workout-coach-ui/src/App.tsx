@@ -6,6 +6,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Home from "./pages/Home";
 import ComingSoon from "./pages/ComingSoon";
+import { UploadPage } from "./features/upload/UploadPage";
 
 /** Redirects authenticated users away from public-only routes. */
 function PublicOnly({ children }: { children: React.ReactNode }) {
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/new-workout" element={<ProtectedRoute><ComingSoon title="New Workout" /></ProtectedRoute>} />
         <Route path="/my-performance" element={<ProtectedRoute><ComingSoon title="My Performance" /></ProtectedRoute>} />
         <Route path="/workout" element={<ProtectedRoute><ComingSoon title="Workout" /></ProtectedRoute>} />
+        <Route path="/upload" element={<ProtectedRoute><UploadPage /></ProtectedRoute>} />
       </Routes>
     </AuthProvider>
   );
