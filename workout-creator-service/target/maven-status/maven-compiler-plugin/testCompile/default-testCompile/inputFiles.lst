@@ -1,0 +1,12 @@
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/integration/upload/UploadIntegrationTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/UploadAtomicityPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/UploadCrossUserAccessPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/UploadErrorResponseShapePropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/UploadPersistencePropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/UploadRoundTripPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/UploadSchemaValidationPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/ValidateEndpointCorrectnessPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/upload/UploadFormatterTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/upload/UploadParserTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/upload/UploadProgramServiceTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/upload/ValidateProgramUploadServiceTest.java

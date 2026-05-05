@@ -1,14 +1,29 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../features/auth/useAuth";
 
-const actions = [
-  { label: "New Workout", to: "/new-workout" },
-  { label: "My Performance", to: "/my-performance" },
-  { label: "Workout", to: "/workout" },
-] as const;
+const cardStyle = {
+  display: "block",
+  padding: "1.5rem",
+  border: "1px solid #ccc",
+  borderRadius: 8,
+  textDecoration: "none",
+  color: "inherit",
+  textAlign: "center" as const,
+  fontSize: "1.125rem",
+};
+
+const subItemStyle = {
+  ...cardStyle,
+  padding: "1rem 1.5rem",
+  fontSize: "1rem",
+  border: "1px solid #e0e0e0",
+  borderRadius: 6,
+};
 
 export default function Home() {
   const { logout } = useAuth();
+  const [newWorkoutOpen, setNewWorkoutOpen] = useState(false);
 
   return (
     <main style={{ maxWidth: 600, margin: "2rem auto", padding: "0 1rem" }}>
@@ -27,24 +42,48 @@ export default function Home() {
       </header>
 
       <nav aria-label="Primary actions" style={{ display: "grid", gap: "1rem" }}>
-        {actions.map(({ label, to }) => (
-          <Link
-            key={to}
-            to={to}
+        {/* New Workout — expandable with sub-options */}
+        <div>
+          <button
+            type="button"
+            onClick={() => setNewWorkoutOpen((prev) => !prev)}
             style={{
-              display: "block",
-              padding: "1.5rem",
-              border: "1px solid #ccc",
-              borderRadius: 8,
-              textDecoration: "none",
-              color: "inherit",
-              textAlign: "center",
-              fontSize: "1.125rem",
+              ...cardStyle,
+              width: "100%",
+              background: "none",
+              cursor: "pointer",
             }}
+            aria-expanded={newWorkoutOpen}
           >
-            {label}
-          </Link>
-        ))}
+            New Workout {newWorkoutOpen ? "▲" : "▼"}
+          </button>
+
+          {newWorkoutOpen && (
+            <div
+              style={{
+                display: "grid",
+                gap: "0.5rem",
+                marginTop: "0.5rem",
+                paddingLeft: "1rem",
+              }}
+            >
+              <Link to="/new-workout" style={subItemStyle}>
+                Ask Gemini
+              </Link>
+              <Link to="/upload" style={subItemStyle}>
+                Upload Program
+              </Link>
+            </div>
+          )}
+        </div>
+
+        {/* Other top-level actions */}
+        <Link to="/my-performance" style={cardStyle}>
+          My Performance
+        </Link>
+        <Link to="/workout" style={cardStyle}>
+          Workout
+        </Link>
       </nav>
     </main>
   );

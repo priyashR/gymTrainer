@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.unit.upload.ValidateProgramUploadServiceTest
+-------------------------------------------------------------------------------
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 s -- in com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.unit.upload.ValidateProgramUploadServiceTest
