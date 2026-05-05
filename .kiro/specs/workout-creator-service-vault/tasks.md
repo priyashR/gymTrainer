@@ -1,0 +1,279 @@
+# Implementation Plan: Vault CRUD and Search
+
+## Overview
+
+This plan implements the full hexagonal architecture for the `vault` package: domain objects, inbound/outbound ports, application service, REST controller, JPA outbound adapter with search queries, Flyway migration for indexes, exception handling, and frontend pages (Vault search, program detail, menu restructure, upload navigation). Tasks are ordered by dependency: domain → ports → application → adapters → frontend → tests.
+
+## Tasks
+
+- [ ] 1. Create vault domain objects
+  - [ ] 1.1 Create `VaultProgram` record in `vault/domain/`
+    - Fields: `id` (UUID), `program` (Program from common/model), `ownerUserId`, `contentSource`, `createdAt`, `updatedAt`
+    - _Requirements: 1.3, 5.1_
+  - [ ] 1.2 Create `VaultItem` record in `vault/domain/`
+    - Fields: `id` (UUID), `name`, `goal`, `durationWeeks`, `equipmentProfile` (List<String>), `contentSource`, `createdAt`, `updatedAt`
+    - _Requirements: 1.2_
+  - [ ] 1.3 Create `SearchCriteria` record in `vault/domain/`
+    - Fields: `query` (nullable), `focusArea` (nullable), `modality` (nullable)
+    - Include helper methods: `hasKeyword()`, `hasFocusArea()`, `hasModality()`
+    - _Requirements: 4.1, 4.8, 4.9_
+
+- [ ] 2. Create vault ports
+  - [ ] 2.1 Create inbound port interfaces in `vault/ports/inbound/`
+    - `ListProgramsUseCase`: `Page<VaultItem> listPrograms(String ownerUserId, Pageable pageable)`
+    - `GetProgramUseCase`: `VaultProgram getProgram(UUID programId, String ownerUserId)`
+    - `UpdateProgramUseCase`: `VaultItem updateProgram(UUID programId, String rawJson, String ownerUserId)`
+    - `DeleteProgramUseCase`: `void deleteProgram(UUID programId, String ownerUserId)`
+    - `CopyProgramUseCase`: `VaultItem copyProgram(UUID programId, String ownerUserId)`
+    - `SearchProgramsUseCase`: `Page<VaultItem> searchPrograms(SearchCriteria criteria, String ownerUserId, Pageable pageable)`
+    - _Requirements: 1.1, 1.3, 2.1, 3.1, 4.1, 5.1_
+  - [ ] 2.2 Create outbound port interface `VaultProgramRepository` in `vault/ports/outbound/`
+    - Methods: `findAllByOwner`, `findByIdAndOwner`, `save`, `deleteByIdAndOwner`, `existsByIdAndOwner`, `search`
+    - _Requirements: 1.1, 1.3, 2.1, 3.1, 4.1, 5.1_
+
+- [ ] 3. Create shared ProgramEntityMapper and exception handling
+  - [ ] 3.1 Extract entity↔domain mapping into `ProgramEntityMapper` utility class
+    - Extract `toEntity` and `toDomain` logic from `JpaUploadProgramRepository` into a shared utility
+    - Place in `vault/adapters/outbound/ProgramEntityMapper.java`
+    - Refactor `JpaUploadProgramRepository` to use the shared mapper
+    - _Requirements: 6.4_
+  - [ ] 3.2 Create `ProgramAccessDeniedException` in `common/exception/`
+    - Message: "Program not found or access denied"
+    - _Requirements: 1.4, 2.3, 2.4, 3.2, 3.3, 5.4, 5.5_
+  - [ ] 3.3 Extend `GlobalExceptionHandler` with `ProgramAccessDeniedException` handler
+    - Map to 403 Forbidden with `ErrorResponse` body
+    - _Requirements: 1.4, 2.3, 2.4, 3.2, 3.3, 5.4, 5.5_
+
+- [ ] 4. Implement VaultService application layer
+  - [ ] 4.1 Create `VaultService` in `vault/application/`
+    - Implements all 6 inbound port interfaces
+    - Inject `VaultProgramRepository` and `UploadParser`
+    - `listPrograms`: delegate to repository
+    - `getProgram`: find by id+owner, throw `ProgramAccessDeniedException` if not found
+    - `updateProgram`: parse JSON via UploadParser, validate, find existing, replace content, save
+    - `deleteProgram`: verify ownership via `existsByIdAndOwner`, delete or throw 403
+    - `copyProgram`: find by id+owner, deep copy with new id, name + " (Copy)", MANUAL source, save
+    - `searchPrograms`: validate criteria (reject empty/blank query), delegate to repository
+    - Annotate with `@Service` and `@Transactional`
+    - _Requirements: 1.1, 1.3, 1.4, 2.1, 2.2, 2.5, 2.7, 3.1, 3.2, 3.5, 4.1, 4.2, 4.3, 5.1, 5.2, 5.3_
+
+- [ ] 5. Checkpoint — Ensure domain, ports, and application layer compile
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 6. Implement outbound adapter and database migration
+  - [ ] 6.1 Extend `ProgramSpringDataRepository` with custom query methods
+    - Add `findAllByOwnerUserIdOrderByCreatedAtDesc` (paginated)
+    - Add `findByIdAndOwnerUserId`
+    - Add `deleteByIdAndOwnerUserId`
+    - Add `existsByIdAndOwnerUserId`
+    - Add `@Query` JPQL method `searchPrograms` with keyword, focusArea, modality params and relevance ordering via CASE expression
+    - _Requirements: 1.1, 1.3, 3.1, 4.1, 4.7, 4.8, 4.9, 4.10_
+  - [ ] 6.2 Create `JpaVaultProgramRepository` in `vault/adapters/outbound/`
+    - Implements `VaultProgramRepository` outbound port
+    - Uses `ProgramSpringDataRepository` and `ProgramEntityMapper`
+    - Maps between JPA entities and domain objects (VaultProgram, VaultItem)
+    - Handles full replacement on update (clear weeks, rebuild entity tree)
+    - _Requirements: 1.1, 1.3, 2.1, 3.1, 4.1, 5.1_
+  - [ ] 6.3 Create Flyway migration `V102__add_search_indexes.sql`
+    - Add indexes: `idx_programs_name_lower`, `idx_programs_goal_lower`, `idx_days_focus_area_lower`, `idx_days_modality`
+    - _Requirements: 4.1, 4.8, 4.9_
+
+- [ ] 7. Implement VaultController inbound adapter
+  - [ ] 7.1 Create DTO records in `vault/adapters/inbound/dto/`
+    - `VaultItemResponse`: mirrors VaultItem fields
+    - `VaultProgramDetailResponse`: full program with nested weeks/days/sections/exercises
+    - `PaginatedResponse<T>`: wraps Spring Page with `content`, `page`, `size`, `totalElements`, `totalPages`
+    - _Requirements: 1.2, 1.3, 1.6, 4.5_
+  - [ ] 7.2 Create `VaultController` in `vault/adapters/inbound/`
+    - `GET /api/v1/vault/programs` → list programs (paginated, size max 100)
+    - `GET /api/v1/vault/programs/{id}` → get program detail
+    - `PUT /api/v1/vault/programs/{id}` → update program (full JSON replacement)
+    - `DELETE /api/v1/vault/programs/{id}` → delete program (204 No Content)
+    - `POST /api/v1/vault/programs/{id}/copy` → copy program (201 Created)
+    - `GET /api/v1/vault/programs/search` → search with `q`, `focusArea`, `modality` params
+    - Resolve `ownerUserId` from JWT subject claim via SecurityContextHolder
+    - Validate page size ≤ 100, validate UUID format
+    - _Requirements: 1.1, 1.3, 1.4, 1.5, 1.6, 2.1, 2.6, 3.1, 3.4, 4.1, 4.5, 4.6, 5.1, 5.6_
+
+- [ ] 8. Checkpoint — Ensure backend compiles and all existing tests pass
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 9. Implement frontend TypeScript types and API client
+  - [ ] 9.1 Create `src/types/vault.ts` with TypeScript interfaces
+    - `VaultItem`, `PaginatedResponse<T>`, `VaultProgramDetail`, `VaultWeek`, `VaultDay`, `WarmCoolEntry`, `VaultSection`, `VaultExercise`
+    - _Requirements: 8.2, 9.1_
+  - [ ] 9.2 Create `src/lib/vaultApi.ts` API client functions
+    - `listPrograms(page, size)`, `getProgram(id)`, `updateProgram(id, json)`, `deleteProgram(id)`, `copyProgram(id)`, `searchPrograms(q, focusArea, modality, page, size)`
+    - Use existing `apiClient` pattern from `authApi.ts`
+    - _Requirements: 8.2, 9.2, 9.6, 9.7, 9.9, 9.11_
+
+- [ ] 10. Implement frontend Vault feature pages
+  - [ ] 10.1 Create `src/features/vault/useVaultSearch.ts` hook
+    - Manage search query state, filter state (focusArea, modality), debounce input by 300ms
+    - Call `searchPrograms` API and manage loading/error/results state
+    - _Requirements: 8.7, 8.10_
+  - [ ] 10.2 Create `src/features/vault/useProgram.ts` hook
+    - Fetch program detail, handle update/delete/copy operations
+    - Manage loading/error state, handle 403 and 401 responses
+    - _Requirements: 9.2, 9.5, 9.6_
+  - [ ] 10.3 Create `src/features/vault/VaultItemCard.tsx` component
+    - Display search result card with name, goal, durationWeeks, contentSource
+    - Clickable to navigate to program detail
+    - _Requirements: 8.2, 8.5_
+  - [ ] 10.4 Create `src/features/vault/VaultSearchPage.tsx`
+    - Text input field with 300ms debounce
+    - Focus Area dropdown filter (All, Push, Pull, Metcon, Full Body)
+    - Modality dropdown filter (All, CrossFit, Hypertrophy)
+    - Search button, loading indicator, empty state message, results list using VaultItemCard
+    - Handle 401 by redirecting to login
+    - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 8.10_
+  - [ ] 10.5 Create `src/features/vault/ProgramJsonEditor.tsx` component
+    - Inline JSON editor pre-populated with program content in Upload_Schema format
+    - Preview button: parse JSON client-side, show structured preview or inline error
+    - Save Changes button: submit PUT request, display validation errors on 400
+    - _Requirements: 9.7, 9.8, 9.9, 9.10_
+  - [ ] 10.6 Create `src/features/vault/ProgramDetailPage.tsx`
+    - Display program metadata (name, goal, duration, equipment, content source)
+    - Collapsible week breakdown with expandable days showing focus area, modality, warm-up, sections, exercises, cool-down
+    - Loading indicator, 403 error message with link back to search
+    - Delete action with confirmation dialog, navigates to search on success
+    - Edit JSON action opening ProgramJsonEditor
+    - Copy action calling POST copy endpoint, navigates to new copy's detail page
+    - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.9, 9.10, 9.11_
+
+- [ ] 11. Update Home page and routing
+  - [ ] 11.1 Restructure "Workout" menu on Home page
+    - Convert the "Workout" link to an expandable menu (same pattern as "New Workout")
+    - Sub-options: "Continue with Program" → `/workout/continue`, "Search for a workout or program" → `/vault/search`
+    - Keep existing "New Workout" expandable menu unchanged
+    - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
+  - [ ] 11.2 Update `App.tsx` with new routes
+    - Add `/vault/search` → VaultSearchPage
+    - Add `/vault/programs/:id` → ProgramDetailPage
+    - Add `/workout/continue` → ComingSoon placeholder
+    - Remove old `/workout` route
+    - _Requirements: 7.3, 7.4, 8.1, 9.1_
+  - [ ] 11.3 Add "View in Vault" link to upload success flow
+    - After 201 response, display "View in Vault" link navigating to `/vault/programs/{id}`
+    - Retain existing success confirmation message
+    - _Requirements: 10.1, 10.2_
+
+- [ ] 12. Checkpoint — Ensure frontend compiles and renders correctly
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 13. Backend unit tests
+  - [ ] 13.1 Write unit tests for `VaultService`
+    - Test each use case method with mocked `VaultProgramRepository` and `UploadParser`
+    - Test ownership enforcement (ProgramAccessDeniedException thrown for non-owner)
+    - Test empty query rejection (400 for blank search query)
+    - Test copy metadata (new id, name + " (Copy)", MANUAL source, timestamps)
+    - Test update preserves immutable fields (contentSource, ownerUserId)
+    - _Requirements: 1.1, 1.4, 2.1, 2.2, 2.5, 2.7, 3.1, 3.2, 4.1, 4.3, 5.1, 5.2, 5.3_
+  - [ ] 13.2 Write unit tests for `SearchCriteria`
+    - Test `hasKeyword()`, `hasFocusArea()`, `hasModality()` with null, blank, and valid values
+    - _Requirements: 4.1, 4.8, 4.9_
+  - [ ] 13.3 Write unit tests for `ProgramEntityMapper`
+    - Test entity→domain and domain→entity mapping for edge cases (empty weeks, empty exercises, null optional fields)
+    - _Requirements: 6.4_
+
+- [ ]* 14. Backend property-based tests (jqwik)
+  - [ ]* 14.1 Write property test: Ownership Enforcement
+    - **Property 1: Ownership Enforcement**
+    - For any program owned by user A, operations by user B (B ≠ A) must throw ProgramAccessDeniedException
+    - **Validates: Requirements 1.4, 2.3, 2.4, 3.2, 3.3, 5.4, 5.5**
+  - [ ]* 14.2 Write property test: Listing Returns Only Owner's Programs in Correct Order
+    - **Property 2: Listing Returns Only Owner's Programs in Correct Order**
+    - For any set of programs belonging to multiple users, listing for user A returns only A's programs ordered by createdAt desc
+    - **Validates: Requirements 1.1**
+  - [ ]* 14.3 Write property test: VaultItem Mapping Completeness
+    - **Property 3: VaultItem Mapping Completeness**
+    - For any valid VaultProgram, mapping to VaultItem produces all required fields with matching values
+    - **Validates: Requirements 1.2**
+  - [ ]* 14.4 Write property test: Program Detail Round-Trip
+    - **Property 4: Program Detail Round-Trip**
+    - For any valid Program, saving and retrieving produces equivalent domain object
+    - **Validates: Requirements 1.3**
+  - [ ]* 14.5 Write property test: Pagination Invariants
+    - **Property 5: Pagination Invariants**
+    - For any N programs and valid page size S, paginating yields exactly N items with no duplicates/omissions
+    - **Validates: Requirements 1.6, 4.5**
+  - [ ]* 14.6 Write property test: Update Replaces Content
+    - **Property 6: Update Replaces Content**
+    - For any existing program and valid new JSON, update results in stored content matching new JSON while preserving id
+    - **Validates: Requirements 2.1**
+  - [ ]* 14.7 Write property test: Update Preserves Immutable Fields and Sets Timestamp
+    - **Property 7: Update Preserves Immutable Fields and Sets Timestamp**
+    - For any update, contentSource and ownerUserId remain unchanged, updatedAt ≥ pre-update time
+    - **Validates: Requirements 2.2, 2.7**
+  - [ ]* 14.8 Write property test: Invalid JSON Rejected on Update
+    - **Property 8: Invalid JSON Rejected on Update**
+    - For any JSON failing Upload_Schema validation, PUT returns 400 with field errors, existing program unchanged
+    - **Validates: Requirements 2.5**
+  - [ ]* 14.9 Write property test: Delete Removes Program
+    - **Property 9: Delete Removes Program**
+    - After deletion, retrieval throws ProgramAccessDeniedException
+    - **Validates: Requirements 3.1, 3.5**
+  - [ ]* 14.10 Write property test: Search Returns Matching Results for Authenticated User Only
+    - **Property 10: Search Returns Matching Results for Authenticated User Only**
+    - Search as user A returns only A's programs matching keyword in name or goal (case-insensitive)
+    - **Validates: Requirements 4.1, 4.2**
+  - [ ]* 14.11 Write property test: Empty Query Rejected
+    - **Property 11: Empty Query Rejected**
+    - Any whitespace-only string as q parameter results in 400
+    - **Validates: Requirements 4.3**
+  - [ ]* 14.12 Write property test: Search Relevance Ordering
+    - **Property 12: Search Relevance Ordering**
+    - Name-matching programs appear before goal-only-matching programs, ties broken by createdAt desc
+    - **Validates: Requirements 4.7**
+  - [ ]* 14.13 Write property test: Combined Filter Enforcement
+    - **Property 13: Combined Filter Enforcement**
+    - Every result matches all specified filter criteria (focusArea, modality)
+    - **Validates: Requirements 4.8, 4.9, 4.10, 4.11**
+  - [ ]* 14.14 Write property test: Copy Produces Complete Deep Copy with Correct Metadata
+    - **Property 14: Copy Produces Complete Deep Copy with Correct Metadata**
+    - Copy has new id, name + " (Copy)", MANUAL source, current timestamps, identical structure
+    - **Validates: Requirements 5.1, 5.2, 5.3**
+  - [ ]* 14.15 Write property test: Content Source Does Not Affect Behavior
+    - **Property 15: Content Source Does Not Affect Behavior**
+    - Two programs with identical structure but different contentSource produce equivalent results for all operations
+    - **Validates: Requirements 6.4**
+
+- [ ]* 15. Backend integration tests
+  - [ ]* 15.1 Write integration tests for VaultController endpoints
+    - Test full request/response cycle for list, get, update, delete, copy, search (happy paths)
+    - Test 403 for non-owner access and non-existent programs
+    - Test 400 for invalid JSON on update and empty search query
+    - Test 401 without JWT
+    - Test pagination across multiple pages
+    - Test upload → vault retrieval integration (upload a program, then GET it via vault endpoint)
+    - Test search with filters against real database
+    - _Requirements: 1.1, 1.3, 1.4, 1.5, 1.6, 2.1, 2.5, 2.6, 3.1, 3.4, 4.1, 4.3, 4.6, 5.1, 5.6, 6.1, 6.2, 6.3_
+
+- [ ]* 16. Frontend tests
+  - [ ]* 16.1 Write Vitest tests for VaultSearchPage
+    - Test renders search input, filters, results; handles loading/empty/error states
+    - Test debounce behavior and filter state management
+    - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.7, 8.8, 8.9, 8.10_
+  - [ ]* 16.2 Write Vitest tests for ProgramDetailPage
+    - Test renders metadata, expandable weeks/days, action buttons
+    - Test delete confirmation, edit JSON flow, copy action
+    - _Requirements: 9.1, 9.2, 9.3, 9.5, 9.6, 9.7, 9.11_
+  - [ ]* 16.3 Write Vitest tests for Home page Workout menu
+    - Test expandable menu renders sub-options, navigation links correct
+    - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
+  - [ ]* 16.4 Write Vitest tests for upload success "View in Vault" link
+    - Test link appears after successful upload with correct program id
+    - _Requirements: 10.1, 10.2_
+
+- [ ] 17. Final checkpoint — Ensure all tests pass
+  - Ensure all tests pass, ask the user if questions arise.
+
+## Notes
+
+- Tasks marked with `*` are optional and can be skipped for faster MVP
+- Each task references specific requirements for traceability
+- Checkpoints ensure incremental validation
+- Property tests validate universal correctness properties defined in the design document
+- Unit tests validate specific examples and edge cases
+- The `ProgramEntityMapper` extraction (task 3.1) eliminates duplication between upload and vault adapters
+- Frontend tasks assume the existing `apiClient.ts` pattern for authenticated requests
