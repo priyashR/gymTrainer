@@ -1,13 +1,13 @@
 {
   "enabled": true,
   "name": "Generate Architecture Diagrams",
-  "description": "Generates architecture diagrams (component, service interaction, and hexagonal layer diagrams) for the full codebase when manually triggered by the user.",
+  "description": "Regenerates the full set of architecture, design, and UI diagrams: 1. Component diagram 2. End-to-end architecture 3. Full system design 4. Screen flows 5. Requirements status mapping. Output is saved to docs/architecture-diagrams.md in Mermaid format.",
   "version": "1",
   "when": {
     "type": "userTriggered"
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Analyze the full codebase structure and generate architecture diagrams in Mermaid format. Include: 1) A high-level service interaction diagram showing all microservices and their communication patterns (REST, RabbitMQ, WebSocket). 2) A hexagonal architecture diagram for each service showing domain, ports (inbound/outbound), adapters, and application layers. 3) A database schema ownership diagram showing which service owns which tables. Save the diagrams as Markdown files with embedded Mermaid blocks in the docs/ directory (e.g. docs/architecture-diagrams.md)."
+    "prompt": "Read all specs under .kiro/specs/, the frontend App.tsx routes, and the workspace steering docs. Then regenerate docs/architecture-diagrams.md with the following sections: 1. Component Diagram (all services, data stores, infrastructure) 2. End-to-End Architecture Diagram (full request/data flow including security sequence) 3. Full System Design (hexagonal internals, Workout Creator detailed design, DB ER diagram) 4. Screen Flows (current route map, home menu structure, upload flow, vault search/detail wireframes) 5. Requirements Status Matrix (every requirement mapped to implementing spec with completion status and prioritised backlog). Use Mermaid for diagrams and ASCII for wireframes."
   }
 }
