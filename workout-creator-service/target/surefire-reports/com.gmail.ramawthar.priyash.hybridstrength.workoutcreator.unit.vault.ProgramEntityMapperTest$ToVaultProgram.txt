@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.unit.vault.ProgramEntityMapperTest$ToVaultProgram
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.unit.vault.ProgramEntityMapperTest$ToVaultProgram

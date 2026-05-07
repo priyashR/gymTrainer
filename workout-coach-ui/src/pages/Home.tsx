@@ -24,6 +24,7 @@ const subItemStyle = {
 export default function Home() {
   const { logout } = useAuth();
   const [newWorkoutOpen, setNewWorkoutOpen] = useState(false);
+  const [workoutOpen, setWorkoutOpen] = useState(false);
 
   return (
     <main style={{ maxWidth: 600, margin: "2rem auto", padding: "0 1rem" }}>
@@ -81,9 +82,40 @@ export default function Home() {
         <Link to="/my-performance" style={cardStyle}>
           My Performance
         </Link>
-        <Link to="/workout" style={cardStyle}>
-          Workout
-        </Link>
+        {/* Workout — expandable with sub-options */}
+        <div>
+          <button
+            type="button"
+            onClick={() => setWorkoutOpen((prev) => !prev)}
+            style={{
+              ...cardStyle,
+              width: "100%",
+              background: "none",
+              cursor: "pointer",
+            }}
+            aria-expanded={workoutOpen}
+          >
+            Workout {workoutOpen ? "▲" : "▼"}
+          </button>
+
+          {workoutOpen && (
+            <div
+              style={{
+                display: "grid",
+                gap: "0.5rem",
+                marginTop: "0.5rem",
+                paddingLeft: "1rem",
+              }}
+            >
+              <Link to="/workout/continue" style={subItemStyle}>
+                Continue with Program
+              </Link>
+              <Link to="/vault/search" style={subItemStyle}>
+                Search for a workout or program
+              </Link>
+            </div>
+          )}
+        </div>
       </nav>
     </main>
   );

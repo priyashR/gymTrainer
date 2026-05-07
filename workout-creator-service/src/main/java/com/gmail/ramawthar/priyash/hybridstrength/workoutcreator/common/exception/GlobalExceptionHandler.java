@@ -92,6 +92,43 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(status).body(body);
     }
 
+    /**
+     * Handles program access denied — returns 403 Forbidden.
+     * Covers both "not found" and "not owned" cases to avoid leaking resource existence.
+     */
+    @ExceptionHandler(ProgramAccessDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleProgramAccessDenied(
+            ProgramAccessDeniedException ex, HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        ErrorResponse body = new ErrorResponse(
+                status.value(),
+                "Forbidden",
+                ex.getMessage(),
+                request.getRequestURI(),
+                Instant.now()
+        );
+        return ResponseEntity.status(status).body(body);
+    }
+
+    /**
+     * Handles service-layer validation failures (e.g. empty search query) — returns 400.
+     */
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgument(
+            IllegalArgumentException ex, HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ErrorResponse body = new ErrorResponse(
+                status.value(),
+                status.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI(),
+                Instant.now()
+        );
+        return ResponseEntity.status(status).body(body);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneric(Exception ex, HttpServletRequest request) {
         log.error("Unhandled exception on {} {}", request.getMethod(), request.getRequestURI(), ex);

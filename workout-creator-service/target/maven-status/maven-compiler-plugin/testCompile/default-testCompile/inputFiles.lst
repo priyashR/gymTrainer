@@ -1,4 +1,5 @@
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/integration/upload/UploadIntegrationTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/integration/vault/VaultIntegrationTest.java
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/UploadAtomicityPropertyTest.java
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/UploadCrossUserAccessPropertyTest.java
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/UploadErrorResponseShapePropertyTest.java
@@ -6,7 +7,19 @@
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/UploadRoundTripPropertyTest.java
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/UploadSchemaValidationPropertyTest.java
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/upload/ValidateEndpointCorrectnessPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/vault/VaultContentSourcePropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/vault/VaultCopyPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/vault/VaultDeletePropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/vault/VaultListingPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/vault/VaultMappingPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/vault/VaultOwnershipPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/vault/VaultPaginationPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/vault/VaultSearchPropertyTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/property/vault/VaultUpdatePropertyTest.java
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/upload/UploadFormatterTest.java
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/upload/UploadParserTest.java
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/upload/UploadProgramServiceTest.java
 /Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/upload/ValidateProgramUploadServiceTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/vault/ProgramEntityMapperTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/vault/SearchCriteriaTest.java
+/Users/priyashr/git/gymApp/workout-creator-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutcreator/unit/vault/VaultServiceTest.java

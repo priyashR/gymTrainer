@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import axios, { AxiosError, type AxiosResponse } from "axios";
+import { AxiosError, type AxiosResponse } from "axios";
 import { extractApiError } from "../authApi";
 
 // Requirements: 1.1, 1.2
