@@ -1,652 +1,560 @@
-# HybridStrength — Architecture Diagrams
-
-This document contains Mermaid architecture diagrams covering the full HybridStrength platform: service interactions, hexagonal architecture per service, and database schema ownership.
+# HybridStrength — Architecture, Design & Status Diagrams
 
 ---
 
-## 1. High-Level Service Interaction Diagram
+## 1. Component Diagram
+
+All logical components of the HybridStrength platform and their responsibilities.
 
 ```mermaid
 graph TB
     subgraph "Frontend"
-        UI[Workout Coach UI<br/>React 18 SPA<br/>Vite + React Router v6]
+        UI[Workout Coach UI<br/>React 18 SPA · Vite · TypeScript]
     end
 
     subgraph "Backend Services"
-        AUTH[Auth Service<br/>:8081<br/>Spring Boot 3.x]
-        WCS[Workout Creator Service<br/>:8082<br/>Spring Boot 3.x]
-        WSS[Workout Session Service<br/>:8083<br/>Spring Boot 3.x]
-        PTS[Progress Tracker Service<br/>:8084<br/>Spring Boot 3.x]
+        AUTH[Auth Service<br/>Spring Boot 3.x]
+        WCS[Workout Creator Service<br/>Spring Boot 3.x]
+        WSS[Workout Session Service<br/>Spring Boot 3.x]
+        PTS[Progress Tracker Service<br/>Spring Boot 3.x]
     end
 
-    subgraph "External Services"
-        GEMINI[Google Gemini API<br/>AI Generation]
-    end
-
-    subgraph "Infrastructure"
-        PG_AUTH[(PostgreSQL<br/>auth_service DB)]
-        PG_WCS[(PostgreSQL<br/>workout_creator DB)]
-        PG_WSS[(PostgreSQL<br/>workout_session DB)]
-        PG_PTS[(PostgreSQL<br/>progress_tracker DB)]
-        RMQ[RabbitMQ<br/>AMQP 0-9-1]
-    end
-
-    %% Frontend to Backend (REST over HTTPS)
-    UI -->|"REST/JSON<br/>JWT Bearer"| AUTH
-    UI -->|"REST/JSON<br/>JWT Bearer"| WCS
-    UI -->|"REST/JSON<br/>JWT Bearer"| WSS
-    UI -->|"WebSocket/STOMP<br/>Live Session"| WSS
-    UI -->|"REST/JSON<br/>JWT Bearer"| PTS
-
-    %% Inter-service REST calls
-    WSS -->|"REST<br/>GET Workout/Program"| WCS
-
-    %% External API
-    WCS -->|"REST<br/>Resilience4j Circuit Breaker"| GEMINI
-
-    %% Database ownership (exclusive)
-    AUTH --- PG_AUTH
-    WCS --- PG_WCS
-    WSS --- PG_WSS
-    PTS --- PG_PTS
-
-    %% Async messaging via RabbitMQ
-    WSS -->|"Publish<br/>SessionCompleted"| RMQ
-    RMQ -->|"Consume<br/>SessionCompleted"| PTS
-```
-
-### Communication Patterns Summary
-
-| Pattern | Usage |
-|---------|-------|
-| **REST (JSON/HTTP)** | All client→service and service→service synchronous calls |
-| **JWT (RS256)** | Authentication on every protected endpoint; verified locally per service |
-| **RabbitMQ (AMQP)** | Async domain events between services (e.g., `SessionCompleted`) |
-| **WebSocket (STOMP)** | Real-time session updates from Workout Session Service to UI |
-| **Circuit Breaker** | Resilience4j wrapping Gemini API calls (10s timeout) |
-
----
-
-## 2. Hexagonal Architecture — Auth Service
-
-```mermaid
-graph TB
-    subgraph "Auth Service"
-        subgraph "Inbound Adapters"
-            RC[RegistrationController<br/>POST /api/v1/auth/register]
-            AC[AuthenticationController<br/>POST /api/v1/auth/login<br/>POST /api/v1/auth/refresh]
-            JF[JwtAuthenticationFilter<br/>Security Filter Chain]
-        end
-
-        subgraph "Inbound Ports"
-            RUU[RegisterUserUseCase]
-            LU[LoginUseCase]
-            RTU[RefreshTokenUseCase]
-        end
-
-        subgraph "Application Layer"
-            RUS[RegisterUserService]
-            LS[LoginService]
-            RTS[RefreshTokenService]
-        end
-
-        subgraph "Domain"
-            USER[User<br/>id, email, passwordHash, role]
-            RT[RefreshToken<br/>id, tokenHash, userId, expiresAt]
-            TP[TokenPair<br/>accessToken, refreshToken]
-        end
-
-        subgraph "Outbound Ports"
-            UR[UserRepository]
-            RTR[RefreshTokenRepository]
-            PE[PasswordEncoder]
-            TPR[TokenProvider]
-        end
-
-        subgraph "Outbound Adapters"
-            JUR[JpaUserRepository<br/>→ SpringDataUserRepository]
-            JRTR[JpaRefreshTokenRepository<br/>→ SpringDataRefreshTokenRepository]
-            BPE[BcryptPasswordEncoder]
-            JWT[JwtTokenProvider<br/>RS256 signing]
-        end
+    subgraph "Data Stores"
+        AUTH_DB[(Auth DB<br/>PostgreSQL)]
+        WCS_DB[(Workout DB<br/>PostgreSQL)]
+        WSS_DB[(Session DB<br/>PostgreSQL)]
+        PTS_DB[(Performance DB<br/>PostgreSQL)]
     end
 
     subgraph "Infrastructure"
-        PG[(PostgreSQL<br/>users, refresh_tokens)]
+        MQ[RabbitMQ<br/>Message Broker]
+        GEMINI[Google Gemini<br/>AI API]
     end
 
-    %% Flow
-    RC --> RUU
-    AC --> LU & RTU
-    RUU -.-> RUS
-    LU -.-> LS
-    RTU -.-> RTS
+    UI -->|REST + JWT| AUTH
+    UI -->|REST + JWT| WCS
+    UI -->|REST + JWT| WSS
+    UI -->|WebSocket + STOMP| WSS
 
-    RUS --> UR & PE
-    LS --> UR & PE & TPR & RTR
-    RTS --> RTR & TPR
+    AUTH --> AUTH_DB
+    WCS --> WCS_DB
+    WSS --> WSS_DB
+    PTS --> PTS_DB
 
-    UR -.-> JUR
-    RTR -.-> JRTR
-    PE -.-> BPE
-    TPR -.-> JWT
-
-    JUR --> PG
-    JRTR --> PG
+    WCS -->|Prompt/Response| GEMINI
+    WSS -->|REST| WCS
+    WSS -->|Publish Events| MQ
+    PTS -->|Consume Events| MQ
 ```
 
-### Auth Service — Package Structure
+### Component Responsibilities
 
-```
-authservice/
-├── config/                    SecurityConfig, JwtConfig
-├── registration/
-│   ├── domain/                User
-│   ├── ports/inbound/         RegisterUserUseCase
-│   ├── ports/outbound/        UserRepository
-│   ├── application/           RegisterUserService
-│   └── adapters/
-│       ├── inbound/           RegistrationController, dto/
-│       └── outbound/          JpaUserRepository, SpringDataUserRepository, UserJpaEntity
-├── authentication/
-│   ├── domain/                RefreshToken, TokenPair
-│   ├── ports/inbound/         LoginUseCase, RefreshTokenUseCase
-│   ├── ports/outbound/        PasswordEncoder, RefreshTokenRepository, TokenProvider
-│   ├── application/           LoginService, RefreshTokenService
-│   └── adapters/
-│       ├── inbound/           AuthenticationController, dto/
-│       └── outbound/          BcryptPasswordEncoder, JpaRefreshTokenRepository,
-│                              JwtTokenProvider, RefreshTokenJpaEntity, SpringDataRefreshTokenRepository
-└── common/
-    ├── dto/                   ErrorResponse, ValidationErrorResponse
-    ├── exception/             GlobalExceptionHandler, DuplicateEmailException,
-    │                          InvalidCredentialsException, InvalidRefreshTokenException
-    └── security/              JwtAuthenticationFilter
-```
+| Component | Responsibility |
+|-----------|---------------|
+| **Workout Coach UI** | React SPA — auth flows, workout generation, vault management, upload, theater mode, progress dashboard |
+| **Auth Service** | User registration, login, JWT issuance (RS256), refresh tokens, admin user management |
+| **Workout Creator Service** | AI workout generation (Gemini), program upload/parse/validate, Vault CRUD, search & filter |
+| **Workout Session Service** | Theater Mode state, live performance logging, rest timers, program progression, event publishing |
+| **Progress Tracker Service** | Dashboard analytics, 1RM calculations, benchmark tracking, muscle heat map, PR detection |
+| **RabbitMQ** | Async event bus — `SessionCompleted` events from Session → Progress Tracker |
+| **Google Gemini** | External AI for natural language → structured workout generation |
 
 ---
 
-## 3. Hexagonal Architecture — Workout Creator Service
+## 2. End-to-End Architecture Diagram
+
+Shows the full request/data flow from user interaction through all layers.
 
 ```mermaid
-graph TB
-    subgraph "Workout Creator Service"
-        subgraph "Inbound Adapters"
-            UC[UploadController<br/>POST /api/v1/uploads/programs<br/>POST /api/v1/uploads/programs/validate]
-            VC[VaultController<br/>GET/PUT/DELETE /api/v1/vault/programs<br/>POST .../copy<br/>GET .../search]
-        end
-
-        subgraph "Inbound Ports"
-            UPU[UploadProgramUseCase]
-            VPU[ValidateProgramUploadUseCase]
-            LPU[ListProgramsUseCase]
-            GPU[GetProgramUseCase]
-            UPDU[UpdateProgramUseCase]
-            DPU[DeleteProgramUseCase]
-            CPU[CopyProgramUseCase]
-            SPU[SearchProgramsUseCase]
-        end
-
-        subgraph "Application Layer"
-            UPS[UploadProgramService]
-            VPS[ValidateProgramUploadService]
-            VS[VaultService]
-        end
-
-        subgraph "Domain"
-            P[Program<br/>name, goal, durationWeeks,<br/>equipmentProfile]
-            W[Week → Day → Section → Exercise]
-            WCE[WarmCoolEntry]
-            UP[UploadedProgram]
-            PR[ParseResult]
-            PARSER[UploadParser]
-            FMT[UploadFormatter]
-            VP[VaultProgram]
-            VI[VaultItem]
-            SC[SearchCriteria]
-        end
-
-        subgraph "Outbound Ports"
-            UPR[UploadProgramRepository]
-            VPR[VaultProgramRepository]
-        end
-
-        subgraph "Outbound Adapters"
-            JUPR[JpaUploadProgramRepository]
-            JVPR[JpaVaultProgramRepository]
-            SDR[ProgramSpringDataRepository]
-            ENT[JPA Entities<br/>ProgramJpaEntity, WeekJpaEntity,<br/>DayJpaEntity, SectionJpaEntity,<br/>ExerciseJpaEntity, WarmCoolEntryJpaEntity]
-        end
-    end
-
-    subgraph "Infrastructure"
-        PG[(PostgreSQL<br/>programs, weeks, days,<br/>sections, exercises,<br/>warm_cool_entries)]
-    end
-
-    %% Upload flow
-    UC --> UPU & VPU
-    UPU -.-> UPS
-    VPU -.-> VPS
-    UPS --> UPR
-    UPR -.-> JUPR
-
-    %% Vault flow
-    VC --> LPU & GPU & UPDU & DPU & CPU & SPU
-    LPU & GPU & UPDU & DPU & CPU & SPU -.-> VS
-    VS --> VPR
-    VPR -.-> JVPR
-
-    %% Shared persistence
-    JUPR --> SDR
-    JVPR --> SDR
-    SDR --> ENT
-    ENT --> PG
-```
-
-### Workout Creator Service — Package Structure
-
-```
-workoutcreator/
-├── config/                    SecurityConfig, JwtConfig, JwtProperties, UploadConfig
-├── upload/
-│   ├── domain/                UploadedProgram, ParseResult, UploadParser,
-│   │                          UploadFormatter, UploadValidationError
-│   ├── ports/inbound/         UploadProgramUseCase, ValidateProgramUploadUseCase
-│   ├── ports/outbound/        UploadProgramRepository
-│   ├── application/           UploadProgramService, ValidateProgramUploadService
-│   └── adapters/
-│       ├── inbound/           UploadController, dto/
-│       └── outbound/          JpaUploadProgramRepository
-├── vault/
-│   ├── domain/                VaultProgram, VaultItem, SearchCriteria
-│   ├── ports/inbound/         ListProgramsUseCase, GetProgramUseCase, UpdateProgramUseCase,
-│   │                          DeleteProgramUseCase, CopyProgramUseCase, SearchProgramsUseCase
-│   ├── ports/outbound/        VaultProgramRepository
-│   ├── application/           VaultService
-│   └── adapters/
-│       ├── inbound/           VaultController, dto/
-│       └── outbound/          JpaVaultProgramRepository, ProgramEntityMapper,
-│                              ProgramSpringDataRepository, ProgramJpaEntity, WeekJpaEntity,
-│                              DayJpaEntity, SectionJpaEntity, ExerciseJpaEntity, WarmCoolEntryJpaEntity
-└── common/
-    ├── model/                 Program, Week, Day, Section, Exercise, WarmCoolEntry,
-    │                          ContentSource, Modality, ModalityType, SectionType
-    ├── dto/                   ErrorResponse, ValidationErrorResponse
-    ├── exception/             GlobalExceptionHandler, UploadValidationException,
-    │                          ProgramAccessDeniedException
-    └── security/              JwtAuthenticationFilter
-```
-
----
-
-## 4. Hexagonal Architecture — Workout Session Service (Planned)
-
-```mermaid
-graph TB
-    subgraph "Workout Session Service"
-        subgraph "Inbound Adapters"
-            TC[TheaterController<br/>REST + WebSocket/STOMP<br/>Live session updates]
-            LC[LoggingController<br/>POST /api/v1/sessions/log]
-            PC[ProgressionController<br/>GET /api/v1/progression]
-        end
-
-        subgraph "Inbound Ports"
-            STU[StartTheaterUseCase]
-            LSU[LogSetUseCase]
-            CSU[CompleteSessionUseCase]
-            PPU[ProgramProgressionUseCase]
-        end
-
-        subgraph "Application Layer"
-            TS[TheaterService]
-            LGS[LoggingService]
-            PS[ProgressionService]
-        end
-
-        subgraph "Domain"
-            SS[Session<br/>id, userId, programId, status]
-            SL[SetLog<br/>exercise, weight, reps, rpe]
-            PP[ProgramProgress<br/>currentWeek, currentDay]
-        end
-
-        subgraph "Outbound Ports"
-            SR[SessionRepository]
-            EP[EventPublisher]
-            WCC[WorkoutCreatorClient]
-        end
-
-        subgraph "Outbound Adapters"
-            JSR[JpaSessionRepository]
-            REP[RabbitEventPublisher<br/>→ SessionCompleted]
-            RCC[RestWorkoutCreatorClient<br/>GET programs from WCS]
-        end
-    end
-
-    subgraph "Infrastructure"
-        PG[(PostgreSQL<br/>sessions, set_logs,<br/>program_progress)]
-        RMQ[RabbitMQ]
-        WCS_API[Workout Creator Service<br/>REST API]
-    end
-
-    TC --> STU & CSU
-    LC --> LSU
-    PC --> PPU
-
-    STU & CSU -.-> TS
-    LSU -.-> LGS
-    PPU -.-> PS
-
-    TS --> SR & EP & WCC
-    LGS --> SR
-    PS --> SR
-
-    SR -.-> JSR
-    EP -.-> REP
-    WCC -.-> RCC
-
-    JSR --> PG
-    REP --> RMQ
-    RCC --> WCS_API
-```
-
----
-
-## 5. Hexagonal Architecture — Progress Tracker Service (Planned)
-
-```mermaid
-graph TB
-    subgraph "Progress Tracker Service"
-        subgraph "Inbound Adapters"
-            DC[DashboardController<br/>GET /api/v1/dashboard]
-            BC[BenchmarkController<br/>GET /api/v1/benchmarks]
-            HC[HeatmapController<br/>GET /api/v1/heatmap]
-            SEL[SessionEventListener<br/>RabbitMQ Consumer]
-        end
-
-        subgraph "Inbound Ports"
-            DU[DashboardUseCase]
-            BU[BenchmarkUseCase]
-            HU[HeatmapUseCase]
-            PSE[ProcessSessionEventUseCase]
-        end
-
-        subgraph "Application Layer"
-            DS[DashboardService]
-            BS[BenchmarkService]
-            HS[HeatmapService]
-            SES[SessionEventService]
-        end
-
-        subgraph "Domain"
-            WS[WorkoutStats<br/>volume, frequency, PRs]
-            BM[Benchmark<br/>exercise, oneRepMax, date]
-            MH[MuscleHeatmap<br/>muscleGroup, intensity, date]
-        end
-
-        subgraph "Outbound Ports"
-            WSR[WorkoutStatsRepository]
-            BMR[BenchmarkRepository]
-            MHR[MuscleHeatmapRepository]
-        end
-
-        subgraph "Outbound Adapters"
-            JWSR[JpaWorkoutStatsRepository]
-            JBMR[JpaBenchmarkRepository]
-            JMHR[JpaMuscleHeatmapRepository]
-        end
-    end
-
-    subgraph "Infrastructure"
-        PG[(PostgreSQL<br/>workout_stats, benchmarks,<br/>muscle_heatmap)]
-        RMQ[RabbitMQ<br/>SessionCompleted events]
-    end
-
-    DC --> DU
-    BC --> BU
-    HC --> HU
-    SEL --> PSE
-
-    DU -.-> DS
-    BU -.-> BS
-    HU -.-> HS
-    PSE -.-> SES
-
-    DS --> WSR
-    BS --> BMR
-    HS --> MHR
-    SES --> WSR & BMR & MHR
-
-    WSR -.-> JWSR
-    BMR -.-> JBMR
-    MHR -.-> JMHR
-
-    JWSR --> PG
-    JBMR --> PG
-    JMHR --> PG
-    RMQ --> SEL
-```
-
----
-
-## 6. Frontend Architecture — Workout Coach UI
-
-```mermaid
-graph TB
-    subgraph "Workout Coach UI (React 18 SPA)"
-        subgraph "Routing (React Router v6)"
-            ROUTES[App.tsx<br/>Route Definitions]
-        end
-
-        subgraph "Pages"
-            HOME[Home.tsx]
-            LOGIN[Login.tsx]
-            REG[Register.tsx]
-            UPLOAD[UploadPage.tsx]
-            SEARCH[VaultSearchPage.tsx]
-            DETAIL[ProgramDetailPage.tsx]
-            CS[ComingSoon.tsx]
-        end
-
-        subgraph "Features"
-            AUTH_F[features/auth/<br/>AuthContext, useAuth]
-            UPLOAD_F[features/upload/<br/>FilePicker, JsonEditor,<br/>ProgramPreview, useUpload]
-            VAULT_F[features/vault/<br/>VaultItemCard, ProgramJsonEditor,<br/>useVaultSearch, useProgram]
-        end
-
-        subgraph "Shared"
-            COMP[components/<br/>ui/, layout/]
-            LIB[lib/<br/>apiClient, authApi, vaultApi]
-            TYPES[types/<br/>auth.ts, upload.ts, vault.ts]
-            HOOKS[hooks/]
-        end
-    end
-
-    subgraph "Backend APIs"
-        AUTH_API[Auth Service<br/>/api/v1/auth/*]
-        WCS_API[Workout Creator Service<br/>/api/v1/uploads/*<br/>/api/v1/vault/*]
-        WSS_API[Workout Session Service<br/>/api/v1/sessions/*]
-        PTS_API[Progress Tracker Service<br/>/api/v1/dashboard/*]
-    end
-
-    ROUTES --> HOME & LOGIN & REG & UPLOAD & SEARCH & DETAIL & CS
-
-    AUTH_F --> LIB
-    UPLOAD_F --> LIB
-    VAULT_F --> LIB
-
-    LIB -->|"REST + JWT"| AUTH_API
-    LIB -->|"REST + JWT"| WCS_API
-    LIB -->|"REST + JWT"| WSS_API
-    LIB -->|"REST + JWT"| PTS_API
-```
-
-### Frontend Route Map
-
-| Route | Page | Status |
-|-------|------|--------|
-| `/login` | Login | ✅ Implemented |
-| `/register` | Register | ✅ Implemented |
-| `/` | Home | ✅ Implemented |
-| `/upload` | UploadPage | ✅ Implemented |
-| `/new-workout` | ComingSoon | Placeholder |
-| `/my-performance` | ComingSoon | Placeholder |
-| `/workout` | ComingSoon | Placeholder |
-| `/vault/search` | VaultSearchPage | Planned |
-| `/vault/programs/:id` | ProgramDetailPage | Planned |
-| `/workout/continue` | ComingSoon | Planned |
-
----
-
-## 7. Database Schema Ownership
-
-```mermaid
-graph LR
-    subgraph "Auth Service DB (V001–V099)"
-        USERS[users<br/>─────────<br/>id UUID PK<br/>email VARCHAR UNIQUE<br/>password_hash VARCHAR<br/>role VARCHAR<br/>created_at TIMESTAMPTZ<br/>updated_at TIMESTAMPTZ]
-        REFRESH[refresh_tokens<br/>─────────<br/>id UUID PK<br/>token_hash VARCHAR UNIQUE<br/>user_id UUID FK→users<br/>expires_at TIMESTAMPTZ<br/>created_at TIMESTAMPTZ]
-    end
-
-    subgraph "Workout Creator Service DB (V100–V199)"
-        PROGRAMS[programs<br/>─────────<br/>id UUID PK<br/>name VARCHAR<br/>duration_weeks INT<br/>goal VARCHAR<br/>equipment_profile TEXT<br/>owner_user_id VARCHAR<br/>content_source VARCHAR<br/>created_at TIMESTAMPTZ<br/>updated_at TIMESTAMPTZ]
-        WEEKS[weeks<br/>─────────<br/>id UUID PK<br/>program_id UUID FK→programs<br/>week_number INT]
-        DAYS[days<br/>─────────<br/>id UUID PK<br/>week_id UUID FK→weeks<br/>day_number INT<br/>day_label VARCHAR<br/>focus_area VARCHAR<br/>modality VARCHAR<br/>methodology_source VARCHAR]
-        SECTIONS[sections<br/>─────────<br/>id UUID PK<br/>day_id UUID FK→days<br/>name VARCHAR<br/>section_type VARCHAR<br/>format VARCHAR<br/>time_cap INT<br/>sort_order INT]
-        EXERCISES[exercises<br/>─────────<br/>id UUID PK<br/>section_id UUID FK→sections<br/>exercise_name VARCHAR<br/>modality_type VARCHAR<br/>prescribed_sets INT<br/>prescribed_reps VARCHAR<br/>prescribed_weight VARCHAR<br/>rest_interval_seconds INT<br/>notes TEXT<br/>sort_order INT]
-        WARMCOOL[warm_cool_entries<br/>─────────<br/>id UUID PK<br/>day_id UUID FK→days<br/>entry_type VARCHAR<br/>movement VARCHAR<br/>instruction TEXT<br/>sort_order INT]
-    end
-
-    subgraph "Workout Session Service DB (V200–V299)"
-        SESSIONS[sessions<br/>─────────<br/>id UUID PK<br/>user_id VARCHAR<br/>program_id UUID<br/>status VARCHAR<br/>started_at TIMESTAMPTZ<br/>completed_at TIMESTAMPTZ]
-        SETLOGS[set_logs<br/>─────────<br/>id UUID PK<br/>session_id UUID FK→sessions<br/>exercise_name VARCHAR<br/>set_number INT<br/>weight DECIMAL<br/>reps INT<br/>rpe DECIMAL<br/>logged_at TIMESTAMPTZ]
-        PROGRESS[program_progress<br/>─────────<br/>id UUID PK<br/>user_id VARCHAR<br/>program_id UUID<br/>current_week INT<br/>current_day INT<br/>updated_at TIMESTAMPTZ]
-    end
-
-    subgraph "Progress Tracker Service DB (V300–V399)"
-        STATS[workout_stats<br/>─────────<br/>id UUID PK<br/>user_id VARCHAR<br/>total_volume DECIMAL<br/>session_count INT<br/>period_start DATE<br/>period_end DATE]
-        BENCHMARKS[benchmarks<br/>─────────<br/>id UUID PK<br/>user_id VARCHAR<br/>exercise_name VARCHAR<br/>one_rep_max DECIMAL<br/>achieved_at TIMESTAMPTZ]
-        HEATMAP[muscle_heatmap<br/>─────────<br/>id UUID PK<br/>user_id VARCHAR<br/>muscle_group VARCHAR<br/>intensity DECIMAL<br/>recorded_at TIMESTAMPTZ]
-    end
-
-    %% Relationships within Auth Service
-    USERS --> REFRESH
-
-    %% Relationships within Workout Creator Service
-    PROGRAMS --> WEEKS
-    WEEKS --> DAYS
-    DAYS --> SECTIONS
-    DAYS --> WARMCOOL
-    SECTIONS --> EXERCISES
-
-    %% Relationships within Workout Session Service
-    SESSIONS --> SETLOGS
-```
-
-### Schema Ownership Rules
-
-| Service | Migration Range | Tables Owned |
-|---------|----------------|--------------|
-| Auth Service | V001–V099 | `users`, `refresh_tokens` |
-| Workout Creator Service | V100–V199 | `programs`, `weeks`, `days`, `sections`, `exercises`, `warm_cool_entries` |
-| Workout Session Service | V200–V299 | `sessions`, `set_logs`, `program_progress` |
-| Progress Tracker Service | V300–V399 | `workout_stats`, `benchmarks`, `muscle_heatmap` |
-
-**Key constraint:** No service reads from or writes to another service's tables. Cross-service data access goes through REST APIs or RabbitMQ events.
-
----
-
-## 8. Deployment Topology
-
-```mermaid
-graph TB
+flowchart LR
     subgraph "Client"
-        BROWSER[Browser<br/>React SPA]
+        Browser[Browser / Mobile]
     end
 
-    subgraph "Kubernetes Cluster (dev namespace)"
-        subgraph "Services"
-            AUTH_POD[auth-service<br/>:8081]
-            WCS_POD[workout-creator-service<br/>:8082]
-            WSS_POD[workout-session-service<br/>:8083]
-            PTS_POD[progress-tracker-service<br/>:8084]
-        end
-
-        subgraph "Data Layer"
-            PG[PostgreSQL 16<br/>:5432<br/>Separate DBs per service]
-            RABBIT[RabbitMQ 3.13+<br/>:5672 / :15672]
-        end
+    subgraph "Frontend Layer"
+        SPA[React SPA<br/>Vite · React Router v6]
     end
 
-    subgraph "External"
-        GEMINI[Google Gemini API]
+    subgraph "API Gateway Layer"
+        direction TB
+        JWT_FILTER[JWT Auth Filter<br/>RS256 Verification]
     end
 
-    BROWSER -->|HTTPS| AUTH_POD
-    BROWSER -->|HTTPS| WCS_POD
-    BROWSER -->|HTTPS + WS| WSS_POD
-    BROWSER -->|HTTPS| PTS_POD
+    subgraph "Service Layer"
+        direction TB
+        AS[Auth Service<br/>:8081]
+        WCS_SVC[Workout Creator<br/>:8082]
+        WSS_SVC[Workout Session<br/>:8083]
+        PTS_SVC[Progress Tracker<br/>:8084]
+    end
 
-    AUTH_POD --> PG
-    WCS_POD --> PG
-    WCS_POD --> GEMINI
-    WSS_POD --> PG
-    WSS_POD --> RABBIT
-    WSS_POD -->|REST| WCS_POD
-    PTS_POD --> PG
-    PTS_POD --> RABBIT
+    subgraph "Messaging Layer"
+        RMQ[RabbitMQ<br/>:5672]
+    end
+
+    subgraph "External APIs"
+        GEM[Google Gemini API]
+    end
+
+    subgraph "Persistence Layer"
+        PG1[(auth_db)]
+        PG2[(workout_creator_db)]
+        PG3[(workout_session_db)]
+        PG4[(progress_tracker_db)]
+    end
+
+    Browser --> SPA
+    SPA -->|HTTPS REST| JWT_FILTER
+    JWT_FILTER --> AS
+    JWT_FILTER --> WCS_SVC
+    JWT_FILTER --> WSS_SVC
+    JWT_FILTER --> PTS_SVC
+
+    SPA -.->|WebSocket STOMP| WSS_SVC
+
+    AS --> PG1
+    WCS_SVC --> PG2
+    WSS_SVC --> PG3
+    PTS_SVC --> PG4
+
+    WCS_SVC -->|HTTP| GEM
+    WSS_SVC -->|REST| WCS_SVC
+    WSS_SVC -->|AMQP Publish| RMQ
+    RMQ -->|AMQP Consume| PTS_SVC
+```
+
+### Communication Patterns
+
+| Pattern | From → To | Protocol | Purpose |
+|---------|-----------|----------|---------|
+| Synchronous | UI → Services | REST/JSON over HTTPS | All CRUD operations |
+| Synchronous | Session → Creator | REST/JSON | Fetch workout definitions |
+| Asynchronous | Session → Progress | RabbitMQ (AMQP) | `SessionCompleted` events |
+| Real-time | UI ↔ Session | WebSocket + STOMP | Live timer updates, session state |
+| External | Creator → Gemini | HTTPS | AI workout generation |
+
+### Security Flow
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant UI as React SPA
+    participant AS as Auth Service
+    participant SVC as Any Service
+
+    U->>UI: Login (email + password)
+    UI->>AS: POST /api/v1/auth/login
+    AS-->>UI: Access Token (body) + Refresh Token (HttpOnly cookie)
+    UI->>UI: Store access token in memory (never localStorage)
+
+    U->>UI: Access protected feature
+    UI->>SVC: GET /api/v1/... (Authorization: Bearer <token>)
+    SVC->>SVC: Verify JWT locally (RS256 public key)
+    SVC-->>UI: 200 OK + data
+
+    Note over UI,AS: On 401 (token expired)
+    UI->>AS: POST /api/v1/auth/refresh (cookie)
+    AS-->>UI: New Access Token + Rotated Refresh Cookie
+    UI->>SVC: Retry original request with new token
 ```
 
 ---
 
-## 9. Event Flow — Session Completion
+## 3. Full System Design
+
+### Hexagonal Architecture (per service)
+
+Each microservice follows the same internal layering:
 
 ```mermaid
-sequenceDiagram
-    participant UI as Workout Coach UI
-    participant WSS as Workout Session Service
-    participant RMQ as RabbitMQ
-    participant PTS as Progress Tracker Service
+graph TB
+    subgraph "Inbound Adapters"
+        REST[REST Controllers]
+        WS[WebSocket Handlers]
+        MQ_IN[Message Listeners]
+    end
 
-    UI->>WSS: POST /api/v1/sessions/{id}/complete
-    WSS->>WSS: Mark session as completed
-    WSS->>WSS: Calculate session stats
-    WSS->>RMQ: Publish SessionCompleted event
-    WSS-->>UI: 200 OK (session summary)
+    subgraph "Inbound Ports"
+        UC[Use Case Interfaces]
+    end
 
-    RMQ->>PTS: Deliver SessionCompleted
-    PTS->>PTS: Update workout_stats
-    PTS->>PTS: Check for new PRs → update benchmarks
-    PTS->>PTS: Update muscle_heatmap
-    PTS-->>RMQ: ACK
+    subgraph "Application Layer"
+        SVC[Service Implementations]
+    end
+
+    subgraph "Domain"
+        DOM[Domain Objects<br/>Pure Java · No Framework]
+    end
+
+    subgraph "Outbound Ports"
+        REPO[Repository Interfaces]
+        EXT[External Client Interfaces]
+    end
+
+    subgraph "Outbound Adapters"
+        JPA[JPA Repositories]
+        HTTP[HTTP Clients]
+        MQ_OUT[RabbitMQ Publishers]
+    end
+
+    REST --> UC
+    WS --> UC
+    MQ_IN --> UC
+    UC -.-> SVC
+    SVC --> DOM
+    SVC --> REPO
+    SVC --> EXT
+    REPO -.-> JPA
+    EXT -.-> HTTP
+    EXT -.-> MQ_OUT
+```
+
+### Workout Creator Service — Internal Design
+
+```mermaid
+graph TB
+    subgraph "Inbound Adapters"
+        UploadCtrl[UploadController<br/>POST /uploads/programs]
+        VaultCtrl[VaultController<br/>GET/PUT/DELETE /vault/programs]
+        GenCtrl[GenerationController<br/>POST /generate]
+    end
+
+    subgraph "Application Layer"
+        UploadSvc[UploadProgramService]
+        VaultSvc[VaultService]
+        GenSvc[GenerationService]
+    end
+
+    subgraph "Domain"
+        Program[Program]
+        Week[Week]
+        Day[Day]
+        Section[Section]
+        Exercise[Exercise]
+        Parser[UploadParser]
+        Formatter[UploadFormatter]
+        SearchCriteria[SearchCriteria]
+        VaultProgram[VaultProgram]
+        VaultItem[VaultItem]
+    end
+
+    subgraph "Outbound Adapters"
+        JpaUpload[JpaUploadProgramRepository]
+        JpaVault[JpaVaultProgramRepository]
+        GeminiClient[GeminiApiClient]
+        EntityMapper[ProgramEntityMapper]
+    end
+
+    subgraph "Persistence"
+        SpringData[ProgramSpringDataRepository]
+        DB[(PostgreSQL<br/>programs, weeks, days,<br/>sections, exercises,<br/>warm_cool_entries)]
+    end
+
+    UploadCtrl --> UploadSvc
+    VaultCtrl --> VaultSvc
+    GenCtrl --> GenSvc
+
+    UploadSvc --> Parser
+    UploadSvc --> JpaUpload
+    VaultSvc --> JpaVault
+    VaultSvc --> Parser
+    GenSvc --> GeminiClient
+    GenSvc --> Formatter
+
+    JpaUpload --> EntityMapper
+    JpaVault --> EntityMapper
+    EntityMapper --> SpringData
+    SpringData --> DB
+```
+
+### Database Schema (Workout Creator Service)
+
+```mermaid
+erDiagram
+    PROGRAMS ||--o{ WEEKS : contains
+    WEEKS ||--o{ DAYS : contains
+    DAYS ||--o{ SECTIONS : contains
+    DAYS ||--o{ WARM_COOL_ENTRIES : contains
+    SECTIONS ||--o{ EXERCISES : contains
+
+    PROGRAMS {
+        uuid id PK
+        varchar name
+        int duration_weeks
+        varchar goal
+        text equipment_profile
+        varchar owner_user_id
+        varchar content_source
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    WEEKS {
+        uuid id PK
+        uuid program_id FK
+        int week_number
+    }
+
+    DAYS {
+        uuid id PK
+        uuid week_id FK
+        int day_number
+        varchar day_label
+        varchar focus_area
+        varchar modality
+        varchar methodology_source
+    }
+
+    SECTIONS {
+        uuid id PK
+        uuid day_id FK
+        varchar name
+        varchar section_type
+        varchar format
+        int time_cap
+        int sort_order
+    }
+
+    EXERCISES {
+        uuid id PK
+        uuid section_id FK
+        varchar exercise_name
+        varchar modality_type
+        int prescribed_sets
+        varchar prescribed_reps
+        varchar prescribed_weight
+        int rest_interval_seconds
+        text notes
+        int sort_order
+    }
+
+    WARM_COOL_ENTRIES {
+        uuid id PK
+        uuid day_id FK
+        varchar entry_type
+        varchar movement
+        text instruction
+        int sort_order
+    }
 ```
 
 ---
 
-## 10. Authentication Flow
+## 4. Screen Flows
+
+### Current Application Routes
 
 ```mermaid
-sequenceDiagram
-    participant UI as Workout Coach UI
-    participant AUTH as Auth Service
-    participant WCS as Workout Creator Service
+flowchart TD
+    START[App Launch] --> AUTH_CHECK{Authenticated?}
 
-    Note over UI,AUTH: Registration
-    UI->>AUTH: POST /api/v1/auth/register {email, password}
-    AUTH->>AUTH: Validate, hash password (bcrypt cost 12)
-    AUTH-->>UI: 201 Created {userId}
+    AUTH_CHECK -->|No| LOGIN[/login<br/>Login Page]
+    AUTH_CHECK -->|Yes| HOME[/<br/>Home Page]
 
-    Note over UI,AUTH: Login
-    UI->>AUTH: POST /api/v1/auth/login {email, password}
-    AUTH->>AUTH: Verify credentials
-    AUTH-->>UI: 200 OK {accessToken} + Set-Cookie: refreshToken (HttpOnly)
+    LOGIN -->|Register link| REGISTER[/register<br/>Registration Page]
+    REGISTER -->|Success| LOGIN
+    LOGIN -->|Success| HOME
 
-    Note over UI,WCS: Authenticated API Call
-    UI->>WCS: GET /api/v1/vault/programs<br/>Authorization: Bearer {accessToken}
-    WCS->>WCS: Verify JWT locally (RS256 public key)
-    WCS->>WCS: Extract userId from JWT subject
-    WCS-->>UI: 200 OK {programs}
+    HOME --> NW[New Workout Menu]
+    HOME --> PERF[/my-performance<br/>Coming Soon]
+    HOME --> WK[Workout Menu]
 
-    Note over UI,AUTH: Token Refresh
-    UI->>AUTH: POST /api/v1/auth/refresh<br/>Cookie: refreshToken
-    AUTH->>AUTH: Validate refresh token hash
-    AUTH-->>UI: 200 OK {accessToken} + Set-Cookie: refreshToken (rotated)
+    NW --> ASK_GEMINI[/new-workout<br/>Ask Gemini · Coming Soon]
+    NW --> UPLOAD[/upload<br/>Upload Program]
+
+    WK --> CONTINUE[/workout/continue<br/>Continue with Program · Coming Soon]
+    WK --> SEARCH[/vault/search<br/>Vault Search Page]
+
+    UPLOAD -->|Success| VAULT_LINK[View in Vault link]
+    VAULT_LINK --> DETAIL
+
+    SEARCH -->|Select result| DETAIL[/vault/programs/:id<br/>Program Detail Page]
+    DETAIL -->|Delete| SEARCH
+    DETAIL -->|Copy| DETAIL_COPY[/vault/programs/:newId<br/>Copy Detail Page]
+    DETAIL -->|Edit JSON| EDITOR[Inline JSON Editor]
+    EDITOR -->|Save| DETAIL
 ```
+
+### Home Page Menu Structure
+
+```
+┌─────────────────────────────────────────┐
+│              HOME SCREEN                 │
+├─────────────────────────────────────────┤
+│                                         │
+│  ┌─────────────────────────────────┐    │
+│  │  🏋️ New Workout  [expandable]   │    │
+│  │    ├── Ask Gemini               │    │
+│  │    └── Upload Program           │    │
+│  └─────────────────────────────────┘    │
+│                                         │
+│  ┌─────────────────────────────────┐    │
+│  │  📊 My Performance              │    │
+│  └─────────────────────────────────┘    │
+│                                         │
+│  ┌─────────────────────────────────┐    │
+│  │  💪 Workout  [expandable]       │    │
+│  │    ├── Continue with Program    │    │
+│  │    └── Search for a workout     │    │
+│  └─────────────────────────────────┘    │
+│                                         │
+│  [Logout]                               │
+└─────────────────────────────────────────┘
+```
+
+### Upload Flow
+
+```
+┌──────────┐    ┌──────────────┐    ┌──────────────┐    ┌─────────────┐
+│  File    │───▶│  Structured  │───▶│   Uploading  │───▶│   Success   │
+│  Picker  │    │   Preview    │    │  (disabled)  │    │ + Vault Link│
+└──────────┘    └──────────────┘    └──────────────┘    └─────────────┘
+                       │                                        
+                       ▼                                        
+                ┌──────────────┐                               
+                │  JSON Editor │                               
+                │  (optional)  │                               
+                └──────────────┘                               
+```
+
+### Vault Search & Detail Flow
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  VAULT SEARCH PAGE  (/vault/search)                     │
+├─────────────────────────────────────────────────────────┤
+│  [Search input ___________] [🔍]                        │
+│  Focus Area: [All ▼]   Modality: [All ▼]               │
+│                                                         │
+│  ┌─────────────────────────────────────────────┐        │
+│  │ Program Name          │ Goal │ Weeks │ Source│        │
+│  ├───────────────────────┼──────┼───────┼──────┤        │
+│  │ Hybrid Strength 4-Wk  │ Str  │  4    │ ⬆️   │        │
+│  │ Push Pull Legs         │ Hyp  │  1    │ 🤖   │        │
+│  └─────────────────────────────────────────────┘        │
+└─────────────────────────────────────────────────────────┘
+                          │ click
+                          ▼
+┌─────────────────────────────────────────────────────────┐
+│  PROGRAM DETAIL PAGE  (/vault/programs/:id)             │
+├─────────────────────────────────────────────────────────┤
+│  Name: Hybrid Strength 4-Week                           │
+│  Goal: Build strength    Duration: 4 weeks              │
+│  Equipment: Barbell, Pull-up Bar                        │
+│  Source: UPLOADED                                       │
+│                                                         │
+│  [Delete] [Edit JSON] [Copy]                            │
+│                                                         │
+│  ▶ Week 1                                              │
+│    ▶ Day 1 — Push (Hypertrophy)                        │
+│      Warm-up: Arm Circles (30s each direction)          │
+│      Section: Tier 1 Compound                           │
+│        • Bench Press — 4×6-8 @ 80% 1RM (120s rest)     │
+│      Cool-down: Chest Stretch (30s each side)           │
+│    ▶ Day 2 — Pull (Hypertrophy)                        │
+│  ▶ Week 2                                              │
+│  ▶ Week 3                                              │
+│  ▶ Week 4                                              │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 5. Requirements Status & Spec Mapping
+
+### Legend
+
+| Status | Meaning |
+|--------|---------|
+| ✅ | Fully implemented and tested |
+| 🔨 | Partially implemented (some tasks remaining) |
+| 📋 | Spec created, not yet implemented |
+| 🚫 | Deferred / TODO |
+
+### Requirements Completion Matrix
+
+| # | Requirement | Status | Implementing Spec(s) |
+|---|-------------|--------|---------------------|
+| 1 | User Registration and Authentication | ✅ | `auth-service-mvp1` |
+| 2 | Admin User Management | 📋 | `auth-service-mvp2` (requirements only) |
+| 3 | AI-Powered Workout & Program Generation | 📋 | `workout-creator-service` (requirements only) |
+| 4 | Workout and Program CRUD (Vault) | ✅ | `workout-creator-service-vault` |
+| 5 | Vault Search and Filter | ✅ | `workout-creator-service-vault` |
+| 6 | Active Workout — Theater Mode | 📋 | `workout-session-service` (requirements only) |
+| 7 | Live Performance Logging | 📋 | `workout-session-service` (requirements only) |
+| 8 | Session State and Program Progression | 📋 | `workout-session-service` (requirements only) |
+| 9 | Progress Dashboard | 📋 | `progress-tracker-service` (requirements only) |
+| 10 | CrossFit and Benchmark Tracking | 📋 | `progress-tracker-service` (requirements only) |
+| 11 | Muscle Activation Heat Map | 📋 | `progress-tracker-service` (requirements only) |
+| 12 | Workout Coach UI — Navigation & Home | ✅ | `workout-coach-ui-mvp1` |
+| 13 | Data Integrity and Service Isolation | 🔨 | `platform` (requirements only; enforced in implemented services) |
+| 14 | Schema Management and Database Standards | ✅ | Enforced across `auth-service-mvp1`, `workout-creator-service-upload`, `workout-creator-service-vault` |
+| 15 | Workout and Program Upload (via UI) | ✅ | `workout-creator-service-upload` |
+| 16 | Workout Ingest via Email | 🚫 | Deferred |
+| 17 | Workout Photo Upload and AI Processing | 🚫 | Deferred |
+| 18 | Workout Ingest via Email — Photo + JSON | 🚫 | Deferred |
+
+### Detailed Spec → Implementation Mapping
+
+#### ✅ Completed Specs (with tasks.md fully checked off)
+
+| Spec | What It Delivers | Tasks |
+|------|-----------------|-------|
+| `auth-service-mvp1` | Registration, login, JWT (RS256), refresh tokens, bcrypt hashing, security filter, exception handling | 13 tasks — all ✅ |
+| `workout-coach-ui-mvp1` | React SPA scaffold, auth context, login/register pages, home page, protected routing, API client with interceptors | 9 task groups — all ✅ |
+| `workout-creator-service-upload` | Upload endpoint, validate endpoint, UploadParser, UploadFormatter, JPA persistence, frontend upload flow (file picker, preview, JSON editor) | 11 task groups — all ✅ |
+| `workout-creator-service-vault` | Vault CRUD (list, get, update, delete, copy), search with filters, frontend vault pages, home menu restructure, 15 property-based tests, unit tests, integration tests | 17 task groups — 15 ✅, 1 in progress, 1 optional |
+
+#### 📋 Specs with Requirements Only (no design/tasks yet)
+
+| Spec | Scope | Blocked By |
+|------|-------|-----------|
+| `auth-service-mvp2` | Admin user management (list users, deactivate accounts) | Nothing — ready to spec |
+| `workout-creator-service` (main) | AI generation via Gemini, round-trip property | Nothing — ready to spec |
+| `workout-session-service` | Theater Mode, live logging, program progression, WebSocket | Workout Creator Service API (for fetching definitions) |
+| `progress-tracker-service` | Dashboard, 1RM, benchmarks, heat map | Session Service (for `SessionCompleted` events) |
+| `workout-coach-ui` (main) | Full UI spec including theater mode, progress views | Session + Progress services |
+| `platform` | Cross-service contracts, data isolation rules | Reference spec — no implementation tasks |
+
+### What's Left — Prioritised Backlog
+
+```
+Priority 1 (Ready Now):
+  ├── AI Workout Generation (Gemini integration)
+  ├── Admin User Management (auth-service-mvp2)
+  └── Vault integration tests (task 15 — just completed)
+
+Priority 2 (Depends on Generation):
+  ├── Workout Session Service (Theater Mode)
+  └── Session UI components
+
+Priority 3 (Depends on Session):
+  ├── Progress Tracker Service
+  ├── Dashboard UI
+  └── Benchmark tracking
+
+Deferred (post-MVP):
+  ├── Email ingest (Req 16)
+  ├── Photo upload + AI extraction (Req 17)
+  └── Email photo ingest (Req 18)
+```
+
+---
+
+## Summary
+
+**Built so far:**
+- Full authentication system (register, login, JWT, refresh)
+- React SPA with auth flows and protected routing
+- Program upload with validation, preview, and JSON editing
+- Complete Vault CRUD (list, get, update, delete, copy)
+- Vault search with keyword, focus area, and modality filters
+- Frontend vault pages (search, detail, JSON editor)
+- Home page with expandable menus
+- 15 property-based tests + unit tests + integration tests for vault
+- Flyway migrations, hexagonal architecture throughout
+
+**Next up:**
+- AI workout generation (Gemini integration)
+- Theater Mode (active workout execution)
+- Progress dashboard and analytics
