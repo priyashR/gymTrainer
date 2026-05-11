@@ -1,13 +1,15 @@
 package com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.config;
 
-import com.nimbusds.jose.jwk.RSAKey;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPublicKey;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 
 /**
  * Provides the RSA public key used to verify incoming JWT access tokens.
@@ -57,8 +59,14 @@ public class JwtConfig {
 
     private RSAPublicKey parsePublicKeyFromPem(String pem) {
         try {
-            RSAKey rsaKey = RSAKey.parseFromPEMEncodedObjects(pem).toRSAKey();
-            return rsaKey.toRSAPublicKey();
+            String stripped = pem
+                    .replace("-----BEGIN PUBLIC KEY-----", "")
+                    .replace("-----END PUBLIC KEY-----", "")
+                    .replaceAll("\\s", "");
+            byte[] decoded = Base64.getDecoder().decode(stripped);
+            X509EncodedKeySpec spec = new X509EncodedKeySpec(decoded);
+            KeyFactory kf = KeyFactory.getInstance("RSA");
+            return (RSAPublicKey) kf.generatePublic(spec);
         } catch (Exception e) {
             throw new IllegalStateException("Failed to parse RSA public key from PEM", e);
         }

@@ -33,16 +33,33 @@ function renderHome(overrides: Partial<AuthContextValue> = {}) {
 }
 
 describe("Home page", () => {
-  it("should render three action cards with correct labels and links", () => {
+  it("should render expandable menus and action cards with correct labels", async () => {
+    const user = userEvent.setup();
     renderHome();
 
-    const newWorkout = screen.getByRole("link", { name: /new workout/i });
-    const myPerformance = screen.getByRole("link", { name: /my performance/i });
-    const workout = screen.getByRole("link", { name: /^workout$/i });
+    // "New Workout" is an expandable button
+    const newWorkoutBtn = screen.getByRole("button", { name: /new workout/i });
+    expect(newWorkoutBtn).toHaveAttribute("aria-expanded", "false");
 
-    expect(newWorkout).toHaveAttribute("href", "/new-workout");
+    // "Workout" is an expandable button
+    const workoutBtn = screen.getByRole("button", { name: /^workout/i });
+    expect(workoutBtn).toHaveAttribute("aria-expanded", "false");
+
+    // "My Performance" is still a link
+    const myPerformance = screen.getByRole("link", { name: /my performance/i });
     expect(myPerformance).toHaveAttribute("href", "/my-performance");
-    expect(workout).toHaveAttribute("href", "/workout");
+
+    // Expand "New Workout" — sub-options appear
+    await user.click(newWorkoutBtn);
+    expect(newWorkoutBtn).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("link", { name: /ask gemini/i })).toHaveAttribute("href", "/new-workout");
+    expect(screen.getByRole("link", { name: /upload program/i })).toHaveAttribute("href", "/upload");
+
+    // Expand "Workout" — sub-options appear
+    await user.click(workoutBtn);
+    expect(workoutBtn).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("link", { name: /continue with program/i })).toHaveAttribute("href", "/workout/continue");
+    expect(screen.getByRole("link", { name: /search for a workout or program/i })).toHaveAttribute("href", "/vault/search");
   });
 
   it("should call logout when the logout button is clicked", async () => {

@@ -8,8 +8,18 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      "/api": {
-        target: "http://localhost:32475",
+      "/api/v1/auth": {
+        target: "http://localhost:8081",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/api/v1/uploads": {
+        target: "http://localhost:8082",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/api/v1/vault": {
+        target: "http://localhost:8082",
         changeOrigin: true,
         secure: false,
       },

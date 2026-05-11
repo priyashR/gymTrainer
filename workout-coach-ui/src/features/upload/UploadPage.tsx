@@ -91,7 +91,7 @@ export function UploadPage() {
           </p>
           <div style={{ display: 'flex', gap: '0.75rem' }}>
             <Link
-              to="/"
+              to={`/vault/programs/${state.programId}`}
               style={{
                 padding: '0.6rem 1.25rem',
                 fontWeight: 600,
@@ -101,7 +101,7 @@ export function UploadPage() {
                 borderRadius: 4,
               }}
             >
-              Go to Vault
+              View in Vault
             </Link>
             <button
               type="button"

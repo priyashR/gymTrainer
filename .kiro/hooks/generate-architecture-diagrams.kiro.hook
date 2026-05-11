@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Generate Architecture Diagrams",
+  "description": "Regenerates the full set of architecture, design, and UI diagrams: 1. Component diagram 2. End-to-end architecture 3. Full system design 4. Screen flows 5. Requirements status mapping. Output is saved to docs/architecture-diagrams.md in Mermaid format.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Read all specs under .kiro/specs/, the frontend App.tsx routes, and the workspace steering docs. Then regenerate docs/architecture-diagrams.md with the following sections: 1. Component Diagram (all services, data stores, infrastructure) 2. End-to-End Architecture Diagram (full request/data flow including security sequence) 3. Full System Design (hexagonal internals, Workout Creator detailed design, DB ER diagram) 4. Screen Flows (current route map, home menu structure, upload flow, vault search/detail wireframes) 5. Requirements Status Matrix (every requirement mapped to implementing spec with completion status and prioritised backlog). Use Mermaid for diagrams and ASCII for wireframes."
+  }
+}
