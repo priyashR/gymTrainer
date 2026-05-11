@@ -30,20 +30,34 @@ public interface ProgramSpringDataRepository extends JpaRepository<ProgramJpaEnt
      *
      * <p>All filter parameters are nullable — when null they are excluded from the WHERE clause.
      */
-    @Query("""
-            SELECT DISTINCT p FROM ProgramJpaEntity p
-            LEFT JOIN p.weeks w
-            LEFT JOIN w.days d
-            WHERE p.ownerUserId = :ownerUserId
+    @Query(value = """
+            SELECT p.* FROM (
+                SELECT DISTINCT p.id, p.content_source, p.created_at, p.duration_weeks,
+                       p.equipment_profile, p.goal, p.name, p.owner_user_id, p.updated_at,
+                       CASE WHEN :query IS NOT NULL AND LOWER(p.name) LIKE LOWER(CONCAT('%', :query, '%'))
+                            THEN 0 ELSE 1 END AS relevance
+                FROM programs p
+                LEFT JOIN weeks w ON p.id = w.program_id
+                LEFT JOIN days d ON w.id = d.week_id
+                WHERE p.owner_user_id = :ownerUserId
+                AND (:query IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :query, '%'))
+                     OR LOWER(p.goal) LIKE LOWER(CONCAT('%', :query, '%')))
+                AND (:focusArea IS NULL OR LOWER(d.focus_area) = LOWER(CAST(:focusArea AS TEXT)))
+                AND (:modality IS NULL OR LOWER(d.modality) = LOWER(CAST(:modality AS TEXT)))
+            ) p
+            ORDER BY p.relevance, p.created_at DESC
+            """,
+            countQuery = """
+            SELECT COUNT(DISTINCT p.id) FROM programs p
+            LEFT JOIN weeks w ON p.id = w.program_id
+            LEFT JOIN days d ON w.id = d.week_id
+            WHERE p.owner_user_id = :ownerUserId
             AND (:query IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :query, '%'))
                  OR LOWER(p.goal) LIKE LOWER(CONCAT('%', :query, '%')))
-            AND (:focusArea IS NULL OR LOWER(d.focusArea) = LOWER(:focusArea))
-            AND (:modality IS NULL OR LOWER(CAST(d.modality AS string)) = LOWER(:modality))
-            ORDER BY
-                CASE WHEN :query IS NOT NULL AND LOWER(p.name) LIKE LOWER(CONCAT('%', :query, '%'))
-                     THEN 0 ELSE 1 END,
-                p.createdAt DESC
-            """)
+            AND (:focusArea IS NULL OR LOWER(d.focus_area) = LOWER(CAST(:focusArea AS TEXT)))
+            AND (:modality IS NULL OR LOWER(d.modality) = LOWER(CAST(:modality AS TEXT)))
+            """,
+            nativeQuery = true)
     Page<ProgramJpaEntity> searchPrograms(
             @Param("ownerUserId") String ownerUserId,
             @Param("query") String query,
