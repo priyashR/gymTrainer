@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:session_integration;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+    locations: classpath:db/migration/h2
+  rabbitmq:
+    host: localhost
+    port: 30672
+    username: guest
+    password: guest
+
+jwt:
+  public-key-pem: # Overridden by TestConfiguration in integration tests
+
+server:
+  port: 0
+
+workout-creator-service:
+  base-url: http://localhost:9999
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      workoutFetcher:
+        sliding-window-size: 10
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 1s
+        permitted-number-of-calls-in-half-open-state: 3
+  timelimiter:
+    instances:
+      workoutFetcher:
+        timeout-duration: 5s
+
+logging:
+  level:
+    com.gmail.ramawthar.priyash.hybridstrength.workoutsession: DEBUG

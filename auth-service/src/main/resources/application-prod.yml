@@ -6,6 +6,50 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: false
+  flyway:
+    validate-on-migrate: false
+    out-of-order: true
+
+jwt:
+  public-key-pem: |
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwXWJKWsQX+a3oEd4Q1LM
+    GcQYhld3V7qZFXDAIJRvqHbHIexpinO0FS8+kqYM0A5MYk0DjWNDZS7/CzpbFFl7
+    Zd/CKV65aW7ErUH/MQ3XkrV3bJb7clR743r0sku3/yILMMZ5df/hEVoPCnt6xI4Y
+    t/dDhA+k3/HQ0vosxWSkicW6SqNFGYHyfXgFubQb/t92cu4BkXLjgoiUydvSoNLC
+    GkAsyuVRl5UcPR7fGmzDIzmdE5233Ix4jUMaD2iT7kZS2XVtx4KuvmdUKiz26zlC
+    Qz22YeK8mjsef1L6KrYzTJhMDxDo8OoVrQrp3dQQ1i10JoF9PtDirFNMeNA3F4jI
+    2wIDAQAB
+    -----END PUBLIC KEY-----
+  private-key-pem: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDBdYkpaxBf5reg
+    R3hDUswZxBiGV3dXupkVcMAglG+odsch7GmKc7QVLz6SpgzQDkxiTQONY0NlLv8L
+    OlsUWXtl38IpXrlpbsStQf8xDdeStXdslvtyVHvjevSyS7f/Igswxnl1/+ERWg8K
+    e3rEjhi390OED6Tf8dDS+izFZKSJxbpKo0UZgfJ9eAW5tBv+33Zy7gGRcuOCiJTJ
+    29Kg0sIaQCzK5VGXlRw9Ht8abMMjOZ0TnbfcjHiNQxoPaJPuRlLZdW3Hgq6+Z1Qq
+    LPbrOUJDPbZh4ryaOx5/UvoqtjNMmEwPEOjw6hWtCund1BDWLXQmgX0+0OKsU0x4
+    0DcXiMjbAgMBAAECggEAOyKzf76jbb03yj2ujF3F1+ZyXLZl26JFYyFpCUx2aTeN
+    nVgH1vORS5x6cxdg+UQ1oyLJgDGki0x3V7ZJ2wmTR8vDLSQwZwMeCZwP5q3FhKoF
+    zGLGj+c1S47tN4cfwlRkuU8iF6jU4pn12Q1vtJ9+/NUPhVHG41GmtKcWgmxGQ3pu
+    TACRP18jz57JQmfZj8s46YyYgXNKGtC8mKCXWF06sdnOBEkrjcrg4UaxLZY7nW6t
+    g7WmZvoh0X/IQ+uufiCm9AveENONgp4OCpEMyX5Zz3rzBcHxSU6z2YB66VwKRaUD
+    Cqpo9eiftG8W9zF7k3iSr2g49M67Ichvu4NcjQChsQKBgQDouNmY/+L6gQBkA6xD
+    3SLu4agJUu2TOcfAwUF3CTJ/XwWy510BokyOhECY/+RivJZIalaVVrMncAMtYW3q
+    M5j+FeWlPwzjXYE9/i/w6E0L9m2SNkPKVq1iKNS8oIoTA8p/3ZEqEGDi9vBeYk5c
+    lRMzI3FVJ8jF4UaHx/ahhavVEwKBgQDUz06lfoFr6CQmCMXQ50nXsbZl3HU+UNGa
+    Ccn8MsE0NqdQ2sOE4420Wc+2fZo2nj+D6afrwdbNUTbAlVeSvgyB5yP0EyEHEQ/J
+    368uvl/1qp0E6rrhZ8Gnh/tNZoHM+EsI9hI/dFeYZHY6fHMMwvxMVZcsiWGkb02D
+    MxQi7OxeGQKBgQC7Rr387La4hgVNdtMyzYrmF3vE/RIoLxA7YomPBDy52TrZzGvA
+    +92FtpHRTeN5PW/mmIRSqzGCpBY6d7QfCySsG+zwvLtfYIi33Yyw3g/ad5WXWsnU
+    00m1u0vu+3YBdUSI/0FpS0LcgoHOQmfzAxgvR+9U6q4b53x9mgIz20D7NwKBgF6S
+    Ed0xrsoJS6crVt1TK1mTO/9gTSn4OG0/1GcjFwDhGNGxphm0FhEDqG7suk9zW75/
+    Y4Q9i/uKD87djyFDG8POuAeLSK4fQujvYqZfK728qDK7LXll5oVQxLjMyPoRjSba
+    U5mnVhX+7xtmmqodLImvr5K3KpEsdUHMvTIYH6JhAoGADcgUiOQE+hvgD+g6guT/
+    Msn9FP+Vy61QgEAYrZV4uQ8A982HtoChN6Tv7mEkBaV2Sf7qaKMaejP3x//QjSio
+    wroCMZYzhq0YfKOOcFzh6EU948tT9YBDtMi6+qMXpXVrWPr3yzsViRVTV/wXDAr9
+    yEt+8P8Nzfqc+yha2BgWQH0=
+    -----END PRIVATE KEY-----
 
 management:
   endpoints:

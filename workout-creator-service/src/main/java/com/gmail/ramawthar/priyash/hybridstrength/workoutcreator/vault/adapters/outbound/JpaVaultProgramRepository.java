@@ -4,6 +4,7 @@ import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.Se
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.VaultItem;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.VaultProgram;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.ports.outbound.VaultProgramRepository;
+import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -24,9 +25,11 @@ import java.util.UUID;
 public class JpaVaultProgramRepository implements VaultProgramRepository {
 
     private final ProgramSpringDataRepository programRepo;
+    private final EntityManager entityManager;
 
-    public JpaVaultProgramRepository(ProgramSpringDataRepository programRepo) {
+    public JpaVaultProgramRepository(ProgramSpringDataRepository programRepo, EntityManager entityManager) {
         this.programRepo = programRepo;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -42,11 +45,15 @@ public class JpaVaultProgramRepository implements VaultProgramRepository {
     }
 
     @Override
+    @Transactional
     public VaultItem save(VaultProgram program) {
         ProgramJpaEntity entity = programRepo.findById(program.id()).orElse(null);
 
         if (entity != null) {
-            // Update: rebuild content on existing entity, preserving id and immutable fields
+            // Update: clear existing weeks and flush DELETEs before rebuilding
+            entity.getWeeks().clear();
+            entityManager.flush();
+            // Rebuild content on existing entity, preserving id and immutable fields
             ProgramEntityMapper.rebuildEntityContent(entity, program.program());
             entity.setUpdatedAt(program.updatedAt());
         } else {
