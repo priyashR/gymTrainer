@@ -1,0 +1,80 @@
+# Docker Compose for running backend services locally.
+# PostgreSQL and RabbitMQ run in the k8s dev namespace (Rancher Desktop).
+# Access them via NodePorts: postgres=30432, rabbitmq=30672.
+#
+# Usage:
+#   1. Ensure k8s infra is running: kubectl get pods -n dev
+#   2. Build JARs: (cd auth-service && ./mvnw package -DskipTests -B -q) && \
+#                  (cd workout-creator-service && mvn package -DskipTests -B -q) && \
+#                  (cd workout-session-service && ./mvnw package -DskipTests -B -q)
+#   3. Start: docker compose -f docker/docker-compose.services.yml up --build
+#   4. Start UI: cd workout-coach-ui && npm run dev
+
+services:
+  auth-service:
+    build:
+      context: ../auth-service
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DATABASE_URL: jdbc:postgresql://host.docker.internal:30432/hybridstrength_dev
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8081/actuator/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+    mem_limit: 512m
+
+  workout-creator-service:
+    build:
+      context: ../workout-creator-service
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_URL: jdbc:postgresql://host.docker.internal:30432/hybridstrength_dev
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8082/actuator/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+    mem_limit: 512m
+    depends_on:
+      auth-service:
+        condition: service_started
+
+  workout-session-service:
+    build:
+      context: ../workout-session-service
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DATABASE_URL: jdbc:postgresql://host.docker.internal:30432/hybridstrength_dev?stringtype=unspecified
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      RABBITMQ_HOST: host.docker.internal
+      RABBITMQ_PORT: "30672"
+      RABBITMQ_USERNAME: guest
+      RABBITMQ_PASSWORD: guest
+      WORKOUT_CREATOR_SERVICE_BASE_URL: http://workout-creator-service:8082
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8083/actuator/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 60s
+    mem_limit: 512m
+    depends_on:
+      workout-creator-service:
+        condition: service_started

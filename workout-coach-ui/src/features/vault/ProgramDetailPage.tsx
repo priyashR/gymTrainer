@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useCallback, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useProgram } from './useProgram';
 import { ProgramJsonEditor } from './ProgramJsonEditor';
+import { enrollProgram, getActiveEnrollment, startSession } from '../../lib/sessionApi';
 import type { VaultDay, VaultProgramDetail, VaultSection, VaultWeek } from '../../types/vault';
 
 /**
@@ -12,11 +13,83 @@ import type { VaultDay, VaultProgramDetail, VaultSection, VaultWeek } from '../.
  */
 export function ProgramDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { state, program, onUpdate, onDelete, onCopy } = useProgram(id!);
   const [showEditor, setShowEditor] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [expandedWeeks, setExpandedWeeks] = useState<Set<number>>(new Set());
   const [expandedDays, setExpandedDays] = useState<Set<string>>(new Set());
+
+  // Vault-initiated workout action state
+  const [showProgramActions, setShowProgramActions] = useState(false);
+  const [confirmReplace, setConfirmReplace] = useState(false);
+  const [startingWorkout, setStartingWorkout] = useState(false);
+  const [workoutError, setWorkoutError] = useState<string | null>(null);
+
+  // Start a standalone session for a specific day
+  const handleStartStandalone = useCallback(async (weekNumber: number, dayNumber: number) => {
+    if (!id) return;
+    setStartingWorkout(true);
+    setWorkoutError(null);
+    try {
+      const session = await startSession({
+        programId: id,
+        weekNumber,
+        dayNumber,
+        standalone: true,
+      });
+      navigate(`/workout/session/${session.id}`);
+    } catch {
+      setWorkoutError("Failed to start standalone session. Please try again.");
+      setStartingWorkout(false);
+    }
+  }, [id, navigate]);
+
+  // Start a new program enrollment (replaces active if exists)
+  const handleStartNewProgram = useCallback(async () => {
+    if (!id || !program) return;
+    setStartingWorkout(true);
+    setWorkoutError(null);
+    setConfirmReplace(false);
+    setShowProgramActions(false);
+    try {
+      await enrollProgram({
+        programId: id,
+        programName: program.name,
+        totalWeeks: program.durationWeeks,
+        totalDaysPerWeek: Math.max(...(program.weeks?.map(w => w.days?.length ?? 0) ?? [1]), 1),
+      });
+      // Start the first day of the program
+      const session = await startSession({
+        programId: id,
+        weekNumber: 1,
+        dayNumber: 1,
+        standalone: false,
+      });
+      navigate(`/workout/session/${session.id}`);
+    } catch {
+      setWorkoutError("Failed to start program. Please try again.");
+      setStartingWorkout(false);
+    }
+  }, [id, program, navigate]);
+
+  // Check if there's an active enrollment before starting a new program
+  const handleStartNewProgramClick = useCallback(async () => {
+    setWorkoutError(null);
+    try {
+      const activeEnrollment = await getActiveEnrollment();
+      if (activeEnrollment) {
+        // Show confirmation prompt
+        setConfirmReplace(true);
+      } else {
+        // No active program — start directly
+        await handleStartNewProgram();
+      }
+    } catch {
+      // If we can't check, proceed with start (server will handle replacement)
+      await handleStartNewProgram();
+    }
+  }, [handleStartNewProgram]);
 
   // -------------------------------------------------------------------------
   // Loading state
@@ -140,6 +213,73 @@ export function ProgramDetailPage() {
         </button>
       </section>
 
+      {/* Workout actions */}
+      <section style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+        <button
+          type="button"
+          onClick={() => setShowProgramActions(!showProgramActions)}
+          style={{ padding: '0.5rem 1rem', cursor: 'pointer', borderRadius: 4, background: '#1976d2', color: '#fff', border: 'none', fontWeight: 600 }}
+        >
+          Start Workout {showProgramActions ? '▲' : '▼'}
+        </button>
+      </section>
+
+      {showProgramActions && (
+        <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.5rem', flexWrap: 'wrap', paddingLeft: '1rem' }}>
+          <button
+            type="button"
+            onClick={handleStartNewProgramClick}
+            disabled={startingWorkout}
+            style={{ padding: '0.5rem 1rem', cursor: 'pointer', borderRadius: 4, background: '#388e3c', color: '#fff', border: 'none' }}
+          >
+            {startingWorkout ? 'Starting…' : 'Start New Program'}
+          </button>
+        </div>
+      )}
+
+      {/* Workout error message */}
+      {workoutError && (
+        <div role="alert" style={{ padding: '0.75rem 1rem', marginBottom: '1rem', background: '#fbe9e7', border: '1px solid #ef9a9a', borderRadius: 8, color: '#c62828' }}>
+          {workoutError}
+        </div>
+      )}
+
+      {/* Confirm replace active program dialog */}
+      {confirmReplace && (
+        <div
+          role="dialog"
+          aria-label="Confirm program replacement"
+          style={{
+            padding: '1rem',
+            marginBottom: '1rem',
+            background: '#fff3e0',
+            border: '1px solid #ffcc80',
+            borderRadius: 8,
+          }}
+        >
+          <p style={{ margin: '0 0 0.75rem' }}>
+            You have an active program. Starting <strong>{prog.name}</strong> will end your current program and replace it. Continue?
+          </p>
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
+            <button
+              type="button"
+              onClick={handleStartNewProgram}
+              disabled={startingWorkout}
+              style={{ padding: '0.5rem 1rem', cursor: 'pointer', background: '#f57c00', color: '#fff', border: 'none', borderRadius: 4 }}
+            >
+              {startingWorkout ? 'Starting…' : 'Yes, Replace Program'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setConfirmReplace(false)}
+              style={{ padding: '0.5rem 1rem', cursor: 'pointer', borderRadius: 4 }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Delete confirmation dialog */}
       {confirmDelete && (
         <div
@@ -195,6 +335,8 @@ export function ProgramDetailPage() {
             onToggle={() => toggleWeek(week.weekNumber)}
             expandedDays={expandedDays}
             onToggleDay={toggleDay}
+            onStartStandalone={handleStartStandalone}
+            startingWorkout={startingWorkout}
           />
         ))}
       </section>
@@ -212,12 +354,16 @@ function WeekSection({
   onToggle,
   expandedDays,
   onToggleDay,
+  onStartStandalone,
+  startingWorkout,
 }: {
   week: VaultWeek;
   expanded: boolean;
   onToggle: () => void;
   expandedDays: Set<string>;
   onToggleDay: (key: string) => void;
+  onStartStandalone: (weekNumber: number, dayNumber: number) => void;
+  startingWorkout: boolean;
 }) {
   return (
     <div style={{ marginBottom: '0.5rem' }}>
@@ -247,8 +393,11 @@ function WeekSection({
               <DaySection
                 key={dayKey}
                 day={day}
+                weekNumber={week.weekNumber}
                 expanded={expandedDays.has(dayKey)}
                 onToggle={() => onToggleDay(dayKey)}
+                onStartStandalone={onStartStandalone}
+                startingWorkout={startingWorkout}
               />
             );
           })}
@@ -260,12 +409,18 @@ function WeekSection({
 
 function DaySection({
   day,
+  weekNumber,
   expanded,
   onToggle,
+  onStartStandalone,
+  startingWorkout,
 }: {
   day: VaultDay;
+  weekNumber: number;
   expanded: boolean;
   onToggle: () => void;
+  onStartStandalone: (weekNumber: number, dayNumber: number) => void;
+  startingWorkout: boolean;
 }) {
   return (
     <div style={{ marginBottom: '0.5rem' }}>
@@ -288,8 +443,31 @@ function DaySection({
       </button>
       {expanded && (
         <div style={{ paddingLeft: '1rem', marginTop: '0.5rem', fontSize: '0.9rem' }}>
-          <p style={{ margin: '0 0 0.25rem' }}><strong>Focus Area:</strong> {day.focusArea}</p>
-          <p style={{ margin: '0 0 0.5rem' }}><strong>Modality:</strong> {day.modality}</p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+            <div>
+              <p style={{ margin: '0 0 0.25rem' }}><strong>Focus Area:</strong> {day.focusArea}</p>
+              <p style={{ margin: '0' }}><strong>Modality:</strong> {day.modality}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => onStartStandalone(weekNumber, day.dayNumber)}
+              disabled={startingWorkout}
+              style={{
+                padding: '0.4rem 0.75rem',
+                background: '#1976d2',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 4,
+                cursor: startingWorkout ? 'default' : 'pointer',
+                fontSize: '0.8rem',
+                fontWeight: 600,
+                opacity: startingWorkout ? 0.7 : 1,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Start Standalone
+            </button>
+          </div>
 
           {/* Warm-up */}
           {day.warmUp.length > 0 && (
@@ -376,39 +554,68 @@ function formatSource(source: string): string {
 
 /**
  * Converts a VaultProgramDetail back to the Upload_Schema format for editing.
+ * The backend UploadParser expects: { program_metadata: {...}, program_structure: [...] }
  */
 function programToUploadSchema(prog: VaultProgramDetail) {
   return {
-    name: prog.name,
-    goal: prog.goal,
-    durationWeeks: prog.durationWeeks,
-    equipmentProfile: prog.equipmentProfile,
-    weeks: prog.weeks.map((week) => ({
-      weekNumber: week.weekNumber,
+    program_metadata: {
+      program_name: prog.name,
+      duration_weeks: prog.durationWeeks,
+      goal: prog.goal,
+      equipment_profile: prog.equipmentProfile,
+      version: "1.0",
+    },
+    program_structure: prog.weeks.map((week) => ({
+      week_number: week.weekNumber,
       days: week.days.map((day) => ({
-        dayNumber: day.dayNumber,
-        label: day.label,
-        focusArea: day.focusArea,
-        modality: day.modality,
-        methodologySource: day.methodologySource ?? undefined,
-        warmUp: day.warmUp,
-        sections: day.sections.map((section) => ({
-          name: section.name,
-          sectionType: section.sectionType,
-          format: section.format ?? undefined,
-          timeCap: section.timeCap ?? undefined,
-          exercises: section.exercises.map((ex) => ({
-            name: ex.name,
-            modalityType: ex.modalityType ?? undefined,
-            sets: ex.sets,
-            reps: ex.reps,
-            weight: ex.weight ?? undefined,
-            restSeconds: ex.restSeconds ?? undefined,
+        day_number: day.dayNumber,
+        day_label: day.label,
+        focus_area: day.focusArea,
+        modality: mapModalityToSchema(day.modality),
+        methodology_source: day.methodologySource ?? undefined,
+        warm_up: day.warmUp.map((entry) => ({
+          movement: entry.movement,
+          instruction: entry.instruction,
+        })),
+        blocks: day.sections.map((section) => ({
+          block_type: section.name,
+          format: section.format ?? "Sets/Reps",
+          time_cap_minutes: section.timeCap ?? undefined,
+          movements: section.exercises.map((ex) => ({
+            exercise_name: ex.name,
+            modality_type: mapModalityTypeToSchema(ex.modalityType),
+            prescribed_sets: ex.sets,
+            prescribed_reps: ex.reps,
+            prescribed_weight: ex.weight ?? undefined,
+            rest_interval_seconds: ex.restSeconds ?? undefined,
             notes: ex.notes ?? undefined,
           })),
         })),
-        coolDown: day.coolDown,
+        cool_down: day.coolDown.map((entry) => ({
+          movement: entry.movement,
+          instruction: entry.instruction,
+        })),
       })),
     })),
   };
+}
+
+/** Maps the enum-style modality from the API response to the Upload_Schema string. */
+function mapModalityToSchema(modality: string): string {
+  switch (modality) {
+    case 'CROSSFIT': return 'CrossFit';
+    case 'HYPERTROPHY': return 'Hypertrophy';
+    default: return modality;
+  }
+}
+
+/** Maps the enum-style modality type from the API response to the Upload_Schema string. */
+function mapModalityTypeToSchema(modalityType: string | undefined): string | undefined {
+  if (!modalityType) return undefined;
+  switch (modalityType) {
+    case 'ENGINE': return 'Engine';
+    case 'GYMNASTICS': return 'Gymnastics';
+    case 'WEIGHTLIFTING': return 'Weightlifting';
+    default: return modalityType;
+  }
 }

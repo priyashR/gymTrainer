@@ -23,6 +23,21 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      "/api/v1/sessions": {
+        target: "http://localhost:8083",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/api/v1/enrollments": {
+        target: "http://localhost:8083",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/ws/sessions": {
+        target: "http://localhost:8083",
+        changeOrigin: true,
+        ws: true,
+      },
     },
   },
   test: {

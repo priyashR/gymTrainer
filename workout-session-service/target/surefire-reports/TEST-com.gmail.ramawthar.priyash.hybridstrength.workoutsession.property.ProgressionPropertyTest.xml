@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.property.ProgressionPropertyTest" time="0.401" tests="4" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/test-classes:/Users/priyashr/git/gymApp/workout-session-service/target/classes:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/priyashr/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/priyashr/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/priyashr/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/priyashr/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/priyashr/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/priyashr/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/priyashr/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/priyashr/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/priyashr/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/priyashr/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/priyashr/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/priyashr/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/priyashr/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/priyashr/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-websocket/3.4.4/spring-boot-starter-websocket-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-messaging/6.2.5/spring-messaging-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-websocket/6.2.5/spring-websocket-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-amqp/3.4.4/spring-boot-starter-amqp-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-rabbit/3.2.4/spring-rabbit-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-amqp/3.2.4/spring-amqp-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/retry/spring-retry/2.0.11/spring-retry-2.0.11.jar:/Users/priyashr/.m2/repository/com/rabbitmq/amqp-client/5.22.0/amqp-client-5.22.0.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/priyashr/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/priyashr/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.4.4/spring-boot-starter-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.4.4/spring-boot-actuator-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator/3.4.4/spring-boot-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-jakarta9/1.14.5/micrometer-jakarta9-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-core/1.14.5/micrometer-core-1.14.5.jar:/Users/priyashr/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/Users/priyashr/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.3/jackson-dataformat-toml-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-database-postgresql/10.20.1/flyway-database-postgresql-10.20.1.jar:/Users/priyashr/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/priyashr/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/priyashr/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/priyashr/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.47/nimbus-jose-jwt-9.47.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring-boot3/2.2.0/resilience4j-spring-boot3-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring6/2.2.0/resilience4j-spring6-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-annotations/2.2.0/resilience4j-annotations-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-consumer/2.2.0/resilience4j-consumer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circularbuffer/2.2.0/resilience4j-circularbuffer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-framework-common/2.2.0/resilience4j-framework-common-2.2.0.jar:/Users/priyashr/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-micrometer/2.2.0/resilience4j-micrometer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-bulkhead/2.2.0/resilience4j-bulkhead-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-retry/2.2.0/resilience4j-retry-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-ratelimiter/2.2.0/resilience4j-ratelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-timelimiter/2.2.0/resilience4j-timelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circuitbreaker/2.2.0/resilience4j-circuitbreaker-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-core/2.2.0/resilience4j-core-2.2.0.jar:/Users/priyashr/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/priyashr/.m2/repository/net/logstash/logback/logstash-logback-encoder/8.0/logstash-logback-encoder-8.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/priyashr/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/priyashr/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/priyashr/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/priyashr/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/priyashr/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/priyashr/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/priyashr/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/priyashr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/priyashr/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/priyashr/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/priyashr/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/priyashr/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik/1.9.2/jqwik-1.9.2.jar:/Users/priyashr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-api/1.9.2/jqwik-api-1.9.2.jar:/Users/priyashr/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-web/1.9.2/jqwik-web-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-time/1.9.2/jqwik-time-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-engine/1.9.2/jqwik-engine-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/priyashr/.m2/repository/org/wiremock/wiremock-standalone/3.5.4/wiremock-standalone-3.5.4.jar:"/>
+    <property name="java.vm.vendor" value="Microsoft"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://www.microsoft.com"/>
+    <property name="catalina.useNaming" value="false"/>
+    <property name="user.timezone" value="Africa/Johannesburg"/>
+    <property name="org.jboss.logging.provider" value="slf4j"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="APPLICATION_NAME" value="workout-session-service"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="GB"/>
+    <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/microsoft-17.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/priyashr/git/gymApp/workout-session-service/target/surefire/surefirebooter-20260513172728096_3.jar /Users/priyashr/git/gymApp/workout-session-service/target/surefire 2026-05-13T17-27-27_956-jvmRun1 surefire-20260513172728096_1tmp surefire_0-20260513172728096_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/test-classes:/Users/priyashr/git/gymApp/workout-session-service/target/classes:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/priyashr/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/priyashr/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/priyashr/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/priyashr/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/priyashr/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/priyashr/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/priyashr/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/priyashr/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/priyashr/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/priyashr/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/priyashr/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/priyashr/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/priyashr/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/priyashr/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-websocket/3.4.4/spring-boot-starter-websocket-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-messaging/6.2.5/spring-messaging-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-websocket/6.2.5/spring-websocket-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-amqp/3.4.4/spring-boot-starter-amqp-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-rabbit/3.2.4/spring-rabbit-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-amqp/3.2.4/spring-amqp-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/retry/spring-retry/2.0.11/spring-retry-2.0.11.jar:/Users/priyashr/.m2/repository/com/rabbitmq/amqp-client/5.22.0/amqp-client-5.22.0.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/priyashr/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/priyashr/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.4.4/spring-boot-starter-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.4.4/spring-boot-actuator-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator/3.4.4/spring-boot-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-jakarta9/1.14.5/micrometer-jakarta9-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-core/1.14.5/micrometer-core-1.14.5.jar:/Users/priyashr/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/Users/priyashr/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.3/jackson-dataformat-toml-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-database-postgresql/10.20.1/flyway-database-postgresql-10.20.1.jar:/Users/priyashr/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/priyashr/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/priyashr/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/priyashr/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.47/nimbus-jose-jwt-9.47.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring-boot3/2.2.0/resilience4j-spring-boot3-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring6/2.2.0/resilience4j-spring6-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-annotations/2.2.0/resilience4j-annotations-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-consumer/2.2.0/resilience4j-consumer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circularbuffer/2.2.0/resilience4j-circularbuffer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-framework-common/2.2.0/resilience4j-framework-common-2.2.0.jar:/Users/priyashr/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-micrometer/2.2.0/resilience4j-micrometer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-bulkhead/2.2.0/resilience4j-bulkhead-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-retry/2.2.0/resilience4j-retry-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-ratelimiter/2.2.0/resilience4j-ratelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-timelimiter/2.2.0/resilience4j-timelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circuitbreaker/2.2.0/resilience4j-circuitbreaker-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-core/2.2.0/resilience4j-core-2.2.0.jar:/Users/priyashr/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/priyashr/.m2/repository/net/logstash/logback/logstash-logback-encoder/8.0/logstash-logback-encoder-8.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/priyashr/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/priyashr/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/priyashr/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/priyashr/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/priyashr/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/priyashr/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/priyashr/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/priyashr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/priyashr/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/priyashr/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/priyashr/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/priyashr/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik/1.9.2/jqwik-1.9.2.jar:/Users/priyashr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-api/1.9.2/jqwik-api-1.9.2.jar:/Users/priyashr/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-web/1.9.2/jqwik-web-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-time/1.9.2/jqwik-time-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-engine/1.9.2/jqwik-engine-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/priyashr/.m2/repository/org/wiremock/wiremock-standalone/3.5.4/wiremock-standalone-3.5.4.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/priyashr"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2022-04-19"/>
+    <property name="java.home" value="/Library/Java/JavaVirtualMachines/microsoft-17.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/priyashr/git/gymApp/workout-session-service"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/surefire/surefirebooter-20260513172728096_3.jar"/>
+    <property name="polyglot.engine.WarnInterpreterOnly" value="false"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="17.0.3+7-LTS"/>
+    <property name="user.name" value="priyashr"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="12.7.6"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Microsoft-33154"/>
+    <property name="localRepository" value="/Users/priyashr/.m2/repository"/>
+    <property name="javax.xml.xpath.XPathFactory:http://java.sun.com/jaxp/xpath/dom" value="com.sun.org.apache.xpath.internal.jaxp.XPathFactoryImpl"/>
+    <property name="java.vendor.url.bug" value="https://github.com/microsoft/openjdk/issues"/>
+    <property name="jetty.git.hash" value="922f8dc188f7011e60d0361de585fd4ac4d63064"/>
+    <property name="java.io.tmpdir" value="/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/"/>
+    <property name="wiremock.org.eclipse.jetty.http.HttpGenerator.STRICT" value="true"/>
+    <property name="catalina.home" value="/private/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/tomcat.0.17094677777068976868"/>
+    <property name="com.zaxxer.hikari.pool_number" value="5"/>
+    <property name="java.version" value="17.0.3"/>
+    <property name="user.dir" value="/Users/priyashr/git/gymApp/workout-session-service"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="24402"/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
+    <property name="catalina.base" value="/private/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/tomcat.0.5104145381702165092"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/priyashr/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Microsoft"/>
+    <property name="java.vm.version" value="17.0.3+7-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="javax.xml.transform.TransformerFactory" value="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="61.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[workout-session-service] "/>
+  </properties>
+  <testcase name="Feature: workout-session-service-active-workout, Property 8: Standalone session enrollment invariant" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.property.ProgressionPropertyTest" time="0.177">
+    <system-out><![CDATA[17:31:09.644 [main] INFO  n.j.e.p.RandomizedShrinkablesGenerator - Edge case generation exceeds number of tries. Stopped after 100 generated cases.
+17:31:09.648 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=0fc743d7-f4c9-4f68-b558-1a4a722fe189, standalone=true
+17:31:09.649 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=38cffff7-0e73-43be-b826-c3dbd6d60552, standalone=true
+17:31:09.651 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=efd40b65-62c4-45c4-87c5-fd512b0f5952, standalone=true
+17:31:09.652 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=54a2be4a-4c08-4696-b9b9-b2c1db00cc21, standalone=true
+17:31:09.653 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=3fec2066-d5bb-4b8c-a701-8d599acb289a, standalone=true
+17:31:09.658 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=c2ef2b68-836d-42e8-a65c-7b910c3477fd, standalone=true
+17:31:09.660 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=5cecb55d-b4bb-4d54-bb49-a05742732686, standalone=true
+17:31:09.662 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=41c0efaf-5d19-465d-a91b-9997e50f802c, standalone=true
+17:31:09.663 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=fdb4fe50-c380-481a-9774-67408d63e102, standalone=true
+17:31:09.665 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=2078ed9f-6720-4b8d-9fa2-c0c0951ba70b, standalone=true
+17:31:09.666 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=40d89dbf-e36c-4a29-99c7-a665ceda8ea4, standalone=true
+17:31:09.667 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=1adf909d-0b9e-4652-ad3b-22d73bf86c5d, standalone=true
+17:31:09.670 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=55529a3f-96bc-4dc5-a379-c4801860641a, standalone=true
+17:31:09.672 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=6d868903-ef8b-457d-ab2a-7a0b061de429, standalone=true
+17:31:09.674 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=9b3bd5bb-936d-44ee-8909-6f55124acae9, standalone=true
+17:31:09.675 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=bb76bf49-f567-40f9-acd1-f014e84f868b, standalone=true
+17:31:09.677 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=b8a134d4-1df7-4269-9a83-6284b712c422, standalone=true
+17:31:09.679 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=bd45c316-013f-43d0-b579-bb3cf82abd9e, standalone=true
+17:31:09.680 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=5dd01afa-7716-49d6-98d8-69775efcbf0d, standalone=true
+17:31:09.682 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=a0dbb7db-3aff-4b70-bf2b-2cec673290fb, standalone=true
+17:31:09.684 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=fe0d51b0-2a00-45d2-9133-b4b0f4267737, standalone=true
+17:31:09.686 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=28303922-d1d0-40a6-ae0b-2d52ff34c488, standalone=true
+17:31:09.689 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=b6bb7090-8159-4cb1-af14-5f81e76a30d2, standalone=true
+17:31:09.693 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=056d0f22-5b17-40b6-84d6-feb65a050666, standalone=true
+17:31:09.693 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=f6f0adc1-0cf4-436b-8f2d-62c237ac5848, standalone=true
+17:31:09.696 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=fdb57573-1b99-4e54-8f32-e1b7cd643ce7, standalone=true
+17:31:09.697 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=09fad5f0-fcad-4d90-8c7e-5d06002f49d2, standalone=true
+17:31:09.699 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=c1391f31-28ab-4540-8608-5aa00bfa4e42, standalone=true
+17:31:09.700 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=65fd6f10-1335-4892-8eb1-149eb9b3b0e5, standalone=true
+17:31:09.701 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=4511319c-aa3b-4786-a2b5-3ec5ea63acfa, standalone=true
+17:31:09.703 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=ff5f34be-9730-45c7-ae58-97b4c1739016, standalone=true
+17:31:09.705 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=15a53554-2faa-452a-a9af-139d68d84845, standalone=true
+17:31:09.708 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=99286b2c-1dd6-4555-800c-b6142dbe80d2, standalone=true
+17:31:09.709 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=7abaf23f-518e-49e6-85f0-2e9a8ddc7fd2, standalone=true
+17:31:09.710 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=c89da2e2-a8aa-4266-9a5f-297cdfd17c6b, standalone=true
+17:31:09.711 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=d5d13bf8-fc53-47a5-9695-140ef6a1fcea, standalone=true
+17:31:09.713 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=236511dc-29fd-45fc-9696-e4283330c2f8, standalone=true
+17:31:09.714 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=2d9e5d72-7dca-4a5c-8bdf-53bcee8e55c1, standalone=true
+17:31:09.715 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=d278d3f9-3809-4db8-a2c1-ccf80a9fdb42, standalone=true
+17:31:09.717 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=41e817fc-8b5d-40d1-8c90-76f1a4400d1f, standalone=true
+17:31:09.720 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=4e91af2f-d1da-45cc-832c-e2995431bff0, standalone=true
+17:31:09.723 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=6e421b66-2a7a-4433-99ce-2d49076153c1, standalone=true
+17:31:09.724 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=695b5f8d-e9d8-409e-9434-c3a6c9a92987, standalone=true
+17:31:09.725 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=e9c397aa-18b8-4bfc-b2f0-df0d04934f57, standalone=true
+17:31:09.727 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=2e91de18-9d73-4a1f-9877-1b815ffe5b2f, standalone=true
+17:31:09.728 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=d51b24ed-f06b-4e46-805c-94d88e11e417, standalone=true
+17:31:09.730 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=246d3fbe-81e5-4588-8624-9a8d857fe12b, standalone=true
+17:31:09.731 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=bd370ccd-6df9-43b2-b795-f7142aa7aecb, standalone=true
+17:31:09.732 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=befde301-58ab-49e1-ace8-3f46b789ced1, standalone=true
+17:31:09.733 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=130f3b32-86e3-430b-acd9-fa780e651cc3, standalone=true
+17:31:09.734 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=ce57a95a-46cf-40f7-8fc5-40ee3a9df385, standalone=true
+17:31:09.736 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=48444c93-1481-4e12-9082-976f6406e9c1, standalone=true
+17:31:09.738 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=c5bd2059-892e-4540-9088-7275217a6bac, standalone=true
+17:31:09.740 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=bd25080c-1b24-444a-8a6a-bedc266a6fd2, standalone=true
+17:31:09.742 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=47f0e66d-6c89-415b-9004-9360d2255c69, standalone=true
+17:31:09.744 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=0f9b5e94-f108-450e-9870-18bb0299d71c, standalone=true
+17:31:09.745 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=1ed21bbc-17d3-4175-835d-2966a3ed48ce, standalone=true
+17:31:09.747 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=556fb950-582a-4675-a1b7-c81f1ec2b37d, standalone=true
+17:31:09.748 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=f58f3bb3-1a12-44dd-86f8-518a3594fb02, standalone=true
+17:31:09.749 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=0bc9e0b7-d70e-4129-896b-020b8b64278a, standalone=true
+17:31:09.751 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=31551e2e-0b1d-4089-84f9-1b2bc83c7fee, standalone=true
+17:31:09.752 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=c45402c2-9c9d-4ad2-b3ff-fa666ea4cd40, standalone=true
+17:31:09.753 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=2402213a-8881-40ce-9c55-a61e91e82cfc, standalone=true
+17:31:09.755 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=d7ea0af9-3fc4-4d84-b500-567fabb0d346, standalone=true
+17:31:09.757 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=937780ca-1758-4d7f-9c49-a7e1f8b0031d, standalone=true
+17:31:09.759 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=fa87d65a-dab7-4dcd-af9d-0e9264b66965, standalone=true
+17:31:09.760 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=6d4b0028-a334-4f59-a11d-f1d57a4e1e5b, standalone=true
+17:31:09.761 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=17862e24-4d6e-45bc-abc7-2326e9f91b76, standalone=true
+17:31:09.763 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=25e54d72-5d00-478d-bc66-86dc2bf6054e, standalone=true
+17:31:09.764 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=de7cf7db-418d-4019-888d-57b584d1511c, standalone=true
+17:31:09.765 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=15f1bd2d-5846-4eb4-8858-94cb6b877821, standalone=true
+17:31:09.766 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=d357deb9-0b83-46e2-8440-b50f4c590979, standalone=true
+17:31:09.767 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=fffc080d-b6bb-4520-8abc-d301901a93f5, standalone=true
+17:31:09.769 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=d3ce40f2-16a9-4e15-96f7-1df60b2d48cd, standalone=true
+17:31:09.772 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=5c82f120-f60c-432c-8bd7-b9492f0f0de5, standalone=true
+17:31:09.774 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=e5943508-0bb3-4062-8103-100a4426248e, standalone=true
+17:31:09.776 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=506e78b2-9a19-431a-9b32-de8bcf7e9256, standalone=true
+17:31:09.779 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=62b2eff3-bb09-4973-a8bb-053d24d8d11f, standalone=true
+17:31:09.780 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=ea2de9b1-1e29-490a-a631-50972aa453fb, standalone=true
+17:31:09.781 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=f7db84eb-35df-4873-a0c6-a5b129b12988, standalone=true
+17:31:09.783 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=09306d83-4d34-466d-841e-45d0b4ca5cc0, standalone=true
+17:31:09.784 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=9952bdc5-f2d5-40be-83cf-0bd6ec0b6669, standalone=true
+17:31:09.787 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=700fa770-8070-4866-b1e9-556d6a492737, standalone=true
+17:31:09.789 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=ce192eb3-0d16-442d-8f78-92ec3c6c7380, standalone=true
+17:31:09.791 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=cfe442af-a8ec-4c7e-b75b-fa39c6f19b81, standalone=true
+17:31:09.792 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=5f3ee4bc-edf5-49a0-aac9-60236cfd15e8, standalone=true
+17:31:09.793 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=e561b29c-b9bb-46e5-81e0-3d1b731f975c, standalone=true
+17:31:09.794 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=47e62b77-8c3f-4d05-9406-0732ff70ef96, standalone=true
+17:31:09.795 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=dc84d734-16bc-4350-b4a8-8fd09b774a67, standalone=true
+17:31:09.796 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=5457dff6-8cd9-46a8-86eb-fea5827f6cf7, standalone=true
+17:31:09.798 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=d74bddd0-c938-4c6c-b8db-986684021706, standalone=true
+17:31:09.799 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=78a3ba4e-065d-4c37-9950-f4a01291a835, standalone=true
+17:31:09.800 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=2d769e4b-bd58-4a91-8a4d-101d3f520ae0, standalone=true
+17:31:09.802 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=b5a70e7f-16f9-4e10-9fab-c178b2a94f3d, standalone=true
+17:31:09.803 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=3d9bf6e3-edaa-4d57-89eb-fd4caf81751b, standalone=true
+17:31:09.805 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=1de40fb6-817a-4f1b-89b8-9bf9a107e505, standalone=true
+17:31:09.806 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=abd5668f-3886-4085-8c0b-5e86c76b682a, standalone=true
+17:31:09.808 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=caf7b917-1d2e-4533-935d-d20ae5542471, standalone=true
+17:31:09.809 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=59e1aeb3-f0c7-43e0-a2c1-ec971c8e4ebb, standalone=true
+17:31:09.810 [main] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=76db448b-e818-4bb9-b9e9-020ae29e775e, standalone=true
+timestamp = 2026-05-13T17:31:09.811691, ProgressionPropertyTest:Feature: workout-session-service-active-workout, Property 8: Standalone session enrollment invariant = 
+                              |-----------------------jqwik-----------------------
+tries = 100                   | # of calls to property
+checks = 100                  | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 100        | # of all combined edge cases
+edge-cases#tried = 20         | # of edge cases tried in current run
+seed = 5056485685836754979    | random seed to reproduce generated values
+
+
+]]></system-out>
+  </testcase>
+  <testcase name="Feature: workout-session-service-active-workout, Property 6: Day pointer advancement" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.property.ProgressionPropertyTest" time="0.028">
+    <system-out><![CDATA[timestamp = 2026-05-13T17:31:09.840580, ProgressionPropertyTest:Feature: workout-session-service-active-workout, Property 6: Day pointer advancement = 
+                              |-----------------------jqwik-----------------------
+tries = 100                   | # of calls to property
+checks = 100                  | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 66         | # of all combined edge cases
+edge-cases#tried = 13         | # of edge cases tried in current run
+seed = -6979012766434162451   | random seed to reproduce generated values
+
+
+]]></system-out>
+  </testcase>
+  <testcase name="Feature: workout-session-service-active-workout, Property 9: Program enrollment replacement" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.property.ProgressionPropertyTest" time="0.156">
+    <system-out><![CDATA[17:31:09.870 [main] INFO  n.j.e.p.RandomizedShrinkablesGenerator - Edge case generation exceeds number of tries. Stopped after 100 generated cases.
+17:31:09.888 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=af34682b-cf5d-44fb-99b7-e9475552f706 (heeeCMtGhdAcIjfuxLMMEcgTeOkMTS)
+17:31:09.888 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=44c3de0a-9de7-42c6-9d26-c9ad3dc51bd8, program=5b1633dd-8ac1-47eb-8c52-e0585e496140
+17:31:09.888 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=9eeb65b5-6757-4c94-a6f0-23c1ee0d7c4c, program=af34682b-cf5d-44fb-99b7-e9475552f706, totalWeeks=5, daysPerWeek=7
+17:31:09.889 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=9b93ba4c-cfe4-4a7c-864b-7aab79959e7d (AAA)
+17:31:09.890 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=8b2ecf3b-4af3-41c8-b210-cae80bc0727e, program=9b93ba4c-cfe4-4a7c-864b-7aab79959e7d, totalWeeks=2, daysPerWeek=2
+17:31:09.891 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=cf00201b-8863-4d0e-95a3-2bfb1b108605 (RnPDP)
+17:31:09.891 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=07dbdf07-ee7a-42ae-b3af-becc145e698d, program=cf00201b-8863-4d0e-95a3-2bfb1b108605, totalWeeks=9, daysPerWeek=7
+17:31:09.891 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=534986a4-0147-4acb-9f7f-268be70f89a3 (aaa)
+17:31:09.891 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=8726de54-1c5f-4010-9640-3d1df20a07f4, program=534986a4-0147-4acb-9f7f-268be70f89a3, totalWeeks=15, daysPerWeek=7
+17:31:09.893 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=7cc26a89-e2ee-44ba-9854-e9baba2911c7 (ycIcZRz)
+17:31:09.893 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=40fe600f-29ac-440c-8c8e-02eb9ebc7c9b, program=38d97f37-4e38-4880-93ea-87f65bb34e07
+17:31:09.893 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=710d4f11-7706-4c5c-b458-ab4279d42f75, program=7cc26a89-e2ee-44ba-9854-e9baba2911c7, totalWeeks=1, daysPerWeek=2
+17:31:09.894 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=ed521a8a-f231-426d-af76-50abe4c29fce (AAA)
+17:31:09.894 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=31aa912f-59f4-405c-ab9b-c6b51f03469e, program=0431c811-1170-4dbf-907c-9ad059bfd396
+17:31:09.894 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=b73b09a0-9ef8-44a1-a64e-12af606cb60f, program=ed521a8a-f231-426d-af76-50abe4c29fce, totalWeeks=2, daysPerWeek=2
+17:31:09.895 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=d74015d4-59e7-4d32-80fa-22dafaf5518a (CqGJTAFoSDdzf)
+17:31:09.895 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=b38b5b5e-bf88-45b1-b94d-acda5ef8c86c, program=d74015d4-59e7-4d32-80fa-22dafaf5518a, totalWeeks=9, daysPerWeek=4
+17:31:09.896 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=c255ae68-973a-4e69-b1c4-a062fc05d632 (PLMufSPb)
+17:31:09.896 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=52a15a56-0bc3-4a97-b7de-430494910947, program=88f220dd-5664-4409-a3cb-ae6419ca1250
+17:31:09.896 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=d3815954-d410-44fc-8cdf-dab502ac02de, program=c255ae68-973a-4e69-b1c4-a062fc05d632, totalWeeks=5, daysPerWeek=5
+17:31:09.896 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=e544aadd-dc5f-4c51-a962-5c545d24144c (kgLYtT)
+17:31:09.897 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=50971ea1-d425-4d67-ab50-36ae4676e96b, program=e544aadd-dc5f-4c51-a962-5c545d24144c, totalWeeks=14, daysPerWeek=3
+17:31:09.898 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=27e17f8e-19ae-4510-8b80-af13c6578e8e (AAA)
+17:31:09.898 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=885938ac-727a-412c-9b9b-891b6641ab9d, program=794564d5-e32c-4cfc-8f5c-ade75002702d
+17:31:09.898 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=47a9679b-fd65-4686-8008-748695ecd654, program=27e17f8e-19ae-4510-8b80-af13c6578e8e, totalWeeks=16, daysPerWeek=7
+17:31:09.898 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=bac6f0f6-3555-4230-aaa5-5310af1218f5 (AAA)
+17:31:09.898 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=1105ffe3-5f29-49a9-876e-7f5c9a39869a, program=f664ec85-c3b1-4bee-b917-37439dafc5e4
+17:31:09.898 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=6d93bc52-781d-4cc5-83b9-001a99d251bd, program=bac6f0f6-3555-4230-aaa5-5310af1218f5, totalWeeks=2, daysPerWeek=2
+17:31:09.899 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=ca22799b-d684-4c32-a771-ee4a08b9501b (zzz)
+17:31:09.899 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=449e85f9-e240-43bf-bb18-96a29a14fd35, program=3be335e6-57b5-441c-9e06-2e4ccc494e4d
+17:31:09.899 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=88498403-7fad-4c2b-8e63-052efab4aa9a, program=ca22799b-d684-4c32-a771-ee4a08b9501b, totalWeeks=2, daysPerWeek=2
+17:31:09.900 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=4451c51a-c502-41df-9cfe-8662e587a45b (aaa)
+17:31:09.900 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=3716bea4-fa37-42ca-b5de-64bdac829a6b, program=463f2d98-cdbd-4dfc-b93f-e3bcac826908
+17:31:09.900 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=58c3f9df-7d58-452b-b621-3947840e7185, program=4451c51a-c502-41df-9cfe-8662e587a45b, totalWeeks=15, daysPerWeek=2
+17:31:09.901 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=b4ef9acb-5bc2-4e62-b6c2-f077fa853fed (AAA)
+17:31:09.902 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=1855a90e-0f51-48fd-ad00-6fb15c8d511a, program=0d1c556d-c1ed-47e6-87cd-cdea5b184fd8
+17:31:09.902 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=9c8428ae-e5e8-4422-b42a-8391f9f7abdf, program=b4ef9acb-5bc2-4e62-b6c2-f077fa853fed, totalWeeks=2, daysPerWeek=2
+17:31:09.906 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=fd0c944e-d36b-47f1-b33f-83f1618d2d67 (IZGrNVuxRMW)
+17:31:09.907 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=dd2a8ae8-de03-409e-8554-de7ed8c2974e, program=fd0c944e-d36b-47f1-b33f-83f1618d2d67, totalWeeks=15, daysPerWeek=1
+17:31:09.907 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=f4d0c958-3b8b-4073-99b2-b4e1f4aa3f73 (zzz)
+17:31:09.907 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=5aee29e3-f6c9-4569-9005-5c4f7a63ae59, program=f4d0c958-3b8b-4073-99b2-b4e1f4aa3f73, totalWeeks=1, daysPerWeek=7
+17:31:09.909 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=a564ced4-90da-46f2-93f0-b7695034137f (PAqWimhxAC)
+17:31:09.909 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=ab52f1c4-a81d-4bc9-86a1-d95cb765855a, program=4bd24ad6-0473-4431-92cd-c9f5a2cc7c7e
+17:31:09.909 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=9f590c27-ce5b-4f52-917c-01dee716b997, program=a564ced4-90da-46f2-93f0-b7695034137f, totalWeeks=9, daysPerWeek=5
+17:31:09.910 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=c74df817-b73b-40d2-a490-6cb47d1f45dc (esgQ)
+17:31:09.910 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=4be53085-2540-4a6e-a482-4c4db077e160, program=6f39996f-12da-4f73-ba88-66a2ab816659
+17:31:09.910 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=a1d627dc-4abc-43ab-9187-60941fcd9256, program=c74df817-b73b-40d2-a490-6cb47d1f45dc, totalWeeks=9, daysPerWeek=3
+17:31:09.910 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=54295842-ab97-4ac9-b28e-c6a9be86db42 (AAA)
+17:31:09.910 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=501696a0-5e2a-4a62-bfc7-9aabed745f18, program=566242bf-2583-4249-96c9-0e2926b31985
+17:31:09.911 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=725eee5b-8da5-46e7-b021-3c371cef73e6, program=54295842-ab97-4ac9-b28e-c6a9be86db42, totalWeeks=2, daysPerWeek=2
+17:31:09.911 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=17c4699a-debf-4154-80ad-526a0ee36906 (DsDnPRt)
+17:31:09.911 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=7466235c-bef1-4539-8035-9a953f8ebdad, program=17c4699a-debf-4154-80ad-526a0ee36906, totalWeeks=6, daysPerWeek=3
+17:31:09.912 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=91705ab4-2093-4111-93a4-d4b33a591db4 (nxpwNmiUXsQOL)
+17:31:09.912 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=74d8e163-573d-4ca4-9834-dbb2638596c3, program=38d722f8-6d01-4132-b49c-b8fc3a286883
+17:31:09.912 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=1d1f9e59-b203-4e6f-889d-2e103c2fa259, program=91705ab4-2093-4111-93a4-d4b33a591db4, totalWeeks=8, daysPerWeek=6
+17:31:09.913 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=0a374443-a9d8-42aa-b367-1505953183d8 (eFmsjJvSui)
+17:31:09.913 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=80ac3fef-f12c-4c68-926d-a4bf2203bbbc, program=0a374443-a9d8-42aa-b367-1505953183d8, totalWeeks=14, daysPerWeek=1
+17:31:09.914 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=819a3ce9-134e-4161-bf91-82767e671963 (RwbgxQvWlwlb)
+17:31:09.914 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=81b5553c-4b49-4c90-b205-d59920133369, program=819a3ce9-134e-4161-bf91-82767e671963, totalWeeks=13, daysPerWeek=5
+17:31:09.915 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=eff80ae3-32ba-4cf7-a046-125e5fb4adc6 (AAA)
+17:31:09.915 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=b55b3ad8-b52a-4968-ab78-bcbf41fff0aa, program=f7fe2c4b-f561-4ffd-8c66-df713eed89f0
+17:31:09.915 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=77a15835-5d17-4656-9c2e-570cadc4241c, program=eff80ae3-32ba-4cf7-a046-125e5fb4adc6, totalWeeks=2, daysPerWeek=2
+17:31:09.916 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=faddb6ed-c8da-4ac5-9788-279bdb268210 (XyFqgcULBPVy)
+17:31:09.916 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=2dfc559e-cde4-4ae6-8d86-4dc8bc60d1a3, program=faddb6ed-c8da-4ac5-9788-279bdb268210, totalWeeks=15, daysPerWeek=7
+17:31:09.917 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=5cb8d3fe-75d4-46c4-b85b-a79aaa919eac (ZNiz)
+17:31:09.917 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=a1e62128-5993-462d-8195-3cac624e9c0e, program=5cb8d3fe-75d4-46c4-b85b-a79aaa919eac, totalWeeks=12, daysPerWeek=7
+17:31:09.919 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=99473279-a469-4c5d-905d-f0d277c48224 (usfrUdJgjYjp)
+17:31:09.919 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=9586c185-d35e-4491-9ecc-f0ffd055569a, program=074eaadf-badf-4386-a2de-f6d3477cec7c
+17:31:09.919 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=5197f48c-50c2-4ca5-aec2-8a9911f3c3e0, program=99473279-a469-4c5d-905d-f0d277c48224, totalWeeks=11, daysPerWeek=5
+17:31:09.923 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=7154f106-d65d-4b38-a99c-eb66508563d6 (VtuFcNvJeLrtGTNZrcfNvIplaMBfG)
+17:31:09.923 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=fd0c1125-b245-4b63-a8c7-cd88173745ed, program=40bb0e48-d50e-4acc-9902-97d308a57d16
+17:31:09.923 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=c0e5b08f-5fd3-4e6b-897c-b9a2ce716432, program=7154f106-d65d-4b38-a99c-eb66508563d6, totalWeeks=9, daysPerWeek=6
+17:31:09.924 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=7bc213a8-93d9-4fa0-871e-fa76cc284868 (blrS)
+17:31:09.924 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=2356e862-50ed-4f6a-a426-9fa840217dbf, program=260008a1-c308-4caf-a34c-b292ca292a38
+17:31:09.924 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=68eb0504-982a-40d2-b264-63fd905ab2ae, program=7bc213a8-93d9-4fa0-871e-fa76cc284868, totalWeeks=2, daysPerWeek=2
+17:31:09.925 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=5e8813f6-6a38-43c6-ab9f-3c224628f493 (tFJrWU)
+17:31:09.925 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=0815978d-5f2d-4e39-b4ae-fbdf93b02ff3, program=65d26e4c-1960-4c57-84a2-9e7c2a8159cd
+17:31:09.925 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=6d3acca8-64ae-4b5a-8135-6c5dc8f455e3, program=5e8813f6-6a38-43c6-ab9f-3c224628f493, totalWeeks=3, daysPerWeek=5
+17:31:09.926 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=f7e38dee-d6cb-428d-b05e-98073c970471 (kKIrCOMppKL)
+17:31:09.926 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=d5d6d509-2ac4-4592-bace-dead91163fd4, program=f7e38dee-d6cb-428d-b05e-98073c970471, totalWeeks=15, daysPerWeek=3
+17:31:09.927 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=ec1cb596-867f-4166-900f-6abbaadc37bb (AAA)
+17:31:09.927 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=3747677c-3d06-4605-8df3-951213e27aef, program=74bb7225-02b2-48f7-95cb-66b93ff779f9
+17:31:09.927 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=50157029-d524-4671-8e0c-1590d3845aa0, program=ec1cb596-867f-4166-900f-6abbaadc37bb, totalWeeks=2, daysPerWeek=2
+17:31:09.927 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=9212d587-4561-4b8f-9da4-e39fbfff3d63 (AAA)
+17:31:09.927 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=bb02c361-816d-4b4e-a072-f1ee26ff70b4, program=b59a11f6-f876-4d98-98a3-409cf2654116
+17:31:09.927 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=ec459acf-46e3-4010-8423-8a1b23687e64, program=9212d587-4561-4b8f-9da4-e39fbfff3d63, totalWeeks=2, daysPerWeek=2
+17:31:09.928 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=921a9854-79a0-4791-92e5-19f363730945 (ZJHgwDIQg)
+17:31:09.929 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=e2ddcde9-2dc4-4801-98c7-f5c306650c5a, program=921a9854-79a0-4791-92e5-19f363730945, totalWeeks=8, daysPerWeek=6
+17:31:09.930 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=4aee9af5-3cd1-46ce-a1ac-8265e2887b2f (sBQCDiDtPe)
+17:31:09.930 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=d3e6476d-396f-4b68-8ee5-6e81899d3a5a, program=4aee9af5-3cd1-46ce-a1ac-8265e2887b2f, totalWeeks=10, daysPerWeek=4
+17:31:09.932 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=16acc2c1-10eb-4480-8294-2ead788ce100 (VgiDtSseBlDySBJGydsonWSlAHxYVk)
+17:31:09.933 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=c82e2579-3886-4122-bbd6-8f11d83bffd1, program=16acc2c1-10eb-4480-8294-2ead788ce100, totalWeeks=8, daysPerWeek=1
+17:31:09.933 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=63cc9ef2-7821-4872-ba04-1240043dcefd (aaa)
+17:31:09.934 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=9a56ae41-853b-44ac-8bfb-8f4f7a5920f1, program=b603b400-6807-4f10-8485-20099cd0d485
+17:31:09.934 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=85eaf901-86ad-487d-836b-8954ae7bb526, program=63cc9ef2-7821-4872-ba04-1240043dcefd, totalWeeks=1, daysPerWeek=2
+17:31:09.934 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=10fcfdfb-b8ef-4ade-aee3-f1439b0cc7ea (tWpaBeJK)
+17:31:09.935 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=21826c6b-1852-4e8e-a303-1c7ef192c7d6, program=10fcfdfb-b8ef-4ade-aee3-f1439b0cc7ea, totalWeeks=1, daysPerWeek=5
+17:31:09.937 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=44ecbc79-1757-4a62-b974-fce374835498 (LKRMNAQHwVJE)
+17:31:09.937 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=6d9cb4e3-1cfe-452a-a239-aacdbd9bba8f, program=43f186cc-3d16-460f-b5e2-8aab5f81070d
+17:31:09.937 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=87acab7f-0363-412f-970a-c37bc4b00990, program=44ecbc79-1757-4a62-b974-fce374835498, totalWeeks=6, daysPerWeek=3
+17:31:09.938 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=fd59a8d0-2d5d-42cd-bb86-df1d6b562bd2 (XogPjwpehtA)
+17:31:09.938 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=7dd3605f-32b5-48b2-9007-2e7ffb0157d3, program=fd59a8d0-2d5d-42cd-bb86-df1d6b562bd2, totalWeeks=3, daysPerWeek=3
+17:31:09.940 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=ddfa94af-ae54-4558-99bf-0a76048e0acf (CfeMqwF)
+17:31:09.940 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=6d47fd9a-fe59-4f2e-b9c3-6dc181d49294, program=ddfa94af-ae54-4558-99bf-0a76048e0acf, totalWeeks=13, daysPerWeek=2
+17:31:09.941 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=76d26e97-2ed1-4168-bbd8-45a52b0ccf5e (ZZZ)
+17:31:09.941 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=46a9ad12-ac7c-47f2-93ec-de717adb65ce, program=76d26e97-2ed1-4168-bbd8-45a52b0ccf5e, totalWeeks=1, daysPerWeek=2
+17:31:09.941 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=db13f14f-f41f-4df6-bf54-a014af460802 (AAA)
+17:31:09.941 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=aeb7bfdd-4160-4df6-b304-a44a8abba332, program=f03386a5-4c9c-452a-a8c8-a4b5204f97a1
+17:31:09.941 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=2e5c4e15-9bee-4be5-b8dd-9d521de48328, program=db13f14f-f41f-4df6-bf54-a014af460802, totalWeeks=2, daysPerWeek=2
+17:31:09.942 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=0e64d5c0-a320-4a11-abc9-31464035b253 (CwbhOVEXnfWil)
+17:31:09.942 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=b46cb449-5aa3-41e0-ae84-4d62559bd505, program=9cc39199-837f-47b5-980e-655e2a7dc2c8
+17:31:09.942 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=aafe826e-bee6-4411-b4aa-28646aea1e2f, program=0e64d5c0-a320-4a11-abc9-31464035b253, totalWeeks=15, daysPerWeek=3
+17:31:09.943 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=bfe63412-52fb-42ef-9a7c-79ae3b0a6dad (IFbpNMVYIq)
+17:31:09.943 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=1b714f48-a047-4cea-960a-d73b0d8a81b6, program=5154b646-82d0-41c8-9ddf-a19cfeb7bc61
+17:31:09.943 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=c079b5f9-028c-498c-80e6-66fa2f5c9d94, program=bfe63412-52fb-42ef-9a7c-79ae3b0a6dad, totalWeeks=7, daysPerWeek=1
+17:31:09.943 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=b7d2e80b-38e6-42cc-ba0f-42435635607f (zzz)
+17:31:09.943 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=6269f9b2-7e00-4404-925d-ddf5569d2dee, program=b7d2e80b-38e6-42cc-ba0f-42435635607f, totalWeeks=1, daysPerWeek=1
+17:31:09.944 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=d1458df4-ea29-4992-b491-7eaf062563ee (CAUqtTtBZFJly)
+17:31:09.945 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=3f523e40-175b-4c95-b88d-b860f32bc4f8, program=d1458df4-ea29-4992-b491-7eaf062563ee, totalWeeks=16, daysPerWeek=1
+17:31:09.945 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=f52c16e7-3f8c-4542-a7be-fbcf98a56fbe (XYfIBPN)
+17:31:09.945 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=3c0ff487-9262-448f-807e-5c343c7188f6, program=f52c16e7-3f8c-4542-a7be-fbcf98a56fbe, totalWeeks=2, daysPerWeek=7
+17:31:09.946 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=6919bbeb-e811-40da-ad34-e334d93ddb65 (AAA)
+17:31:09.946 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=dbb30366-6f69-4b70-8508-68d183f748da, program=d6ca245f-4472-4ed1-8703-b199ceb45402
+17:31:09.946 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=253d7655-0562-410f-ac57-43c65554e02b, program=6919bbeb-e811-40da-ad34-e334d93ddb65, totalWeeks=2, daysPerWeek=2
+17:31:09.946 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=ac7e1d8d-5418-4c9f-a77a-90ac6dacdb27 (AAA)
+17:31:09.947 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=5f00cd9d-27e1-47b8-9d15-2e94838ed44f, program=cfb12d1d-5c73-4e15-91cc-c3a410ec263d
+17:31:09.947 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=f21381a8-dd43-4880-bc0e-3e52d338a315, program=ac7e1d8d-5418-4c9f-a77a-90ac6dacdb27, totalWeeks=2, daysPerWeek=2
+17:31:09.947 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=f8167a52-eabf-4d1f-a7bb-8acf5d1bb513 (ZZZ)
+17:31:09.947 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=cfdc0aa9-1f59-42c6-a0b9-f1e051026786, program=ca346209-3a57-4754-81db-70802a0a5494
+17:31:09.947 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=967c21f6-5a75-4b63-b755-6fc8c74d0f73, program=f8167a52-eabf-4d1f-a7bb-8acf5d1bb513, totalWeeks=15, daysPerWeek=6
+17:31:09.949 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=8e7c46b7-559b-43ab-a71a-39386ade7e77 (JSYkyaHyY)
+17:31:09.949 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=da09d14d-3f05-4fe4-b4ae-ce32f91dfc02, program=074c8edd-ddf7-4daa-8916-1ef229b7988e
+17:31:09.949 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=33dc71e2-6cbc-4e60-8fd6-b15468283d40, program=8e7c46b7-559b-43ab-a71a-39386ade7e77, totalWeeks=15, daysPerWeek=6
+17:31:09.951 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=dbc07829-577e-4230-a1b3-aa2745a5dce8 (QsHtbXbCOKjeidbzxzRNmbJTQWniaa)
+17:31:09.951 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=8e8d3ae8-5e6b-42c6-89eb-6a75b0497b0e, program=ba4f8ac0-d52c-4797-81b1-73b6c6ff1ff8
+17:31:09.951 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=d4fd024b-5d9b-4ac0-9ea0-ca06d17b8405, program=dbc07829-577e-4230-a1b3-aa2745a5dce8, totalWeeks=4, daysPerWeek=4
+17:31:09.952 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=aa67bc89-9bb5-482c-9b4d-b735370acbb9 (zzz)
+17:31:09.952 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=4d9ddc67-1481-4493-84c8-b21fe0f1dd6b, program=aa67bc89-9bb5-482c-9b4d-b735370acbb9, totalWeeks=1, daysPerWeek=7
+17:31:09.953 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=8e36b0f4-c7b6-4cba-9172-100a54d69e70 (zzz)
+17:31:09.953 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=8f0e55de-21bb-436d-8b20-16a42f08e14f, program=8e36b0f4-c7b6-4cba-9172-100a54d69e70, totalWeeks=1, daysPerWeek=1
+17:31:09.954 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=9b08b3ea-4773-42c8-972a-59e36c387213 (kkNdIQycMIKn)
+17:31:09.955 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=98fd88f0-a2bf-46a1-9559-b964dacbe33b, program=0320f57b-3fe9-460b-898e-b33df5b7989f
+17:31:09.955 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=aa6cb0fb-42c2-4116-8451-c1bb04c6ef16, program=9b08b3ea-4773-42c8-972a-59e36c387213, totalWeeks=1, daysPerWeek=2
+17:31:09.956 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=9082f784-39bd-4a81-b8a0-67557136dbb1 (bYn)
+17:31:09.956 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=e155feaf-1cd9-43e6-aafd-d926dd960692, program=9082f784-39bd-4a81-b8a0-67557136dbb1, totalWeeks=16, daysPerWeek=3
+17:31:09.957 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=49bbdd50-c3ad-48a2-a041-f3c6d377e15f (pYhtUrnC)
+17:31:09.957 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=6167734a-5b11-4886-893d-260e50e92586, program=769566c4-910d-464a-bc56-cc4498baf078
+17:31:09.957 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=8ee43628-e696-40df-a925-8f7d9d014419, program=49bbdd50-c3ad-48a2-a041-f3c6d377e15f, totalWeeks=9, daysPerWeek=2
+17:31:09.958 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=39c53e4c-8289-42f0-88f7-50b4abf4f962 (sDGyzYjdFz)
+17:31:09.958 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=32388fda-7c15-42e5-9b75-855bf3ff081b, program=3f0a27bd-ebb9-44ed-94fc-ecc82cc94f98
+17:31:09.958 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=1594cf16-7cd4-470d-bad2-6c46632ba757, program=39c53e4c-8289-42f0-88f7-50b4abf4f962, totalWeeks=13, daysPerWeek=4
+17:31:09.959 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=c14c5245-7a14-46be-b500-99e6efc314b2 (tAnPwlmpuOfh)
+17:31:09.959 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=e9b82277-2be6-42c9-8877-c06a0386f818, program=c14c5245-7a14-46be-b500-99e6efc314b2, totalWeeks=16, daysPerWeek=4
+17:31:09.959 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=c19e718e-b66d-4879-8dcb-488dbf55c24b (AAA)
+17:31:09.959 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=7562df96-6ec7-4d3c-84cf-dd0407c203a4, program=ff0ba8f4-cdcc-4e8e-ac91-2683fb15360a
+17:31:09.960 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=cc50ccaa-4351-416e-b312-d8090a4d15c0, program=c19e718e-b66d-4879-8dcb-488dbf55c24b, totalWeeks=2, daysPerWeek=2
+17:31:09.960 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=5c49adf6-3cd5-4624-a63d-e620bf63e5b1 (AAA)
+17:31:09.960 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=13568ade-afeb-4749-9128-695ea777abc1, program=9396de41-e565-4536-959b-5e5f2db97bbe
+17:31:09.960 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=5441f863-20d4-431d-83cc-7d5a63a53223, program=5c49adf6-3cd5-4624-a63d-e620bf63e5b1, totalWeeks=2, daysPerWeek=2
+17:31:09.961 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=6bad703c-d96a-43b3-a6a2-47ff3dffa86e (IDhbqmNndZdIDvFFugNNVDSdG)
+17:31:09.961 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=b9bcf12b-0561-47a0-866a-189eaa78d210, program=6bad703c-d96a-43b3-a6a2-47ff3dffa86e, totalWeeks=13, daysPerWeek=3
+17:31:09.962 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=4f3afdce-8903-4c77-a94d-53b62f862d7e (IfSJSIQPpOUqStUhJ)
+17:31:09.962 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=353a491d-7cf3-4523-af71-a4beca5564af, program=4f3afdce-8903-4c77-a94d-53b62f862d7e, totalWeeks=16, daysPerWeek=3
+17:31:09.962 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=4f543062-8f75-44cd-a1e1-86afe0fa1eb6 (aaa)
+17:31:09.962 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=955a974b-bb2a-4d77-89f5-35ade984814f, program=4f543062-8f75-44cd-a1e1-86afe0fa1eb6, totalWeeks=15, daysPerWeek=7
+17:31:09.963 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=3e9bd00f-3572-4f13-82f6-598143b24b8c (aaa)
+17:31:09.963 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=04723bc0-e25b-46b7-bff1-7a17cac08cdf, program=3e9bd00f-3572-4f13-82f6-598143b24b8c, totalWeeks=16, daysPerWeek=2
+17:31:09.963 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=43c2514c-f006-47d9-9413-9a8c6da22970 (mwGX)
+17:31:09.963 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=44ac2487-8a77-4851-b938-d11ea543e3e0, program=43c2514c-f006-47d9-9413-9a8c6da22970, totalWeeks=9, daysPerWeek=5
+17:31:09.964 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=94a0e96e-3e3a-4847-93cf-80fe0a142a84 (JQwTEkON)
+17:31:09.965 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=40c97d7c-a960-4117-ac78-b77c20f65a09, program=ef5a2d6c-1604-417c-b20a-ce816aa53012
+17:31:09.965 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=36e93686-35ab-43f7-9bb7-16b336b05484, program=94a0e96e-3e3a-4847-93cf-80fe0a142a84, totalWeeks=1, daysPerWeek=7
+17:31:09.966 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=18488623-0261-4879-9e0d-48a67111c369 (doePFdbO)
+17:31:09.966 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=b5afea48-2b7a-41a3-80ba-e9e8ec7b93cb, program=1c39baa4-621c-4a31-a84d-96166cc587f3
+17:31:09.966 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=4b719d20-dac0-43f9-949f-3ade5833e1a8, program=18488623-0261-4879-9e0d-48a67111c369, totalWeeks=4, daysPerWeek=5
+17:31:09.966 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=4f22b953-c8ef-44c7-9ef6-f1828455ac8d (AAA)
+17:31:09.966 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=658c169d-d0d9-4e88-8fec-25902d62b763, program=c35f2907-47cf-4872-b032-a72f6969b7bb
+17:31:09.967 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=c0d16010-e862-49bc-8894-7a984e7c4d03, program=4f22b953-c8ef-44c7-9ef6-f1828455ac8d, totalWeeks=2, daysPerWeek=2
+17:31:09.967 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=2e2c554c-0ef0-4d3e-9a45-d721227ac0c9 (AAA)
+17:31:09.967 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=c0469c68-d708-4acb-a8d4-f8a0b2c01947, program=93774b60-cbb8-4a05-a9b1-ea67a32af1e3
+17:31:09.967 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=efacb46a-108f-423a-bdcc-0a768f9f4254, program=2e2c554c-0ef0-4d3e-9a45-d721227ac0c9, totalWeeks=2, daysPerWeek=2
+17:31:09.968 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=b52c7cc1-a8af-478d-a30b-b65f9d939b84 (klrlpIkcE)
+17:31:09.968 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=a88a9d0f-f46b-4faf-9a4f-ef803cbd452d, program=b52c7cc1-a8af-478d-a30b-b65f9d939b84, totalWeeks=3, daysPerWeek=7
+17:31:09.970 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=26078c24-ec11-4d54-b780-d5402c1e8a7f (cKhHs)
+17:31:09.970 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=2df8c468-3552-41cc-96e9-511d93498faa, program=fcb2b610-3459-496d-9c88-7e7c9c043d1e
+17:31:09.970 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=da878d19-ec8e-4ce6-a4cd-cfc64735556b, program=26078c24-ec11-4d54-b780-d5402c1e8a7f, totalWeeks=5, daysPerWeek=3
+17:31:09.971 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=e8b22833-1814-4a24-bc7b-7f451344f715 (lVeLJfODM)
+17:31:09.971 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=14f7e96f-16e5-433e-9ce5-87c5c6b1bca4, program=e8b22833-1814-4a24-bc7b-7f451344f715, totalWeeks=2, daysPerWeek=1
+17:31:09.973 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=6a773d2f-506b-43bb-9a80-f916ed332c91 (vUTBGsfN)
+17:31:09.973 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=1a20c531-910b-4983-9847-da76e3a780c5, program=9e880ec5-c303-455b-b87c-111f573122a5
+17:31:09.973 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=233d8a30-150c-4c7e-bd34-ef54ec779802, program=6a773d2f-506b-43bb-9a80-f916ed332c91, totalWeeks=4, daysPerWeek=2
+17:31:09.974 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=adf674d8-36f7-497b-b517-617036259414 (ocRFUwHdCYllX)
+17:31:09.974 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=68f1fed6-980d-4678-8982-18a1c754e6de, program=00aeed78-6522-4bd2-8e35-a40d9836745f
+17:31:09.974 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=758c4b7a-3059-4251-b608-f81355ac7890, program=adf674d8-36f7-497b-b517-617036259414, totalWeeks=14, daysPerWeek=6
+17:31:09.974 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=207977f0-12ca-4f05-9ee9-3d984eb8b692 (AAA)
+17:31:09.974 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=ad6a2294-4903-48fd-8a8c-109d78c90772, program=72076feb-82e1-4180-b383-020d35201bf2
+17:31:09.975 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=1fcb7654-583b-4313-97f8-6889d2fc5b1f, program=207977f0-12ca-4f05-9ee9-3d984eb8b692, totalWeeks=2, daysPerWeek=2
+17:31:09.975 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=abeb0b61-1745-4ee2-9def-96fc16bcee65 (zsSqhvBtSUT)
+17:31:09.975 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=227f9889-8744-49c6-86d6-1206b35909da, program=abeb0b61-1745-4ee2-9def-96fc16bcee65, totalWeeks=9, daysPerWeek=1
+17:31:09.976 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=4399c5ca-b15d-4a58-b6a4-114d74d37420 (CrUhmfMOscRi)
+17:31:09.976 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=c0813261-b5e6-4906-a580-9058183cfc6d, program=c5af4e30-46c0-4039-a417-f91abbd1f217
+17:31:09.976 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=92365e64-abd3-4dcf-a9ec-0c968a671b4f, program=4399c5ca-b15d-4a58-b6a4-114d74d37420, totalWeeks=4, daysPerWeek=2
+17:31:09.977 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=442a1e34-7bfc-4a99-8834-79cdd539514a (zzz)
+17:31:09.977 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=4f8de678-06d7-43a9-9561-228b42f5b612, program=442a1e34-7bfc-4a99-8834-79cdd539514a, totalWeeks=16, daysPerWeek=7
+17:31:09.978 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=1d007151-4c02-48f4-92f1-d18a36b7dccd (ZZZ)
+17:31:09.978 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=59cc8649-fe3a-4703-97cc-9076546f7acb, program=328ce6ba-6e7f-46a6-b899-1a9c6e0e213a
+17:31:09.978 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=a6a8d868-c35c-4fe4-8df0-6f81b4700236, program=1d007151-4c02-48f4-92f1-d18a36b7dccd, totalWeeks=2, daysPerWeek=7
+17:31:09.979 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=730ab239-6b18-43db-8eda-059a2246ffc7 (tGoq)
+17:31:09.979 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=8a7d378a-2b60-4999-98a3-b488886f0daf, program=730ab239-6b18-43db-8eda-059a2246ffc7, totalWeeks=16, daysPerWeek=1
+17:31:09.979 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=b01c34af-788a-4853-9d14-49fc40766be2 (zzz)
+17:31:09.980 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=1a06096e-67df-4d65-a3de-0b99da8d6af2, program=b01c34af-788a-4853-9d14-49fc40766be2, totalWeeks=16, daysPerWeek=1
+17:31:09.980 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=5fb72392-34ab-4edb-8811-7898661b3e58 (lKzVot)
+17:31:09.980 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=05a1466a-1b83-451e-8e56-54a36f030ac0, program=5fb72392-34ab-4edb-8811-7898661b3e58, totalWeeks=16, daysPerWeek=1
+17:31:09.981 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=e6e52d48-4af5-474d-a7a5-c80154cb43f6 (LFkqxKlnz)
+17:31:09.981 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=6253140b-ebc1-4077-af02-3b63af609734, program=e6e52d48-4af5-474d-a7a5-c80154cb43f6, totalWeeks=10, daysPerWeek=3
+17:31:09.982 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=773e2051-88b8-4adb-9fa4-3b15f3abb16f (nhPVvpQLUqmmqOfCRwZjqxREpdydgp)
+17:31:09.982 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=cca46f05-b7c5-4e95-9216-74cb999a2577, program=773e2051-88b8-4adb-9fa4-3b15f3abb16f, totalWeeks=12, daysPerWeek=4
+17:31:09.984 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=2aa9ef2c-56fa-4f7c-83a5-f1fc5ae655cd (wRKSnSJdgKGfzaWqXbwjAomaNMsfBY)
+17:31:09.984 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=7231f289-e253-4d24-bb1b-d9c3b1840d82, program=c7ea1067-46cf-4679-9dbb-b637414b6920
+17:31:09.984 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=e66f10a4-6f71-46b3-9334-0c42781059f2, program=2aa9ef2c-56fa-4f7c-83a5-f1fc5ae655cd, totalWeeks=10, daysPerWeek=2
+17:31:09.984 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=23c038e7-b474-4920-a262-596caf93ca10 (AAA)
+17:31:09.984 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=60967862-c9f6-49a3-b6fc-ec402bc0b056, program=8e599bcc-bc23-4a02-a86b-acd626175237
+17:31:09.984 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=4e7b5646-f47c-45f3-8090-cfe5f1202caa, program=23c038e7-b474-4920-a262-596caf93ca10, totalWeeks=2, daysPerWeek=2
+17:31:09.985 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=05da2096-27fb-43bc-888c-cf472ac97606 (zzz)
+17:31:09.985 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=8e0604a1-b020-4b87-b0b5-4258fd50d403, program=a1f9aadc-7ce4-428d-9005-99c079f540f4
+17:31:09.985 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=7c97b5c6-1165-488f-a841-145c31896543, program=05da2096-27fb-43bc-888c-cf472ac97606, totalWeeks=16, daysPerWeek=7
+17:31:09.987 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=f30f421e-e18b-440e-a7aa-f126c5dbcc44 (PZUnpmCyAMCAHHeYWPDHIKQNG)
+17:31:09.987 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=026cdd12-bac6-4529-b560-1433bb368506, program=e630c357-6e7b-40d6-ae77-445be7530498
+17:31:09.987 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=0584f27b-4526-4ade-98ae-d07ccdcdadce, program=f30f421e-e18b-440e-a7aa-f126c5dbcc44, totalWeeks=5, daysPerWeek=4
+17:31:09.988 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=b0e1f56f-aad6-42af-bbc8-6f282e4480ac (UBxrOHT)
+17:31:09.988 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=7ff999e4-389c-4d07-aab6-efcb5ed8859c, program=f4549c36-bfd7-4a44-aeea-037f50fdf238
+17:31:09.988 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=bc520cf6-cafe-4a2d-8e61-226259aa4e5a, program=b0e1f56f-aad6-42af-bbc8-6f282e4480ac, totalWeeks=2, daysPerWeek=4
+17:31:09.989 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=7a0920cb-06c3-45fd-ab05-b4763cb1bb85 (VortqKdm)
+17:31:09.990 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=e7fae5b3-efd3-494b-9439-0ba429811989, program=53c701d6-c689-4cf0-bcf1-210a61edac39
+17:31:09.990 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=517d8cbc-2813-4f76-9403-8858e884ca2f, program=7a0920cb-06c3-45fd-ab05-b4763cb1bb85, totalWeeks=14, daysPerWeek=6
+17:31:09.990 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=50afe94a-9cb1-4ec8-9291-9c0916c787b3 (nZiIHivH)
+17:31:09.991 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=100627bf-7291-44b2-9a41-8bb059bec7c9, program=50afe94a-9cb1-4ec8-9291-9c0916c787b3, totalWeeks=3, daysPerWeek=3
+17:31:09.991 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=6b656f3a-b7d4-43a6-89da-40ea735bb3cd (AAA)
+17:31:09.991 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=a178c7f9-b75b-4cf2-99fd-b8c506d68786, program=cdca5cb9-1f96-446f-a906-e4c7f17814ab
+17:31:09.991 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=7e73a602-1aee-4422-892a-030b34d7df36, program=6b656f3a-b7d4-43a6-89da-40ea735bb3cd, totalWeeks=2, daysPerWeek=2
+17:31:09.992 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=ab6d152f-8f1e-4508-b082-10513c6a82e6 (yAIaXUpxPYFBGOwMP)
+17:31:09.992 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=e7b3b9e6-c52b-4763-aa02-e0f1001233e4, program=5d074bc0-7d59-4a4c-b11a-64e02145d9af
+17:31:09.992 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=847afb5f-3468-4c1c-942c-8dbefc122872, program=ab6d152f-8f1e-4508-b082-10513c6a82e6, totalWeeks=5, daysPerWeek=1
+17:31:09.993 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=3b460907-83ba-42c3-9099-f32e664e6c53 (wUUNSkVlxQNe)
+17:31:09.993 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=50ef970b-30dd-4283-9bb9-280ef3a91999, program=51f516d8-82e2-4758-9fd2-338d945b190a
+17:31:09.993 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=c9d66ccc-d2e6-44f1-b705-9a60116e1b3d, program=3b460907-83ba-42c3-9099-f32e664e6c53, totalWeeks=9, daysPerWeek=2
+17:31:09.993 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=2be5665c-5b32-4f12-80eb-f7ee8ef32288 (AAA)
+17:31:09.993 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=1fe702b6-2bd1-4cae-9144-a2e940e3cc1a, program=2be5665c-5b32-4f12-80eb-f7ee8ef32288, totalWeeks=2, daysPerWeek=7
+17:31:09.994 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=5b5d95d9-6299-44ff-bbcc-60a2968fdfb3 (ZXCswsjYmnusKfIYMdmkUI)
+17:31:09.994 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=5cd01cb6-4f34-4e6f-ad82-f76257c00597, program=24a89352-f4ed-4c05-aa41-2d9a378f1115
+17:31:09.994 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=06afc52f-0ac1-424b-ac68-d2f8e87c1d09, program=5b5d95d9-6299-44ff-bbcc-60a2968fdfb3, totalWeeks=11, daysPerWeek=7
+17:31:09.995 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=ddce1623-c03c-40ef-924f-28eef7ee667f (ZZZ)
+17:31:09.995 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=873ab846-e073-4a37-964c-8070b04455e9, program=7429954f-4d67-41c4-b3d9-1d01ea5a8420
+17:31:09.995 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=0213131a-fc7f-4fb3-831b-eefa3059923e, program=ddce1623-c03c-40ef-924f-28eef7ee667f, totalWeeks=15, daysPerWeek=1
+17:31:09.996 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrolling user=user-prop-test in program=42694db4-b077-40db-82cb-3272c598c404 (KtUrZC)
+17:31:09.996 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Replaced existing enrollment: id=a0a8db09-1e47-4351-98d9-5798a71bae8d, program=eda1717d-50bd-48e8-b24a-20d261d33fa5
+17:31:09.996 [main] INFO  c.g.r.p.h.w.p.a.ProgressionService - Enrollment created: id=7b53c94b-4070-42a4-b679-0e56aca8d708, program=42694db4-b077-40db-82cb-3272c598c404, totalWeeks=13, daysPerWeek=1
+timestamp = 2026-05-13T17:31:09.996887, ProgressionPropertyTest:Feature: workout-session-service-active-workout, Property 9: Program enrollment replacement = 
+                              |-----------------------jqwik-----------------------
+tries = 100                   | # of calls to property
+checks = 100                  | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 100        | # of all combined edge cases
+edge-cases#tried = 18         | # of edge cases tried in current run
+seed = -2167277746347244266   | random seed to reproduce generated values
+
+
+]]></system-out>
+  </testcase>
+  <testcase name="Feature: workout-session-service-active-workout, Property 7: Skip records creation" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.property.ProgressionPropertyTest" time="0.037">
+    <system-out><![CDATA[17:31:10.000 [main] INFO  n.j.e.p.RandomizedShrinkablesGenerator - Edge case generation exceeds number of tries. Stopped after 100 generated cases.
+timestamp = 2026-05-13T17:31:10.034033, ProgressionPropertyTest:Feature: workout-session-service-active-workout, Property 7: Skip records creation = 
+                              |-----------------------jqwik-----------------------
+tries = 100                   | # of calls to property
+checks = 100                  | # of not rejected calls
+generation = RANDOMIZED       | parameters are randomly generated
+after-failure = SAMPLE_FIRST  | try previously failed sample, then previous seed
+when-fixed-seed = ALLOW       | fixing the random seed is allowed
+edge-cases#mode = MIXIN       | edge cases are mixed in
+edge-cases#total = 100        | # of all combined edge cases
+edge-cases#tried = 15         | # of edge cases tried in current run
+seed = -4397199738422026284   | random seed to reproduce generated values
+
+
+]]></system-out>
+  </testcase>
+</testsuite>

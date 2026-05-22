@@ -1,0 +1,70 @@
+package com.gmail.ramawthar.priyash.hybridstrength.workoutsession.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
+
+/**
+ * Provides the RSA public key used to verify incoming JWT access tokens.
+ *
+ * <p>The workout-session-service is a resource server — it only needs the public key
+ * to verify tokens issued by the auth-service. It never issues tokens itself.
+ *
+ * <p>In production, configure {@code jwt.public-key-pem} with the auth-service's
+ * RSA public key. In dev/test, a fresh key pair is generated at startup (tokens
+ * signed with the matching private key will verify correctly within the same JVM,
+ * which is exactly what the integration tests do).
+ */
+@Configuration
+public class JwtConfig {
+
+    private final JwtProperties jwtProperties;
+
+    public JwtConfig(JwtProperties jwtProperties) {
+        this.jwtProperties = jwtProperties;
+    }
+
+    @Bean
+    public RSAPublicKey rsaPublicKey() {
+        String pem = jwtProperties.getPublicKeyPem();
+        if (pem != null && !pem.isBlank()) {
+            return parsePublicKeyFromPem(pem);
+        }
+        // No PEM configured — generate a fresh key pair.
+        // Useful in dev and integration tests where the test generates its own key pair
+        // and registers the public key via a @TestConfiguration override.
+        return (RSAPublicKey) generateKeyPair().getPublic();
+    }
+
+    private KeyPair generateKeyPair() {
+        try {
+            KeyPairGenerator gen = KeyPairGenerator.getInstance("RSA");
+            gen.initialize(2048);
+            return gen.generateKeyPair();
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException("RSA key pair generation failed", e);
+        }
+    }
+
+    private RSAPublicKey parsePublicKeyFromPem(String pem) {
+        try {
+            String stripped = pem
+                    .replace("-----BEGIN PUBLIC KEY-----", "")
+                    .replace("-----END PUBLIC KEY-----", "")
+                    .replaceAll("\\s", "");
+            byte[] decoded = Base64.getDecoder().decode(stripped);
+            X509EncodedKeySpec spec = new X509EncodedKeySpec(decoded);
+            KeyFactory kf = KeyFactory.getInstance("RSA");
+            return (RSAPublicKey) kf.generatePublic(spec);
+        } catch (Exception e) {
+            throw new IllegalStateException("Failed to parse RSA public key from PEM", e);
+        }
+    }
+}

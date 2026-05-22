@@ -6,13 +6,13 @@ This plan implements the Workout Session Service as a new Spring Boot microservi
 
 ## Tasks
 
-- [ ] 1. Project scaffold and configuration
-  - [ ] 1.1 Create Maven project structure with Spring Boot 3.x parent, Java 17, and all required dependencies (Spring Web, Spring Data JPA, Spring Security, Spring WebSocket, Spring AMQP, Flyway, PostgreSQL driver, H2, Resilience4j, Jackson, Jakarta Validation, Lombok, Actuator, jqwik)
+- [x] 1. Project scaffold and configuration
+  - [x] 1.1 Create Maven project structure with Spring Boot 3.x parent, Java 17, and all required dependencies (Spring Web, Spring Data JPA, Spring Security, Spring WebSocket, Spring AMQP, Flyway, PostgreSQL driver, H2, Resilience4j, Jackson, Jakarta Validation, Lombok, Actuator, jqwik)
     - Create `workout-session-service/pom.xml` with Maven Wrapper
     - Create `WorkoutSessionApplication.java` main class
     - Create package structure: `config/`, `session/`, `progression/`, `common/`
     - _Requirements: 5.4, 5.5_
-  - [ ] 1.2 Create application configuration files
+  - [x] 1.2 Create application configuration files
     - `application.yml` — server port 8083, shared defaults, Flyway config, RabbitMQ config, JWT public key path
     - `application-dev.yml` — H2 or local PostgreSQL connection
     - `application-prod.yml` — environment variable placeholders
@@ -20,22 +20,22 @@ This plan implements the Workout Session Service as a new Spring Boot microservi
     - `logback-spring.xml` — structured JSON logging with Logstash encoder
     - _Requirements: 5.4, 5.5, 5.6_
 
-- [ ] 2. Flyway database migrations
-  - [ ] 2.1 Create `V200__create_sessions.sql` migration
+- [x] 2. Flyway database migrations
+  - [x] 2.1 Create `V200__create_sessions.sql` migration
     - Define `sessions` table with UUID PK, user_id, program_id, enrollment_id, week/day numbers, status, current_section_index, workout_snapshot (JSONB), section_progresses (JSONB), timestamps
     - Add indexes on user_id and (user_id, status)
     - _Requirements: 5.2, 5.4, 5.5_
-  - [ ] 2.2 Create `V201__create_program_enrollments.sql` migration
+  - [x] 2.2 Create `V201__create_program_enrollments.sql` migration
     - Define `program_enrollments` table with UUID PK, user_id, program_id, program_name, current_week, current_day, total_weeks, total_days_per_week, status, timestamps
     - Add indexes on user_id and (user_id, status)
     - _Requirements: 5.2, 5.4_
-  - [ ] 2.3 Create `V202__create_skip_records.sql` migration
+  - [x] 2.3 Create `V202__create_skip_records.sql` migration
     - Define `skip_records` table with UUID PK, enrollment_id FK, week_number, day_number, skipped_at
     - Add index on enrollment_id
     - _Requirements: 2.8, 5.4_
 
-- [ ] 3. Domain objects
-  - [ ] 3.1 Implement session domain objects
+- [x] 3. Domain objects
+  - [x] 3.1 Implement session domain objects
     - Create `Session.java` — fields: id, userId, programId, enrollmentId, weekNumber, dayNumber, status, currentSectionIndex, sectionProgresses, workoutSnapshot, startedAt, pausedAt, completedAt, lastPersistedAt
     - Create `SessionStatus.java` enum — IN_PROGRESS, PAUSED, COMPLETED
     - Create `SectionProgress.java` — sectionIndex, sectionName, sectionType, exerciseLogs, completed
@@ -43,77 +43,77 @@ This plan implements the Workout Session Service as a new Spring Boot microservi
     - Create `TimerConfig.java` — sectionType, durationSeconds, workSeconds, restSeconds, rounds
     - Add domain methods: `completeExercise()`, `advanceSection()`, `pause()`, `end()`, `computeNextUp()`, `isAllComplete()`
     - _Requirements: 1.1, 1.4, 1.7, 1.8, 1.10, 1.11_
-  - [ ] 3.2 Implement progression domain objects
+  - [x] 3.2 Implement progression domain objects
     - Create `ProgramEnrollment.java` — fields: id, userId, programId, programName, currentWeek, currentDay, totalWeeks, totalDaysPerWeek, status, enrolledAt, completedAt, skips
     - Create `EnrollmentStatus.java` enum — ACTIVE, COMPLETED, REPLACED
     - Create `SkipRecord.java` — weekNumber, dayNumber, skippedAt
     - Add domain methods: `advanceDay()`, `skipDay()`, `markReplaced()`, `markCompleted()`
     - _Requirements: 2.1, 2.7, 2.8, 3.4_
 
-- [ ] 4. Ports (inbound and outbound interfaces)
-  - [ ] 4.1 Define session inbound ports
+- [x] 4. Ports (inbound and outbound interfaces)
+  - [x] 4.1 Define session inbound ports
     - `StartSessionUseCase` — `startSession(userId, programId, weekNumber, dayNumber, standalone)`
     - `GetSessionUseCase` — `getSession(sessionId, userId)`, `getActiveSession(userId)`
     - `UpdateSessionUseCase` — `completeExercise(sessionId, userId, sectionIndex, exerciseIndex)`, `advanceSection(sessionId, userId, targetSectionIndex)`
     - `PauseSessionUseCase` — `pauseSession(sessionId, userId)`, `resumeSession(sessionId, userId)`
     - `EndSessionUseCase` — `endSession(sessionId, userId)`
     - _Requirements: 1.1, 1.4, 1.8, 1.10, 1.11_
-  - [ ] 4.2 Define session outbound ports
+  - [x] 4.2 Define session outbound ports
     - `SessionRepository` — `save(Session)`, `findById(UUID)`, `findActiveByUserId(String)`
     - `WorkoutFetcher` — `fetchProgram(UUID programId, String jwt)`
     - `SessionEventPublisher` — `publishSessionCompleted(SessionCompletedEvent)`
     - _Requirements: 1.8, 5.1, 5.3_
-  - [ ] 4.3 Define progression inbound ports
+  - [x] 4.3 Define progression inbound ports
     - `EnrollProgramUseCase` — `enrollProgram(userId, programId, programName, totalWeeks, totalDaysPerWeek)`
     - `AdvanceDayUseCase` — `advanceDay(enrollmentId, userId)`
     - `SkipDayUseCase` — `skipDay(enrollmentId, userId)`
     - `GetEnrollmentUseCase` — `getActiveEnrollment(userId)`
     - _Requirements: 2.1, 2.5, 2.7, 3.4_
-  - [ ] 4.4 Define progression outbound port
+  - [x] 4.4 Define progression outbound port
     - `EnrollmentRepository` — `save(ProgramEnrollment)`, `findActiveByUserId(String)`, `findById(UUID)`
     - _Requirements: 2.1, 5.2_
 
-- [ ] 5. Application services
-  - [ ] 5.1 Implement `SessionService`
+- [x] 5. Application services
+  - [x] 5.1 Implement `SessionService`
     - Implement `StartSessionUseCase`: call WorkoutFetcher, create Session with workout snapshot, persist, return session ID
     - Implement `GetSessionUseCase`: load session, verify ownership (403 if mismatch)
     - Implement `UpdateSessionUseCase`: load session, delegate to domain methods, persist, push WebSocket update
     - Implement `PauseSessionUseCase`: validate state, delegate to domain, persist
     - Implement `EndSessionUseCase`: mark complete, publish SessionCompleted event, call AdvanceDayUseCase if not standalone
     - _Requirements: 1.1, 1.4, 1.8, 1.10, 1.11, 2.1, 2.4_
-  - [ ] 5.2 Implement `ProgressionService`
+  - [x] 5.2 Implement `ProgressionService`
     - Implement `EnrollProgramUseCase`: end existing active enrollment (mark REPLACED), create new at week 1 day 1
     - Implement `AdvanceDayUseCase`: increment day pointer, handle week rollover, mark COMPLETED if past last week
     - Implement `SkipDayUseCase`: advance pointer + persist SkipRecord
     - Implement `GetEnrollmentUseCase`: return active enrollment with next day info
     - _Requirements: 2.1, 2.3, 2.7, 2.8, 3.4, 3.7_
 
-- [ ] 6. Checkpoint — Ensure domain and application layers compile
+- [x] 6. Checkpoint — Ensure domain and application layers compile
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 7. Outbound adapters
-  - [ ] 7.1 Implement `JpaSessionRepository`
+- [x] 7. Outbound adapters
+  - [x] 7.1 Implement `JpaSessionRepository`
     - JPA entity mapping for `sessions` table (JSONB columns mapped via AttributeConverter or Hibernate Types)
     - Implement `save`, `findById`, `findActiveByUserId` queries
     - _Requirements: 1.8, 5.2_
-  - [ ] 7.2 Implement `RestWorkoutFetcher`
+  - [x] 7.2 Implement `RestWorkoutFetcher`
     - Use Spring `RestClient` to call Workout Creator Service at `/api/v1/vault/programs/{id}`
     - Propagate JWT in Authorization header
     - Wrap with Resilience4j circuit breaker (5s timeout, fallback returns 502)
     - _Requirements: 5.1_
-  - [ ] 7.3 Implement `RabbitSessionEventPublisher`
+  - [x] 7.3 Implement `RabbitSessionEventPublisher`
     - Configure topic exchange `session.events`, routing key `session.completed`
     - Use `Jackson2JsonMessageConverter` for serialization
     - Implement exponential backoff retry (1s initial, multiplier 2, max 5 attempts)
     - Log at ERROR on final failure with full event payload
     - _Requirements: 5.3_
-  - [ ] 7.4 Implement `JpaEnrollmentRepository`
+  - [x] 7.4 Implement `JpaEnrollmentRepository`
     - JPA entity mapping for `program_enrollments` and `skip_records` tables
     - Implement `save`, `findActiveByUserId`, `findById` queries
     - _Requirements: 2.1, 5.2_
 
-- [ ] 8. Inbound adapters
-  - [ ] 8.1 Implement `SessionController`
+- [x] 8. Inbound adapters
+  - [x] 8.1 Implement `SessionController`
     - POST `/api/v1/sessions` — start session (201)
     - GET `/api/v1/sessions/{id}` — get session state (200)
     - GET `/api/v1/sessions/active` — get active session (200 or 204)
@@ -124,59 +124,59 @@ This plan implements the Workout Session Service as a new Spring Boot microservi
     - POST `/api/v1/sessions/{id}/end` — end session (200)
     - Define request/response DTOs: `StartSessionRequest`, `CompleteExerciseRequest`, `AdvanceSectionRequest`, `SessionResponse`, `SectionProgressResponse`
     - _Requirements: 1.1, 1.4, 1.8, 1.10, 1.11_
-  - [ ] 8.2 Implement `ProgressionController`
+  - [x] 8.2 Implement `ProgressionController`
     - POST `/api/v1/enrollments` — enroll in program (201)
     - GET `/api/v1/enrollments/active` — get active enrollment (200 or 204)
     - POST `/api/v1/enrollments/{id}/skip` — skip current day (200)
     - Define DTOs: `EnrollRequest`, `EnrollmentResponse`, `NextDayInfo`
     - _Requirements: 2.1, 2.5, 2.7, 3.4_
-  - [ ] 8.3 Implement `SessionWebSocketHandler` and WebSocket configuration
+  - [x] 8.3 Implement `SessionWebSocketHandler` and WebSocket configuration
     - Configure STOMP endpoint at `/ws/sessions`
     - JWT authentication via query parameter on WebSocket connect
     - Push `SESSION_STATE_UPDATE` messages to `/topic/sessions/{sessionId}` on state changes
     - Push `SESSION_COMPLETED` message on session end
     - _Requirements: 1.8, 4.13_
 
-- [ ] 9. Security and common configuration
-  - [ ] 9.1 Implement `SecurityConfig`
+- [x] 9. Security and common configuration
+  - [x] 9.1 Implement `SecurityConfig`
     - Configure `SecurityFilterChain` — stateless sessions, CSRF disabled, JWT filter
     - Permit WebSocket handshake endpoint
     - All other endpoints require authentication
     - _Requirements: 5.1 (JWT verification)_
-  - [ ] 9.2 Implement `JwtAuthenticationFilter`
+  - [x] 9.2 Implement `JwtAuthenticationFilter`
     - Extract JWT from Authorization header, verify RS256 signature with public key
     - Set SecurityContext with userId and roles
     - _Requirements: 5.1_
-  - [ ] 9.3 Implement common exception handling
+  - [x] 9.3 Implement common exception handling
     - `GlobalExceptionHandler` with `@ControllerAdvice`
     - `SessionNotFoundException`, `SessionAlreadyCompleteException`, `EnrollmentNotFoundException`
     - Map to standard `ErrorResponse` shape (status, error, message, path, timestamp)
     - _Requirements: 1.11, 2.6_
-  - [ ] 9.4 Implement `SessionCompletedEvent` record
+  - [x] 9.4 Implement `SessionCompletedEvent` record
     - Fields: eventId, occurredAt, userId, sessionId, programId, weekNumber, dayNumber, standalone, sectionProgresses, startedAt, completedAt
     - _Requirements: 5.3_
-  - [ ] 9.5 Implement `RabbitMQConfig` and `WebSocketConfig`
+  - [x] 9.5 Implement `RabbitMQConfig` and `WebSocketConfig`
     - RabbitMQ: declare topic exchange, queue binding, Jackson message converter
     - WebSocket: STOMP broker relay configuration, allowed origins
     - _Requirements: 5.3, 4.13_
 
-- [ ] 10. Checkpoint — Ensure backend compiles and Flyway migrations run
+- [x] 10. Checkpoint — Ensure backend compiles and Flyway migrations run
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 11. Frontend types and API client
-  - [ ] 11.1 Create TypeScript types for session and enrollment
+- [x] 11. Frontend types and API client
+  - [x] 11.1 Create TypeScript types for session and enrollment
     - `Session`, `SessionStatus`, `SectionProgress`, `ExerciseLog`, `TimerConfig` types
     - `ProgramEnrollment`, `EnrollmentStatus`, `SkipRecord`, `NextDayInfo` types
     - Request types: `StartSessionRequest`, `CompleteExerciseRequest`, `AdvanceSectionRequest`, `EnrollRequest`
     - Response types: `SessionResponse`, `EnrollmentResponse`
     - _Requirements: 4.2, 4.13_
-  - [ ] 11.2 Create session API client module
+  - [x] 11.2 Create session API client module
     - Functions: `startSession()`, `getSession()`, `getActiveSession()`, `completeExercise()`, `advanceSection()`, `pauseSession()`, `resumeSession()`, `endSession()`
     - Functions: `enrollProgram()`, `getActiveEnrollment()`, `skipDay()`
     - Base URL: `/api/v1/sessions` and `/api/v1/enrollments`
     - Include JWT in Authorization header from auth context
     - _Requirements: 4.2, 4.13_
-  - [ ] 11.3 Create `useSession` hook
+  - [x] 11.3 Create `useSession` hook
     - Fetch session state on mount via REST
     - Establish STOMP WebSocket connection to `/ws/sessions`
     - Subscribe to `/topic/sessions/{sessionId}` for real-time updates
@@ -184,77 +184,77 @@ This plan implements the Workout Session Service as a new Spring Boot microservi
     - Expose session state, loading, error, and mutation functions
     - _Requirements: 4.2, 4.11, 4.13_
 
-- [ ] 12. Frontend Theater Mode components
-  - [ ] 12.1 Implement `TheaterModePage` component
+- [x] 12. Frontend Theater Mode components
+  - [x] 12.1 Implement `TheaterModePage` component
     - Route-level component at `/workout/session/:sessionId`
     - Use `useSession` hook to load and subscribe to session state
     - Render child components: SectionNavigator, TimerDisplay, ExerciseChecklist, RestTimerOverlay, NextUpIndicator, SessionControls
     - Handle loading and error states
     - _Requirements: 4.1, 4.2, 4.11_
-  - [ ] 12.2 Implement `SectionNavigator` component
+  - [x] 12.2 Implement `SectionNavigator` component
     - Display current section name and progress indicator ("Section 2 of 4")
     - Previous/Next buttons with disabled states (prev disabled on first, next disabled on last)
     - Call `advanceSection` on navigation
     - _Requirements: 1.3, 4.3, 4.4_
-  - [ ] 12.3 Implement `TimerDisplay` component
+  - [x] 12.3 Implement `TimerDisplay` component
     - Render countdown timer for AMRAP sections
     - Render stopwatch timer for Strength sections
     - Render interval timer (work/rest cycles) for Tabata and EMOM sections
     - Timer logic runs client-side via `setInterval`
     - _Requirements: 1.2, 4.7_
-  - [ ] 12.4 Implement `ExerciseChecklist` component
+  - [x] 12.4 Implement `ExerciseChecklist` component
     - List exercises in current section with checkbox controls
     - Display prescribed sets/reps per exercise
     - Visual completion state (strikethrough/checkmark)
     - On check: call `completeExercise`, trigger RestTimerOverlay
     - _Requirements: 1.4, 4.5, 4.6_
-  - [ ] 12.5 Implement `RestTimerOverlay` component
+  - [x] 12.5 Implement `RestTimerOverlay` component
     - Countdown overlay showing remaining rest seconds
     - Duration from exercise definition's `restSeconds` field
     - Allow user to adjust duration (local-only, current rest period only)
     - "Skip Rest" button to dismiss early
     - Visual and audible notification on expiry
     - _Requirements: 1.4, 1.5, 1.6, 4.8_
-  - [ ] 12.6 Implement `NextUpIndicator` component
+  - [x] 12.6 Implement `NextUpIndicator` component
     - Show next uncompleted exercise name in current section
     - Show next section name when current section is fully complete
     - Empty when all sections complete
     - _Requirements: 1.7, 4.9_
-  - [ ] 12.7 Implement `SessionControls` component
+  - [x] 12.7 Implement `SessionControls` component
     - "Pause Workout" button — calls pauseSession API
     - "End Workout" button — shows confirmation prompt, then calls endSession API
     - "Leave Workout" button — shows confirmation prompt, persists state, navigates away
     - _Requirements: 1.10, 1.11, 4.12_
-  - [ ] 12.8 Implement `FinishWorkoutPrompt` component
+  - [x] 12.8 Implement `FinishWorkoutPrompt` component
     - Displayed when all exercises in all sections are complete
     - "Finish Workout" action triggers session completion
     - _Requirements: 4.10_
 
-- [ ] 13. Frontend routing and home page integration
-  - [ ] 13.1 Register Theater Mode route
+- [x] 13. Frontend routing and home page integration
+  - [x] 13.1 Register Theater Mode route
     - Add protected route `/workout/session/:sessionId` to React Router config in `App.tsx`
     - Redirect to login if unauthenticated
     - _Requirements: 4.1_
-  - [ ] 13.2 Add "Next Step" indicator to Home page
+  - [x] 13.2 Add "Next Step" indicator to Home page
     - Fetch active enrollment via `getActiveEnrollment()`
     - Display program name, current week/day, workout name, and "Start" action
     - "Start" action calls `startSession` and navigates to Theater Mode route
     - _Requirements: 2.2, 2.5_
-  - [ ] 13.3 Add Vault-initiated workout actions
+  - [x] 13.3 Add Vault-initiated workout actions
     - "Start Standalone" action on single workout day selection
     - Program selection: "Start as Standalone Day" and "Start New Program" options
     - Confirmation prompt when replacing an active program
     - _Requirements: 3.1, 3.3, 3.6_
-  - [ ] 13.4 Add "Resume Session" action
+  - [x] 13.4 Add "Resume Session" action
     - On app load, check for active session via `getActiveSession()`
     - If found, display "Resume Session" prompt that navigates to Theater Mode
     - _Requirements: 1.9_
 
-- [ ] 14. Checkpoint — Ensure frontend compiles and renders
+- [x] 14. Checkpoint — Ensure frontend compiles and renders
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 15. Backend unit tests
-  - [ ] 15.1 Write unit tests for Session domain logic
+- [x] 15. Backend unit tests
+  - [x] 15.1 Write unit tests for Session domain logic
     - Test `completeExercise` — marks exercise, sets completedAt
     - Test `advanceSection` — updates currentSectionIndex
     - Test `pause` — transitions to PAUSED, preserves progress
@@ -263,118 +263,118 @@ This plan implements the Workout Session Service as a new Spring Boot microservi
     - Test `isAllComplete` — true only when all exercises done
     - Test boundary cases: already completed exercise (idempotent), invalid indices
     - _Requirements: 1.4, 1.7, 1.10, 1.11_
-  - [ ] 15.2 Write unit tests for ProgramEnrollment domain logic
+  - [x] 15.2 Write unit tests for ProgramEnrollment domain logic
     - Test `advanceDay` — increments day, handles week rollover, marks COMPLETED at end
     - Test `skipDay` — advances pointer and creates SkipRecord
     - Test `markReplaced` — transitions to REPLACED status
     - _Requirements: 2.1, 2.7, 2.8, 3.4_
-  - [ ] 15.3 Write unit tests for SessionService
+  - [x] 15.3 Write unit tests for SessionService
     - Test startSession — calls WorkoutFetcher, creates session, persists
     - Test completeExercise — loads session, delegates, persists, pushes WebSocket
     - Test endSession — marks complete, publishes event, advances day for program sessions
     - Test endSession standalone — does NOT advance day
     - Test ownership validation — returns 403 for wrong user
     - _Requirements: 1.1, 1.4, 1.11, 2.1, 2.4_
-  - [ ] 15.4 Write unit tests for ProgressionService
+  - [x] 15.4 Write unit tests for ProgressionService
     - Test enrollProgram — replaces existing, creates new at day 1
     - Test advanceDay — normal advance and week rollover
     - Test skipDay — advance + SkipRecord creation
     - Test getActiveEnrollment — returns enrollment with NextDayInfo
     - _Requirements: 2.1, 2.7, 2.8, 3.4, 3.7_
 
-- [ ] 16. Backend property-based tests (jqwik)
-  - [ ]* 16.1 Write property test for session initialization (Property 1)
+- [x] 16. Backend property-based tests (jqwik)
+  - [x] 16.1 Write property test for session initialization (Property 1)
     - **Property 1: Session initialization produces valid state**
     - Generate random workout definitions (1–5 sections, 1–8 exercises each)
     - Assert: status = IN_PROGRESS, currentSectionIndex = 0, sectionProgresses count matches sections, all exercises not completed
     - **Validates: Requirements 1.1**
-  - [ ]* 16.2 Write property test for exercise completion (Property 2)
+  - [x] 16.2 Write property test for exercise completion (Property 2)
     - **Property 2: Exercise completion records and returns rest duration**
     - Generate random IN_PROGRESS sessions with valid (sectionIndex, exerciseIndex) pairs
     - Assert: exercise marked completed with non-null completedAt, rest duration equals exercise's restSeconds
     - **Validates: Requirements 1.4**
-  - [ ]* 16.3 Write property test for next-up computation (Property 3)
+  - [x] 16.3 Write property test for next-up computation (Property 3)
     - **Property 3: Next-up computation correctness**
     - Generate random session states with varying completion patterns
     - Assert: next-up is first uncompleted exercise in current section, or next section name, or empty
     - **Validates: Requirements 1.7, 4.9**
-  - [ ]* 16.4 Write property test for pause preservation (Property 4)
+  - [x] 16.4 Write property test for pause preservation (Property 4)
     - **Property 4: Pause preserves session state**
     - Generate random IN_PROGRESS sessions with varying progress
     - Assert: after pause, status = PAUSED, all sectionProgresses unchanged
     - **Validates: Requirements 1.10**
-  - [ ]* 16.5 Write property test for end session preservation (Property 5)
+  - [x] 16.5 Write property test for end session preservation (Property 5)
     - **Property 5: End session preserves logged progress**
     - Generate random IN_PROGRESS or PAUSED sessions
     - Assert: after end, status = COMPLETED, completedAt non-null, all progress preserved
     - **Validates: Requirements 1.11**
-  - [ ]* 16.6 Write property test for day pointer advancement (Property 6)
+  - [x] 16.6 Write property test for day pointer advancement (Property 6)
     - **Property 6: Day pointer advancement**
     - Generate random enrollments at non-final positions
     - Assert: both complete and skip advance to same next position — (W, D+1) or (W+1, 1)
     - **Validates: Requirements 2.1, 2.7**
-  - [ ]* 16.7 Write property test for skip records (Property 7)
+  - [x] 16.7 Write property test for skip records (Property 7)
     - **Property 7: Skip records creation**
     - Generate random enrollments at any position
     - Assert: skip creates SkipRecord with correct week, day, and non-null skippedAt
     - **Validates: Requirements 2.8**
-  - [ ]* 16.8 Write property test for standalone session invariant (Property 8)
+  - [x] 16.8 Write property test for standalone session invariant (Property 8)
     - **Property 8: Standalone session enrollment invariant**
     - Generate random active enrollments and standalone session starts
     - Assert: enrollment currentWeek, currentDay, and status unchanged after standalone session
     - **Validates: Requirements 2.4, 3.2, 3.5**
-  - [ ]* 16.9 Write property test for enrollment replacement (Property 9)
+  - [x] 16.9 Write property test for enrollment replacement (Property 9)
     - **Property 9: Program enrollment replacement**
     - Generate users with 0 or 1 active enrollment, enroll in new program
     - Assert: exactly one ACTIVE enrollment at (week 1, day 1), previous marked REPLACED
     - **Validates: Requirements 3.4, 3.7**
-  - [ ]* 16.10 Write property test for section navigator disabled state (Property 10)
+  - [x] 16.10 Write property test for section navigator disabled state (Property 10)
     - **Property 10: Section navigator disabled state**
     - Generate random section counts (1–10) and current indices
     - Assert: prev disabled iff index = 0, next disabled iff index = N-1
     - **Validates: Requirements 4.4**
-  - [ ]* 16.11 Write property test for all-complete predicate (Property 11)
+  - [x] 16.11 Write property test for all-complete predicate (Property 11)
     - **Property 11: All-complete predicate**
     - Generate random session states with varying completion
     - Assert: allComplete = true iff every exercise in every section has completed = true
     - **Validates: Requirements 4.10**
 
-- [ ] 17. Backend integration tests
-  - [ ]* 17.1 Write integration tests for session lifecycle
+- [x] 17. Backend integration tests
+  - [x] 17.1 Write integration tests for session lifecycle
     - Test full HTTP cycle: start session → complete exercises → pause → resume → end
     - Verify Flyway migrations run on startup
     - Verify session state persisted and retrievable
     - Use WireMock to stub Workout Creator Service responses
     - _Requirements: 1.1, 1.4, 1.8, 1.10, 1.11, 5.1, 5.5_
-  - [ ]* 17.2 Write integration tests for progression lifecycle
+  - [x] 17.2 Write integration tests for progression lifecycle
     - Test: enroll → advance day → skip day → complete program
     - Verify enrollment state transitions
     - _Requirements: 2.1, 2.3, 2.7, 2.8_
-  - [ ]* 17.3 Write integration tests for RabbitMQ event publishing
+  - [x] 17.3 Write integration tests for RabbitMQ event publishing
     - Verify SessionCompleted event arrives on queue after session end
     - Verify event payload matches contract (eventId, occurredAt, userId, sessionId, etc.)
     - _Requirements: 5.3_
-  - [ ]* 17.4 Write integration tests for WebSocket session updates
+  - [x] 17.4 Write integration tests for WebSocket session updates
     - Connect STOMP client, subscribe to session topic
     - Complete an exercise, verify SESSION_STATE_UPDATE message received
     - End session, verify SESSION_COMPLETED message received
     - _Requirements: 4.13_
 
-- [ ] 18. Frontend tests
-  - [ ]* 18.1 Write unit tests for Theater Mode components
+- [x] 18. Frontend tests
+  - [x] 18.1 Write unit tests for Theater Mode components
     - Test `SectionNavigator` — disabled button states, navigation callbacks
     - Test `ExerciseChecklist` — checkbox interaction, visual completion
     - Test `RestTimerOverlay` — countdown display, skip button, expiry notification
     - Test `NextUpIndicator` — correct text based on session state
     - Test `TimerDisplay` — correct timer type per section type
     - _Requirements: 4.3, 4.4, 4.5, 4.7, 4.8, 4.9_
-  - [ ]* 18.2 Write unit tests for `useSession` hook
+  - [x] 18.2 Write unit tests for `useSession` hook
     - Test REST fetch on mount
     - Test WebSocket subscription and message handling
     - Test optimistic updates on exercise checkoff
     - _Requirements: 4.2, 4.13_
 
-- [ ] 19. Final checkpoint — Ensure all tests pass
+- [x] 19. Final checkpoint — Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 ## Notes

@@ -5,7 +5,7 @@ metadata:
   namespace: dev
 data:
   SPRING_PROFILES_ACTIVE: prod
-  DATABASE_URL: jdbc:postgresql://postgres:5432/auth_service
+  DATABASE_URL: jdbc:postgresql://postgres:5432/hybridstrength_dev
   SERVER_PORT: "8081"
 ---
 apiVersion: v1

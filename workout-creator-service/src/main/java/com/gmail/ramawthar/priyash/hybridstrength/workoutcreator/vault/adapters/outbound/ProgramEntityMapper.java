@@ -107,7 +107,9 @@ public final class ProgramEntityMapper {
      * Rebuilds the child entity tree (weeks, days, sections, exercises, warm-cool entries)
      * on an existing {@link ProgramJpaEntity} from a {@link Program} domain object.
      * Preserves the entity's id, ownerUserId, contentSource, and createdAt.
-     * Callers should clear existing weeks before calling this method.
+     * <p>
+     * Callers MUST clear existing weeks and flush before calling this method
+     * to avoid unique constraint violations on (program_id, week_number).
      */
     public static void rebuildEntityContent(ProgramJpaEntity entity, Program program) {
         entity.setName(program.getName());
@@ -119,7 +121,6 @@ public final class ProgramEntityMapper {
         for (Week week : program.getWeeks()) {
             weekEntities.add(toWeekEntity(week, entity));
         }
-        entity.getWeeks().clear();
         entity.getWeeks().addAll(weekEntities);
     }
 

@@ -1,0 +1,54 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 15
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  jpa:
+    show-sql: false
+  flyway:
+    validate-on-migrate: false
+    out-of-order: true
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+
+jwt:
+  public-key-pem: |
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwXWJKWsQX+a3oEd4Q1LM
+    GcQYhld3V7qZFXDAIJRvqHbHIexpinO0FS8+kqYM0A5MYk0DjWNDZS7/CzpbFFl7
+    Zd/CKV65aW7ErUH/MQ3XkrV3bJb7clR743r0sku3/yILMMZ5df/hEVoPCnt6xI4Y
+    t/dDhA+k3/HQ0vosxWSkicW6SqNFGYHyfXgFubQb/t92cu4BkXLjgoiUydvSoNLC
+    GkAsyuVRl5UcPR7fGmzDIzmdE5233Ix4jUMaD2iT7kZS2XVtx4KuvmdUKiz26zlC
+    Qz22YeK8mjsef1L6KrYzTJhMDxDo8OoVrQrp3dQQ1i10JoF9PtDirFNMeNA3F4jI
+    2wIDAQAB
+    -----END PUBLIC KEY-----
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+  health:
+    rabbit:
+      enabled: false
+
+workout-creator-service:
+  base-url: ${WORKOUT_CREATOR_SERVICE_BASE_URL:http://localhost:8082}
+
+logging:
+  level:
+    com.gmail.ramawthar.priyash.hybridstrength.workoutsession: INFO
+    org.springframework.security: WARN
