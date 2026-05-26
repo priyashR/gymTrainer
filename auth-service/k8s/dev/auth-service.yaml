@@ -37,8 +37,8 @@ spec:
     spec:
       containers:
         - name: auth-service
-          image: auth-service:dev
-          imagePullPolicy: Never
+          image: priyash/gym-app:auth-service-latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8081
           envFrom:

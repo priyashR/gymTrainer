@@ -47,8 +47,8 @@ spec:
     spec:
       containers:
         - name: workout-creator-service
-          image: workout-creator-service:dev
-          imagePullPolicy: Never
+          image: priyash/gym-app:workout-creator-service-latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8082
           envFrom:

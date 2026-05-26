@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workout-coach-ui
+  namespace: dev
+  labels:
+    app: workout-coach-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: workout-coach-ui
+  template:
+    metadata:
+      labels:
+        app: workout-coach-ui
+    spec:
+      containers:
+        - name: workout-coach-ui
+          image: priyash/gym-app:workout-coach-ui-latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: workout-coach-ui
+  namespace: dev
+spec:
+  selector:
+    app: workout-coach-ui
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
+  type: NodePort

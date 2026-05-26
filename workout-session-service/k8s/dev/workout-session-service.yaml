@@ -52,8 +52,8 @@ spec:
     spec:
       containers:
         - name: workout-session-service
-          image: workout-session-service:dev
-          imagePullPolicy: Never
+          image: priyash/gym-app:workout-session-service-latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8083
           envFrom:
