@@ -1,0 +1,362 @@
+# Implementation Plan: Workout Session Service — Performance Tracking
+
+## Overview
+
+This plan extends the existing workout-session-service to capture live performance data during active sessions. It adds strength set logging (weight, reps, RPE), CrossFit score logging (rounds, additional reps, time), session duration tracking, and enriches the SessionCompleted event with all performance data. Tasks are ordered by dependency: domain objects first, then backend ports/services, then REST endpoints, then database migration, then frontend types/API, then frontend components, then tests.
+
+## Tasks
+
+- [ ] 1. New domain objects and enum extension
+  - [ ] 1.1 Create `SetLog` value object
+    - Create `SetLog.java` in `session/domain/` with fields: setNumber (int, 1-based), weight (BigDecimal, positive), repetitions (int, positive), rpe (BigDecimal, nullable, 1.0–10.0 in 0.5 increments), loggedAt (Instant)
+    - Validate in constructor: weight > 0, repetitions > 0, rpe == null OR (rpe >= 1.0 AND rpe <= 10.0 AND rpe % 0.5 == 0)
+    - _Requirements: 1.1, 1.7, 1.8_
+  - [ ] 1.2 Create `CrossFitScore` value object
+    - Create `CrossFitScore.java` in `session/domain/` with fields: rounds (int, non-negative), additionalReps (int, non-negative), totalTimeSeconds (Integer, nullable, positive when present), loggedAt (Instant)
+    - Validate in constructor: rounds >= 0, additionalReps >= 0, totalTimeSeconds == null OR totalTimeSeconds > 0
+    - _Requirements: 2.1, 2.2, 2.3, 2.6_
+  - [ ] 1.3 Add `FOR_TIME` to `SectionType` enum
+    - Add `FOR_TIME` constant to the existing `SectionType.java`
+    - _Requirements: 2.3_
+  - [ ] 1.4 Extend `ExerciseLog` with set logs
+    - Add `List<SetLog> setLogs` field (ordered chronologically)
+    - Add constructor overload accepting setLogs list for reconstitution
+    - Add `addSetLog(SetLog setLog)` method that appends to the list
+    - Add `getSetLogs()` getter returning unmodifiable list
+    - _Requirements: 1.2, 1.6_
+  - [ ] 1.5 Extend `SectionProgress` with CrossFit score and round counter
+    - Add `CrossFitScore crossFitScore` field (nullable, one per section)
+    - Add `int roundCount` field (AMRAP round counter state, default 0)
+    - Add `setCrossFitScore(CrossFitScore score)` method
+    - Add `getCrossFitScore()` getter
+    - Add `setRoundCount(int count)` and `getRoundCount()` methods
+    - Add constructor overload accepting crossFitScore and roundCount for reconstitution
+    - _Requirements: 2.4, 2.7, 3.6_
+  - [ ] 1.6 Extend `Session` with timing and performance data fields
+    - Add `long totalPausedSeconds` field (cumulative seconds in PAUSED state)
+    - Add `Integer durationSeconds` field (computed on end, nullable until completed)
+    - Modify resume logic in `SessionService` to accumulate paused duration into totalPausedSeconds
+    - Add `computeDuration(Instant endTime)` method: durationSeconds = (endTime - startedAt).seconds - totalPausedSeconds
+    - Add `hasPerformanceData()` method: returns true if any ExerciseLog has non-empty setLogs OR any SectionProgress has non-null crossFitScore
+    - Add totalPausedSeconds and durationSeconds to Builder
+    - _Requirements: 7.1, 7.2, 7.3, 5.1_
+
+- [ ] 2. Checkpoint — Ensure domain objects compile
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 3. New inbound ports and service implementation
+  - [ ] 3.1 Create `LogSetUseCase` inbound port
+    - Define interface with method: `Session logSet(UUID sessionId, String userId, int sectionIndex, int exerciseIndex, BigDecimal weight, int repetitions, BigDecimal rpe)`
+    - _Requirements: 1.1, 1.2_
+  - [ ] 3.2 Create `LogCrossFitScoreUseCase` inbound port
+    - Define interface with method: `Session logCrossFitScore(UUID sessionId, String userId, int sectionIndex, int rounds, int additionalReps, Integer totalTimeSeconds)`
+    - _Requirements: 2.1, 2.2, 2.3_
+  - [ ] 3.3 Implement `LogSetUseCase` in `SessionService`
+    - Load session, verify ownership, validate session not COMPLETED (throw 409 if so)
+    - Validate section at sectionIndex is STRENGTH type (throw 400 if not)
+    - Create SetLog with next setNumber (existing setLogs.size() + 1), weight, repetitions, rpe, Instant.now()
+    - Call exerciseLog.addSetLog(setLog), persist session, push WebSocket update
+    - _Requirements: 1.1, 1.2, 1.3, 1.6, 1.7, 1.8_
+  - [ ] 3.4 Implement `LogCrossFitScoreUseCase` in `SessionService`
+    - Load session, verify ownership, validate session not COMPLETED (throw 409 if so)
+    - Validate section at sectionIndex is AMRAP, EMOM, or FOR_TIME (throw 400 if not)
+    - Validate FOR_TIME requires totalTimeSeconds > 0 (throw 400 if missing/invalid)
+    - Create CrossFitScore, call sectionProgress.setCrossFitScore(score), persist, push WebSocket update
+    - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7_
+  - [ ] 3.5 Modify `SessionService.resumeSession()` to accumulate paused duration
+    - When resuming: compute pausedDuration = now - session.getPausedAt(), add to totalPausedSeconds
+    - Rebuild session with updated totalPausedSeconds via Builder
+    - _Requirements: 7.3_
+  - [ ] 3.6 Modify `SessionService.endSession()` to compute duration and enrich event
+    - After calling session.end(now), compute durationSeconds via session.computeDuration(now)
+    - Add durationSeconds to the SessionCompletedEvent constructor call
+    - _Requirements: 7.2, 7.3, 7.6, 4.1, 4.2, 4.3_
+
+- [ ] 4. Database migration
+  - [ ] 4.1 Create `V203__add_session_timing_columns.sql` Flyway migration
+    - `ALTER TABLE sessions ADD COLUMN total_paused_seconds BIGINT NOT NULL DEFAULT 0;`
+    - `ALTER TABLE sessions ADD COLUMN duration_seconds INTEGER;`
+    - _Requirements: 7.3_
+
+- [ ] 5. REST endpoints and DTOs
+  - [ ] 5.1 Create `LogSetRequest` DTO
+    - Record with fields: sectionIndex (int, @NotNull), exerciseIndex (int, @NotNull), weight (BigDecimal, @NotNull @DecimalMin("0.01")), repetitions (int, @NotNull @Min(1)), rpe (BigDecimal, nullable, @DecimalMin("1.0") @DecimalMax("10.0"))
+    - _Requirements: 1.1, 1.7, 1.8_
+  - [ ] 5.2 Create `LogCrossFitScoreRequest` DTO
+    - Record with fields: sectionIndex (int, @NotNull), rounds (int, @NotNull @Min(0)), additionalReps (int, @NotNull @Min(0)), totalTimeSeconds (Integer, nullable, @Min(1))
+    - _Requirements: 2.1, 2.2, 2.3, 2.6_
+  - [ ] 5.3 Create `SetLogResponse` and `CrossFitScoreResponse` DTOs
+    - `SetLogResponse`: setNumber, weight, repetitions, rpe (nullable), loggedAt
+    - `CrossFitScoreResponse`: rounds, additionalReps, totalTimeSeconds (nullable), loggedAt
+    - _Requirements: 1.1, 2.1_
+  - [ ] 5.4 Extend `ExerciseLogResponse` with setLogs field
+    - Add `List<SetLogResponse> setLogs` field (empty list if no sets logged)
+    - Update the mapping from domain ExerciseLog to include setLogs
+    - _Requirements: 1.2, 4.4_
+  - [ ] 5.5 Extend `SectionProgressResponse` with crossFitScore and roundCount fields
+    - Add `CrossFitScoreResponse crossFitScore` (nullable) and `int roundCount` fields
+    - Update the mapping from domain SectionProgress
+    - _Requirements: 2.4, 3.6_
+  - [ ] 5.6 Extend `SessionResponse` with durationSeconds field
+    - Add `Integer durationSeconds` field (null until session ends)
+    - Update the mapping from domain Session
+    - _Requirements: 7.3, 7.5_
+  - [ ] 5.7 Add POST `/api/v1/sessions/{id}/sets` endpoint to `SessionController`
+    - Accept `@Valid @RequestBody LogSetRequest`, call logSet use case, return 200 + SessionResponse
+    - _Requirements: 1.1, 1.5_
+  - [ ] 5.8 Add POST `/api/v1/sessions/{id}/scores` endpoint to `SessionController`
+    - Accept `@Valid @RequestBody LogCrossFitScoreRequest`, call logCrossFitScore use case, return 200 + SessionResponse
+    - _Requirements: 2.1, 2.8_
+  - [ ] 5.9 Modify `SessionCompletedEvent` to include durationSeconds
+    - Add `Integer durationSeconds` field to the record
+    - Existing sectionProgresses field already carries setLogs and crossFitScore via Jackson serialization
+    - _Requirements: 4.1, 4.2, 4.3, 7.6_
+
+- [ ] 6. Checkpoint — Ensure backend compiles and Flyway migration runs
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 7. Frontend types and API client
+  - [ ] 7.1 Extend frontend TypeScript types
+    - Add `FOR_TIME` to `SectionType` union
+    - Add `SetLog` interface: setNumber, weight, repetitions, rpe (number | null), loggedAt (string)
+    - Add `CrossFitScore` interface: rounds, additionalReps, totalTimeSeconds (number | null), loggedAt (string)
+    - Extend `ExerciseLog` with `setLogs: SetLog[]`
+    - Extend `SectionProgress` with `crossFitScore: CrossFitScore | null` and `roundCount: number`
+    - Extend `SessionResponse` with `durationSeconds: number | null`
+    - Add `LogSetRequest` interface: sectionIndex, exerciseIndex, weight, repetitions, rpe (number | null)
+    - Add `LogCrossFitScoreRequest` interface: sectionIndex, rounds, additionalReps, totalTimeSeconds (number | null)
+    - _Requirements: 1.4, 2.8, 7.4_
+  - [ ] 7.2 Add API client functions for performance tracking
+    - `logSet(sessionId: string, request: LogSetRequest): Promise<SessionResponse>` — POST `/sessions/{id}/sets`
+    - `logCrossFitScore(sessionId: string, request: LogCrossFitScoreRequest): Promise<SessionResponse>` — POST `/sessions/{id}/scores`
+    - _Requirements: 1.5, 2.8_
+  - [ ] 7.3 Extend `useSession` hook with performance tracking mutations
+    - Add `logSet` and `logCrossFitScore` mutation functions
+    - Expose them alongside existing completeExercise, pauseSession, etc.
+    - _Requirements: 1.5, 2.8_
+
+- [ ] 8. Frontend components — Performance logging
+  - [ ] 8.1 Create `SetLogForm` component
+    - Input fields for weight (number), repetitions (number), RPE (optional select with 0.5 increments from 1.0 to 10.0)
+    - Submit button calls `logSet` via useSession hook
+    - Client-side validation: weight > 0, reps > 0
+    - Disabled state when session is PAUSED or COMPLETED
+    - _Requirements: 1.4, 1.5, 1.7_
+  - [ ] 8.2 Create `SetLogList` component
+    - Displays logged sets for an exercise in a compact list (set #, weight, reps, RPE)
+    - Renders empty state when no sets logged
+    - _Requirements: 1.6_
+  - [ ] 8.3 Create `RoundCounter` component
+    - Large tap target that increments round count on tap
+    - Displays current round count as a large number
+    - Decrement button (floor at zero)
+    - Persists count to session state on each change (calls API or updates local state synced to backend)
+    - _Requirements: 3.1, 3.2, 3.3, 3.6_
+  - [ ] 8.4 Create `CrossFitScoreForm` component
+    - Fields adapt to section type: rounds + additional reps for AMRAP/EMOM, plus total time for FOR_TIME
+    - Submit button calls `logCrossFitScore` via useSession hook
+    - Client-side validation: rounds >= 0, additionalReps >= 0, totalTimeSeconds > 0 for FOR_TIME
+    - _Requirements: 2.8, 3.4, 3.5_
+  - [ ] 8.5 Create `ExercisePrescription` component
+    - Displays prescribed sets, reps, weight, and notes from workout snapshot
+    - Hides fields that are absent from the exercise definition
+    - _Requirements: 6.1, 6.2, 6.3, 6.6_
+  - [ ] 8.6 Create `SectionHeader` component
+    - Displays section name, time cap (for AMRAP/FOR_TIME), and format descriptor
+    - _Requirements: 6.4, 6.5_
+  - [ ] 8.7 Create `ElapsedTimer` component
+    - Running elapsed time indicator excluding paused time
+    - Uses client-side interval, pauses when session is PAUSED
+    - Displays in human-readable format (e.g., "12:34")
+    - _Requirements: 7.4_
+  - [ ] 8.8 Create `EmptySessionGuard` component
+    - Confirmation prompt shown when user attempts to end session with no performance data
+    - Checks hasPerformanceData equivalent on frontend (any setLogs or crossFitScores present)
+    - Confirm proceeds with end, Cancel returns to session
+    - _Requirements: 5.1, 5.2, 5.3, 5.4_
+
+- [ ] 9. Frontend integration — Modify existing components
+  - [ ] 9.1 Modify `ExerciseChecklist` to integrate `SetLogForm`, `SetLogList`, and `ExercisePrescription`
+    - For STRENGTH sections: render ExercisePrescription above each exercise, SetLogForm below, SetLogList showing logged sets
+    - Pass logSet callback and exercise setLogs data
+    - _Requirements: 1.4, 6.1_
+  - [ ] 9.2 Modify `SessionControls` to integrate `EmptySessionGuard`
+    - Before calling onEnd, check if session has performance data
+    - If no data, show EmptySessionGuard prompt instead of the standard end confirmation
+    - _Requirements: 5.1, 5.3, 5.4_
+  - [ ] 9.3 Modify `TheaterModePage` to add `ElapsedTimer`, `RoundCounter`, `SectionHeader`, and `CrossFitScoreForm`
+    - Add ElapsedTimer to the page header area
+    - Show RoundCounter when current section is AMRAP
+    - Show SectionHeader with time cap and format descriptor
+    - Show CrossFitScoreForm when section is AMRAP, EMOM, or FOR_TIME (on section completion or timer expiry)
+    - _Requirements: 3.1, 6.4, 6.5, 7.4_
+
+- [ ] 10. Checkpoint — Ensure frontend compiles and renders
+  - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 11. Backend unit tests
+  - [ ] 11.1 Write unit tests for `SetLog` domain object
+    - Test valid construction with all fields
+    - Test valid construction with null RPE
+    - Test rejection of weight <= 0
+    - Test rejection of repetitions <= 0
+    - Test rejection of RPE outside 1.0–10.0
+    - Test rejection of RPE not in 0.5 increments (e.g., 7.3)
+    - _Requirements: 1.1, 1.7, 1.8_
+  - [ ] 11.2 Write unit tests for `CrossFitScore` domain object
+    - Test valid construction for AMRAP (rounds + additionalReps, no time)
+    - Test valid construction for FOR_TIME (rounds + additionalReps + totalTimeSeconds)
+    - Test rejection of negative rounds
+    - Test rejection of negative additionalReps
+    - Test rejection of totalTimeSeconds <= 0
+    - _Requirements: 2.1, 2.3, 2.6_
+  - [ ] 11.3 Write unit tests for `ExerciseLog.addSetLog()`
+    - Test appending multiple sets maintains chronological order
+    - Test setNumber assignment is sequential
+    - _Requirements: 1.6_
+  - [ ] 11.4 Write unit tests for `SectionProgress` CrossFit score and round counter
+    - Test setCrossFitScore overwrites previous score
+    - Test roundCount increment/decrement
+    - _Requirements: 2.7, 3.6_
+  - [ ] 11.5 Write unit tests for `Session.hasPerformanceData()`
+    - Test returns false when no sets and no scores
+    - Test returns true when at least one set exists
+    - Test returns true when at least one score exists
+    - _Requirements: 5.1, 5.4_
+  - [ ] 11.6 Write unit tests for `Session` duration computation
+    - Test duration with no pauses: endTime - startTime
+    - Test duration with one pause/resume cycle
+    - Test duration with multiple pause/resume cycles
+    - _Requirements: 7.3_
+  - [ ] 11.7 Write unit tests for `SessionService.logSet()`
+    - Test happy path: appends set, persists, returns updated session
+    - Test rejection on completed session (409)
+    - Test rejection on non-STRENGTH section (400)
+    - Test ownership validation (403)
+    - _Requirements: 1.1, 1.2, 1.7_
+  - [ ] 11.8 Write unit tests for `SessionService.logCrossFitScore()`
+    - Test happy path for AMRAP section
+    - Test happy path for FOR_TIME section with totalTimeSeconds
+    - Test rejection on non-scored section (400)
+    - Test rejection on completed session (409)
+    - Test overwrite semantics (second score replaces first)
+    - _Requirements: 2.1, 2.3, 2.6, 2.7_
+  - [ ] 11.9 Write unit tests for `SessionService.endSession()` enriched event
+    - Test event includes durationSeconds
+    - Test event sectionProgresses contain setLogs and crossFitScore data
+    - Test event includes empty performance fields for exercises/sections with no data
+    - _Requirements: 4.1, 4.2, 4.3, 4.4, 7.6_
+
+- [ ] 12. Backend property-based tests (jqwik)
+  - [ ]* 12.1 Write property test for valid set log persistence (Property 1)
+    - **Property 1: Valid set log persistence and association**
+    - Generate random valid set log data (weight 0.01–500, reps 1–100, RPE null or 1.0–10.0 in 0.5 steps)
+    - Assert: SetLog appended to correct ExerciseLog with correct values and non-null loggedAt
+    - **Validates: Requirements 1.1, 1.2, 1.3**
+  - [ ]* 12.2 Write property test for multiple sets chronological order (Property 2)
+    - **Property 2: Multiple sets stored in chronological order**
+    - Generate N valid set logs (N = 1–20) submitted to the same exercise
+    - Assert: ExerciseLog contains exactly N entries with setNumbers 1..N, loggedAt non-decreasing
+    - **Validates: Requirements 1.6**
+  - [ ]* 12.3 Write property test for invalid set log rejection (Property 3)
+    - **Property 3: Invalid set log rejection preserves state**
+    - Generate invalid set log data (weight <= 0, reps <= 0, or RPE outside valid range/not 0.5 increment)
+    - Assert: exception thrown, session state unchanged (existing SetLog entries preserved)
+    - **Validates: Requirements 1.7**
+  - [ ]* 12.4 Write property test for valid CrossFit score persistence (Property 4)
+    - **Property 4: Valid CrossFit score persistence and association**
+    - Generate random valid CrossFitScore data for AMRAP/EMOM/FOR_TIME sections
+    - Assert: CrossFitScore set on correct SectionProgress with correct values and non-null loggedAt
+    - **Validates: Requirements 2.1, 2.2, 2.3, 2.4, 2.5**
+  - [ ]* 12.5 Write property test for invalid CrossFit score rejection (Property 5)
+    - **Property 5: Invalid CrossFit score rejection**
+    - Generate invalid CrossFitScore data (negative rounds, negative additionalReps, or non-positive totalTimeSeconds for FOR_TIME)
+    - Assert: exception thrown, session state unchanged
+    - **Validates: Requirements 2.6**
+  - [ ]* 12.6 Write property test for CrossFit score overwrite semantics (Property 6)
+    - **Property 6: CrossFit score overwrite semantics**
+    - Generate two valid scores submitted to the same section
+    - Assert: section contains exactly one CrossFitScore (the latest), not a list
+    - **Validates: Requirements 2.7**
+  - [ ]* 12.7 Write property test for round counter floor at zero (Property 7)
+    - **Property 7: Round counter increment/decrement with floor at zero**
+    - Generate random sequences of increment/decrement actions
+    - Assert: resulting count = max(0, total_increments - total_decrements), never negative
+    - **Validates: Requirements 3.1, 3.3**
+  - [ ]* 12.8 Write property test for SessionCompleted event completeness (Property 8)
+    - **Property 8: SessionCompleted event contains all performance data and timing**
+    - Generate random sessions with varying performance data (some exercises with sets, some without; some sections with scores, some without)
+    - Assert: event contains all fields, all SetLog entries, all CrossFitScores (or null), durationSeconds, no sections/exercises omitted
+    - **Validates: Requirements 4.1, 4.2, 4.3, 4.4, 7.6**
+  - [ ]* 12.9 Write property test for hasPerformanceData predicate (Property 9)
+    - **Property 9: Has-performance-data predicate correctness**
+    - Generate random session states with varying combinations of empty/non-empty setLogs and null/non-null crossFitScores
+    - Assert: hasPerformanceData() == true iff at least one ExerciseLog has non-empty setLogs OR at least one SectionProgress has non-null crossFitScore
+    - **Validates: Requirements 5.1, 5.4**
+  - [ ]* 12.10 Write property test for duration computation (Property 10)
+    - **Property 10: Duration computation excludes paused time**
+    - Generate random session timelines (start, 0–5 pause/resume pairs, end) with realistic timestamps
+    - Assert: durationSeconds = (endTime - startTime) - sum(resumeTime - pauseTime), always non-negative
+    - **Validates: Requirements 7.3**
+
+- [ ] 13. Backend integration tests
+  - [ ]* 13.1 Write integration tests for set logging endpoint
+    - POST `/api/v1/sessions/{id}/sets` — happy path, validation errors (400), wrong section type (400), completed session (409)
+    - Verify JSONB round-trip: log sets → GET session → verify setLogs present in response
+    - _Requirements: 1.1, 1.5, 1.7_
+  - [ ]* 13.2 Write integration tests for CrossFit score endpoint
+    - POST `/api/v1/sessions/{id}/scores` — happy path per section type (AMRAP, EMOM, FOR_TIME), overwrite, validation errors
+    - Verify JSONB round-trip: log score → GET session → verify crossFitScore present
+    - _Requirements: 2.1, 2.3, 2.7_
+  - [ ]* 13.3 Write integration tests for enriched SessionCompleted event
+    - End session with performance data → verify event on RabbitMQ queue includes setLogs, crossFitScore, durationSeconds
+    - End session without performance data → verify event includes empty performance fields
+    - _Requirements: 4.1, 4.2, 4.3, 4.4, 7.6_
+  - [ ]* 13.4 Write integration tests for duration computation end-to-end
+    - Start → pause → resume → end → verify durationSeconds excludes paused time
+    - Start → end (no pauses) → verify durationSeconds = completedAt - startedAt
+    - _Requirements: 7.3_
+
+- [ ] 14. Frontend tests
+  - [ ]* 14.1 Write unit tests for `SetLogForm` component
+    - Test input validation (weight > 0, reps > 0)
+    - Test submission calls logSet with correct data
+    - Test disabled state when session is PAUSED/COMPLETED
+    - _Requirements: 1.4, 1.5, 1.7_
+  - [ ]* 14.2 Write unit tests for `SetLogList` component
+    - Test renders logged sets with correct set number, weight, reps, RPE
+    - Test empty state rendering
+    - _Requirements: 1.6_
+  - [ ]* 14.3 Write unit tests for `RoundCounter` component
+    - Test increment on tap
+    - Test decrement with floor at zero
+    - Test display of current count
+    - _Requirements: 3.1, 3.2, 3.3_
+  - [ ]* 14.4 Write unit tests for `CrossFitScoreForm` component
+    - Test appropriate fields per section type (AMRAP vs FOR_TIME)
+    - Test validation (non-negative rounds/reps, positive time for FOR_TIME)
+    - Test submission calls logCrossFitScore
+    - _Requirements: 2.8, 3.4, 3.5_
+  - [ ]* 14.5 Write unit tests for `ElapsedTimer` component
+    - Test elapsed time computation excluding paused time
+    - Test timer pauses when session is PAUSED
+    - _Requirements: 7.4_
+  - [ ]* 14.6 Write unit tests for `EmptySessionGuard` component
+    - Test prompt shown when no performance data
+    - Test prompt not shown when performance data exists
+    - Test confirm proceeds with end, cancel returns to session
+    - _Requirements: 5.1, 5.2, 5.3, 5.4_
+
+- [ ] 15. Final checkpoint — Ensure all tests pass
+  - Ensure all tests pass, ask the user if questions arise.
+
+## Notes
+
+- Tasks marked with `*` are optional and can be skipped for faster MVP
+- Each task references specific requirements for traceability
+- Checkpoints ensure incremental validation
+- Property tests validate the 10 universal correctness properties from the design document
+- Unit tests validate specific examples and edge cases
+- The backend is implemented first (tasks 1–6) because the frontend depends on the API contracts
+- No schema change needed for JSONB `section_progresses` column — SetLog and CrossFitScore are serialized by Jackson automatically
+- The only Flyway migration adds `total_paused_seconds` and `duration_seconds` columns to the `sessions` table

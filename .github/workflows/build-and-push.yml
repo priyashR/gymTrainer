@@ -54,7 +54,7 @@ jobs:
           push: true
           tags: |
             priyash/gym-app:auth-service-latest
-            priyash/gym-app:auth-service-${{ github.sha }}
+#             priyash/gym-app:auth-service-${{ github.sha }}
 
       - name: Build and push workout-creator-service
         uses: docker/build-push-action@v6
@@ -63,7 +63,7 @@ jobs:
           push: true
           tags: |
             priyash/gym-app:workout-creator-service-latest
-            priyash/gym-app:workout-creator-service-${{ github.sha }}
+#             priyash/gym-app:workout-creator-service-${{ github.sha }}
 
       - name: Build and push workout-session-service
         uses: docker/build-push-action@v6
@@ -72,7 +72,7 @@ jobs:
           push: true
           tags: |
             priyash/gym-app:workout-session-service-latest
-            priyash/gym-app:workout-session-service-${{ github.sha }}
+#             priyash/gym-app:workout-session-service-${{ github.sha }}
 
       - name: Build and push workout-coach-ui
         uses: docker/build-push-action@v6
@@ -81,4 +81,4 @@ jobs:
           push: true
           tags: |
             priyash/gym-app:workout-coach-ui-latest
-            priyash/gym-app:workout-coach-ui-${{ github.sha }}
+#             priyash/gym-app:workout-coach-ui-${{ github.sha }}
