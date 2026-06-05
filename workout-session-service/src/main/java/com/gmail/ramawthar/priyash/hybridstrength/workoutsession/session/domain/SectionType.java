@@ -7,5 +7,6 @@ public enum SectionType {
     STRENGTH,
     AMRAP,
     TABATA,
-    EMOM
+    EMOM,
+    FOR_TIME
 }

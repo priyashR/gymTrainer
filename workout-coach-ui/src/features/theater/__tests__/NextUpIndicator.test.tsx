@@ -15,8 +15,11 @@ function makeSectionProgresses(
       exerciseName: name,
       completed: sec.completedIndices?.includes(j) ?? false,
       completedAt: sec.completedIndices?.includes(j) ? "2026-01-15T10:30:00Z" : null,
+      setLogs: [],
     })),
     completed: sec.completedIndices?.length === sec.exerciseNames.length,
+    crossFitScore: null,
+    roundCount: 0,
   }));
 }
 

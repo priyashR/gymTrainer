@@ -1,9 +1,12 @@
 package com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
- * Tracks the completion state of a single exercise within a section.
+ * Tracks the completion state and performance data of a single exercise within a section.
  * Includes the rest duration (in seconds) from the exercise definition,
  * used to drive the Rest Timer after exercise completion.
  */
@@ -17,6 +20,7 @@ public class ExerciseLog {
     private final Integer restSeconds;
     private boolean completed;
     private Instant completedAt;
+    private final List<SetLog> setLogs;
 
     public ExerciseLog(int exerciseIndex, String exerciseName) {
         this(exerciseIndex, exerciseName, null);
@@ -34,10 +38,19 @@ public class ExerciseLog {
         this.restSeconds = restSeconds;
         this.completed = false;
         this.completedAt = null;
+        this.setLogs = new ArrayList<>();
     }
 
     public ExerciseLog(int exerciseIndex, String exerciseName, Integer restSeconds,
                        boolean completed, Instant completedAt) {
+        this(exerciseIndex, exerciseName, restSeconds, completed, completedAt, new ArrayList<>());
+    }
+
+    /**
+     * Constructor for reconstitution from persistence, including set logs.
+     */
+    public ExerciseLog(int exerciseIndex, String exerciseName, Integer restSeconds,
+                       boolean completed, Instant completedAt, List<SetLog> setLogs) {
         if (exerciseIndex < 0) {
             throw new IllegalArgumentException("exerciseIndex must be non-negative");
         }
@@ -49,6 +62,7 @@ public class ExerciseLog {
         this.restSeconds = restSeconds;
         this.completed = completed;
         this.completedAt = completedAt;
+        this.setLogs = setLogs != null ? new ArrayList<>(setLogs) : new ArrayList<>();
     }
 
     public void markCompleted(Instant timestamp) {
@@ -57,6 +71,23 @@ public class ExerciseLog {
         }
         this.completed = true;
         this.completedAt = timestamp;
+    }
+
+    /**
+     * Appends a set log to this exercise's set log list.
+     */
+    public void addSetLog(SetLog setLog) {
+        if (setLog == null) {
+            throw new IllegalArgumentException("setLog must not be null");
+        }
+        this.setLogs.add(setLog);
+    }
+
+    /**
+     * Returns an unmodifiable view of the set logs in chronological order.
+     */
+    public List<SetLog> getSetLogs() {
+        return Collections.unmodifiableList(setLogs);
     }
 
     public int getExerciseIndex() {

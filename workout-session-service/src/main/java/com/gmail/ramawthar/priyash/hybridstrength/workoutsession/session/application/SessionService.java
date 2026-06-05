@@ -2,17 +2,22 @@ package com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.applic
 
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.common.event.SessionCompletedEvent;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.common.exception.AccessDeniedException;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.common.exception.SessionAlreadyCompleteException;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.common.exception.SessionNotFoundException;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.progression.ports.inbound.AdvanceDayUseCase;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.progression.ports.inbound.GetEnrollmentUseCase;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.progression.domain.ProgramEnrollment;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.CrossFitScore;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.Session;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.SessionStatus;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.SectionProgress;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.ExerciseLog;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.SectionType;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.SetLog;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.EndSessionUseCase;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.GetSessionUseCase;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.LogCrossFitScoreUseCase;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.LogSetUseCase;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.PauseSessionUseCase;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.StartSessionUseCase;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.UpdateSessionUseCase;
@@ -31,6 +36,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +49,8 @@ import java.util.UUID;
  */
 @Service
 public class SessionService implements StartSessionUseCase, GetSessionUseCase,
-        UpdateSessionUseCase, PauseSessionUseCase, EndSessionUseCase {
+        UpdateSessionUseCase, PauseSessionUseCase, EndSessionUseCase,
+        LogSetUseCase, LogCrossFitScoreUseCase {
 
     private static final Logger log = LoggerFactory.getLogger(SessionService.class);
 
@@ -187,8 +194,12 @@ public class SessionService implements StartSessionUseCase, GetSessionUseCase,
                     "Can only resume a PAUSED session, current status: " + session.getStatus());
         }
 
-        // Reconstitute as IN_PROGRESS — domain doesn't have a resume method,
-        // so we rebuild with the same state but IN_PROGRESS status
+        // Compute paused duration and accumulate into totalPausedSeconds
+        Instant now = Instant.now();
+        long pausedDuration = java.time.Duration.between(session.getPausedAt(), now).getSeconds();
+        long updatedTotalPausedSeconds = session.getTotalPausedSeconds() + pausedDuration;
+
+        // Reconstitute as IN_PROGRESS with accumulated paused time
         Session resumed = new Session.Builder()
                 .id(session.getId())
                 .userId(session.getUserId())
@@ -203,13 +214,16 @@ public class SessionService implements StartSessionUseCase, GetSessionUseCase,
                 .startedAt(session.getStartedAt())
                 .pausedAt(null)
                 .completedAt(null)
-                .lastPersistedAt(Instant.now())
+                .lastPersistedAt(now)
+                .totalPausedSeconds(updatedTotalPausedSeconds)
+                .durationSeconds(session.getDurationSeconds())
                 .build();
 
         Session saved = sessionRepository.save(resumed);
         sessionNotifier.notifySessionUpdate(saved);
 
-        log.info("Session resumed: id={}", sessionId);
+        log.info("Session resumed: id={}, pausedDuration={}s, totalPaused={}s",
+                sessionId, pausedDuration, updatedTotalPausedSeconds);
         return saved;
     }
 
@@ -220,11 +234,39 @@ public class SessionService implements StartSessionUseCase, GetSessionUseCase,
         verifyOwnership(session, userId);
 
         Instant now = Instant.now();
+
+        // If session is currently paused, accumulate the final paused duration
+        if (session.getStatus() == SessionStatus.PAUSED && session.getPausedAt() != null) {
+            long finalPausedDuration = java.time.Duration.between(session.getPausedAt(), now).getSeconds();
+            long updatedTotalPausedSeconds = session.getTotalPausedSeconds() + finalPausedDuration;
+
+            // Reconstitute with accumulated paused time before ending
+            session = new Session.Builder()
+                    .id(session.getId())
+                    .userId(session.getUserId())
+                    .programId(session.getProgramId())
+                    .enrollmentId(session.getEnrollmentId())
+                    .weekNumber(session.getWeekNumber())
+                    .dayNumber(session.getDayNumber())
+                    .status(session.getStatus())
+                    .currentSectionIndex(session.getCurrentSectionIndex())
+                    .sectionProgresses(session.getSectionProgresses())
+                    .workoutSnapshot(session.getWorkoutSnapshot())
+                    .startedAt(session.getStartedAt())
+                    .pausedAt(session.getPausedAt())
+                    .completedAt(null)
+                    .lastPersistedAt(session.getLastPersistedAt())
+                    .totalPausedSeconds(updatedTotalPausedSeconds)
+                    .durationSeconds(session.getDurationSeconds())
+                    .build();
+        }
+
         session.end(now);
+        session.computeDuration(now);
 
         Session saved = sessionRepository.save(session);
 
-        // Publish SessionCompleted event
+        // Publish SessionCompleted event with performance data and duration
         boolean standalone = (session.getEnrollmentId() == null);
         SessionCompletedEvent event = new SessionCompletedEvent(
                 UUID.randomUUID(),
@@ -237,7 +279,8 @@ public class SessionService implements StartSessionUseCase, GetSessionUseCase,
                 standalone,
                 session.getSectionProgresses(),
                 session.getStartedAt(),
-                now
+                now,
+                session.getDurationSeconds()
         );
         sessionEventPublisher.publishSessionCompleted(event);
 
@@ -256,7 +299,103 @@ public class SessionService implements StartSessionUseCase, GetSessionUseCase,
 
         sessionNotifier.notifySessionCompleted(saved);
 
-        log.info("Session ended: id={}, standalone={}", sessionId, standalone);
+        log.info("Session ended: id={}, standalone={}, durationSeconds={}",
+                sessionId, standalone, session.getDurationSeconds());
+        return saved;
+    }
+
+    @Override
+    @Transactional
+    public Session logSet(UUID sessionId, String userId, int sectionIndex, int exerciseIndex,
+                          BigDecimal weight, int repetitions, BigDecimal rpe) {
+        Session session = loadSession(sessionId);
+        verifyOwnership(session, userId);
+
+        if (session.getStatus() == SessionStatus.COMPLETED) {
+            throw new SessionAlreadyCompleteException(sessionId);
+        }
+
+        // Validate section index
+        List<SectionProgress> sections = session.getSectionProgresses();
+        if (sectionIndex < 0 || sectionIndex >= sections.size()) {
+            throw new IllegalArgumentException(
+                    "Invalid sectionIndex: " + sectionIndex + ", valid range: [0, " + (sections.size() - 1) + "]");
+        }
+
+        SectionProgress section = sections.get(sectionIndex);
+
+        // Validate section is STRENGTH type
+        if (section.getSectionType() != SectionType.STRENGTH) {
+            throw new IllegalArgumentException("Set logging is only available for STRENGTH sections");
+        }
+
+        // Validate exercise index
+        List<ExerciseLog> exerciseLogs = section.getExerciseLogs();
+        if (exerciseIndex < 0 || exerciseIndex >= exerciseLogs.size()) {
+            throw new IllegalArgumentException(
+                    "Invalid exerciseIndex: " + exerciseIndex + ", valid range: [0, " + (exerciseLogs.size() - 1) + "]");
+        }
+
+        ExerciseLog exerciseLog = exerciseLogs.get(exerciseIndex);
+
+        // Create SetLog with next set number
+        int nextSetNumber = exerciseLog.getSetLogs().size() + 1;
+        Instant now = Instant.now();
+        SetLog setLog = new SetLog(nextSetNumber, weight, repetitions, rpe, now);
+
+        exerciseLog.addSetLog(setLog);
+
+        Session saved = sessionRepository.save(session);
+        sessionNotifier.notifySessionUpdate(saved);
+
+        log.debug("Set logged: session={}, section={}, exercise={}, set#={}, weight={}, reps={}, rpe={}",
+                sessionId, sectionIndex, exerciseIndex, nextSetNumber, weight, repetitions, rpe);
+        return saved;
+    }
+
+    @Override
+    @Transactional
+    public Session logCrossFitScore(UUID sessionId, String userId, int sectionIndex,
+                                    int rounds, int additionalReps, Integer totalTimeSeconds) {
+        Session session = loadSession(sessionId);
+        verifyOwnership(session, userId);
+
+        if (session.getStatus() == SessionStatus.COMPLETED) {
+            throw new SessionAlreadyCompleteException(sessionId);
+        }
+
+        // Validate section index
+        List<SectionProgress> sections = session.getSectionProgresses();
+        if (sectionIndex < 0 || sectionIndex >= sections.size()) {
+            throw new IllegalArgumentException(
+                    "Invalid sectionIndex: " + sectionIndex + ", valid range: [0, " + (sections.size() - 1) + "]");
+        }
+
+        SectionProgress section = sections.get(sectionIndex);
+
+        // Validate section is a scored type (AMRAP, EMOM, or FOR_TIME)
+        SectionType type = section.getSectionType();
+        if (type != SectionType.AMRAP && type != SectionType.EMOM && type != SectionType.FOR_TIME) {
+            throw new IllegalArgumentException(
+                    "Score logging is only available for AMRAP, EMOM, or FOR_TIME sections");
+        }
+
+        // Validate FOR_TIME requires totalTimeSeconds > 0
+        if (type == SectionType.FOR_TIME && (totalTimeSeconds == null || totalTimeSeconds <= 0)) {
+            throw new IllegalArgumentException(
+                    "Total time must be greater than zero for For Time sections");
+        }
+
+        // Create CrossFitScore and set on section (overwrites any previous score)
+        Instant now = Instant.now();
+        CrossFitScore score = new CrossFitScore(rounds, additionalReps, totalTimeSeconds, now);
+        section.setCrossFitScore(score);
+
+        Session saved = sessionRepository.save(session);
+        sessionNotifier.notifySessionUpdate(saved);
+
+        log.debug("CrossFit score logged: session={}, section={}, rounds={}, additionalReps={}, time={}",
+                sessionId, sectionIndex, rounds, additionalReps, totalTimeSeconds);
         return saved;
     }
 

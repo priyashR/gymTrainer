@@ -9,6 +9,7 @@ import java.util.UUID;
 /**
  * Domain event published when a user completes a workout session.
  * Consumed by the Progress Tracker Service via RabbitMQ.
+ * Includes all performance data (set logs, CrossFit scores) and session duration.
  */
 public record SessionCompletedEvent(
         UUID eventId,
@@ -21,6 +22,7 @@ public record SessionCompletedEvent(
         boolean standalone,
         List<SectionProgress> sectionProgresses,
         Instant startedAt,
-        Instant completedAt
+        Instant completedAt,
+        Integer durationSeconds
 ) {
 }

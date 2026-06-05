@@ -10,6 +10,8 @@ public record SectionProgressResponse(
         String sectionName,
         String sectionType,
         List<ExerciseLogResponse> exerciseLogs,
-        boolean completed
+        boolean completed,
+        CrossFitScoreResponse crossFitScore,
+        int roundCount
 ) {
 }

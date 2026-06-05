@@ -2,11 +2,15 @@ package com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.adapte
 
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.adapters.inbound.dto.AdvanceSectionRequest;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.adapters.inbound.dto.CompleteExerciseRequest;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.adapters.inbound.dto.LogCrossFitScoreRequest;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.adapters.inbound.dto.LogSetRequest;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.adapters.inbound.dto.SessionResponse;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.adapters.inbound.dto.StartSessionRequest;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.Session;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.EndSessionUseCase;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.GetSessionUseCase;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.LogCrossFitScoreUseCase;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.LogSetUseCase;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.PauseSessionUseCase;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.StartSessionUseCase;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.inbound.UpdateSessionUseCase;
@@ -43,17 +47,23 @@ public class SessionController {
     private final UpdateSessionUseCase updateSessionUseCase;
     private final PauseSessionUseCase pauseSessionUseCase;
     private final EndSessionUseCase endSessionUseCase;
+    private final LogSetUseCase logSetUseCase;
+    private final LogCrossFitScoreUseCase logCrossFitScoreUseCase;
 
     public SessionController(StartSessionUseCase startSessionUseCase,
                              GetSessionUseCase getSessionUseCase,
                              UpdateSessionUseCase updateSessionUseCase,
                              PauseSessionUseCase pauseSessionUseCase,
-                             EndSessionUseCase endSessionUseCase) {
+                             EndSessionUseCase endSessionUseCase,
+                             LogSetUseCase logSetUseCase,
+                             LogCrossFitScoreUseCase logCrossFitScoreUseCase) {
         this.startSessionUseCase = startSessionUseCase;
         this.getSessionUseCase = getSessionUseCase;
         this.updateSessionUseCase = updateSessionUseCase;
         this.pauseSessionUseCase = pauseSessionUseCase;
         this.endSessionUseCase = endSessionUseCase;
+        this.logSetUseCase = logSetUseCase;
+        this.logCrossFitScoreUseCase = logCrossFitScoreUseCase;
     }
 
     @PostMapping
@@ -126,6 +136,28 @@ public class SessionController {
             @AuthenticationPrincipal UUID userId,
             @PathVariable UUID id) {
         Session session = pauseSessionUseCase.resumeSession(id, userId.toString());
+        return ResponseEntity.ok(SessionResponse.from(session));
+    }
+
+    @PostMapping("/{id}/sets")
+    public ResponseEntity<SessionResponse> logSet(
+            @AuthenticationPrincipal UUID userId,
+            @PathVariable UUID id,
+            @Valid @RequestBody LogSetRequest request) {
+        Session session = logSetUseCase.logSet(
+                id, userId.toString(), request.sectionIndex(), request.exerciseIndex(),
+                request.weight(), request.repetitions(), request.rpe());
+        return ResponseEntity.ok(SessionResponse.from(session));
+    }
+
+    @PostMapping("/{id}/scores")
+    public ResponseEntity<SessionResponse> logCrossFitScore(
+            @AuthenticationPrincipal UUID userId,
+            @PathVariable UUID id,
+            @Valid @RequestBody LogCrossFitScoreRequest request) {
+        Session session = logCrossFitScoreUseCase.logCrossFitScore(
+                id, userId.toString(), request.sectionIndex(),
+                request.rounds(), request.additionalReps(), request.totalTimeSeconds());
         return ResponseEntity.ok(SessionResponse.from(session));
     }
 

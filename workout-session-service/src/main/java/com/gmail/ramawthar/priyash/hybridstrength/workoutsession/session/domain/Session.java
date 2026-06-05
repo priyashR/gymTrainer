@@ -1,5 +1,6 @@
 package com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +28,8 @@ public class Session {
     private Instant pausedAt;
     private Instant completedAt;
     private Instant lastPersistedAt;
+    private long totalPausedSeconds;
+    private Integer durationSeconds;
 
     private Session(Builder builder) {
         this.id = builder.id;
@@ -43,6 +46,8 @@ public class Session {
         this.pausedAt = builder.pausedAt;
         this.completedAt = builder.completedAt;
         this.lastPersistedAt = builder.lastPersistedAt;
+        this.totalPausedSeconds = builder.totalPausedSeconds;
+        this.durationSeconds = builder.durationSeconds;
     }
 
     /**
@@ -81,6 +86,7 @@ public class Session {
                 .workoutSnapshot(workoutSnapshot)
                 .startedAt(now)
                 .lastPersistedAt(now)
+                .totalPausedSeconds(0)
                 .build();
     }
 
@@ -171,6 +177,38 @@ public class Session {
         this.status = SessionStatus.COMPLETED;
         this.completedAt = now;
         this.lastPersistedAt = now;
+    }
+
+    /**
+     * Computes the active duration of the session excluding paused time.
+     * Should be called after end() to set the durationSeconds field.
+     *
+     * @param endTime the time the session ended
+     */
+    public void computeDuration(Instant endTime) {
+        if (startedAt == null || endTime == null) {
+            throw new IllegalArgumentException("startedAt and endTime must not be null");
+        }
+        long totalSeconds = Duration.between(startedAt, endTime).getSeconds();
+        this.durationSeconds = (int) Math.max(0, totalSeconds - totalPausedSeconds);
+    }
+
+    /**
+     * Returns true if any ExerciseLog has non-empty setLogs
+     * OR any SectionProgress has a non-null crossFitScore.
+     */
+    public boolean hasPerformanceData() {
+        for (SectionProgress section : sectionProgresses) {
+            if (section.getCrossFitScore() != null) {
+                return true;
+            }
+            for (ExerciseLog exerciseLog : section.getExerciseLogs()) {
+                if (!exerciseLog.getSetLogs().isEmpty()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -268,6 +306,14 @@ public class Session {
         return lastPersistedAt;
     }
 
+    public long getTotalPausedSeconds() {
+        return totalPausedSeconds;
+    }
+
+    public Integer getDurationSeconds() {
+        return durationSeconds;
+    }
+
     // --- Builder for reconstitution from persistence ---
 
     public static class Builder {
@@ -285,6 +331,8 @@ public class Session {
         private Instant pausedAt;
         private Instant completedAt;
         private Instant lastPersistedAt;
+        private long totalPausedSeconds;
+        private Integer durationSeconds;
 
         public Builder id(UUID id) {
             this.id = id;
@@ -353,6 +401,16 @@ public class Session {
 
         public Builder lastPersistedAt(Instant lastPersistedAt) {
             this.lastPersistedAt = lastPersistedAt;
+            return this;
+        }
+
+        public Builder totalPausedSeconds(long totalPausedSeconds) {
+            this.totalPausedSeconds = totalPausedSeconds;
+            return this;
+        }
+
+        public Builder durationSeconds(Integer durationSeconds) {
+            this.durationSeconds = durationSeconds;
             return this;
         }
 

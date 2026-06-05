@@ -4,6 +4,8 @@ import type {
   CompleteExerciseRequest,
   EnrollmentResponse,
   EnrollRequest,
+  LogCrossFitScoreRequest,
+  LogSetRequest,
   SessionResponse,
   StartSessionRequest,
 } from "../types/session";
@@ -89,6 +91,30 @@ export function resumeSession(sessionId: string): Promise<SessionResponse> {
 export function endSession(sessionId: string): Promise<SessionResponse> {
   return apiClient
     .post<SessionResponse>(`/sessions/${sessionId}/end`)
+    .then((res) => res.data);
+}
+
+/**
+ * Log a strength set for an exercise within a session.
+ */
+export function logSet(
+  sessionId: string,
+  request: LogSetRequest
+): Promise<SessionResponse> {
+  return apiClient
+    .post<SessionResponse>(`/sessions/${sessionId}/sets`, request)
+    .then((res) => res.data);
+}
+
+/**
+ * Log a CrossFit score for a section within a session.
+ */
+export function logCrossFitScore(
+  sessionId: string,
+  request: LogCrossFitScoreRequest
+): Promise<SessionResponse> {
+  return apiClient
+    .post<SessionResponse>(`/sessions/${sessionId}/scores`, request)
     .then((res) => res.data);
 }
 

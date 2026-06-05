@@ -10,9 +10,11 @@ function makeSectionProgresses(count: number): SectionProgress[] {
     sectionName: `Section ${i + 1}`,
     sectionType: "STRENGTH" as const,
     exerciseLogs: [
-      { exerciseIndex: 0, exerciseName: "Exercise A", completed: false, completedAt: null },
+      { exerciseIndex: 0, exerciseName: "Exercise A", completed: false, completedAt: null, setLogs: [] },
     ],
     completed: false,
+    crossFitScore: null,
+    roundCount: 0,
   }));
 }
 

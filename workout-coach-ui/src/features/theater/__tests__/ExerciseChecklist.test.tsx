@@ -4,6 +4,12 @@ import { describe, it, expect, vi } from "vitest";
 import { ExerciseChecklist } from "../ExerciseChecklist";
 import type { ExerciseLog } from "../../../types/session";
 
+const defaultProps = {
+  sectionType: "STRENGTH" as const,
+  sessionStatus: "IN_PROGRESS" as const,
+  onLogSet: vi.fn(),
+};
+
 const exerciseDefinitions = [
   { name: "Back Squat", sets: 4, reps: 6, restSeconds: 90 },
   { name: "Bench Press", sets: 3, reps: 8, restSeconds: 60 },
@@ -16,6 +22,7 @@ function makeExerciseLogs(completedIndices: number[] = []): ExerciseLog[] {
     exerciseName: def.name,
     completed: completedIndices.includes(i),
     completedAt: completedIndices.includes(i) ? "2026-01-15T10:30:00Z" : null,
+    setLogs: [],
   }));
 }
 
@@ -28,6 +35,7 @@ describe("ExerciseChecklist", () => {
         sectionIndex={0}
         onCompleteExercise={vi.fn()}
         onRestTimerStart={vi.fn()}
+        {...defaultProps}
       />
     );
 
@@ -48,6 +56,7 @@ describe("ExerciseChecklist", () => {
         sectionIndex={2}
         onCompleteExercise={onComplete}
         onRestTimerStart={onRestStart}
+        {...defaultProps}
       />
     );
 
@@ -65,6 +74,7 @@ describe("ExerciseChecklist", () => {
         sectionIndex={0}
         onCompleteExercise={vi.fn()}
         onRestTimerStart={vi.fn()}
+        {...defaultProps}
       />
     );
 
@@ -85,13 +95,14 @@ describe("ExerciseChecklist", () => {
         sectionIndex={0}
         onCompleteExercise={vi.fn()}
         onRestTimerStart={vi.fn()}
+        {...defaultProps}
       />
     );
 
     expect(screen.getByText(/Back Squat ✓/)).toBeInTheDocument();
   });
 
-  it("displays sets and reps information", () => {
+  it("displays sets and reps information via ExercisePrescription for STRENGTH sections", () => {
     render(
       <ExerciseChecklist
         exerciseLogs={makeExerciseLogs()}
@@ -99,12 +110,17 @@ describe("ExerciseChecklist", () => {
         sectionIndex={0}
         onCompleteExercise={vi.fn()}
         onRestTimerStart={vi.fn()}
+        {...defaultProps}
       />
     );
 
-    expect(screen.getByText("4 sets × 6 reps")).toBeInTheDocument();
-    expect(screen.getByText("3 sets × 8 reps")).toBeInTheDocument();
-    expect(screen.getByText("5 sets × 3 reps")).toBeInTheDocument();
+    // ExercisePrescription renders sets and reps as separate badges
+    expect(screen.getAllByText("4 sets").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("6 reps").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("3 sets").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("8 reps").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("5 sets").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("3 reps").length).toBeGreaterThan(0);
   });
 
   it("does not call handlers when clicking an already completed exercise", async () => {
@@ -119,6 +135,7 @@ describe("ExerciseChecklist", () => {
         sectionIndex={0}
         onCompleteExercise={onComplete}
         onRestTimerStart={onRestStart}
+        {...defaultProps}
       />
     );
 

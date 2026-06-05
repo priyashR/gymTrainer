@@ -5,6 +5,8 @@ import * as sessionApi from "../lib/sessionApi";
 import type {
   AdvanceSectionRequest,
   CompleteExerciseRequest,
+  LogCrossFitScoreRequest,
+  LogSetRequest,
   SessionResponse,
   SessionWebSocketMessage,
 } from "../types/session";
@@ -18,6 +20,8 @@ export interface UseSessionResult {
   pauseSession: () => Promise<void>;
   resumeSession: () => Promise<void>;
   endSession: () => Promise<void>;
+  logSet: (request: LogSetRequest) => Promise<void>;
+  logCrossFitScore: (request: LogCrossFitScoreRequest) => Promise<void>;
 }
 
 /**
@@ -184,6 +188,22 @@ export function useSession(sessionId: string): UseSessionResult {
     setSession(updated);
   }, [sessionId]);
 
+  const logSet = useCallback(
+    async (request: LogSetRequest): Promise<void> => {
+      const updated = await sessionApi.logSet(sessionId, request);
+      setSession(updated);
+    },
+    [sessionId]
+  );
+
+  const logCrossFitScore = useCallback(
+    async (request: LogCrossFitScoreRequest): Promise<void> => {
+      const updated = await sessionApi.logCrossFitScore(sessionId, request);
+      setSession(updated);
+    },
+    [sessionId]
+  );
+
   return {
     session,
     loading,
@@ -193,5 +213,7 @@ export function useSession(sessionId: string): UseSessionResult {
     pauseSession,
     resumeSession,
     endSession,
+    logSet,
+    logCrossFitScore,
   };
 }

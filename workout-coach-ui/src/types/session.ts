@@ -2,13 +2,29 @@
 
 export type SessionStatus = 'IN_PROGRESS' | 'PAUSED' | 'COMPLETED';
 
-export type SectionType = 'STRENGTH' | 'AMRAP' | 'EMOM' | 'TABATA';
+export type SectionType = 'STRENGTH' | 'AMRAP' | 'EMOM' | 'TABATA' | 'FOR_TIME';
+
+export interface SetLog {
+  setNumber: number;
+  weight: number; // kg
+  repetitions: number;
+  rpe: number | null; // 1.0–10.0 in 0.5 increments
+  loggedAt: string; // ISO-8601
+}
+
+export interface CrossFitScore {
+  rounds: number;
+  additionalReps: number;
+  totalTimeSeconds: number | null;
+  loggedAt: string; // ISO-8601
+}
 
 export interface ExerciseLog {
   exerciseIndex: number;
   exerciseName: string;
   completed: boolean;
   completedAt: string | null; // ISO-8601
+  setLogs: SetLog[];
 }
 
 export interface TimerConfig {
@@ -25,6 +41,8 @@ export interface SectionProgress {
   sectionType: SectionType;
   exerciseLogs: ExerciseLog[];
   completed: boolean;
+  crossFitScore: CrossFitScore | null;
+  roundCount: number;
 }
 
 export interface Session {
@@ -101,6 +119,21 @@ export interface EnrollRequest {
   totalDaysPerWeek: number;
 }
 
+export interface LogSetRequest {
+  sectionIndex: number;
+  exerciseIndex: number;
+  weight: number;
+  repetitions: number;
+  rpe: number | null;
+}
+
+export interface LogCrossFitScoreRequest {
+  sectionIndex: number;
+  rounds: number;
+  additionalReps: number;
+  totalTimeSeconds: number | null;
+}
+
 // --- Response DTOs ---
 
 export interface SectionProgressResponse {
@@ -109,6 +142,8 @@ export interface SectionProgressResponse {
   sectionType: SectionType;
   exerciseLogs: ExerciseLog[];
   completed: boolean;
+  crossFitScore: CrossFitScore | null;
+  roundCount: number;
 }
 
 export interface SessionResponse {
@@ -120,6 +155,7 @@ export interface SessionResponse {
   startedAt: string; // ISO-8601
   pausedAt: string | null; // ISO-8601
   completedAt: string | null; // ISO-8601
+  durationSeconds: number | null;
 }
 
 export interface EnrollmentResponse {

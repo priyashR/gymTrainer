@@ -85,13 +85,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- H2 (dev/test) -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
         <!-- JWT (Nimbus JOSE for RS256) -->
         <dependency>
             <groupId>com.nimbusds</groupId>
