@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.PerformanceTrackingIntegrationTest$CrossFitScoreTests
--------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.500 s -- in com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.PerformanceTrackingIntegrationTest$CrossFitScoreTests
