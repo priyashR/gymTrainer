@@ -1,9 +1,16 @@
-import type { ExerciseLog } from "../../types/session";
+import type { ExerciseLog, LogSetRequest, SessionStatus, SectionType } from "../../types/session";
+import type { ExerciseRecommendationDto } from "../../types/recommendation";
+import { ExercisePrescription } from "./ExercisePrescription";
+import { RecommendationBadge } from "./RecommendationBadge";
+import { SetLogForm } from "./SetLogForm";
+import { SetLogList } from "./SetLogList";
 
 interface ExerciseDefinition {
   name: string;
   sets?: number;
   reps?: number | string;
+  weight?: number | string;
+  notes?: string;
   restSeconds?: number;
 }
 
@@ -12,9 +19,19 @@ interface ExerciseChecklistProps {
   /** Exercise definitions from the workout snapshot for sets/reps info */
   exerciseDefinitions: ExerciseDefinition[];
   sectionIndex: number;
+  sectionType: SectionType;
+  sessionStatus: SessionStatus;
   onCompleteExercise: (sectionIndex: number, exerciseIndex: number) => void;
   /** Called when an exercise is checked off, passing the rest duration */
   onRestTimerStart: (restSeconds: number) => void;
+  /** Called to log a strength set */
+  onLogSet: (request: LogSetRequest) => Promise<void>;
+  /** Recommendations for exercises in the current section */
+  recommendations?: ExerciseRecommendationDto[];
+  /** Whether recommendations are currently being loaded */
+  recommendationsLoading?: boolean;
+  /** Whether recommendations failed to load (hides badge area) */
+  recommendationsError?: boolean;
 }
 
 const listStyle: React.CSSProperties = {
@@ -23,13 +40,13 @@ const listStyle: React.CSSProperties = {
   margin: 0,
   display: "flex",
   flexDirection: "column",
-  gap: "0.5rem",
+  gap: "0.75rem",
 };
 
 const itemStyle: React.CSSProperties = {
   display: "flex",
-  alignItems: "center",
-  gap: "0.75rem",
+  flexDirection: "column",
+  gap: "0.25rem",
   padding: "0.75rem 1rem",
   border: "1px solid #e0e0e0",
   borderRadius: 8,
@@ -40,6 +57,12 @@ const completedItemStyle: React.CSSProperties = {
   ...itemStyle,
   background: "#f1f8e9",
   borderColor: "#c5e1a5",
+};
+
+const checkRowStyle: React.CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  gap: "0.75rem",
 };
 
 const checkboxStyle: React.CSSProperties = {
@@ -61,20 +84,23 @@ const completedNameStyle: React.CSSProperties = {
   color: "#888",
 };
 
-const detailStyle: React.CSSProperties = {
-  fontSize: "0.8rem",
-  color: "#666",
-};
-
 const DEFAULT_REST_SECONDS = 60;
 
 export function ExerciseChecklist({
   exerciseLogs,
   exerciseDefinitions,
   sectionIndex,
+  sectionType,
+  sessionStatus,
   onCompleteExercise,
   onRestTimerStart,
+  onLogSet,
+  recommendations = [],
+  recommendationsLoading = false,
+  recommendationsError = false,
 }: ExerciseChecklistProps) {
+  const isStrength = sectionType === "STRENGTH";
+
   const handleCheck = (exerciseIndex: number) => {
     const log = exerciseLogs[exerciseIndex];
     if (log?.completed) return; // Already completed — idempotent
@@ -91,30 +117,66 @@ export function ExerciseChecklist({
     <ul style={listStyle} aria-label="Exercise checklist">
       {exerciseLogs.map((log, index) => {
         const def = exerciseDefinitions[index];
-        const setsReps = def
-          ? [def.sets && `${def.sets} sets`, def.reps && `${def.reps} reps`]
-              .filter(Boolean)
-              .join(" × ")
-          : "";
 
         return (
           <li
             key={log.exerciseIndex}
             style={log.completed ? completedItemStyle : itemStyle}
           >
-            <input
-              type="checkbox"
-              style={checkboxStyle}
-              checked={log.completed}
-              onChange={() => handleCheck(index)}
-              disabled={log.completed}
-              aria-label={`Mark ${log.exerciseName} as complete`}
-            />
-            <span style={log.completed ? completedNameStyle : nameStyle}>
-              {log.exerciseName}
-              {log.completed && " ✓"}
-            </span>
-            {setsReps && <span style={detailStyle}>{setsReps}</span>}
+            {/* Recommendation Badge — hidden on error, positioned above set-logging */}
+            {!recommendationsError && (() => {
+              const rec = recommendations.find(
+                (r) => r.exerciseIndex === index
+              );
+              return (
+                <RecommendationBadge
+                  prescribedWeight={rec?.prescribedWeight ?? null}
+                  prescribedReps={rec?.prescribedReps ?? null}
+                  prescribedSets={rec?.prescribedSets ?? null}
+                  isLoading={recommendationsLoading}
+                />
+              );
+            })()}
+
+            {/* Prescription display for STRENGTH sections */}
+            {isStrength && def && (
+              <ExercisePrescription
+                name={def.name}
+                sets={def.sets}
+                reps={def.reps}
+                weight={def.weight}
+                notes={def.notes}
+              />
+            )}
+
+            {/* Checkbox row */}
+            <div style={checkRowStyle}>
+              <input
+                type="checkbox"
+                style={checkboxStyle}
+                checked={log.completed}
+                onChange={() => handleCheck(index)}
+                disabled={log.completed}
+                aria-label={`Mark ${log.exerciseName} as complete`}
+              />
+              <span style={log.completed ? completedNameStyle : nameStyle}>
+                {log.exerciseName}
+                {log.completed && " ✓"}
+              </span>
+            </div>
+
+            {/* Set logging for STRENGTH sections */}
+            {isStrength && (
+              <>
+                <SetLogList setLogs={log.setLogs} />
+                <SetLogForm
+                  sectionIndex={sectionIndex}
+                  exerciseIndex={log.exerciseIndex}
+                  sessionStatus={sessionStatus}
+                  onLogSet={onLogSet}
+                />
+              </>
+            )}
           </li>
         );
       })}

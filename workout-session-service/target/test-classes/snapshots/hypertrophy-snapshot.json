@@ -1,0 +1,96 @@
+{
+  "weeks": [
+    {
+      "weekNumber": 1,
+      "days": [
+        {
+          "dayNumber": 1,
+          "modality": "HYPERTROPHY",
+          "sections": [
+            {
+              "name": "Main Lifts",
+              "type": "STRENGTH",
+              "exercises": [
+                {
+                  "name": "Barbell Squat",
+                  "sets": 4,
+                  "reps": "8-10",
+                  "weight": "80kg",
+                  "restSeconds": 120
+                },
+                {
+                  "name": "Romanian Deadlift",
+                  "sets": 3,
+                  "reps": "10-12",
+                  "weight": "60kg",
+                  "restSeconds": 90
+                },
+                {
+                  "name": "Leg Press",
+                  "sets": 0,
+                  "reps": "12",
+                  "weight": "120kg",
+                  "restSeconds": 60
+                }
+              ]
+            },
+            {
+              "name": "Accessories",
+              "type": "HYPERTROPHY",
+              "exercises": [
+                {
+                  "name": "Leg Curl",
+                  "sets": 3,
+                  "reps": "12-15",
+                  "weight": null,
+                  "restSeconds": 60
+                },
+                {
+                  "name": "Calf Raise",
+                  "sets": 4,
+                  "reps": "15",
+                  "weight": "40kg",
+                  "restSeconds": 45
+                },
+                {
+                  "name": "Walking Lunge",
+                  "sets": 3,
+                  "reps": "20",
+                  "weight": "20kg",
+                  "restSeconds": 60
+                },
+                {
+                  "name": "Leg Extension",
+                  "sets": 0,
+                  "reps": "15-20",
+                  "weight": null,
+                  "restSeconds": 45
+                }
+              ]
+            },
+            {
+              "name": "Finisher",
+              "type": "CONDITIONING",
+              "exercises": [
+                {
+                  "name": "Prowler Push",
+                  "sets": 5,
+                  "reps": "AMRAP",
+                  "weight": "60kg",
+                  "restSeconds": 90
+                },
+                {
+                  "name": "Battle Ropes",
+                  "sets": 3,
+                  "reps": "30",
+                  "weight": null,
+                  "restSeconds": 30
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

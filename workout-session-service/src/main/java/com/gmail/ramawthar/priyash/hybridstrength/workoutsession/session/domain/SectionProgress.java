@@ -14,30 +14,25 @@ public class SectionProgress {
     private final SectionType sectionType;
     private final List<ExerciseLog> exerciseLogs;
     private boolean completed;
+    private CrossFitScore crossFitScore;
+    private int roundCount;
 
     public SectionProgress(int sectionIndex, String sectionName, SectionType sectionType,
                            List<ExerciseLog> exerciseLogs) {
-        if (sectionIndex < 0) {
-            throw new IllegalArgumentException("sectionIndex must be non-negative");
-        }
-        if (sectionName == null || sectionName.isBlank()) {
-            throw new IllegalArgumentException("sectionName must not be null or blank");
-        }
-        if (sectionType == null) {
-            throw new IllegalArgumentException("sectionType must not be null");
-        }
-        if (exerciseLogs == null) {
-            throw new IllegalArgumentException("exerciseLogs must not be null");
-        }
-        this.sectionIndex = sectionIndex;
-        this.sectionName = sectionName;
-        this.sectionType = sectionType;
-        this.exerciseLogs = new ArrayList<>(exerciseLogs);
-        this.completed = false;
+        this(sectionIndex, sectionName, sectionType, exerciseLogs, false, null, 0);
     }
 
     public SectionProgress(int sectionIndex, String sectionName, SectionType sectionType,
                            List<ExerciseLog> exerciseLogs, boolean completed) {
+        this(sectionIndex, sectionName, sectionType, exerciseLogs, completed, null, 0);
+    }
+
+    /**
+     * Constructor for reconstitution from persistence, including CrossFit score and round counter.
+     */
+    public SectionProgress(int sectionIndex, String sectionName, SectionType sectionType,
+                           List<ExerciseLog> exerciseLogs, boolean completed,
+                           CrossFitScore crossFitScore, int roundCount) {
         if (sectionIndex < 0) {
             throw new IllegalArgumentException("sectionIndex must be non-negative");
         }
@@ -55,6 +50,8 @@ public class SectionProgress {
         this.sectionType = sectionType;
         this.exerciseLogs = new ArrayList<>(exerciseLogs);
         this.completed = completed;
+        this.crossFitScore = crossFitScore;
+        this.roundCount = roundCount;
     }
 
     /**
@@ -69,6 +66,35 @@ public class SectionProgress {
      */
     public void updateCompletionStatus() {
         this.completed = isAllExercisesCompleted();
+    }
+
+    /**
+     * Sets or overwrites the CrossFit score for this section.
+     * Only one score is allowed per section per session.
+     */
+    public void setCrossFitScore(CrossFitScore crossFitScore) {
+        this.crossFitScore = crossFitScore;
+    }
+
+    /**
+     * Returns the CrossFit score for this section, or null if not yet logged.
+     */
+    public CrossFitScore getCrossFitScore() {
+        return crossFitScore;
+    }
+
+    /**
+     * Sets the AMRAP round counter state.
+     */
+    public void setRoundCount(int roundCount) {
+        this.roundCount = roundCount;
+    }
+
+    /**
+     * Returns the current AMRAP round counter state.
+     */
+    public int getRoundCount() {
+        return roundCount;
     }
 
     public int getSectionIndex() {

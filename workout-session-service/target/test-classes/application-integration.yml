@@ -1,19 +1,17 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:session_integration;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:postgresql://localhost:30432/hybridstrength_dev?stringtype=unspecified
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
     show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
   flyway:
     enabled: true
-    locations: classpath:db/migration/h2
+    locations: classpath:db/migration
+    ignore-migration-patterns: "*:missing"
   rabbitmq:
     host: localhost
     port: 30672
@@ -21,26 +19,16 @@ spring:
     password: guest
 
 jwt:
-  public-key-pem: # Overridden by TestConfiguration in integration tests
-
-server:
-  port: 0
-
-workout-creator-service:
-  base-url: http://localhost:9999
-
-resilience4j:
-  circuitbreaker:
-    instances:
-      workoutFetcher:
-        sliding-window-size: 10
-        failure-rate-threshold: 50
-        wait-duration-in-open-state: 1s
-        permitted-number-of-calls-in-half-open-state: 3
-  timelimiter:
-    instances:
-      workoutFetcher:
-        timeout-duration: 5s
+  public-key-pem: |
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwXWJKWsQX+a3oEd4Q1LM
+    GcQYhld3V7qZFXDAIJRvqHbHIexpinO0FS8+kqYM0A5MYk0DjWNDZS7/CzpbFFl7
+    Zd/CKV65aW7ErUH/MQ3XkrV3bJb7clR743r0sku3/yILMMZ5df/hEVoPCnt6xI4Y
+    t/dDhA+k3/HQ0vosxWSkicW6SqNFGYHyfXgFubQb/t92cu4BkXLjgoiUydvSoNLC
+    GkAsyuVRl5UcPR7fGmzDIzmdE5233Ix4jUMaD2iT7kZS2XVtx4KuvmdUKiz26zlC
+    Qz22YeK8mjsef1L6KrYzTJhMDxDo8OoVrQrp3dQQ1i10JoF9PtDirFNMeNA3F4jI
+    2wIDAQAB
+    -----END PUBLIC KEY-----
 
 logging:
   level:

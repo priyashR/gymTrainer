@@ -67,6 +67,12 @@ class SessionJpaEntity {
     @Column(name = "last_persisted_at", nullable = false)
     private Instant lastPersistedAt;
 
+    @Column(name = "total_paused_seconds", nullable = false)
+    private long totalPausedSeconds;
+
+    @Column(name = "duration_seconds")
+    private Integer durationSeconds;
+
     protected SessionJpaEntity() {
         // JPA requires a no-arg constructor
     }
@@ -89,6 +95,8 @@ class SessionJpaEntity {
         entity.pausedAt = session.getPausedAt();
         entity.completedAt = session.getCompletedAt();
         entity.lastPersistedAt = session.getLastPersistedAt();
+        entity.totalPausedSeconds = session.getTotalPausedSeconds();
+        entity.durationSeconds = session.getDurationSeconds();
         return entity;
     }
 
@@ -112,6 +120,8 @@ class SessionJpaEntity {
                 .pausedAt(pausedAt)
                 .completedAt(completedAt)
                 .lastPersistedAt(lastPersistedAt)
+                .totalPausedSeconds(totalPausedSeconds)
+                .durationSeconds(durationSeconds)
                 .build();
     }
 }

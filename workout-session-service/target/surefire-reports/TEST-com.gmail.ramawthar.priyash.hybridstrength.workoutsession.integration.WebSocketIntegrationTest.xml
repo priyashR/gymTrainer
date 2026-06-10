@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest" time="38.887" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest" time="6.357" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/test-classes:/Users/priyashr/git/gymApp/workout-session-service/target/classes:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/priyashr/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/priyashr/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/priyashr/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/priyashr/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/priyashr/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/priyashr/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/priyashr/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/priyashr/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/priyashr/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/priyashr/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/priyashr/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/priyashr/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/priyashr/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/priyashr/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-websocket/3.4.4/spring-boot-starter-websocket-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-messaging/6.2.5/spring-messaging-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-websocket/6.2.5/spring-websocket-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-amqp/3.4.4/spring-boot-starter-amqp-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-rabbit/3.2.4/spring-rabbit-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-amqp/3.2.4/spring-amqp-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/retry/spring-retry/2.0.11/spring-retry-2.0.11.jar:/Users/priyashr/.m2/repository/com/rabbitmq/amqp-client/5.22.0/amqp-client-5.22.0.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/priyashr/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/priyashr/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.4.4/spring-boot-starter-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.4.4/spring-boot-actuator-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator/3.4.4/spring-boot-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-jakarta9/1.14.5/micrometer-jakarta9-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-core/1.14.5/micrometer-core-1.14.5.jar:/Users/priyashr/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/Users/priyashr/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.3/jackson-dataformat-toml-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-database-postgresql/10.20.1/flyway-database-postgresql-10.20.1.jar:/Users/priyashr/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/priyashr/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/priyashr/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/priyashr/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.47/nimbus-jose-jwt-9.47.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring-boot3/2.2.0/resilience4j-spring-boot3-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring6/2.2.0/resilience4j-spring6-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-annotations/2.2.0/resilience4j-annotations-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-consumer/2.2.0/resilience4j-consumer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circularbuffer/2.2.0/resilience4j-circularbuffer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-framework-common/2.2.0/resilience4j-framework-common-2.2.0.jar:/Users/priyashr/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-micrometer/2.2.0/resilience4j-micrometer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-bulkhead/2.2.0/resilience4j-bulkhead-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-retry/2.2.0/resilience4j-retry-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-ratelimiter/2.2.0/resilience4j-ratelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-timelimiter/2.2.0/resilience4j-timelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circuitbreaker/2.2.0/resilience4j-circuitbreaker-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-core/2.2.0/resilience4j-core-2.2.0.jar:/Users/priyashr/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/priyashr/.m2/repository/net/logstash/logback/logstash-logback-encoder/8.0/logstash-logback-encoder-8.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/priyashr/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/priyashr/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/priyashr/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/priyashr/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/priyashr/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/priyashr/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/priyashr/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/priyashr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/priyashr/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/priyashr/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/priyashr/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/priyashr/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik/1.9.2/jqwik-1.9.2.jar:/Users/priyashr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-api/1.9.2/jqwik-api-1.9.2.jar:/Users/priyashr/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-web/1.9.2/jqwik-web-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-time/1.9.2/jqwik-time-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-engine/1.9.2/jqwik-engine-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/priyashr/.m2/repository/org/wiremock/wiremock-standalone/3.5.4/wiremock-standalone-3.5.4.jar:"/>
+    <property name="java.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/test-classes:/Users/priyashr/git/gymApp/workout-session-service/target/classes:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/priyashr/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/priyashr/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/priyashr/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/priyashr/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/priyashr/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/priyashr/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/priyashr/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/priyashr/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/priyashr/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/priyashr/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/priyashr/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/priyashr/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/priyashr/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/priyashr/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-websocket/3.4.4/spring-boot-starter-websocket-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-messaging/6.2.5/spring-messaging-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-websocket/6.2.5/spring-websocket-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-amqp/3.4.4/spring-boot-starter-amqp-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-rabbit/3.2.4/spring-rabbit-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-amqp/3.2.4/spring-amqp-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/retry/spring-retry/2.0.11/spring-retry-2.0.11.jar:/Users/priyashr/.m2/repository/com/rabbitmq/amqp-client/5.22.0/amqp-client-5.22.0.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/priyashr/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/priyashr/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.4.4/spring-boot-starter-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.4.4/spring-boot-actuator-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator/3.4.4/spring-boot-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-jakarta9/1.14.5/micrometer-jakarta9-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-core/1.14.5/micrometer-core-1.14.5.jar:/Users/priyashr/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/Users/priyashr/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.3/jackson-dataformat-toml-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-database-postgresql/10.20.1/flyway-database-postgresql-10.20.1.jar:/Users/priyashr/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/priyashr/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/priyashr/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.47/nimbus-jose-jwt-9.47.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring-boot3/2.2.0/resilience4j-spring-boot3-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring6/2.2.0/resilience4j-spring6-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-annotations/2.2.0/resilience4j-annotations-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-consumer/2.2.0/resilience4j-consumer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circularbuffer/2.2.0/resilience4j-circularbuffer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-framework-common/2.2.0/resilience4j-framework-common-2.2.0.jar:/Users/priyashr/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-micrometer/2.2.0/resilience4j-micrometer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-bulkhead/2.2.0/resilience4j-bulkhead-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-retry/2.2.0/resilience4j-retry-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-ratelimiter/2.2.0/resilience4j-ratelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-timelimiter/2.2.0/resilience4j-timelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circuitbreaker/2.2.0/resilience4j-circuitbreaker-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-core/2.2.0/resilience4j-core-2.2.0.jar:/Users/priyashr/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/priyashr/.m2/repository/net/logstash/logback/logstash-logback-encoder/8.0/logstash-logback-encoder-8.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/priyashr/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/priyashr/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/priyashr/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/priyashr/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/priyashr/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/priyashr/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/priyashr/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/priyashr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/priyashr/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/priyashr/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/priyashr/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/priyashr/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik/1.9.2/jqwik-1.9.2.jar:/Users/priyashr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-api/1.9.2/jqwik-api-1.9.2.jar:/Users/priyashr/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-web/1.9.2/jqwik-web-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-time/1.9.2/jqwik-time-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-engine/1.9.2/jqwik-engine-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/priyashr/.m2/repository/org/wiremock/wiremock-standalone/3.5.4/wiremock-standalone-3.5.4.jar:"/>
     <property name="java.vm.vendor" value="Microsoft"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://www.microsoft.com"/>
@@ -16,10 +16,10 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/microsoft-17.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/priyashr/git/gymApp/workout-session-service/target/surefire/surefirebooter-20260513172728096_3.jar /Users/priyashr/git/gymApp/workout-session-service/target/surefire 2026-05-13T17-27-27_956-jvmRun1 surefire-20260513172728096_1tmp surefire_0-20260513172728096_2tmp"/>
+    <property name="sun.java.command" value="/Users/priyashr/git/gymApp/workout-session-service/target/surefire/surefirebooter-20260610054241875_3.jar /Users/priyashr/git/gymApp/workout-session-service/target/surefire 2026-06-10T05-42-41_771-jvmRun1 surefire-20260610054241875_1tmp surefire_0-20260610054241875_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/test-classes:/Users/priyashr/git/gymApp/workout-session-service/target/classes:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/priyashr/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/priyashr/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/priyashr/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/priyashr/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/priyashr/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/priyashr/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/priyashr/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/priyashr/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/priyashr/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/priyashr/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/priyashr/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/priyashr/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/priyashr/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/priyashr/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-websocket/3.4.4/spring-boot-starter-websocket-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-messaging/6.2.5/spring-messaging-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-websocket/6.2.5/spring-websocket-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-amqp/3.4.4/spring-boot-starter-amqp-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-rabbit/3.2.4/spring-rabbit-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-amqp/3.2.4/spring-amqp-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/retry/spring-retry/2.0.11/spring-retry-2.0.11.jar:/Users/priyashr/.m2/repository/com/rabbitmq/amqp-client/5.22.0/amqp-client-5.22.0.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/priyashr/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/priyashr/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.4.4/spring-boot-starter-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.4.4/spring-boot-actuator-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator/3.4.4/spring-boot-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-jakarta9/1.14.5/micrometer-jakarta9-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-core/1.14.5/micrometer-core-1.14.5.jar:/Users/priyashr/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/Users/priyashr/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.3/jackson-dataformat-toml-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-database-postgresql/10.20.1/flyway-database-postgresql-10.20.1.jar:/Users/priyashr/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/priyashr/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/priyashr/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/priyashr/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.47/nimbus-jose-jwt-9.47.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring-boot3/2.2.0/resilience4j-spring-boot3-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring6/2.2.0/resilience4j-spring6-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-annotations/2.2.0/resilience4j-annotations-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-consumer/2.2.0/resilience4j-consumer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circularbuffer/2.2.0/resilience4j-circularbuffer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-framework-common/2.2.0/resilience4j-framework-common-2.2.0.jar:/Users/priyashr/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-micrometer/2.2.0/resilience4j-micrometer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-bulkhead/2.2.0/resilience4j-bulkhead-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-retry/2.2.0/resilience4j-retry-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-ratelimiter/2.2.0/resilience4j-ratelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-timelimiter/2.2.0/resilience4j-timelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circuitbreaker/2.2.0/resilience4j-circuitbreaker-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-core/2.2.0/resilience4j-core-2.2.0.jar:/Users/priyashr/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/priyashr/.m2/repository/net/logstash/logback/logstash-logback-encoder/8.0/logstash-logback-encoder-8.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/priyashr/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/priyashr/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/priyashr/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/priyashr/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/priyashr/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/priyashr/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/priyashr/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/priyashr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/priyashr/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/priyashr/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/priyashr/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/priyashr/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik/1.9.2/jqwik-1.9.2.jar:/Users/priyashr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-api/1.9.2/jqwik-api-1.9.2.jar:/Users/priyashr/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-web/1.9.2/jqwik-web-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-time/1.9.2/jqwik-time-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-engine/1.9.2/jqwik-engine-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/priyashr/.m2/repository/org/wiremock/wiremock-standalone/3.5.4/wiremock-standalone-3.5.4.jar:"/>
+    <property name="surefire.test.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/test-classes:/Users/priyashr/git/gymApp/workout-session-service/target/classes:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/priyashr/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/priyashr/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/priyashr/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/priyashr/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/priyashr/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/priyashr/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/priyashr/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/priyashr/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/priyashr/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/priyashr/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/priyashr/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/priyashr/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/priyashr/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/priyashr/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-websocket/3.4.4/spring-boot-starter-websocket-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-messaging/6.2.5/spring-messaging-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-websocket/6.2.5/spring-websocket-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-amqp/3.4.4/spring-boot-starter-amqp-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-rabbit/3.2.4/spring-rabbit-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-amqp/3.2.4/spring-amqp-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/retry/spring-retry/2.0.11/spring-retry-2.0.11.jar:/Users/priyashr/.m2/repository/com/rabbitmq/amqp-client/5.22.0/amqp-client-5.22.0.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/priyashr/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/priyashr/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.4.4/spring-boot-starter-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.4.4/spring-boot-actuator-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator/3.4.4/spring-boot-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-jakarta9/1.14.5/micrometer-jakarta9-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-core/1.14.5/micrometer-core-1.14.5.jar:/Users/priyashr/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/Users/priyashr/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.3/jackson-dataformat-toml-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-database-postgresql/10.20.1/flyway-database-postgresql-10.20.1.jar:/Users/priyashr/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/priyashr/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/priyashr/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.47/nimbus-jose-jwt-9.47.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring-boot3/2.2.0/resilience4j-spring-boot3-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring6/2.2.0/resilience4j-spring6-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-annotations/2.2.0/resilience4j-annotations-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-consumer/2.2.0/resilience4j-consumer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circularbuffer/2.2.0/resilience4j-circularbuffer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-framework-common/2.2.0/resilience4j-framework-common-2.2.0.jar:/Users/priyashr/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-micrometer/2.2.0/resilience4j-micrometer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-bulkhead/2.2.0/resilience4j-bulkhead-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-retry/2.2.0/resilience4j-retry-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-ratelimiter/2.2.0/resilience4j-ratelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-timelimiter/2.2.0/resilience4j-timelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circuitbreaker/2.2.0/resilience4j-circuitbreaker-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-core/2.2.0/resilience4j-core-2.2.0.jar:/Users/priyashr/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/priyashr/.m2/repository/net/logstash/logback/logstash-logback-encoder/8.0/logstash-logback-encoder-8.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/priyashr/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/priyashr/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/priyashr/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/priyashr/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/priyashr/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/priyashr/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/priyashr/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/priyashr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/priyashr/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/priyashr/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/priyashr/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/priyashr/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik/1.9.2/jqwik-1.9.2.jar:/Users/priyashr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-api/1.9.2/jqwik-api-1.9.2.jar:/Users/priyashr/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-web/1.9.2/jqwik-web-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-time/1.9.2/jqwik-time-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-engine/1.9.2/jqwik-engine-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/priyashr/.m2/repository/org/wiremock/wiremock-standalone/3.5.4/wiremock-standalone-3.5.4.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/priyashr"/>
     <property name="user.language" value="en"/>
@@ -34,7 +34,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/surefire/surefirebooter-20260513172728096_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/surefire/surefirebooter-20260610054241875_3.jar"/>
     <property name="polyglot.engine.WarnInterpreterOnly" value="false"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
@@ -52,15 +52,15 @@
     <property name="jetty.git.hash" value="922f8dc188f7011e60d0361de585fd4ac4d63064"/>
     <property name="java.io.tmpdir" value="/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/"/>
     <property name="wiremock.org.eclipse.jetty.http.HttpGenerator.STRICT" value="true"/>
-    <property name="catalina.home" value="/private/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/tomcat.0.17094677777068976868"/>
-    <property name="com.zaxxer.hikari.pool_number" value="4"/>
+    <property name="catalina.home" value="/private/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/tomcat.0.12180413435930446340"/>
+    <property name="com.zaxxer.hikari.pool_number" value="6"/>
     <property name="java.version" value="17.0.3"/>
     <property name="user.dir" value="/Users/priyashr/git/gymApp/workout-session-service"/>
     <property name="os.arch" value="x86_64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="24402"/>
+    <property name="PID" value="66977"/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
-    <property name="catalina.base" value="/private/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/tomcat.0.5104145381702165092"/>
+    <property name="catalina.base" value="/private/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/tomcat.0.4635650907422420196"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/priyashr/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -72,8 +72,8 @@
     <property name="java.class.version" value="61.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[workout-session-service] "/>
   </properties>
-  <testcase name="completeExerciseThenEnd_ReceivesBothMessageTypes" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest" time="16.395">
-    <system-out><![CDATA[17:30:27.766 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.gmail.ramawthar.priyash.hybridstrength.workoutsession.WorkoutSessionApplication for test class com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest
+  <testcase name="completeExerciseThenEnd_ReceivesBothMessageTypes" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest" time="1.33">
+    <system-out><![CDATA[05:43:29.791 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.gmail.ramawthar.priyash.hybridstrength.workoutsession.WorkoutSessionApplication for test class com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -84,67 +84,67 @@
 
  :: Spring Boot ::                (v3.4.4)
 
-17:30:28.256 [main] INFO  c.g.r.p.h.w.i.WebSocketIntegrationTest - Starting WebSocketIntegrationTest using Java 17.0.3 with PID 24402 (started by priyashr in /Users/priyashr/git/gymApp/workout-session-service)
-17:30:28.256 [main] DEBUG c.g.r.p.h.w.i.WebSocketIntegrationTest - Running with Spring Boot v3.4.4, Spring v6.2.5
-17:30:28.256 [main] INFO  c.g.r.p.h.w.i.WebSocketIntegrationTest - The following 1 profile is active: "integration"
-17:30:28.622 [main] INFO  o.s.b.f.s.DefaultListableBeanFactory - Overriding bean definition for bean 'rsaPublicKey' with a different definition: replacing [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=jwtConfig; factoryMethodName=rsaPublicKey; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/gmail/ramawthar/priyash/hybridstrength/workoutsession/config/JwtConfig.class]] with [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=true; fallback=false; factoryBeanName=webSocketIntegrationTest.TestConfig; factoryMethodName=rsaPublicKey; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest$TestConfig]
-17:30:28.883 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-17:30:28.958 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 63 ms. Found 2 JPA repository interfaces.
-17:30:29.356 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-17:30:29.357 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-4"]
-17:30:29.358 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-17:30:29.358 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.39]
-17:30:29.388 [main] INFO  o.a.c.c.C.[Tomcat-3].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-17:30:29.388 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1129 ms
-17:30:29.674 [main] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
-17:30:29.817 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
-17:30:29.818 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Added connection conn30: url=jdbc:h2:mem:session_integration user=SA
-17:30:29.818 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
-17:30:29.820 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:h2:mem:session_integration (H2 2.3)
-17:30:29.823 [main] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: H2 2.3.232 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.2.224.
-17:30:29.829 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 3 migrations (execution time 00:00.004s)
-17:30:29.833 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "PUBLIC": 202
-17:30:29.833 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "PUBLIC" is up to date. No migration necessary.
-17:30:29.913 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-17:30:29.917 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-17:30:29.941 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-17:30:29.943 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-4)']
+05:43:30.146 [main] INFO  c.g.r.p.h.w.i.WebSocketIntegrationTest - Starting WebSocketIntegrationTest using Java 17.0.3 with PID 66977 (started by priyashr in /Users/priyashr/git/gymApp/workout-session-service)
+05:43:30.146 [main] DEBUG c.g.r.p.h.w.i.WebSocketIntegrationTest - Running with Spring Boot v3.4.4, Spring v6.2.5
+05:43:30.146 [main] INFO  c.g.r.p.h.w.i.WebSocketIntegrationTest - The following 1 profile is active: "integration"
+05:43:30.361 [main] INFO  o.s.b.f.s.DefaultListableBeanFactory - Overriding bean definition for bean 'rsaPublicKey' with a different definition: replacing [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=jwtConfig; factoryMethodName=rsaPublicKey; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/gmail/ramawthar/priyash/hybridstrength/workoutsession/config/JwtConfig.class]] with [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=true; fallback=false; factoryBeanName=webSocketIntegrationTest.TestConfig; factoryMethodName=rsaPublicKey; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest$TestConfig]
+05:43:30.463 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+05:43:30.489 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 25 ms. Found 2 JPA repository interfaces.
+05:43:30.668 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+05:43:30.668 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-6"]
+05:43:30.668 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+05:43:30.668 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.39]
+05:43:30.680 [main] INFO  o.a.c.c.C.[Tomcat-5].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+05:43:30.680 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 533 ms
+05:43:30.796 [main] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+05:43:30.863 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Starting...
+05:43:30.905 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-6 - Added connection org.postgresql.jdbc.PgConnection@2d11c1e0
+05:43:30.905 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-6 - Start completed.
+05:43:30.910 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:30432/hybridstrength_dev?stringtype=unspecified (PostgreSQL 16.13)
+05:43:30.963 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 9 migrations (execution time 00:00.019s)
+05:43:31.053 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 203
+05:43:31.056 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+05:43:31.124 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+05:43:31.126 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+05:43:31.138 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+05:43:31.157 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-6)']
 	Database driver: undefined/unknown
-	Database version: 2.3.232
+	Database version: 16.13
 	Autocommit mode: undefined/unknown
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-17:30:30.187 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-17:30:30.188 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-17:30:31.209 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+05:43:31.247 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+05:43:31.312 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+05:43:31.798 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: 78c0fbf9-c4e2-4829-8046-aa57c550a94c
+Using generated security password: d01041fe-59dd-47dd-bf27-edadb158415e
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-17:30:31.214 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-17:30:31.635 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-17:30:32.897 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
-17:30:32.897 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@21253afe]]
-17:30:32.897 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
-17:30:32.898 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-4"]
-17:30:32.901 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 61482 (http) with context path '/'
-17:30:32.918 [main] INFO  c.g.r.p.h.w.i.WebSocketIntegrationTest - Started WebSocketIntegrationTest in 4.717 seconds (process running for 184.698)
-17:30:33.077 [http-nio-auto-4-exec-1] INFO  o.a.c.c.C.[Tomcat-3].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-17:30:33.077 [http-nio-auto-4-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-17:30:33.079 [http-nio-auto-4-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-17:30:33.081 [http-nio-auto-4-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 750fe2f2-2bb8-4f74-a8fa-8ddfa1866994
-17:30:33.101 [http-nio-auto-4-exec-1] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=750fe2f2-2bb8-4f74-a8fa-8ddfa1866994, program=be5c30f0-1af8-4b9b-b2e9-45fdbe629167
-17:30:33.102 [http-nio-auto-4-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=750fe2f2-2bb8-4f74-a8fa-8ddfa1866994, program=be5c30f0-1af8-4b9b-b2e9-45fdbe629167, week=1, day=1, standalone=true
-17:30:33.103 [http-nio-auto-4-exec-1] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=be5c30f0-1af8-4b9b-b2e9-45fdbe629167
+05:43:31.803 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+05:43:32.027 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+05:43:32.584 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+05:43:32.584 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7be3bd78]]
+05:43:32.584 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+05:43:32.585 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-6"]
+05:43:32.587 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 53424 (http) with context path '/'
+05:43:32.594 [main] INFO  c.g.r.p.h.w.i.WebSocketIntegrationTest - Started WebSocketIntegrationTest in 2.475 seconds (process running for 50.633)
+05:43:32.613 [http-nio-auto-6-exec-1] INFO  o.a.c.c.C.[Tomcat-5].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+05:43:32.613 [http-nio-auto-6-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+05:43:32.614 [http-nio-auto-6-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+05:43:32.615 [http-nio-auto-6-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: cdca0abd-df78-464f-a66f-58bdd1332fcb
+05:43:32.627 [http-nio-auto-6-exec-1] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=cdca0abd-df78-464f-a66f-58bdd1332fcb, program=a85850b2-eefe-41b2-bcdd-74bf67cdd035
+05:43:32.639 [http-nio-auto-6-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=cdca0abd-df78-464f-a66f-58bdd1332fcb, program=a85850b2-eefe-41b2-bcdd-74bf67cdd035, week=1, day=1, standalone=true
+05:43:32.639 [http-nio-auto-6-exec-1] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=a85850b2-eefe-41b2-bcdd-74bf67cdd035
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -152,6 +152,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -159,14 +160,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:30:33.117 [http-nio-auto-4-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=4a169bdb-fa3a-42cf-947b-3e94e23e3524, sections=2
+05:43:32.651 [http-nio-auto-6-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=95a34be8-c2dd-4a68-93fb-f2aaf4ee70e1, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -174,6 +175,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -181,6 +183,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -192,6 +195,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -199,6 +203,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -206,14 +211,15 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:30:33.267 [http-nio-auto-4-exec-3] DEBUG c.g.r.p.h.w.c.WebSocketJwtInterceptor - WebSocket CONNECT authenticated for user: 750fe2f2-2bb8-4f74-a8fa-8ddfa1866994
-17:30:34.291 [http-nio-auto-4-exec-5] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 750fe2f2-2bb8-4f74-a8fa-8ddfa1866994
+05:43:32.765 [http-nio-auto-6-exec-3] DEBUG c.g.r.p.h.w.c.WebSocketJwtInterceptor - WebSocket CONNECT authenticated for user: cdca0abd-df78-464f-a66f-58bdd1332fcb
+05:43:33.779 [http-nio-auto-6-exec-5] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: cdca0abd-df78-464f-a66f-58bdd1332fcb
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -221,6 +227,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -228,8 +235,8 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:30:34.306 [http-nio-auto-4-exec-5] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/4a169bdb-fa3a-42cf-947b-3e94e23e3524
-17:30:34.306 [http-nio-auto-4-exec-5] DEBUG c.g.r.p.h.w.s.a.SessionService - Exercise completed: session=4a169bdb-fa3a-42cf-947b-3e94e23e3524, section=0, exercise=0
+05:43:33.793 [http-nio-auto-6-exec-5] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/95a34be8-c2dd-4a68-93fb-f2aaf4ee70e1
+05:43:33.793 [http-nio-auto-6-exec-5] DEBUG c.g.r.p.h.w.s.a.SessionService - Exercise completed: session=95a34be8-c2dd-4a68-93fb-f2aaf4ee70e1, section=0, exercise=0
 Hibernate: 
     update
         sessions 
@@ -237,6 +244,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -244,18 +252,20 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
     where
         id=?
-17:30:34.321 [http-nio-auto-4-exec-6] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 750fe2f2-2bb8-4f74-a8fa-8ddfa1866994
+05:43:33.810 [http-nio-auto-6-exec-6] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: cdca0abd-df78-464f-a66f-58bdd1332fcb
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -263,6 +273,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -270,24 +281,11 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:30:34.333 [http-nio-auto-4-exec-6] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:30:34.336 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:30:34.338 [http-nio-auto-4-exec-6] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 1/5): java.net.ConnectException: Connection refused
-17:30:35.366 [http-nio-auto-4-exec-6] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:30:35.391 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:30:35.393 [http-nio-auto-4-exec-6] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 2/5): java.net.ConnectException: Connection refused
-17:30:37.395 [http-nio-auto-4-exec-6] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:30:37.407 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:30:37.408 [http-nio-auto-4-exec-6] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 3/5): java.net.ConnectException: Connection refused
-17:30:41.409 [http-nio-auto-4-exec-6] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:30:41.412 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:30:41.414 [http-nio-auto-4-exec-6] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 4/5): java.net.ConnectException: Connection refused
-17:30:49.414 [http-nio-auto-4-exec-6] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:30:49.417 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:30:49.418 [http-nio-auto-4-exec-6] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 5/5): java.net.ConnectException: Connection refused
-17:30:49.418 [http-nio-auto-4-exec-6] ERROR c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Exhausted all 5 retry attempts for SessionCompleted event. Event payload for manual replay: eventId=052bb420-83a1-49f4-b8a9-5d6dfdeaef19, sessionId=4a169bdb-fa3a-42cf-947b-3e94e23e3524, userId=750fe2f2-2bb8-4f74-a8fa-8ddfa1866994, programId=be5c30f0-1af8-4b9b-b2e9-45fdbe629167, weekNumber=1, dayNumber=1, standalone=true, startedAt=2026-05-13T15:30:33.113537Z, completedAt=2026-05-13T15:30:34.326264Z
-17:30:49.419 [http-nio-auto-4-exec-6] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_COMPLETED to /topic/sessions/4a169bdb-fa3a-42cf-947b-3e94e23e3524
-17:30:49.419 [http-nio-auto-4-exec-6] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=4a169bdb-fa3a-42cf-947b-3e94e23e3524, standalone=true
+05:43:33.819 [http-nio-auto-6-exec-6] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
+05:43:33.895 [http-nio-auto-6-exec-6] INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#30fbed38:0/SimpleConnection@a974f97 [delegate=amqp://guest@127.0.0.1:30672/, localPort=53430]
+05:43:33.911 [http-nio-auto-6-exec-6] INFO  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Published SessionCompleted event: eventId=daf73922-619f-4ddb-b102-ed89d8c78c0f, sessionId=95a34be8-c2dd-4a68-93fb-f2aaf4ee70e1
+05:43:33.912 [http-nio-auto-6-exec-6] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_COMPLETED to /topic/sessions/95a34be8-c2dd-4a68-93fb-f2aaf4ee70e1
+05:43:33.912 [http-nio-auto-6-exec-6] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=95a34be8-c2dd-4a68-93fb-f2aaf4ee70e1, standalone=true, durationSeconds=1
 Hibernate: 
     update
         sessions 
@@ -295,6 +293,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -302,6 +301,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -309,21 +309,22 @@ Hibernate:
         id=?
 ]]></system-out>
   </testcase>
-  <testcase name="stompClient_CanConnectAndSubscribe" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest" time="0.031">
-    <system-out><![CDATA[17:30:49.457 [http-nio-auto-4-exec-9] DEBUG c.g.r.p.h.w.c.WebSocketJwtInterceptor - WebSocket CONNECT authenticated for user: adca032a-372a-4ace-ada4-b1ae0fc01fc0
+  <testcase name="stompClient_CanConnectAndSubscribe" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest" time="0.022">
+    <system-out><![CDATA[05:43:33.942 [http-nio-auto-6-exec-9] DEBUG c.g.r.p.h.w.c.WebSocketJwtInterceptor - WebSocket CONNECT authenticated for user: c42c0071-f5c8-4327-94f7-3ebe3c4892d9
 ]]></system-out>
   </testcase>
-  <testcase name="endSession_PushesSessionCompleted" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest" time="16.121">
-    <system-out><![CDATA[17:30:49.481 [http-nio-auto-4-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 719a3c10-27e6-4316-94c5-59c4bb095c16
-17:30:49.485 [http-nio-auto-4-exec-1] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=719a3c10-27e6-4316-94c5-59c4bb095c16, program=4c0a5a0a-ee66-47c6-b758-c2dd024a5c84
-17:30:49.485 [http-nio-auto-4-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=719a3c10-27e6-4316-94c5-59c4bb095c16, program=4c0a5a0a-ee66-47c6-b758-c2dd024a5c84, week=1, day=1, standalone=true
-17:30:49.486 [http-nio-auto-4-exec-1] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=4c0a5a0a-ee66-47c6-b758-c2dd024a5c84
+  <testcase name="endSession_PushesSessionCompleted" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest" time="1.096">
+    <system-out><![CDATA[05:43:33.962 [http-nio-auto-6-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 9248256e-39ae-4150-a400-f62fc418446c
+05:43:33.962 [http-nio-auto-6-exec-1] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=9248256e-39ae-4150-a400-f62fc418446c, program=f1bf03ea-91e5-408c-a801-125b3d172d90
+05:43:33.963 [http-nio-auto-6-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=9248256e-39ae-4150-a400-f62fc418446c, program=f1bf03ea-91e5-408c-a801-125b3d172d90, week=1, day=1, standalone=true
+05:43:33.963 [http-nio-auto-6-exec-1] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=f1bf03ea-91e5-408c-a801-125b3d172d90
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -331,6 +332,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -338,14 +340,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:30:49.496 [http-nio-auto-4-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=ef53f4e6-fdc8-484c-9ca9-60acc2ed4487, sections=2
+05:43:33.971 [http-nio-auto-6-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=9134aa29-aab4-4f23-9db1-13bf931a0125, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -353,6 +355,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -360,6 +363,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -371,6 +375,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -378,6 +383,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -385,14 +391,15 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:30:49.537 [http-nio-auto-4-exec-2] DEBUG c.g.r.p.h.w.c.WebSocketJwtInterceptor - WebSocket CONNECT authenticated for user: 719a3c10-27e6-4316-94c5-59c4bb095c16
-17:30:50.550 [http-nio-auto-4-exec-4] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 719a3c10-27e6-4316-94c5-59c4bb095c16
+05:43:33.992 [http-nio-auto-6-exec-3] DEBUG c.g.r.p.h.w.c.WebSocketJwtInterceptor - WebSocket CONNECT authenticated for user: 9248256e-39ae-4150-a400-f62fc418446c
+05:43:34.998 [http-nio-auto-6-exec-5] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 9248256e-39ae-4150-a400-f62fc418446c
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -400,6 +407,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -407,24 +415,9 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:30:50.552 [http-nio-auto-4-exec-4] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:30:50.555 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:30:50.555 [http-nio-auto-4-exec-4] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 1/5): java.net.ConnectException: Connection refused
-17:30:51.556 [http-nio-auto-4-exec-4] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:30:51.558 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:30:51.559 [http-nio-auto-4-exec-4] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 2/5): java.net.ConnectException: Connection refused
-17:30:53.561 [http-nio-auto-4-exec-4] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:30:53.564 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:30:53.565 [http-nio-auto-4-exec-4] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 3/5): java.net.ConnectException: Connection refused
-17:30:57.569 [http-nio-auto-4-exec-4] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:30:57.572 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:30:57.573 [http-nio-auto-4-exec-4] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 4/5): java.net.ConnectException: Connection refused
-17:31:05.577 [http-nio-auto-4-exec-4] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:31:05.579 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:31:05.580 [http-nio-auto-4-exec-4] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 5/5): java.net.ConnectException: Connection refused
-17:31:05.580 [http-nio-auto-4-exec-4] ERROR c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Exhausted all 5 retry attempts for SessionCompleted event. Event payload for manual replay: eventId=b2df3694-e49b-4db4-9cb5-27a963726835, sessionId=ef53f4e6-fdc8-484c-9ca9-60acc2ed4487, userId=719a3c10-27e6-4316-94c5-59c4bb095c16, programId=4c0a5a0a-ee66-47c6-b758-c2dd024a5c84, weekNumber=1, dayNumber=1, standalone=true, startedAt=2026-05-13T15:30:49.494175Z, completedAt=2026-05-13T15:30:50.552168Z
-17:31:05.580 [http-nio-auto-4-exec-4] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_COMPLETED to /topic/sessions/ef53f4e6-fdc8-484c-9ca9-60acc2ed4487
-17:31:05.580 [http-nio-auto-4-exec-4] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=ef53f4e6-fdc8-484c-9ca9-60acc2ed4487, standalone=true
+05:43:35.010 [http-nio-auto-6-exec-5] INFO  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Published SessionCompleted event: eventId=e2cb5a24-263d-4dbb-b548-c9073e8e0cc8, sessionId=9134aa29-aab4-4f23-9db1-13bf931a0125
+05:43:35.011 [http-nio-auto-6-exec-5] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_COMPLETED to /topic/sessions/9134aa29-aab4-4f23-9db1-13bf931a0125
+05:43:35.011 [http-nio-auto-6-exec-5] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=9134aa29-aab4-4f23-9db1-13bf931a0125, standalone=true, durationSeconds=1
 Hibernate: 
     update
         sessions 
@@ -432,6 +425,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -439,6 +433,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -446,17 +441,18 @@ Hibernate:
         id=?
 ]]></system-out>
   </testcase>
-  <testcase name="completeExercise_PushesSessionStateUpdate" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest" time="1.057">
-    <system-out><![CDATA[17:31:05.595 [http-nio-auto-4-exec-6] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 96d5ecbe-ed34-4b66-82b7-5137e022eff6
-17:31:05.596 [http-nio-auto-4-exec-6] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=96d5ecbe-ed34-4b66-82b7-5137e022eff6, program=311f8325-4864-4f64-9698-cb06e03d0841
-17:31:05.596 [http-nio-auto-4-exec-6] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=96d5ecbe-ed34-4b66-82b7-5137e022eff6, program=311f8325-4864-4f64-9698-cb06e03d0841, week=1, day=1, standalone=true
-17:31:05.596 [http-nio-auto-4-exec-6] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=311f8325-4864-4f64-9698-cb06e03d0841
+  <testcase name="completeExercise_PushesSessionStateUpdate" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.WebSocketIntegrationTest" time="1.089">
+    <system-out><![CDATA[05:43:35.059 [http-nio-auto-6-exec-7] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: d230c656-b2d4-419b-ae86-148ebdafc57e
+05:43:35.060 [http-nio-auto-6-exec-7] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=d230c656-b2d4-419b-ae86-148ebdafc57e, program=732df78a-40a1-449e-a3e8-b5d1d1326639
+05:43:35.061 [http-nio-auto-6-exec-7] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=d230c656-b2d4-419b-ae86-148ebdafc57e, program=732df78a-40a1-449e-a3e8-b5d1d1326639, week=1, day=1, standalone=true
+05:43:35.061 [http-nio-auto-6-exec-7] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=732df78a-40a1-449e-a3e8-b5d1d1326639
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -464,6 +460,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -471,14 +468,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:31:05.602 [http-nio-auto-4-exec-6] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=53973043-dadd-44c0-ab0f-05df33bd8eb7, sections=2
+05:43:35.069 [http-nio-auto-6-exec-7] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=be2336c6-f242-4e15-91eb-fdcb11f880df, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -486,6 +483,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -493,6 +491,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -504,6 +503,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -511,6 +511,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -518,14 +519,15 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:31:05.622 [http-nio-auto-4-exec-8] DEBUG c.g.r.p.h.w.c.WebSocketJwtInterceptor - WebSocket CONNECT authenticated for user: 96d5ecbe-ed34-4b66-82b7-5137e022eff6
-17:31:06.633 [http-nio-auto-4-exec-10] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 96d5ecbe-ed34-4b66-82b7-5137e022eff6
+05:43:35.105 [http-nio-auto-6-exec-9] DEBUG c.g.r.p.h.w.c.WebSocketJwtInterceptor - WebSocket CONNECT authenticated for user: d230c656-b2d4-419b-ae86-148ebdafc57e
+05:43:36.112 [http-nio-auto-6-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: d230c656-b2d4-419b-ae86-148ebdafc57e
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -533,6 +535,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -540,8 +543,8 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:31:06.637 [http-nio-auto-4-exec-10] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/53973043-dadd-44c0-ab0f-05df33bd8eb7
-17:31:06.637 [http-nio-auto-4-exec-10] DEBUG c.g.r.p.h.w.s.a.SessionService - Exercise completed: session=53973043-dadd-44c0-ab0f-05df33bd8eb7, section=0, exercise=0
+05:43:36.121 [http-nio-auto-6-exec-1] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/be2336c6-f242-4e15-91eb-fdcb11f880df
+05:43:36.121 [http-nio-auto-6-exec-1] DEBUG c.g.r.p.h.w.s.a.SessionService - Exercise completed: session=be2336c6-f242-4e15-91eb-fdcb11f880df, section=0, exercise=0
 Hibernate: 
     update
         sessions 
@@ -549,6 +552,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -556,6 +560,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 

@@ -78,16 +78,19 @@ const mockSession: SessionResponse = {
       sectionName: "Strength",
       sectionType: "STRENGTH",
       exerciseLogs: [
-        { exerciseIndex: 0, exerciseName: "Squat", completed: false, completedAt: null },
-        { exerciseIndex: 1, exerciseName: "Bench", completed: false, completedAt: null },
+        { exerciseIndex: 0, exerciseName: "Squat", completed: false, completedAt: null, setLogs: [] },
+        { exerciseIndex: 1, exerciseName: "Bench", completed: false, completedAt: null, setLogs: [] },
       ],
       completed: false,
+      crossFitScore: null,
+      roundCount: 0,
     },
   ],
   workoutSnapshot: { sections: [] },
   startedAt: "2026-01-15T10:00:00Z",
   pausedAt: null,
   completedAt: null,
+  durationSeconds: null,
 };
 
 describe("useSession", () => {
@@ -101,8 +104,8 @@ describe("useSession", () => {
         {
           ...mockSession.sectionProgresses[0],
           exerciseLogs: [
-            { exerciseIndex: 0, exerciseName: "Squat", completed: true, completedAt: "2026-01-15T10:30:00Z" },
-            { exerciseIndex: 1, exerciseName: "Bench", completed: false, completedAt: null },
+            { exerciseIndex: 0, exerciseName: "Squat", completed: true, completedAt: "2026-01-15T10:30:00Z", setLogs: [] },
+            { exerciseIndex: 1, exerciseName: "Bench", completed: false, completedAt: null, setLogs: [] },
           ],
         },
       ],

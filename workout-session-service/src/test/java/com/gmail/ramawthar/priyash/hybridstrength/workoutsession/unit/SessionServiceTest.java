@@ -3,15 +3,18 @@ package com.gmail.ramawthar.priyash.hybridstrength.workoutsession.unit;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.common.event.SessionCompletedEvent;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.common.exception.AccessDeniedException;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.common.exception.SessionAlreadyCompleteException;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.common.exception.SessionNotFoundException;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.progression.ports.inbound.AdvanceDayUseCase;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.progression.ports.inbound.GetEnrollmentUseCase;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.application.SessionService;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.CrossFitScore;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.ExerciseLog;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.SectionProgress;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.SectionType;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.Session;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.SessionStatus;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.SetLog;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.outbound.SessionEventPublisher;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.outbound.SessionNotifier;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.ports.outbound.SessionRepository;
@@ -26,6 +29,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -461,6 +465,445 @@ class SessionServiceTest {
             assertThrows(IllegalStateException.class, () ->
                     sessionService.resumeSession(sessionId, USER_ID)
             );
+        }
+    }
+
+    // --- Performance Tracking Tests ---
+
+    @Nested
+    @DisplayName("logSet")
+    class LogSet {
+
+        private Session createSessionWithStrengthSection(String userId) {
+            List<SectionProgress> sections = List.of(
+                    new SectionProgress(0, "Main Lift", SectionType.STRENGTH,
+                            List.of(new ExerciseLog(0, "Back Squat"), new ExerciseLog(1, "Bench Press"))),
+                    new SectionProgress(1, "Conditioning", SectionType.AMRAP,
+                            List.of(new ExerciseLog(0, "Burpees")))
+            );
+            return Session.start(
+                    UUID.randomUUID(), userId, PROGRAM_ID, ENROLLMENT_ID,
+                    1, 1, sections, createValidProgramJson(), Instant.now()
+            );
+        }
+
+        @Test
+        @DisplayName("logSet_HappyPath_AppendsSetAndPersists")
+        void logSet_HappyPath_AppendsSetAndPersists() {
+            Session session = createSessionWithStrengthSection(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+            when(sessionRepository.save(any(Session.class))).thenAnswer(inv -> inv.getArgument(0));
+
+            Session result = sessionService.logSet(sessionId, USER_ID, 0, 0,
+                    new BigDecimal("100.0"), 5, new BigDecimal("8.0"));
+
+            List<SetLog> setLogs = result.getSectionProgresses().get(0).getExerciseLogs().get(0).getSetLogs();
+            assertEquals(1, setLogs.size());
+            assertEquals(1, setLogs.get(0).getSetNumber());
+            assertEquals(0, new BigDecimal("100.0").compareTo(setLogs.get(0).getWeight()));
+            assertEquals(5, setLogs.get(0).getRepetitions());
+            assertEquals(0, new BigDecimal("8.0").compareTo(setLogs.get(0).getRpe()));
+
+            verify(sessionRepository).save(any(Session.class));
+            verify(sessionNotifier).notifySessionUpdate(any(Session.class));
+        }
+
+        @Test
+        @DisplayName("logSet_MultipleSetsSameExercise_IncrementsSetNumber")
+        void logSet_MultipleSetsSameExercise_IncrementsSetNumber() {
+            Session session = createSessionWithStrengthSection(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+            when(sessionRepository.save(any(Session.class))).thenAnswer(inv -> inv.getArgument(0));
+
+            sessionService.logSet(sessionId, USER_ID, 0, 0, new BigDecimal("80"), 8, null);
+            sessionService.logSet(sessionId, USER_ID, 0, 0, new BigDecimal("85"), 6, new BigDecimal("7.5"));
+            Session result = sessionService.logSet(sessionId, USER_ID, 0, 0, new BigDecimal("90"), 5, new BigDecimal("9.0"));
+
+            List<SetLog> setLogs = result.getSectionProgresses().get(0).getExerciseLogs().get(0).getSetLogs();
+            assertEquals(3, setLogs.size());
+            assertEquals(1, setLogs.get(0).getSetNumber());
+            assertEquals(2, setLogs.get(1).getSetNumber());
+            assertEquals(3, setLogs.get(2).getSetNumber());
+        }
+
+        @Test
+        @DisplayName("logSet_CompletedSession_ThrowsSessionAlreadyComplete")
+        void logSet_CompletedSession_ThrowsSessionAlreadyComplete() {
+            Session session = createSessionWithStrengthSection(USER_ID);
+            session.end(Instant.now());
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+
+            assertThrows(SessionAlreadyCompleteException.class, () ->
+                    sessionService.logSet(sessionId, USER_ID, 0, 0,
+                            new BigDecimal("100"), 5, null)
+            );
+            verify(sessionRepository, never()).save(any());
+        }
+
+        @Test
+        @DisplayName("logSet_NonStrengthSection_ThrowsIllegalArgument")
+        void logSet_NonStrengthSection_ThrowsIllegalArgument() {
+            Session session = createSessionWithStrengthSection(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+
+            // Section index 1 is AMRAP, not STRENGTH
+            IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
+                    sessionService.logSet(sessionId, USER_ID, 1, 0,
+                            new BigDecimal("100"), 5, null)
+            );
+            assertTrue(ex.getMessage().contains("Set logging is only available for STRENGTH sections"));
+            verify(sessionRepository, never()).save(any());
+        }
+
+        @Test
+        @DisplayName("logSet_WrongUser_ThrowsAccessDenied")
+        void logSet_WrongUser_ThrowsAccessDenied() {
+            Session session = createSessionWithStrengthSection(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+
+            assertThrows(AccessDeniedException.class, () ->
+                    sessionService.logSet(sessionId, OTHER_USER_ID, 0, 0,
+                            new BigDecimal("100"), 5, null)
+            );
+        }
+
+        @Test
+        @DisplayName("logSet_InvalidSectionIndex_ThrowsIllegalArgument")
+        void logSet_InvalidSectionIndex_ThrowsIllegalArgument() {
+            Session session = createSessionWithStrengthSection(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+
+            assertThrows(IllegalArgumentException.class, () ->
+                    sessionService.logSet(sessionId, USER_ID, 99, 0,
+                            new BigDecimal("100"), 5, null)
+            );
+        }
+
+        @Test
+        @DisplayName("logSet_InvalidExerciseIndex_ThrowsIllegalArgument")
+        void logSet_InvalidExerciseIndex_ThrowsIllegalArgument() {
+            Session session = createSessionWithStrengthSection(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+
+            assertThrows(IllegalArgumentException.class, () ->
+                    sessionService.logSet(sessionId, USER_ID, 0, 99,
+                            new BigDecimal("100"), 5, null)
+            );
+        }
+
+        @Test
+        @DisplayName("logSet_NullRpe_AllowedAndPersists")
+        void logSet_NullRpe_AllowedAndPersists() {
+            Session session = createSessionWithStrengthSection(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+            when(sessionRepository.save(any(Session.class))).thenAnswer(inv -> inv.getArgument(0));
+
+            Session result = sessionService.logSet(sessionId, USER_ID, 0, 0,
+                    new BigDecimal("60"), 10, null);
+
+            SetLog logged = result.getSectionProgresses().get(0).getExerciseLogs().get(0).getSetLogs().get(0);
+            assertNull(logged.getRpe());
+        }
+    }
+
+    @Nested
+    @DisplayName("logCrossFitScore")
+    class LogCrossFitScore {
+
+        private Session createSessionWithScoredSections(String userId) {
+            List<SectionProgress> sections = List.of(
+                    new SectionProgress(0, "Strength", SectionType.STRENGTH,
+                            List.of(new ExerciseLog(0, "Squat"))),
+                    new SectionProgress(1, "AMRAP 20", SectionType.AMRAP,
+                            List.of(new ExerciseLog(0, "Pull-ups"), new ExerciseLog(1, "Push-ups"))),
+                    new SectionProgress(2, "For Time", SectionType.FOR_TIME,
+                            List.of(new ExerciseLog(0, "Thrusters")))
+            );
+            return Session.start(
+                    UUID.randomUUID(), userId, PROGRAM_ID, ENROLLMENT_ID,
+                    1, 1, sections, createValidProgramJson(), Instant.now()
+            );
+        }
+
+        @Test
+        @DisplayName("logCrossFitScore_AmrapSection_SetsScoreAndPersists")
+        void logCrossFitScore_AmrapSection_SetsScoreAndPersists() {
+            Session session = createSessionWithScoredSections(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+            when(sessionRepository.save(any(Session.class))).thenAnswer(inv -> inv.getArgument(0));
+
+            Session result = sessionService.logCrossFitScore(sessionId, USER_ID, 1, 5, 12, null);
+
+            CrossFitScore score = result.getSectionProgresses().get(1).getCrossFitScore();
+            assertNotNull(score);
+            assertEquals(5, score.getRounds());
+            assertEquals(12, score.getAdditionalReps());
+            assertNull(score.getTotalTimeSeconds());
+
+            verify(sessionRepository).save(any(Session.class));
+            verify(sessionNotifier).notifySessionUpdate(any(Session.class));
+        }
+
+        @Test
+        @DisplayName("logCrossFitScore_ForTimeSection_SetsScoreWithTime")
+        void logCrossFitScore_ForTimeSection_SetsScoreWithTime() {
+            Session session = createSessionWithScoredSections(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+            when(sessionRepository.save(any(Session.class))).thenAnswer(inv -> inv.getArgument(0));
+
+            Session result = sessionService.logCrossFitScore(sessionId, USER_ID, 2, 3, 0, 720);
+
+            CrossFitScore score = result.getSectionProgresses().get(2).getCrossFitScore();
+            assertNotNull(score);
+            assertEquals(3, score.getRounds());
+            assertEquals(0, score.getAdditionalReps());
+            assertEquals(720, score.getTotalTimeSeconds());
+        }
+
+        @Test
+        @DisplayName("logCrossFitScore_NonScoredSection_ThrowsIllegalArgument")
+        void logCrossFitScore_NonScoredSection_ThrowsIllegalArgument() {
+            Session session = createSessionWithScoredSections(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+
+            // Section 0 is STRENGTH, not a scored type
+            IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
+                    sessionService.logCrossFitScore(sessionId, USER_ID, 0, 5, 12, null)
+            );
+            assertTrue(ex.getMessage().contains("Score logging is only available for AMRAP, EMOM, or FOR_TIME sections"));
+            verify(sessionRepository, never()).save(any());
+        }
+
+        @Test
+        @DisplayName("logCrossFitScore_CompletedSession_ThrowsSessionAlreadyComplete")
+        void logCrossFitScore_CompletedSession_ThrowsSessionAlreadyComplete() {
+            Session session = createSessionWithScoredSections(USER_ID);
+            session.end(Instant.now());
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+
+            assertThrows(SessionAlreadyCompleteException.class, () ->
+                    sessionService.logCrossFitScore(sessionId, USER_ID, 1, 5, 12, null)
+            );
+            verify(sessionRepository, never()).save(any());
+        }
+
+        @Test
+        @DisplayName("logCrossFitScore_OverwriteSemantics_ReplacesExistingScore")
+        void logCrossFitScore_OverwriteSemantics_ReplacesExistingScore() {
+            Session session = createSessionWithScoredSections(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+            when(sessionRepository.save(any(Session.class))).thenAnswer(inv -> inv.getArgument(0));
+
+            // Log first score
+            sessionService.logCrossFitScore(sessionId, USER_ID, 1, 3, 8, null);
+            // Log second score — should overwrite
+            Session result = sessionService.logCrossFitScore(sessionId, USER_ID, 1, 6, 15, null);
+
+            CrossFitScore score = result.getSectionProgresses().get(1).getCrossFitScore();
+            assertNotNull(score);
+            assertEquals(6, score.getRounds());
+            assertEquals(15, score.getAdditionalReps());
+        }
+
+        @Test
+        @DisplayName("logCrossFitScore_ForTimeMissingTime_ThrowsIllegalArgument")
+        void logCrossFitScore_ForTimeMissingTime_ThrowsIllegalArgument() {
+            Session session = createSessionWithScoredSections(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+
+            // FOR_TIME section (index 2) requires totalTimeSeconds
+            IllegalArgumentException ex = assertThrows(IllegalArgumentException.class, () ->
+                    sessionService.logCrossFitScore(sessionId, USER_ID, 2, 3, 0, null)
+            );
+            assertTrue(ex.getMessage().contains("Total time must be greater than zero"));
+        }
+
+        @Test
+        @DisplayName("logCrossFitScore_ForTimeZeroTime_ThrowsIllegalArgument")
+        void logCrossFitScore_ForTimeZeroTime_ThrowsIllegalArgument() {
+            Session session = createSessionWithScoredSections(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+
+            assertThrows(IllegalArgumentException.class, () ->
+                    sessionService.logCrossFitScore(sessionId, USER_ID, 2, 3, 0, 0)
+            );
+        }
+
+        @Test
+        @DisplayName("logCrossFitScore_WrongUser_ThrowsAccessDenied")
+        void logCrossFitScore_WrongUser_ThrowsAccessDenied() {
+            Session session = createSessionWithScoredSections(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+
+            assertThrows(AccessDeniedException.class, () ->
+                    sessionService.logCrossFitScore(sessionId, OTHER_USER_ID, 1, 5, 12, null)
+            );
+        }
+    }
+
+    @Nested
+    @DisplayName("endSession — enriched event")
+    class EndSessionEnrichedEvent {
+
+        private Session createSessionWithPerformanceData(String userId) {
+            ExerciseLog squat = new ExerciseLog(0, "Back Squat");
+            squat.addSetLog(new SetLog(1, new BigDecimal("100"), 5, new BigDecimal("7.0"), Instant.now()));
+            squat.addSetLog(new SetLog(2, new BigDecimal("110"), 3, new BigDecimal("8.5"), Instant.now()));
+
+            ExerciseLog bench = new ExerciseLog(1, "Bench Press");
+            // No sets logged for bench — should still appear in event
+
+            SectionProgress strengthSection = new SectionProgress(0, "Main Lift", SectionType.STRENGTH,
+                    List.of(squat, bench));
+
+            SectionProgress amrapSection = new SectionProgress(1, "AMRAP 20", SectionType.AMRAP,
+                    List.of(new ExerciseLog(0, "Pull-ups")));
+            amrapSection.setCrossFitScore(new CrossFitScore(5, 12, null, Instant.now()));
+
+            return Session.start(
+                    UUID.randomUUID(), userId, PROGRAM_ID, ENROLLMENT_ID,
+                    1, 1, List.of(strengthSection, amrapSection),
+                    createValidProgramJson(), Instant.now()
+            );
+        }
+
+        @Test
+        @DisplayName("endSession_WithPerformanceData_EventIncludesDurationSeconds")
+        void endSession_WithPerformanceData_EventIncludesDurationSeconds() {
+            Session session = createSessionWithPerformanceData(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+            when(sessionRepository.save(any(Session.class))).thenAnswer(inv -> inv.getArgument(0));
+
+            ArgumentCaptor<SessionCompletedEvent> eventCaptor =
+                    ArgumentCaptor.forClass(SessionCompletedEvent.class);
+
+            sessionService.endSession(sessionId, USER_ID);
+
+            verify(sessionEventPublisher).publishSessionCompleted(eventCaptor.capture());
+            SessionCompletedEvent event = eventCaptor.getValue();
+
+            assertNotNull(event.durationSeconds());
+            assertTrue(event.durationSeconds() >= 0);
+        }
+
+        @Test
+        @DisplayName("endSession_WithPerformanceData_EventContainsSetLogs")
+        void endSession_WithPerformanceData_EventContainsSetLogs() {
+            Session session = createSessionWithPerformanceData(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+            when(sessionRepository.save(any(Session.class))).thenAnswer(inv -> inv.getArgument(0));
+
+            ArgumentCaptor<SessionCompletedEvent> eventCaptor =
+                    ArgumentCaptor.forClass(SessionCompletedEvent.class);
+
+            sessionService.endSession(sessionId, USER_ID);
+
+            verify(sessionEventPublisher).publishSessionCompleted(eventCaptor.capture());
+            SessionCompletedEvent event = eventCaptor.getValue();
+
+            // Verify set logs are present in the event
+            List<SectionProgress> sections = event.sectionProgresses();
+            assertEquals(2, sections.size());
+
+            // Strength section has set logs
+            List<SetLog> squatSets = sections.get(0).getExerciseLogs().get(0).getSetLogs();
+            assertEquals(2, squatSets.size());
+            assertEquals(1, squatSets.get(0).getSetNumber());
+            assertEquals(2, squatSets.get(1).getSetNumber());
+        }
+
+        @Test
+        @DisplayName("endSession_WithPerformanceData_EventContainsCrossFitScore")
+        void endSession_WithPerformanceData_EventContainsCrossFitScore() {
+            Session session = createSessionWithPerformanceData(USER_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+            when(sessionRepository.save(any(Session.class))).thenAnswer(inv -> inv.getArgument(0));
+
+            ArgumentCaptor<SessionCompletedEvent> eventCaptor =
+                    ArgumentCaptor.forClass(SessionCompletedEvent.class);
+
+            sessionService.endSession(sessionId, USER_ID);
+
+            verify(sessionEventPublisher).publishSessionCompleted(eventCaptor.capture());
+            SessionCompletedEvent event = eventCaptor.getValue();
+
+            // Verify CrossFit score is present in the event
+            CrossFitScore score = event.sectionProgresses().get(1).getCrossFitScore();
+            assertNotNull(score);
+            assertEquals(5, score.getRounds());
+            assertEquals(12, score.getAdditionalReps());
+        }
+
+        @Test
+        @DisplayName("endSession_NoPerformanceData_EventIncludesEmptyPerformanceFields")
+        void endSession_NoPerformanceData_EventIncludesEmptyPerformanceFields() {
+            Session session = createTestSession(USER_ID, ENROLLMENT_ID);
+            UUID sessionId = session.getId();
+
+            when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(session));
+            when(sessionRepository.save(any(Session.class))).thenAnswer(inv -> inv.getArgument(0));
+
+            ArgumentCaptor<SessionCompletedEvent> eventCaptor =
+                    ArgumentCaptor.forClass(SessionCompletedEvent.class);
+
+            sessionService.endSession(sessionId, USER_ID);
+
+            verify(sessionEventPublisher).publishSessionCompleted(eventCaptor.capture());
+            SessionCompletedEvent event = eventCaptor.getValue();
+
+            // All sections and exercises should be present even without performance data
+            assertEquals(2, event.sectionProgresses().size());
+
+            // Verify empty set logs (not null)
+            for (SectionProgress section : event.sectionProgresses()) {
+                for (ExerciseLog exerciseLog : section.getExerciseLogs()) {
+                    assertNotNull(exerciseLog.getSetLogs());
+                    assertTrue(exerciseLog.getSetLogs().isEmpty());
+                }
+                // No CrossFit score for STRENGTH sections
+                assertNull(section.getCrossFitScore());
+            }
+
+            // Duration should still be computed
+            assertNotNull(event.durationSeconds());
         }
     }
 }

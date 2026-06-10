@@ -1,0 +1,1 @@
+{ "weeks": [ { "weekNumber": 1, "days": [ { "dayNumber": 1, "modality": "HYPERTROPHY", "sections": [ { "name": "Main Lifts", "exercises": [ { "name": "Squat", "sets": 4, "reps": "8-10" "weight": "80kg" } ] } ] } ] } ] }

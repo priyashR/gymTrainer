@@ -3,6 +3,7 @@ package com.gmail.ramawthar.priyash.hybridstrength.workoutsession.common.excepti
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.common.dto.ErrorResponse;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.common.dto.ValidationErrorResponse;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.common.dto.ValidationErrorResponse.FieldError;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.SnapshotParseException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,6 +93,26 @@ public class GlobalExceptionHandler {
                 status.value(),
                 "Forbidden",
                 "Access denied",
+                request.getRequestURI(),
+                Instant.now()
+        );
+        return ResponseEntity.status(status).body(body);
+    }
+
+    /**
+     * Snapshot parse failure — 500 with corruption message.
+     */
+    @ExceptionHandler(SnapshotParseException.class)
+    public ResponseEntity<ErrorResponse> handleSnapshotParseException(
+            SnapshotParseException ex, HttpServletRequest request) {
+
+        log.error("Snapshot parse failure on {} {}", request.getMethod(), request.getRequestURI(), ex);
+
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        ErrorResponse body = new ErrorResponse(
+                status.value(),
+                status.getReasonPhrase(),
+                "Workout snapshot is corrupted",
                 request.getRequestURI(),
                 Instant.now()
         );

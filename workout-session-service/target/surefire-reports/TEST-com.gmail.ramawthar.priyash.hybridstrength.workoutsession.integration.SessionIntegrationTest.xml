@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="60.343" tests="15" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="4.874" tests="15" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/test-classes:/Users/priyashr/git/gymApp/workout-session-service/target/classes:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/priyashr/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/priyashr/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/priyashr/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/priyashr/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/priyashr/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/priyashr/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/priyashr/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/priyashr/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/priyashr/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/priyashr/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/priyashr/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/priyashr/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/priyashr/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/priyashr/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-websocket/3.4.4/spring-boot-starter-websocket-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-messaging/6.2.5/spring-messaging-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-websocket/6.2.5/spring-websocket-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-amqp/3.4.4/spring-boot-starter-amqp-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-rabbit/3.2.4/spring-rabbit-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-amqp/3.2.4/spring-amqp-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/retry/spring-retry/2.0.11/spring-retry-2.0.11.jar:/Users/priyashr/.m2/repository/com/rabbitmq/amqp-client/5.22.0/amqp-client-5.22.0.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/priyashr/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/priyashr/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.4.4/spring-boot-starter-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.4.4/spring-boot-actuator-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator/3.4.4/spring-boot-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-jakarta9/1.14.5/micrometer-jakarta9-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-core/1.14.5/micrometer-core-1.14.5.jar:/Users/priyashr/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/Users/priyashr/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.3/jackson-dataformat-toml-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-database-postgresql/10.20.1/flyway-database-postgresql-10.20.1.jar:/Users/priyashr/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/priyashr/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/priyashr/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/priyashr/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.47/nimbus-jose-jwt-9.47.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring-boot3/2.2.0/resilience4j-spring-boot3-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring6/2.2.0/resilience4j-spring6-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-annotations/2.2.0/resilience4j-annotations-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-consumer/2.2.0/resilience4j-consumer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circularbuffer/2.2.0/resilience4j-circularbuffer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-framework-common/2.2.0/resilience4j-framework-common-2.2.0.jar:/Users/priyashr/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-micrometer/2.2.0/resilience4j-micrometer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-bulkhead/2.2.0/resilience4j-bulkhead-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-retry/2.2.0/resilience4j-retry-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-ratelimiter/2.2.0/resilience4j-ratelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-timelimiter/2.2.0/resilience4j-timelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circuitbreaker/2.2.0/resilience4j-circuitbreaker-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-core/2.2.0/resilience4j-core-2.2.0.jar:/Users/priyashr/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/priyashr/.m2/repository/net/logstash/logback/logstash-logback-encoder/8.0/logstash-logback-encoder-8.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/priyashr/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/priyashr/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/priyashr/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/priyashr/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/priyashr/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/priyashr/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/priyashr/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/priyashr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/priyashr/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/priyashr/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/priyashr/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/priyashr/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik/1.9.2/jqwik-1.9.2.jar:/Users/priyashr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-api/1.9.2/jqwik-api-1.9.2.jar:/Users/priyashr/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-web/1.9.2/jqwik-web-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-time/1.9.2/jqwik-time-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-engine/1.9.2/jqwik-engine-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/priyashr/.m2/repository/org/wiremock/wiremock-standalone/3.5.4/wiremock-standalone-3.5.4.jar:"/>
+    <property name="java.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/test-classes:/Users/priyashr/git/gymApp/workout-session-service/target/classes:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/priyashr/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/priyashr/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/priyashr/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/priyashr/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/priyashr/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/priyashr/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/priyashr/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/priyashr/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/priyashr/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/priyashr/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/priyashr/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/priyashr/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/priyashr/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/priyashr/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-websocket/3.4.4/spring-boot-starter-websocket-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-messaging/6.2.5/spring-messaging-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-websocket/6.2.5/spring-websocket-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-amqp/3.4.4/spring-boot-starter-amqp-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-rabbit/3.2.4/spring-rabbit-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-amqp/3.2.4/spring-amqp-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/retry/spring-retry/2.0.11/spring-retry-2.0.11.jar:/Users/priyashr/.m2/repository/com/rabbitmq/amqp-client/5.22.0/amqp-client-5.22.0.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/priyashr/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/priyashr/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.4.4/spring-boot-starter-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.4.4/spring-boot-actuator-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator/3.4.4/spring-boot-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-jakarta9/1.14.5/micrometer-jakarta9-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-core/1.14.5/micrometer-core-1.14.5.jar:/Users/priyashr/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/Users/priyashr/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.3/jackson-dataformat-toml-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-database-postgresql/10.20.1/flyway-database-postgresql-10.20.1.jar:/Users/priyashr/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/priyashr/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/priyashr/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.47/nimbus-jose-jwt-9.47.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring-boot3/2.2.0/resilience4j-spring-boot3-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring6/2.2.0/resilience4j-spring6-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-annotations/2.2.0/resilience4j-annotations-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-consumer/2.2.0/resilience4j-consumer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circularbuffer/2.2.0/resilience4j-circularbuffer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-framework-common/2.2.0/resilience4j-framework-common-2.2.0.jar:/Users/priyashr/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-micrometer/2.2.0/resilience4j-micrometer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-bulkhead/2.2.0/resilience4j-bulkhead-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-retry/2.2.0/resilience4j-retry-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-ratelimiter/2.2.0/resilience4j-ratelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-timelimiter/2.2.0/resilience4j-timelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circuitbreaker/2.2.0/resilience4j-circuitbreaker-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-core/2.2.0/resilience4j-core-2.2.0.jar:/Users/priyashr/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/priyashr/.m2/repository/net/logstash/logback/logstash-logback-encoder/8.0/logstash-logback-encoder-8.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/priyashr/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/priyashr/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/priyashr/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/priyashr/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/priyashr/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/priyashr/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/priyashr/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/priyashr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/priyashr/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/priyashr/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/priyashr/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/priyashr/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik/1.9.2/jqwik-1.9.2.jar:/Users/priyashr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-api/1.9.2/jqwik-api-1.9.2.jar:/Users/priyashr/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-web/1.9.2/jqwik-web-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-time/1.9.2/jqwik-time-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-engine/1.9.2/jqwik-engine-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/priyashr/.m2/repository/org/wiremock/wiremock-standalone/3.5.4/wiremock-standalone-3.5.4.jar:"/>
     <property name="java.vm.vendor" value="Microsoft"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://www.microsoft.com"/>
@@ -16,10 +16,10 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/microsoft-17.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/priyashr/git/gymApp/workout-session-service/target/surefire/surefirebooter-20260513172728096_3.jar /Users/priyashr/git/gymApp/workout-session-service/target/surefire 2026-05-13T17-27-27_956-jvmRun1 surefire-20260513172728096_1tmp surefire_0-20260513172728096_2tmp"/>
+    <property name="sun.java.command" value="/Users/priyashr/git/gymApp/workout-session-service/target/surefire/surefirebooter-20260610054241875_3.jar /Users/priyashr/git/gymApp/workout-session-service/target/surefire 2026-06-10T05-42-41_771-jvmRun1 surefire-20260610054241875_1tmp surefire_0-20260610054241875_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/test-classes:/Users/priyashr/git/gymApp/workout-session-service/target/classes:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/priyashr/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/priyashr/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/priyashr/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/priyashr/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/priyashr/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/priyashr/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/priyashr/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/priyashr/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/priyashr/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/priyashr/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/priyashr/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/priyashr/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/priyashr/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/priyashr/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-websocket/3.4.4/spring-boot-starter-websocket-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-messaging/6.2.5/spring-messaging-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-websocket/6.2.5/spring-websocket-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-amqp/3.4.4/spring-boot-starter-amqp-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-rabbit/3.2.4/spring-rabbit-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-amqp/3.2.4/spring-amqp-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/retry/spring-retry/2.0.11/spring-retry-2.0.11.jar:/Users/priyashr/.m2/repository/com/rabbitmq/amqp-client/5.22.0/amqp-client-5.22.0.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/priyashr/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/priyashr/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.4.4/spring-boot-starter-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.4.4/spring-boot-actuator-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator/3.4.4/spring-boot-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-jakarta9/1.14.5/micrometer-jakarta9-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-core/1.14.5/micrometer-core-1.14.5.jar:/Users/priyashr/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/Users/priyashr/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.3/jackson-dataformat-toml-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-database-postgresql/10.20.1/flyway-database-postgresql-10.20.1.jar:/Users/priyashr/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/priyashr/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/priyashr/.m2/repository/com/h2database/h2/2.3.232/h2-2.3.232.jar:/Users/priyashr/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.47/nimbus-jose-jwt-9.47.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring-boot3/2.2.0/resilience4j-spring-boot3-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring6/2.2.0/resilience4j-spring6-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-annotations/2.2.0/resilience4j-annotations-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-consumer/2.2.0/resilience4j-consumer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circularbuffer/2.2.0/resilience4j-circularbuffer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-framework-common/2.2.0/resilience4j-framework-common-2.2.0.jar:/Users/priyashr/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-micrometer/2.2.0/resilience4j-micrometer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-bulkhead/2.2.0/resilience4j-bulkhead-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-retry/2.2.0/resilience4j-retry-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-ratelimiter/2.2.0/resilience4j-ratelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-timelimiter/2.2.0/resilience4j-timelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circuitbreaker/2.2.0/resilience4j-circuitbreaker-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-core/2.2.0/resilience4j-core-2.2.0.jar:/Users/priyashr/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/priyashr/.m2/repository/net/logstash/logback/logstash-logback-encoder/8.0/logstash-logback-encoder-8.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/priyashr/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/priyashr/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/priyashr/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/priyashr/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/priyashr/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/priyashr/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/priyashr/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/priyashr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/priyashr/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/priyashr/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/priyashr/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/priyashr/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik/1.9.2/jqwik-1.9.2.jar:/Users/priyashr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-api/1.9.2/jqwik-api-1.9.2.jar:/Users/priyashr/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-web/1.9.2/jqwik-web-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-time/1.9.2/jqwik-time-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-engine/1.9.2/jqwik-engine-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/priyashr/.m2/repository/org/wiremock/wiremock-standalone/3.5.4/wiremock-standalone-3.5.4.jar:"/>
+    <property name="surefire.test.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/test-classes:/Users/priyashr/git/gymApp/workout-session-service/target/classes:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.4.4/spring-boot-starter-web-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter/3.4.4/spring-boot-starter-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot/3.4.4/spring-boot-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.4.4/spring-boot-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.4.4/spring-boot-starter-logging-3.4.4.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-classic/1.5.18/logback-classic-1.5.18.jar:/Users/priyashr/.m2/repository/ch/qos/logback/logback-core/1.5.18/logback-core-1.5.18.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.24.3/log4j-to-slf4j-2.24.3.jar:/Users/priyashr/.m2/repository/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar:/Users/priyashr/.m2/repository/org/slf4j/jul-to-slf4j/2.0.17/jul-to-slf4j-2.0.17.jar:/Users/priyashr/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/Users/priyashr/.m2/repository/org/yaml/snakeyaml/2.3/snakeyaml-2.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.4.4/spring-boot-starter-json-3.4.4.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.18.3/jackson-datatype-jdk8-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.18.3/jackson-module-parameter-names-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.4.4/spring-boot-starter-tomcat-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.39/tomcat-embed-core-10.1.39.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.39/tomcat-embed-websocket-10.1.39.jar:/Users/priyashr/.m2/repository/org/springframework/spring-web/6.2.5/spring-web-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-beans/6.2.5/spring-beans-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-webmvc/6.2.5/spring-webmvc-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-context/6.2.5/spring-context-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-expression/6.2.5/spring-expression-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.4.4/spring-boot-starter-security-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aop/6.2.5/spring-aop-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-config/6.4.4/spring-security-config-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-web/6.4.4/spring-security-web-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-data-jpa/3.4.4/spring-boot-starter-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/3.4.4/spring-boot-starter-jdbc-3.4.4.jar:/Users/priyashr/.m2/repository/com/zaxxer/HikariCP/5.1.0/HikariCP-5.1.0.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jdbc/6.2.5/spring-jdbc-6.2.5.jar:/Users/priyashr/.m2/repository/org/hibernate/orm/hibernate-core/6.6.11.Final/hibernate-core-6.6.11.Final.jar:/Users/priyashr/.m2/repository/jakarta/persistence/jakarta.persistence-api/3.1.0/jakarta.persistence-api-3.1.0.jar:/Users/priyashr/.m2/repository/jakarta/transaction/jakarta.transaction-api/2.0.1/jakarta.transaction-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/jboss/logging/jboss-logging/3.6.1.Final/jboss-logging-3.6.1.Final.jar:/Users/priyashr/.m2/repository/org/hibernate/common/hibernate-commons-annotations/7.0.3.Final/hibernate-commons-annotations-7.0.3.Final.jar:/Users/priyashr/.m2/repository/io/smallrye/jandex/3.2.0/jandex-3.2.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/classmate/1.7.0/classmate-1.7.0.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy/1.15.11/byte-buddy-1.15.11.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-runtime/4.0.5/jaxb-runtime-4.0.5.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/jaxb-core/4.0.5/jaxb-core-4.0.5.jar:/Users/priyashr/.m2/repository/org/eclipse/angus/angus-activation/2.0.2/angus-activation-2.0.2.jar:/Users/priyashr/.m2/repository/org/glassfish/jaxb/txw2/4.0.5/txw2-4.0.5.jar:/Users/priyashr/.m2/repository/com/sun/istack/istack-commons-runtime/4.1.2/istack-commons-runtime-4.1.2.jar:/Users/priyashr/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/priyashr/.m2/repository/org/antlr/antlr4-runtime/4.13.0/antlr4-runtime-4.13.0.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-jpa/3.4.4/spring-data-jpa-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/data/spring-data-commons/3.4.4/spring-data-commons-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-orm/6.2.5/spring-orm-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-tx/6.2.5/spring-tx-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-aspects/6.2.5/spring-aspects-6.2.5.jar:/Users/priyashr/.m2/repository/org/aspectj/aspectjweaver/1.9.23/aspectjweaver-1.9.23.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-websocket/3.4.4/spring-boot-starter-websocket-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/spring-messaging/6.2.5/spring-messaging-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-websocket/6.2.5/spring-websocket-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-amqp/3.4.4/spring-boot-starter-amqp-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-rabbit/3.2.4/spring-rabbit-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/amqp/spring-amqp/3.2.4/spring-amqp-3.2.4.jar:/Users/priyashr/.m2/repository/org/springframework/retry/spring-retry/2.0.11/spring-retry-2.0.11.jar:/Users/priyashr/.m2/repository/com/rabbitmq/amqp-client/5.22.0/amqp-client-5.22.0.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-validation/3.4.4/spring-boot-starter-validation-3.4.4.jar:/Users/priyashr/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.39/tomcat-embed-el-10.1.39.jar:/Users/priyashr/.m2/repository/org/hibernate/validator/hibernate-validator/8.0.2.Final/hibernate-validator-8.0.2.Final.jar:/Users/priyashr/.m2/repository/jakarta/validation/jakarta.validation-api/3.0.2/jakarta.validation-api-3.0.2.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/3.4.4/spring-boot-starter-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/3.4.4/spring-boot-actuator-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-actuator/3.4.4/spring-boot-actuator-3.4.4.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-observation/1.14.5/micrometer-observation-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-commons/1.14.5/micrometer-commons-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-jakarta9/1.14.5/micrometer-jakarta9-1.14.5.jar:/Users/priyashr/.m2/repository/io/micrometer/micrometer-core/1.14.5/micrometer-core-1.14.5.jar:/Users/priyashr/.m2/repository/org/hdrhistogram/HdrHistogram/2.2.2/HdrHistogram-2.2.2.jar:/Users/priyashr/.m2/repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-core/10.20.1/flyway-core-10.20.1.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/dataformat/jackson-dataformat-toml/2.18.3/jackson-dataformat-toml-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.18.3/jackson-core-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.18.3/jackson-datatype-jsr310-2.18.3.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.18.3/jackson-annotations-2.18.3.jar:/Users/priyashr/.m2/repository/org/flywaydb/flyway-database-postgresql/10.20.1/flyway-database-postgresql-10.20.1.jar:/Users/priyashr/.m2/repository/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar:/Users/priyashr/.m2/repository/org/checkerframework/checker-qual/3.48.3/checker-qual-3.48.3.jar:/Users/priyashr/.m2/repository/com/nimbusds/nimbus-jose-jwt/9.47/nimbus-jose-jwt-9.47.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring-boot3/2.2.0/resilience4j-spring-boot3-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-spring6/2.2.0/resilience4j-spring6-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-annotations/2.2.0/resilience4j-annotations-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-consumer/2.2.0/resilience4j-consumer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circularbuffer/2.2.0/resilience4j-circularbuffer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-framework-common/2.2.0/resilience4j-framework-common-2.2.0.jar:/Users/priyashr/.m2/repository/org/slf4j/slf4j-api/2.0.17/slf4j-api-2.0.17.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-micrometer/2.2.0/resilience4j-micrometer-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-bulkhead/2.2.0/resilience4j-bulkhead-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-retry/2.2.0/resilience4j-retry-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-ratelimiter/2.2.0/resilience4j-ratelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-timelimiter/2.2.0/resilience4j-timelimiter-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-circuitbreaker/2.2.0/resilience4j-circuitbreaker-2.2.0.jar:/Users/priyashr/.m2/repository/io/github/resilience4j/resilience4j-core/2.2.0/resilience4j-core-2.2.0.jar:/Users/priyashr/.m2/repository/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar:/Users/priyashr/.m2/repository/net/logstash/logback/logstash-logback-encoder/8.0/logstash-logback-encoder-8.0.jar:/Users/priyashr/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.18.3/jackson-databind-2.18.3.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.4.4/spring-boot-starter-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test/3.4.4/spring-boot-test-3.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.4.4/spring-boot-test-autoconfigure-3.4.4.jar:/Users/priyashr/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/Users/priyashr/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.2/jakarta.xml.bind-api-4.0.2.jar:/Users/priyashr/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.3/jakarta.activation-api-2.1.3.jar:/Users/priyashr/.m2/repository/net/minidev/json-smart/2.5.2/json-smart-2.5.2.jar:/Users/priyashr/.m2/repository/net/minidev/accessors-smart/2.5.2/accessors-smart-2.5.2.jar:/Users/priyashr/.m2/repository/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar:/Users/priyashr/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/priyashr/.m2/repository/org/awaitility/awaitility/4.2.2/awaitility-4.2.2.jar:/Users/priyashr/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/priyashr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-core/5.14.2/mockito-core-5.14.2.jar:/Users/priyashr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.15.11/byte-buddy-agent-1.15.11.jar:/Users/priyashr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/Users/priyashr/.m2/repository/org/mockito/mockito-junit-jupiter/5.14.2/mockito-junit-jupiter-5.14.2.jar:/Users/priyashr/.m2/repository/org/skyscreamer/jsonassert/1.5.3/jsonassert-1.5.3.jar:/Users/priyashr/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/Users/priyashr/.m2/repository/org/springframework/spring-core/6.2.5/spring-core-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-jcl/6.2.5/spring-jcl-6.2.5.jar:/Users/priyashr/.m2/repository/org/springframework/spring-test/6.2.5/spring-test-6.2.5.jar:/Users/priyashr/.m2/repository/org/xmlunit/xmlunit-core/2.10.0/xmlunit-core-2.10.0.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-test/6.4.4/spring-security-test-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-core/6.4.4/spring-security-core-6.4.4.jar:/Users/priyashr/.m2/repository/org/springframework/security/spring-security-crypto/6.4.4/spring-security-crypto-6.4.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik/1.9.2/jqwik-1.9.2.jar:/Users/priyashr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-api/1.9.2/jqwik-api-1.9.2.jar:/Users/priyashr/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-web/1.9.2/jqwik-web-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-time/1.9.2/jqwik-time-1.9.2.jar:/Users/priyashr/.m2/repository/net/jqwik/jqwik-engine/1.9.2/jqwik-engine-1.9.2.jar:/Users/priyashr/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/priyashr/.m2/repository/org/wiremock/wiremock-standalone/3.5.4/wiremock-standalone-3.5.4.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/priyashr"/>
     <property name="user.language" value="en"/>
@@ -34,7 +34,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/surefire/surefirebooter-20260513172728096_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/priyashr/git/gymApp/workout-session-service/target/surefire/surefirebooter-20260610054241875_3.jar"/>
     <property name="polyglot.engine.WarnInterpreterOnly" value="false"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
@@ -52,15 +52,15 @@
     <property name="jetty.git.hash" value="922f8dc188f7011e60d0361de585fd4ac4d63064"/>
     <property name="java.io.tmpdir" value="/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/"/>
     <property name="wiremock.org.eclipse.jetty.http.HttpGenerator.STRICT" value="true"/>
-    <property name="catalina.home" value="/private/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/tomcat.0.17094677777068976868"/>
-    <property name="com.zaxxer.hikari.pool_number" value="1"/>
+    <property name="catalina.home" value="/private/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/tomcat.0.12180413435930446340"/>
+    <property name="com.zaxxer.hikari.pool_number" value="3"/>
     <property name="java.version" value="17.0.3"/>
     <property name="user.dir" value="/Users/priyashr/git/gymApp/workout-session-service"/>
     <property name="os.arch" value="x86_64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="24402"/>
+    <property name="PID" value="66977"/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
-    <property name="catalina.base" value="/private/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/tomcat.0.17094677777068976868"/>
+    <property name="catalina.base" value="/private/var/folders/f7/m4y3m6fj74gbyx4_gzyf05rr0000gn/T/tomcat.0.12201717918836449152"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/priyashr/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -72,8 +72,8 @@
     <property name="java.class.version" value="61.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[workout-session-service] "/>
   </properties>
-  <testcase name="resumeSession_TransitionsToInProgress" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="1.05">
-    <system-out><![CDATA[17:27:32.246 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.gmail.ramawthar.priyash.hybridstrength.workoutsession.WorkoutSessionApplication for test class com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest
+  <testcase name="resumeSession_TransitionsToInProgress" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.289">
+    <system-out><![CDATA[05:43:16.345 [main] INFO  o.s.b.t.c.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.gmail.ramawthar.priyash.hybridstrength.workoutsession.WorkoutSessionApplication for test class com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -84,74 +84,67 @@
 
  :: Spring Boot ::                (v3.4.4)
 
-17:27:34.743 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
-17:27:34.813 [main] INFO  c.g.r.p.h.w.i.SessionIntegrationTest - Starting SessionIntegrationTest using Java 17.0.3 with PID 24402 (started by priyashr in /Users/priyashr/git/gymApp/workout-session-service)
-17:27:34.814 [main] DEBUG c.g.r.p.h.w.i.SessionIntegrationTest - Running with Spring Boot v3.4.4, Spring v6.2.5
-17:27:34.815 [main] INFO  c.g.r.p.h.w.i.SessionIntegrationTest - The following 1 profile is active: "integration"
-17:27:35.654 [main] INFO  o.s.b.f.s.DefaultListableBeanFactory - Overriding bean definition for bean 'rsaPublicKey' with a different definition: replacing [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=jwtConfig; factoryMethodName=rsaPublicKey; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/gmail/ramawthar/priyash/hybridstrength/workoutsession/config/JwtConfig.class]] with [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=true; fallback=false; factoryBeanName=sessionIntegrationTest.TestConfig; factoryMethodName=rsaPublicKey; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest$TestConfig]
-17:27:36.243 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-17:27:36.325 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72 ms. Found 2 JPA repository interfaces.
-17:27:37.928 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
-17:27:37.950 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-1"]
-17:27:37.953 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-17:27:37.955 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.39]
-17:27:38.047 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-17:27:38.048 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3205 ms
-17:27:38.645 [main] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
-17:27:39.103 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-17:27:39.363 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:session_integration user=SA
-17:27:39.365 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-17:27:39.436 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:h2:mem:session_integration (H2 2.3)
-17:27:39.457 [main] WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: H2 2.3.232 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.2.224.
-17:27:39.498 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
-17:27:39.502 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 3 migrations (execution time 00:00.024s)
-17:27:39.516 [main] INFO  o.f.c.i.s.JdbcTableSchemaHistory - Creating Schema History table "PUBLIC"."flyway_schema_history" ...
-17:27:39.575 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "PUBLIC": << Empty Schema >>
-17:27:39.583 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "200 - create sessions"
-17:27:39.611 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "201 - create program enrollments"
-17:27:39.621 [main] INFO  o.f.core.internal.command.DbMigrate - Migrating schema "PUBLIC" to version "202 - create skip records"
-17:27:39.634 [main] INFO  o.f.core.internal.command.DbMigrate - Successfully applied 3 migrations to schema "PUBLIC", now at version v202 (execution time 00:00.016s)
-17:27:39.797 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-17:27:39.859 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.11.Final
-17:27:39.898 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-17:27:40.071 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-17:27:40.164 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+05:43:16.512 [main] INFO  c.g.r.p.h.w.i.SessionIntegrationTest - Starting SessionIntegrationTest using Java 17.0.3 with PID 66977 (started by priyashr in /Users/priyashr/git/gymApp/workout-session-service)
+05:43:16.512 [main] DEBUG c.g.r.p.h.w.i.SessionIntegrationTest - Running with Spring Boot v3.4.4, Spring v6.2.5
+05:43:16.512 [main] INFO  c.g.r.p.h.w.i.SessionIntegrationTest - The following 1 profile is active: "integration"
+05:43:16.869 [main] INFO  o.s.b.f.s.DefaultListableBeanFactory - Overriding bean definition for bean 'rsaPublicKey' with a different definition: replacing [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=jwtConfig; factoryMethodName=rsaPublicKey; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/gmail/ramawthar/priyash/hybridstrength/workoutsession/config/JwtConfig.class]] with [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=true; fallback=false; factoryBeanName=sessionIntegrationTest.TestConfig; factoryMethodName=rsaPublicKey; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest$TestConfig]
+05:43:17.033 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+05:43:17.066 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 30 ms. Found 2 JPA repository interfaces.
+05:43:17.316 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 0 (http)
+05:43:17.317 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-auto-3"]
+05:43:17.318 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+05:43:17.318 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.39]
+05:43:17.336 [main] INFO  o.a.c.c.C.[Tomcat-2].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+05:43:17.336 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 821 ms
+05:43:17.487 [main] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+05:43:17.573 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+05:43:17.612 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@2167cb1
+05:43:17.612 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+05:43:17.616 [main] INFO  org.flywaydb.core.FlywayExecutor - Database: jdbc:postgresql://localhost:30432/hybridstrength_dev?stringtype=unspecified (PostgreSQL 16.13)
+05:43:17.671 [main] INFO  o.f.core.internal.command.DbValidate - Successfully validated 9 migrations (execution time 00:00.019s)
+05:43:17.744 [main] INFO  o.f.core.internal.command.DbMigrate - Current version of schema "public": 203
+05:43:17.750 [main] INFO  o.f.core.internal.command.DbMigrate - Schema "public" is up to date. No migration necessary.
+05:43:17.815 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+05:43:17.820 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+05:43:17.841 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+05:43:17.862 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-3)']
 	Database driver: undefined/unknown
-	Database version: 2.3.232
+	Database version: 16.13
 	Autocommit mode: undefined/unknown
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-17:27:41.128 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-17:27:41.131 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-17:27:42.952 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+05:43:17.975 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+05:43:18.099 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+05:43:18.833 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
 
-Using generated security password: 168eadfb-393a-4e2f-937d-b441fffffb34
+Using generated security password: 5a1820e0-0c53-44f6-803f-c489cf2befab
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-17:27:42.974 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-17:27:43.742 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
-17:27:45.168 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
-17:27:45.168 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5f850405]]
-17:27:45.170 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
-17:27:45.170 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-1"]
-17:27:45.180 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 61352 (http) with context path '/'
-17:27:45.204 [main] INFO  c.g.r.p.h.w.i.SessionIntegrationTest - Started SessionIntegrationTest in 10.969 seconds (process running for 16.969)
-17:27:45.550 [http-nio-auto-1-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-17:27:45.551 [http-nio-auto-1-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-17:27:45.554 [http-nio-auto-1-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
-17:27:45.591 [http-nio-auto-1-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: abe3bba7-b71c-4f74-a6c5-f56f9fb7f321
-17:27:45.695 [http-nio-auto-1-exec-1] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=abe3bba7-b71c-4f74-a6c5-f56f9fb7f321, program=d6fca739-95e2-4e64-8bac-748374b0c215
-17:27:45.703 [http-nio-auto-1-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=abe3bba7-b71c-4f74-a6c5-f56f9fb7f321, program=d6fca739-95e2-4e64-8bac-748374b0c215, week=1, day=1, standalone=true
-17:27:45.714 [http-nio-auto-1-exec-1] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=d6fca739-95e2-4e64-8bac-748374b0c215
+05:43:18.840 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+05:43:19.072 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+05:43:19.855 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Starting...
+05:43:19.855 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@10365f1c]]
+05:43:19.855 [main] INFO  o.s.m.s.b.SimpleBrokerMessageHandler - Started.
+05:43:19.856 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-auto-3"]
+05:43:19.859 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 53378 (http) with context path '/'
+05:43:19.866 [main] INFO  c.g.r.p.h.w.i.SessionIntegrationTest - Started SessionIntegrationTest in 3.424 seconds (process running for 37.905)
+05:43:19.893 [http-nio-auto-3-exec-1] INFO  o.a.c.c.C.[Tomcat-2].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+05:43:19.893 [http-nio-auto-3-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+05:43:19.894 [http-nio-auto-3-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+05:43:19.895 [http-nio-auto-3-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 4743805a-90ec-4411-a52c-57f2169e7c5e
+05:43:19.910 [http-nio-auto-3-exec-1] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=4743805a-90ec-4411-a52c-57f2169e7c5e, program=f555310b-7540-48e7-b416-adf97ef45f9a
+05:43:19.915 [http-nio-auto-3-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=4743805a-90ec-4411-a52c-57f2169e7c5e, program=f555310b-7540-48e7-b416-adf97ef45f9a, week=1, day=1, standalone=true
+05:43:19.916 [http-nio-auto-3-exec-1] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=f555310b-7540-48e7-b416-adf97ef45f9a
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -159,6 +152,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -166,14 +160,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:27:46.116 [http-nio-auto-1-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=b0421895-5ad5-4111-a8e4-0c9aca34ad3b, sections=2
+05:43:19.931 [http-nio-auto-3-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=b6e27bfe-24f1-4c50-8f5b-263ecf7c59b5, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -181,6 +175,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -188,6 +183,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -199,6 +195,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -206,6 +203,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -213,13 +211,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:27:46.262 [http-nio-auto-1-exec-2] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: abe3bba7-b71c-4f74-a6c5-f56f9fb7f321
+05:43:20.100 [http-nio-auto-3-exec-2] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 4743805a-90ec-4411-a52c-57f2169e7c5e
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -227,6 +226,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -234,8 +234,8 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:27:46.277 [http-nio-auto-1-exec-2] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/b0421895-5ad5-4111-a8e4-0c9aca34ad3b
-17:27:46.277 [http-nio-auto-1-exec-2] INFO  c.g.r.p.h.w.s.a.SessionService - Session paused: id=b0421895-5ad5-4111-a8e4-0c9aca34ad3b
+05:43:20.117 [http-nio-auto-3-exec-2] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/b6e27bfe-24f1-4c50-8f5b-263ecf7c59b5
+05:43:20.118 [http-nio-auto-3-exec-2] INFO  c.g.r.p.h.w.s.a.SessionService - Session paused: id=b6e27bfe-24f1-4c50-8f5b-263ecf7c59b5
 Hibernate: 
     update
         sessions 
@@ -243,6 +243,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -250,18 +251,20 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
     where
         id=?
-17:27:46.295 [http-nio-auto-1-exec-3] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: abe3bba7-b71c-4f74-a6c5-f56f9fb7f321
+05:43:20.139 [http-nio-auto-3-exec-3] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 4743805a-90ec-4411-a52c-57f2169e7c5e
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -269,6 +272,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -276,8 +280,8 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:27:46.301 [http-nio-auto-1-exec-3] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/b0421895-5ad5-4111-a8e4-0c9aca34ad3b
-17:27:46.301 [http-nio-auto-1-exec-3] INFO  c.g.r.p.h.w.s.a.SessionService - Session resumed: id=b0421895-5ad5-4111-a8e4-0c9aca34ad3b
+05:43:20.145 [http-nio-auto-3-exec-3] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/b6e27bfe-24f1-4c50-8f5b-263ecf7c59b5
+05:43:20.145 [http-nio-auto-3-exec-3] INFO  c.g.r.p.h.w.s.a.SessionService - Session resumed: id=b6e27bfe-24f1-4c50-8f5b-263ecf7c59b5, pausedDuration=0s, totalPaused=0s
 Hibernate: 
     update
         sessions 
@@ -285,6 +289,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -292,6 +297,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -299,17 +305,18 @@ Hibernate:
         id=?
 ]]></system-out>
   </testcase>
-  <testcase name="fullSessionLifecycle" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="15.239">
-    <system-out><![CDATA[17:27:46.340 [http-nio-auto-1-exec-4] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 9c4da377-2f4a-4fc8-b9c6-efac89a62d8f
-17:27:46.342 [http-nio-auto-1-exec-4] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=9c4da377-2f4a-4fc8-b9c6-efac89a62d8f, program=44faf814-8591-4ad4-a66e-8b84dda7cf79
-17:27:46.342 [http-nio-auto-1-exec-4] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=9c4da377-2f4a-4fc8-b9c6-efac89a62d8f, program=44faf814-8591-4ad4-a66e-8b84dda7cf79, week=1, day=1, standalone=true
-17:27:46.342 [http-nio-auto-1-exec-4] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=44faf814-8591-4ad4-a66e-8b84dda7cf79
+  <testcase name="fullSessionLifecycle" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.232">
+    <system-out><![CDATA[05:43:20.176 [http-nio-auto-3-exec-4] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 3ff040bb-bd1d-4057-a01b-c804cc074fe6
+05:43:20.178 [http-nio-auto-3-exec-4] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=3ff040bb-bd1d-4057-a01b-c804cc074fe6, program=000e6942-cceb-4e33-8aa3-83f75d58948f
+05:43:20.178 [http-nio-auto-3-exec-4] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=3ff040bb-bd1d-4057-a01b-c804cc074fe6, program=000e6942-cceb-4e33-8aa3-83f75d58948f, week=1, day=1, standalone=true
+05:43:20.178 [http-nio-auto-3-exec-4] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=000e6942-cceb-4e33-8aa3-83f75d58948f
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -317,6 +324,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -324,14 +332,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:27:46.352 [http-nio-auto-1-exec-4] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=a9442b29-5774-4c5b-af36-94529c3504ac, sections=2
+05:43:20.188 [http-nio-auto-3-exec-4] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=6dce2389-a1ec-4510-9341-f31882d0d698, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -339,6 +347,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -346,6 +355,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -357,6 +367,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -364,6 +375,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -371,13 +383,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:27:46.371 [http-nio-auto-1-exec-5] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 9c4da377-2f4a-4fc8-b9c6-efac89a62d8f
+05:43:20.222 [http-nio-auto-3-exec-5] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 3ff040bb-bd1d-4057-a01b-c804cc074fe6
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -385,6 +398,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -392,8 +406,8 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:27:46.381 [http-nio-auto-1-exec-5] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/a9442b29-5774-4c5b-af36-94529c3504ac
-17:27:46.381 [http-nio-auto-1-exec-5] DEBUG c.g.r.p.h.w.s.a.SessionService - Exercise completed: session=a9442b29-5774-4c5b-af36-94529c3504ac, section=0, exercise=0
+05:43:20.235 [http-nio-auto-3-exec-5] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/6dce2389-a1ec-4510-9341-f31882d0d698
+05:43:20.235 [http-nio-auto-3-exec-5] DEBUG c.g.r.p.h.w.s.a.SessionService - Exercise completed: session=6dce2389-a1ec-4510-9341-f31882d0d698, section=0, exercise=0
 Hibernate: 
     update
         sessions 
@@ -401,6 +415,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -408,18 +423,20 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
     where
         id=?
-17:27:46.399 [http-nio-auto-1-exec-6] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 9c4da377-2f4a-4fc8-b9c6-efac89a62d8f
+05:43:20.263 [http-nio-auto-3-exec-6] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 3ff040bb-bd1d-4057-a01b-c804cc074fe6
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -427,6 +444,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -434,8 +452,8 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:27:46.411 [http-nio-auto-1-exec-6] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/a9442b29-5774-4c5b-af36-94529c3504ac
-17:27:46.411 [http-nio-auto-1-exec-6] DEBUG c.g.r.p.h.w.s.a.SessionService - Section advanced: session=a9442b29-5774-4c5b-af36-94529c3504ac, targetSection=1
+05:43:20.273 [http-nio-auto-3-exec-6] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/6dce2389-a1ec-4510-9341-f31882d0d698
+05:43:20.273 [http-nio-auto-3-exec-6] DEBUG c.g.r.p.h.w.s.a.SessionService - Section advanced: session=6dce2389-a1ec-4510-9341-f31882d0d698, targetSection=1
 Hibernate: 
     update
         sessions 
@@ -443,6 +461,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -450,18 +469,20 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
     where
         id=?
-17:27:46.426 [http-nio-auto-1-exec-7] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 9c4da377-2f4a-4fc8-b9c6-efac89a62d8f
+05:43:20.288 [http-nio-auto-3-exec-7] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 3ff040bb-bd1d-4057-a01b-c804cc074fe6
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -469,6 +490,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -476,8 +498,8 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:27:46.429 [http-nio-auto-1-exec-7] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/a9442b29-5774-4c5b-af36-94529c3504ac
-17:27:46.430 [http-nio-auto-1-exec-7] INFO  c.g.r.p.h.w.s.a.SessionService - Session paused: id=a9442b29-5774-4c5b-af36-94529c3504ac
+05:43:20.293 [http-nio-auto-3-exec-7] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/6dce2389-a1ec-4510-9341-f31882d0d698
+05:43:20.293 [http-nio-auto-3-exec-7] INFO  c.g.r.p.h.w.s.a.SessionService - Session paused: id=6dce2389-a1ec-4510-9341-f31882d0d698
 Hibernate: 
     update
         sessions 
@@ -485,6 +507,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -492,18 +515,20 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
     where
         id=?
-17:27:46.442 [http-nio-auto-1-exec-8] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 9c4da377-2f4a-4fc8-b9c6-efac89a62d8f
+05:43:20.305 [http-nio-auto-3-exec-8] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 3ff040bb-bd1d-4057-a01b-c804cc074fe6
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -511,6 +536,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -518,8 +544,8 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:27:46.446 [http-nio-auto-1-exec-8] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/a9442b29-5774-4c5b-af36-94529c3504ac
-17:27:46.446 [http-nio-auto-1-exec-8] INFO  c.g.r.p.h.w.s.a.SessionService - Session resumed: id=a9442b29-5774-4c5b-af36-94529c3504ac
+05:43:20.309 [http-nio-auto-3-exec-8] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/6dce2389-a1ec-4510-9341-f31882d0d698
+05:43:20.309 [http-nio-auto-3-exec-8] INFO  c.g.r.p.h.w.s.a.SessionService - Session resumed: id=6dce2389-a1ec-4510-9341-f31882d0d698, pausedDuration=0s, totalPaused=0s
 Hibernate: 
     update
         sessions 
@@ -527,6 +553,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -534,18 +561,20 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
     where
         id=?
-17:27:46.460 [http-nio-auto-1-exec-9] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 9c4da377-2f4a-4fc8-b9c6-efac89a62d8f
+05:43:20.322 [http-nio-auto-3-exec-9] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 3ff040bb-bd1d-4057-a01b-c804cc074fe6
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -553,6 +582,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -560,24 +590,11 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:27:46.478 [http-nio-auto-1-exec-9] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:27:46.496 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:27:46.502 [http-nio-auto-1-exec-9] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 1/5): java.net.ConnectException: Connection refused
-17:27:47.507 [http-nio-auto-1-exec-9] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:27:47.512 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:27:47.513 [http-nio-auto-1-exec-9] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 2/5): java.net.ConnectException: Connection refused
-17:27:49.518 [http-nio-auto-1-exec-9] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:27:49.523 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:27:49.524 [http-nio-auto-1-exec-9] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 3/5): java.net.ConnectException: Connection refused
-17:27:53.525 [http-nio-auto-1-exec-9] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:27:53.527 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:27:53.528 [http-nio-auto-1-exec-9] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 4/5): java.net.ConnectException: Connection refused
-17:28:01.531 [http-nio-auto-1-exec-9] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:28:01.537 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:28:01.538 [http-nio-auto-1-exec-9] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 5/5): java.net.ConnectException: Connection refused
-17:28:01.539 [http-nio-auto-1-exec-9] ERROR c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Exhausted all 5 retry attempts for SessionCompleted event. Event payload for manual replay: eventId=bb1ea8fc-b708-4bc1-bd49-33cd2b683ef6, sessionId=a9442b29-5774-4c5b-af36-94529c3504ac, userId=9c4da377-2f4a-4fc8-b9c6-efac89a62d8f, programId=44faf814-8591-4ad4-a66e-8b84dda7cf79, weekNumber=1, dayNumber=1, standalone=true, startedAt=2026-05-13T15:27:46.350216Z, completedAt=2026-05-13T15:27:46.463269Z
-17:28:01.539 [http-nio-auto-1-exec-9] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_COMPLETED to /topic/sessions/a9442b29-5774-4c5b-af36-94529c3504ac
-17:28:01.539 [http-nio-auto-1-exec-9] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=a9442b29-5774-4c5b-af36-94529c3504ac, standalone=true
+05:43:20.334 [http-nio-auto-3-exec-9] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
+05:43:20.346 [http-nio-auto-3-exec-9] INFO  o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#6cca1020:0/SimpleConnection@4edbfd62 [delegate=amqp://guest@127.0.0.1:30672/, localPort=53381]
+05:43:20.364 [http-nio-auto-3-exec-9] INFO  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Published SessionCompleted event: eventId=18601ea9-db86-4df8-8092-1f892dcd3d0c, sessionId=6dce2389-a1ec-4510-9341-f31882d0d698
+05:43:20.364 [http-nio-auto-3-exec-9] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_COMPLETED to /topic/sessions/6dce2389-a1ec-4510-9341-f31882d0d698
+05:43:20.364 [http-nio-auto-3-exec-9] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=6dce2389-a1ec-4510-9341-f31882d0d698, standalone=true, durationSeconds=0
 Hibernate: 
     update
         sessions 
@@ -585,6 +602,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -592,18 +610,20 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
     where
         id=?
-17:28:01.551 [http-nio-auto-1-exec-10] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 9c4da377-2f4a-4fc8-b9c6-efac89a62d8f
+05:43:20.380 [http-nio-auto-3-exec-10] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 3ff040bb-bd1d-4057-a01b-c804cc074fe6
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -611,6 +631,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -620,17 +641,18 @@ Hibernate:
         sje1_0.id=?
 ]]></system-out>
   </testcase>
-  <testcase name="getActiveSession_ReturnsActiveSession" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.144">
-    <system-out><![CDATA[17:28:01.579 [http-nio-auto-1-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: fcf231ff-317f-46d5-b37b-72cbf3971aa9
-17:28:01.581 [http-nio-auto-1-exec-1] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=fcf231ff-317f-46d5-b37b-72cbf3971aa9, program=e8b6163e-e99d-4a64-b0a7-636602d7b255
-17:28:01.581 [http-nio-auto-1-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=fcf231ff-317f-46d5-b37b-72cbf3971aa9, program=e8b6163e-e99d-4a64-b0a7-636602d7b255, week=1, day=1, standalone=true
-17:28:01.581 [http-nio-auto-1-exec-1] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=e8b6163e-e99d-4a64-b0a7-636602d7b255
+  <testcase name="getActiveSession_ReturnsActiveSession" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.152">
+    <system-out><![CDATA[05:43:20.408 [http-nio-auto-3-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: d3141203-3361-403d-8c33-606bb0c942ae
+05:43:20.410 [http-nio-auto-3-exec-1] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=d3141203-3361-403d-8c33-606bb0c942ae, program=6c4a6a38-db53-4680-87da-30d8f2e7272b
+05:43:20.410 [http-nio-auto-3-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=d3141203-3361-403d-8c33-606bb0c942ae, program=6c4a6a38-db53-4680-87da-30d8f2e7272b, week=1, day=1, standalone=true
+05:43:20.410 [http-nio-auto-3-exec-1] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=6c4a6a38-db53-4680-87da-30d8f2e7272b
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -638,6 +660,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -645,14 +668,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:01.590 [http-nio-auto-1-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=cd70f5e5-d451-4c25-a2e5-f666f88df4cc, sections=2
+05:43:20.418 [http-nio-auto-3-exec-1] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=11b9769e-f414-46e6-8fad-737c018fd40f, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -660,6 +683,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -667,6 +691,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -678,6 +703,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -685,6 +711,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -692,13 +719,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:01.606 [http-nio-auto-1-exec-2] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: fcf231ff-317f-46d5-b37b-72cbf3971aa9
+05:43:20.442 [http-nio-auto-3-exec-2] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: d3141203-3361-403d-8c33-606bb0c942ae
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -706,6 +734,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -718,14 +747,15 @@ Hibernate:
         first ? rows only
 ]]></system-out>
   </testcase>
-  <testcase name="getSession_NotFound_Returns404" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.029">
-    <system-out><![CDATA[17:28:01.725 [http-nio-auto-1-exec-3] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 03227a88-f385-4293-9248-496c82001e21
+  <testcase name="getSession_NotFound_Returns404" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.027">
+    <system-out><![CDATA[05:43:20.561 [http-nio-auto-3-exec-3] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: e57f7a70-7bc8-4ba8-b8c5-d712d3d0f8ec
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -733,6 +763,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -742,18 +773,19 @@ Hibernate:
         sje1_0.id=?
 ]]></system-out>
   </testcase>
-  <testcase name="noJwt_Returns401" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.019"/>
-  <testcase name="advanceSection_NavigatesToTargetSection" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.054">
-    <system-out><![CDATA[17:28:01.774 [http-nio-auto-1-exec-5] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 9092d7ee-0c7f-41ca-abed-56fd4730dc81
-17:28:01.776 [http-nio-auto-1-exec-5] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=9092d7ee-0c7f-41ca-abed-56fd4730dc81, program=217665de-90b4-4220-bc71-efcc7cd05f65
-17:28:01.776 [http-nio-auto-1-exec-5] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=9092d7ee-0c7f-41ca-abed-56fd4730dc81, program=217665de-90b4-4220-bc71-efcc7cd05f65, week=1, day=1, standalone=true
-17:28:01.776 [http-nio-auto-1-exec-5] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=217665de-90b4-4220-bc71-efcc7cd05f65
+  <testcase name="noJwt_Returns401" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.016"/>
+  <testcase name="advanceSection_NavigatesToTargetSection" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.071">
+    <system-out><![CDATA[05:43:20.605 [http-nio-auto-3-exec-5] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: a64f83ef-4bd1-4345-ade4-43dd47513b17
+05:43:20.607 [http-nio-auto-3-exec-5] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=a64f83ef-4bd1-4345-ade4-43dd47513b17, program=920e65bc-598d-4df5-a2fd-37a44a4bf159
+05:43:20.607 [http-nio-auto-3-exec-5] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=a64f83ef-4bd1-4345-ade4-43dd47513b17, program=920e65bc-598d-4df5-a2fd-37a44a4bf159, week=1, day=1, standalone=true
+05:43:20.607 [http-nio-auto-3-exec-5] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=920e65bc-598d-4df5-a2fd-37a44a4bf159
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -761,6 +793,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -768,14 +801,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:01.783 [http-nio-auto-1-exec-5] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=94f54d63-a391-40b8-a3fc-09d02d452607, sections=2
+05:43:20.613 [http-nio-auto-3-exec-5] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=657c9f01-6c5d-4718-9ece-63ba08952f2f, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -783,6 +816,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -790,6 +824,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -801,6 +836,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -808,6 +844,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -815,13 +852,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:01.803 [http-nio-auto-1-exec-6] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 9092d7ee-0c7f-41ca-abed-56fd4730dc81
+05:43:20.639 [http-nio-auto-3-exec-6] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: a64f83ef-4bd1-4345-ade4-43dd47513b17
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -829,6 +867,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -836,8 +875,8 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:01.808 [http-nio-auto-1-exec-6] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/94f54d63-a391-40b8-a3fc-09d02d452607
-17:28:01.808 [http-nio-auto-1-exec-6] DEBUG c.g.r.p.h.w.s.a.SessionService - Section advanced: session=94f54d63-a391-40b8-a3fc-09d02d452607, targetSection=1
+05:43:20.647 [http-nio-auto-3-exec-6] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/657c9f01-6c5d-4718-9ece-63ba08952f2f
+05:43:20.647 [http-nio-auto-3-exec-6] DEBUG c.g.r.p.h.w.s.a.SessionService - Section advanced: session=657c9f01-6c5d-4718-9ece-63ba08952f2f, targetSection=1
 Hibernate: 
     update
         sessions 
@@ -845,6 +884,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -852,6 +892,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -859,14 +900,15 @@ Hibernate:
         id=?
 ]]></system-out>
   </testcase>
-  <testcase name="getActiveSession_NoSession_Returns204" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.023">
-    <system-out><![CDATA[17:28:01.828 [http-nio-auto-1-exec-7] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: fef18a9d-0da2-43e4-9b45-a822074f1f29
+  <testcase name="getActiveSession_NoSession_Returns204" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.034">
+    <system-out><![CDATA[05:43:20.677 [http-nio-auto-3-exec-7] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 8fff57dc-9290-4152-a1fb-3a1b1d2a2b28
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -874,6 +916,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -886,17 +929,18 @@ Hibernate:
         first ? rows only
 ]]></system-out>
   </testcase>
-  <testcase name="pauseSession_TransitionsToPaused" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.049">
-    <system-out><![CDATA[17:28:01.851 [http-nio-auto-1-exec-8] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 4d4920b1-7243-4767-bd53-6f860affff06
-17:28:01.854 [http-nio-auto-1-exec-8] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=4d4920b1-7243-4767-bd53-6f860affff06, program=fa8c4a12-8eca-4527-9dc9-dffa18d7a870
-17:28:01.855 [http-nio-auto-1-exec-8] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=4d4920b1-7243-4767-bd53-6f860affff06, program=fa8c4a12-8eca-4527-9dc9-dffa18d7a870, week=1, day=1, standalone=true
-17:28:01.855 [http-nio-auto-1-exec-8] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=fa8c4a12-8eca-4527-9dc9-dffa18d7a870
+  <testcase name="pauseSession_TransitionsToPaused" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.056">
+    <system-out><![CDATA[05:43:20.711 [http-nio-auto-3-exec-8] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: bf7cc831-80ee-48e8-b993-cb26be137c8e
+05:43:20.712 [http-nio-auto-3-exec-8] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=bf7cc831-80ee-48e8-b993-cb26be137c8e, program=ef6620e2-1a47-4b8a-8e07-619ac034363e
+05:43:20.712 [http-nio-auto-3-exec-8] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=bf7cc831-80ee-48e8-b993-cb26be137c8e, program=ef6620e2-1a47-4b8a-8e07-619ac034363e, week=1, day=1, standalone=true
+05:43:20.712 [http-nio-auto-3-exec-8] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=ef6620e2-1a47-4b8a-8e07-619ac034363e
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -904,6 +948,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -911,14 +956,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:01.861 [http-nio-auto-1-exec-8] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=ec916547-8240-4360-b17c-751c4f321400, sections=2
+05:43:20.720 [http-nio-auto-3-exec-8] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=4c721798-b86a-4868-bfbc-8f5bd42a05c8, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -926,6 +971,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -933,6 +979,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -944,6 +991,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -951,6 +999,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -958,13 +1007,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:01.875 [http-nio-auto-1-exec-9] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 4d4920b1-7243-4767-bd53-6f860affff06
+05:43:20.742 [http-nio-auto-3-exec-9] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: bf7cc831-80ee-48e8-b993-cb26be137c8e
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -972,6 +1022,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -979,8 +1030,8 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:01.879 [http-nio-auto-1-exec-9] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/ec916547-8240-4360-b17c-751c4f321400
-17:28:01.879 [http-nio-auto-1-exec-9] INFO  c.g.r.p.h.w.s.a.SessionService - Session paused: id=ec916547-8240-4360-b17c-751c4f321400
+05:43:20.746 [http-nio-auto-3-exec-9] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/4c721798-b86a-4868-bfbc-8f5bd42a05c8
+05:43:20.746 [http-nio-auto-3-exec-9] INFO  c.g.r.p.h.w.s.a.SessionService - Session paused: id=4c721798-b86a-4868-bfbc-8f5bd42a05c8
 Hibernate: 
     update
         sessions 
@@ -988,6 +1039,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -995,6 +1047,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -1002,18 +1055,19 @@ Hibernate:
         id=?
 ]]></system-out>
   </testcase>
-  <testcase name="flywayMigrationsRun_TablesExist" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.022"/>
-  <testcase name="getSession_ReturnsSessionState" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.046">
-    <system-out><![CDATA[17:28:01.924 [http-nio-auto-1-exec-10] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 29fb3b00-2ad2-43e6-aed1-baccd293ee55
-17:28:01.925 [http-nio-auto-1-exec-10] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=29fb3b00-2ad2-43e6-aed1-baccd293ee55, program=b470ead9-22d6-4896-a786-14e34c1cfee9
-17:28:01.926 [http-nio-auto-1-exec-10] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=29fb3b00-2ad2-43e6-aed1-baccd293ee55, program=b470ead9-22d6-4896-a786-14e34c1cfee9, week=1, day=1, standalone=true
-17:28:01.926 [http-nio-auto-1-exec-10] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=b470ead9-22d6-4896-a786-14e34c1cfee9
+  <testcase name="flywayMigrationsRun_TablesExist" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.024"/>
+  <testcase name="getSession_ReturnsSessionState" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.057">
+    <system-out><![CDATA[05:43:20.793 [http-nio-auto-3-exec-10] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 2054de79-8f70-46b4-a22e-196604693566
+05:43:20.794 [http-nio-auto-3-exec-10] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=2054de79-8f70-46b4-a22e-196604693566, program=9be1ccb6-6bc1-45aa-b43b-bd8a22e8c351
+05:43:20.795 [http-nio-auto-3-exec-10] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=2054de79-8f70-46b4-a22e-196604693566, program=9be1ccb6-6bc1-45aa-b43b-bd8a22e8c351, week=1, day=1, standalone=true
+05:43:20.795 [http-nio-auto-3-exec-10] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=9be1ccb6-6bc1-45aa-b43b-bd8a22e8c351
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1021,6 +1075,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1028,14 +1083,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:01.931 [http-nio-auto-1-exec-10] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=44a3066a-5b01-4a0c-9798-34830b11e593, sections=2
+05:43:20.802 [http-nio-auto-3-exec-10] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=3090a9bc-2fd1-49ac-9710-0eec7c140cea, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -1043,6 +1098,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -1050,6 +1106,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -1061,6 +1118,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1068,6 +1126,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1075,13 +1134,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:01.948 [http-nio-auto-1-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 29fb3b00-2ad2-43e6-aed1-baccd293ee55
+05:43:20.824 [http-nio-auto-3-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 2054de79-8f70-46b4-a22e-196604693566
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1089,80 +1149,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
-        sje1_0.user_id,
-        sje1_0.week_number,
-        sje1_0.workout_snapshot 
-    from
-        sessions sje1_0 
-    where
-        sje1_0.id=?
-]]></system-out>
-  </testcase>
-  <testcase name="startSession_ReturnsCreatedSession" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.037">
-    <system-out><![CDATA[17:28:01.971 [http-nio-auto-1-exec-2] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 86f8539e-53f9-461e-b415-d0fe9059cb26
-17:28:01.974 [http-nio-auto-1-exec-2] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=86f8539e-53f9-461e-b415-d0fe9059cb26, program=eb3e60f1-47da-4739-8134-383b4a3fbabd
-17:28:01.975 [http-nio-auto-1-exec-2] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=86f8539e-53f9-461e-b415-d0fe9059cb26, program=eb3e60f1-47da-4739-8134-383b4a3fbabd, week=1, day=1, standalone=true
-17:28:01.975 [http-nio-auto-1-exec-2] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=eb3e60f1-47da-4739-8134-383b4a3fbabd
-Hibernate: 
-    select
-        sje1_0.id,
-        sje1_0.completed_at,
-        sje1_0.current_section_index,
-        sje1_0.day_number,
-        sje1_0.enrollment_id,
-        sje1_0.last_persisted_at,
-        sje1_0.paused_at,
-        sje1_0.program_id,
-        sje1_0.section_progresses,
-        sje1_0.started_at,
-        sje1_0.status,
-        sje1_0.user_id,
-        sje1_0.week_number,
-        sje1_0.workout_snapshot 
-    from
-        sessions sje1_0 
-    where
-        sje1_0.id=?
-17:28:01.982 [http-nio-auto-1-exec-2] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=29d01f84-9860-4c82-b407-de5da3d36d8c, sections=2
-Hibernate: 
-    insert 
-    into
-        sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
-    values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-Hibernate: 
-    update
-        sessions 
-    set
-        completed_at=?,
-        current_section_index=?,
-        day_number=?,
-        enrollment_id=?,
-        last_persisted_at=?,
-        paused_at=?,
-        program_id=?,
-        section_progresses=?,
-        started_at=?,
-        status=?,
-        user_id=?,
-        week_number=?,
-        workout_snapshot=? 
-    where
-        id=?
-Hibernate: 
-    select
-        sje1_0.id,
-        sje1_0.completed_at,
-        sje1_0.current_section_index,
-        sje1_0.day_number,
-        sje1_0.enrollment_id,
-        sje1_0.last_persisted_at,
-        sje1_0.paused_at,
-        sje1_0.program_id,
-        sje1_0.section_progresses,
-        sje1_0.started_at,
-        sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1172,17 +1159,18 @@ Hibernate:
         sje1_0.id=?
 ]]></system-out>
   </testcase>
-  <testcase name="getSession_WrongUser_Returns403" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.045">
-    <system-out><![CDATA[17:28:02.011 [http-nio-auto-1-exec-3] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: e169ad55-93dd-4886-bc43-1e493959546c
-17:28:02.012 [http-nio-auto-1-exec-3] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=e169ad55-93dd-4886-bc43-1e493959546c, program=acc02992-19ec-48f1-bc7d-e993a2607095
-17:28:02.013 [http-nio-auto-1-exec-3] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=e169ad55-93dd-4886-bc43-1e493959546c, program=acc02992-19ec-48f1-bc7d-e993a2607095, week=1, day=1, standalone=true
-17:28:02.013 [http-nio-auto-1-exec-3] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=acc02992-19ec-48f1-bc7d-e993a2607095
+  <testcase name="startSession_ReturnsCreatedSession" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.047">
+    <system-out><![CDATA[05:43:20.849 [http-nio-auto-3-exec-2] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: a55e1c87-8a65-4ecf-a079-60c7025b0614
+05:43:20.851 [http-nio-auto-3-exec-2] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=a55e1c87-8a65-4ecf-a079-60c7025b0614, program=56ffa15a-9835-46e0-b551-5baa59e57b81
+05:43:20.851 [http-nio-auto-3-exec-2] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=a55e1c87-8a65-4ecf-a079-60c7025b0614, program=56ffa15a-9835-46e0-b551-5baa59e57b81, week=1, day=1, standalone=true
+05:43:20.851 [http-nio-auto-3-exec-2] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=56ffa15a-9835-46e0-b551-5baa59e57b81
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1190,6 +1178,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1197,14 +1186,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:02.019 [http-nio-auto-1-exec-3] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=c97f7d36-7d15-4d55-836f-12d7df311379, sections=2
+05:43:20.858 [http-nio-auto-3-exec-2] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=00ae1245-b40f-48e2-9617-a054aacc7b12, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -1212,6 +1201,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -1219,6 +1209,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -1230,6 +1221,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1237,27 +1229,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
-        sje1_0.user_id,
-        sje1_0.week_number,
-        sje1_0.workout_snapshot 
-    from
-        sessions sje1_0 
-    where
-        sje1_0.id=?
-17:28:02.033 [http-nio-auto-1-exec-4] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 23c387c4-675e-46c6-a15a-9d281fc29b4f
-Hibernate: 
-    select
-        sje1_0.id,
-        sje1_0.completed_at,
-        sje1_0.current_section_index,
-        sje1_0.day_number,
-        sje1_0.enrollment_id,
-        sje1_0.last_persisted_at,
-        sje1_0.paused_at,
-        sje1_0.program_id,
-        sje1_0.section_progresses,
-        sje1_0.started_at,
-        sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1267,17 +1239,18 @@ Hibernate:
         sje1_0.id=?
 ]]></system-out>
   </testcase>
-  <testcase name="completeExercise_MarksExerciseDone" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.043">
-    <system-out><![CDATA[17:28:02.054 [http-nio-auto-1-exec-5] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: eaffc5bf-a039-47c8-9e76-abb19426b7e5
-17:28:02.056 [http-nio-auto-1-exec-5] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=eaffc5bf-a039-47c8-9e76-abb19426b7e5, program=4bd5dfde-5895-4827-9345-6cb4bff3831d
-17:28:02.057 [http-nio-auto-1-exec-5] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=eaffc5bf-a039-47c8-9e76-abb19426b7e5, program=4bd5dfde-5895-4827-9345-6cb4bff3831d, week=1, day=1, standalone=true
-17:28:02.057 [http-nio-auto-1-exec-5] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=4bd5dfde-5895-4827-9345-6cb4bff3831d
+  <testcase name="getSession_WrongUser_Returns403" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.073">
+    <system-out><![CDATA[05:43:20.896 [http-nio-auto-3-exec-3] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: dc01625f-98f3-4fbc-9175-03f748d158cd
+05:43:20.897 [http-nio-auto-3-exec-3] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=dc01625f-98f3-4fbc-9175-03f748d158cd, program=e75855ca-7906-47d2-8233-bc1b1e408508
+05:43:20.898 [http-nio-auto-3-exec-3] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=dc01625f-98f3-4fbc-9175-03f748d158cd, program=e75855ca-7906-47d2-8233-bc1b1e408508, week=1, day=1, standalone=true
+05:43:20.898 [http-nio-auto-3-exec-3] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=e75855ca-7906-47d2-8233-bc1b1e408508
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1285,6 +1258,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1292,14 +1266,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:02.063 [http-nio-auto-1-exec-5] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=ce3a1fcd-9922-40d3-ba1e-d6aeb1eec317, sections=2
+05:43:20.909 [http-nio-auto-3-exec-3] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=5b6cb40e-7133-4353-9d5c-4f25aade7c53, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -1307,6 +1281,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -1314,6 +1289,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -1325,6 +1301,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1332,6 +1309,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1339,13 +1317,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:02.075 [http-nio-auto-1-exec-6] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: eaffc5bf-a039-47c8-9e76-abb19426b7e5
+05:43:20.936 [http-nio-auto-3-exec-4] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 53b8496f-a6f2-40c5-906e-315371ad9110
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1353,6 +1332,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1360,8 +1340,43 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:02.079 [http-nio-auto-1-exec-6] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/ce3a1fcd-9922-40d3-ba1e-d6aeb1eec317
-17:28:02.079 [http-nio-auto-1-exec-6] DEBUG c.g.r.p.h.w.s.a.SessionService - Exercise completed: session=ce3a1fcd-9922-40d3-ba1e-d6aeb1eec317, section=0, exercise=0
+]]></system-out>
+  </testcase>
+  <testcase name="completeExercise_MarksExerciseDone" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.084">
+    <system-out><![CDATA[05:43:20.971 [http-nio-auto-3-exec-5] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 753a1366-817d-47bf-b708-78786191ae7e
+05:43:20.973 [http-nio-auto-3-exec-5] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=753a1366-817d-47bf-b708-78786191ae7e, program=953149fb-7820-41d7-ac0b-014b0fb566c8
+05:43:20.973 [http-nio-auto-3-exec-5] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=753a1366-817d-47bf-b708-78786191ae7e, program=953149fb-7820-41d7-ac0b-014b0fb566c8, week=1, day=1, standalone=true
+05:43:20.974 [http-nio-auto-3-exec-5] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=953149fb-7820-41d7-ac0b-014b0fb566c8
+Hibernate: 
+    select
+        sje1_0.id,
+        sje1_0.completed_at,
+        sje1_0.current_section_index,
+        sje1_0.day_number,
+        sje1_0.duration_seconds,
+        sje1_0.enrollment_id,
+        sje1_0.last_persisted_at,
+        sje1_0.paused_at,
+        sje1_0.program_id,
+        sje1_0.section_progresses,
+        sje1_0.started_at,
+        sje1_0.status,
+        sje1_0.total_paused_seconds,
+        sje1_0.user_id,
+        sje1_0.week_number,
+        sje1_0.workout_snapshot 
+    from
+        sessions sje1_0 
+    where
+        sje1_0.id=?
+05:43:20.983 [http-nio-auto-3-exec-5] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=a9c56c31-c2e9-4044-a1df-377132c95523, sections=2
+Hibernate: 
+    insert 
+    into
+        sessions
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -1369,6 +1384,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -1376,6 +1392,75 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
+        user_id=?,
+        week_number=?,
+        workout_snapshot=? 
+    where
+        id=?
+Hibernate: 
+    select
+        sje1_0.id,
+        sje1_0.completed_at,
+        sje1_0.current_section_index,
+        sje1_0.day_number,
+        sje1_0.duration_seconds,
+        sje1_0.enrollment_id,
+        sje1_0.last_persisted_at,
+        sje1_0.paused_at,
+        sje1_0.program_id,
+        sje1_0.section_progresses,
+        sje1_0.started_at,
+        sje1_0.status,
+        sje1_0.total_paused_seconds,
+        sje1_0.user_id,
+        sje1_0.week_number,
+        sje1_0.workout_snapshot 
+    from
+        sessions sje1_0 
+    where
+        sje1_0.id=?
+05:43:21.012 [http-nio-auto-3-exec-6] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 753a1366-817d-47bf-b708-78786191ae7e
+Hibernate: 
+    select
+        sje1_0.id,
+        sje1_0.completed_at,
+        sje1_0.current_section_index,
+        sje1_0.day_number,
+        sje1_0.duration_seconds,
+        sje1_0.enrollment_id,
+        sje1_0.last_persisted_at,
+        sje1_0.paused_at,
+        sje1_0.program_id,
+        sje1_0.section_progresses,
+        sje1_0.started_at,
+        sje1_0.status,
+        sje1_0.total_paused_seconds,
+        sje1_0.user_id,
+        sje1_0.week_number,
+        sje1_0.workout_snapshot 
+    from
+        sessions sje1_0 
+    where
+        sje1_0.id=?
+05:43:21.018 [http-nio-auto-3-exec-6] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_STATE_UPDATE to /topic/sessions/a9c56c31-c2e9-4044-a1df-377132c95523
+05:43:21.018 [http-nio-auto-3-exec-6] DEBUG c.g.r.p.h.w.s.a.SessionService - Exercise completed: session=a9c56c31-c2e9-4044-a1df-377132c95523, section=0, exercise=0
+Hibernate: 
+    update
+        sessions 
+    set
+        completed_at=?,
+        current_section_index=?,
+        day_number=?,
+        duration_seconds=?,
+        enrollment_id=?,
+        last_persisted_at=?,
+        paused_at=?,
+        program_id=?,
+        section_progresses=?,
+        started_at=?,
+        status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -1383,17 +1468,18 @@ Hibernate:
         id=?
 ]]></system-out>
   </testcase>
-  <testcase name="endSession_MarksCompleted" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="15.077">
-    <system-out><![CDATA[17:28:02.098 [http-nio-auto-1-exec-7] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 8bdfd0cd-21d4-4910-a707-128a58d50cdd
-17:28:02.099 [http-nio-auto-1-exec-7] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=8bdfd0cd-21d4-4910-a707-128a58d50cdd, program=66ad314d-a8bc-4bdf-bd36-88052fa02971
-17:28:02.100 [http-nio-auto-1-exec-7] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=8bdfd0cd-21d4-4910-a707-128a58d50cdd, program=66ad314d-a8bc-4bdf-bd36-88052fa02971, week=1, day=1, standalone=true
-17:28:02.100 [http-nio-auto-1-exec-7] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=66ad314d-a8bc-4bdf-bd36-88052fa02971
+  <testcase name="endSession_MarksCompleted" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.083">
+    <system-out><![CDATA[05:43:21.058 [http-nio-auto-3-exec-7] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 5709f688-68cb-4715-8220-6542bcf13001
+05:43:21.060 [http-nio-auto-3-exec-7] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=5709f688-68cb-4715-8220-6542bcf13001, program=93ad713b-07da-4b7d-b44f-5182746084e4
+05:43:21.060 [http-nio-auto-3-exec-7] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=5709f688-68cb-4715-8220-6542bcf13001, program=93ad713b-07da-4b7d-b44f-5182746084e4, week=1, day=1, standalone=true
+05:43:21.061 [http-nio-auto-3-exec-7] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=93ad713b-07da-4b7d-b44f-5182746084e4
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1401,6 +1487,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1408,14 +1495,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:02.106 [http-nio-auto-1-exec-7] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=d05adfe7-0bf1-4201-abbd-80898b52690a, sections=2
+05:43:21.071 [http-nio-auto-3-exec-7] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=8b2f06e2-4d6c-4099-807b-1f28dc5ec51a, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -1423,6 +1510,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -1430,6 +1518,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -1441,6 +1530,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1448,6 +1538,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1455,13 +1546,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:02.117 [http-nio-auto-1-exec-8] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 8bdfd0cd-21d4-4910-a707-128a58d50cdd
+05:43:21.100 [http-nio-auto-3-exec-8] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 5709f688-68cb-4715-8220-6542bcf13001
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1469,6 +1561,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1476,24 +1569,9 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:02.122 [http-nio-auto-1-exec-8] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:28:02.124 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:28:02.125 [http-nio-auto-1-exec-8] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 1/5): java.net.ConnectException: Connection refused
-17:28:03.128 [http-nio-auto-1-exec-8] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:28:03.130 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:28:03.130 [http-nio-auto-1-exec-8] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 2/5): java.net.ConnectException: Connection refused
-17:28:05.137 [http-nio-auto-1-exec-8] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:28:05.139 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:28:05.140 [http-nio-auto-1-exec-8] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 3/5): java.net.ConnectException: Connection refused
-17:28:09.143 [http-nio-auto-1-exec-8] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:28:09.145 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:28:09.146 [http-nio-auto-1-exec-8] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 4/5): java.net.ConnectException: Connection refused
-17:28:17.151 [http-nio-auto-1-exec-8] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:28:17.155 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:28:17.156 [http-nio-auto-1-exec-8] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 5/5): java.net.ConnectException: Connection refused
-17:28:17.156 [http-nio-auto-1-exec-8] ERROR c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Exhausted all 5 retry attempts for SessionCompleted event. Event payload for manual replay: eventId=c82e7be4-ae6d-427c-bfae-8fec68911468, sessionId=d05adfe7-0bf1-4201-abbd-80898b52690a, userId=8bdfd0cd-21d4-4910-a707-128a58d50cdd, programId=66ad314d-a8bc-4bdf-bd36-88052fa02971, weekNumber=1, dayNumber=1, standalone=true, startedAt=2026-05-13T15:28:02.105369Z, completedAt=2026-05-13T15:28:02.120441Z
-17:28:17.156 [http-nio-auto-1-exec-8] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_COMPLETED to /topic/sessions/d05adfe7-0bf1-4201-abbd-80898b52690a
-17:28:17.156 [http-nio-auto-1-exec-8] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=d05adfe7-0bf1-4201-abbd-80898b52690a, standalone=true
+05:43:21.106 [http-nio-auto-3-exec-8] INFO  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Published SessionCompleted event: eventId=69047e2b-a150-421e-af30-25a88fd6fa49, sessionId=8b2f06e2-4d6c-4099-807b-1f28dc5ec51a
+05:43:21.106 [http-nio-auto-3-exec-8] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_COMPLETED to /topic/sessions/8b2f06e2-4d6c-4099-807b-1f28dc5ec51a
+05:43:21.106 [http-nio-auto-3-exec-8] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=8b2f06e2-4d6c-4099-807b-1f28dc5ec51a, standalone=true, durationSeconds=0
 Hibernate: 
     update
         sessions 
@@ -1501,6 +1579,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -1508,6 +1587,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -1515,17 +1595,18 @@ Hibernate:
         id=?
 ]]></system-out>
   </testcase>
-  <testcase name="endSession_AlreadyCompleted_ReturnsError" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="15.093">
-    <system-out><![CDATA[17:28:17.178 [http-nio-auto-1-exec-9] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 68d66947-9721-440f-8a89-5b2f29652fc5
-17:28:17.179 [http-nio-auto-1-exec-9] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=68d66947-9721-440f-8a89-5b2f29652fc5, program=78df554b-1714-4621-b176-9617c77cbab6
-17:28:17.179 [http-nio-auto-1-exec-9] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=68d66947-9721-440f-8a89-5b2f29652fc5, program=78df554b-1714-4621-b176-9617c77cbab6, week=1, day=1, standalone=true
-17:28:17.179 [http-nio-auto-1-exec-9] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=78df554b-1714-4621-b176-9617c77cbab6
+  <testcase name="endSession_AlreadyCompleted_ReturnsError" classname="com.gmail.ramawthar.priyash.hybridstrength.workoutsession.integration.SessionIntegrationTest" time="0.082">
+    <system-out><![CDATA[05:43:21.138 [http-nio-auto-3-exec-9] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: bed1afac-663a-4a98-bb42-9d8c49303a65
+05:43:21.139 [http-nio-auto-3-exec-9] INFO  c.g.r.p.h.w.s.a.i.SessionController - POST /api/v1/sessions — user=bed1afac-663a-4a98-bb42-9d8c49303a65, program=4acd0e11-47c9-43bd-a357-83a866143c45
+05:43:21.139 [http-nio-auto-3-exec-9] INFO  c.g.r.p.h.w.s.a.SessionService - Starting session for user=bed1afac-663a-4a98-bb42-9d8c49303a65, program=4acd0e11-47c9-43bd-a357-83a866143c45, week=1, day=1, standalone=true
+05:43:21.139 [http-nio-auto-3-exec-9] DEBUG c.g.r.p.h.w.s.a.o.RestWorkoutFetcher - Fetching program definition for programId=4acd0e11-47c9-43bd-a357-83a866143c45
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1533,6 +1614,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1540,14 +1622,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:17.185 [http-nio-auto-1-exec-9] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=ac4ad231-a484-4ab1-9f3f-f86e177d246c, sections=2
+05:43:21.146 [http-nio-auto-3-exec-9] INFO  c.g.r.p.h.w.s.a.SessionService - Session started: id=339df2c6-8791-4c53-ab55-49e688e05914, sections=2
 Hibernate: 
     insert 
     into
         sessions
-        (completed_at, current_section_index, day_number, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, user_id, week_number, workout_snapshot, id) 
+        (completed_at, current_section_index, day_number, duration_seconds, enrollment_id, last_persisted_at, paused_at, program_id, section_progresses, started_at, status, total_paused_seconds, user_id, week_number, workout_snapshot, id) 
     values
-        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 Hibernate: 
     update
         sessions 
@@ -1555,6 +1637,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -1562,6 +1645,7 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
@@ -1573,6 +1657,7 @@ Hibernate:
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1580,6 +1665,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1587,13 +1673,14 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:17.197 [http-nio-auto-1-exec-10] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 68d66947-9721-440f-8a89-5b2f29652fc5
+05:43:21.168 [http-nio-auto-3-exec-10] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: bed1afac-663a-4a98-bb42-9d8c49303a65
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1601,6 +1688,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1608,24 +1696,9 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:17.199 [http-nio-auto-1-exec-10] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:28:17.204 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:28:17.205 [http-nio-auto-1-exec-10] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 1/5): java.net.ConnectException: Connection refused
-17:28:18.210 [http-nio-auto-1-exec-10] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:28:18.212 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:28:18.213 [http-nio-auto-1-exec-10] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 2/5): java.net.ConnectException: Connection refused
-17:28:20.217 [http-nio-auto-1-exec-10] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:28:20.219 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:28:20.220 [http-nio-auto-1-exec-10] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 3/5): java.net.ConnectException: Connection refused
-17:28:24.221 [http-nio-auto-1-exec-10] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:28:24.224 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:28:24.225 [http-nio-auto-1-exec-10] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 4/5): java.net.ConnectException: Connection refused
-17:28:32.226 [http-nio-auto-1-exec-10] INFO  o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:30672]
-17:28:32.230 [AMQP Connection 127.0.0.1:30672] WARN  c.r.c.impl.ForgivingExceptionHandler - An unexpected connection driver error occurred (Exception message: Connection reset)
-17:28:32.231 [http-nio-auto-1-exec-10] WARN  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Failed to publish SessionCompleted event (attempt 5/5): java.net.ConnectException: Connection refused
-17:28:32.231 [http-nio-auto-1-exec-10] ERROR c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Exhausted all 5 retry attempts for SessionCompleted event. Event payload for manual replay: eventId=9a59d0c2-88a1-4ec1-a482-bfd9c5df12eb, sessionId=ac4ad231-a484-4ab1-9f3f-f86e177d246c, userId=68d66947-9721-440f-8a89-5b2f29652fc5, programId=78df554b-1714-4621-b176-9617c77cbab6, weekNumber=1, dayNumber=1, standalone=true, startedAt=2026-05-13T15:28:17.183371Z, completedAt=2026-05-13T15:28:17.199358Z
-17:28:32.231 [http-nio-auto-1-exec-10] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_COMPLETED to /topic/sessions/ac4ad231-a484-4ab1-9f3f-f86e177d246c
-17:28:32.231 [http-nio-auto-1-exec-10] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=ac4ad231-a484-4ab1-9f3f-f86e177d246c, standalone=true
+05:43:21.174 [http-nio-auto-3-exec-10] INFO  c.g.r.p.h.w.s.a.o.RabbitSessionEventPublisher - Published SessionCompleted event: eventId=0782afa8-49b3-4413-a166-fdcf4d89de5e, sessionId=339df2c6-8791-4c53-ab55-49e688e05914
+05:43:21.174 [http-nio-auto-3-exec-10] DEBUG c.g.r.p.h.w.s.a.i.StompSessionNotifier - Pushed SESSION_COMPLETED to /topic/sessions/339df2c6-8791-4c53-ab55-49e688e05914
+05:43:21.175 [http-nio-auto-3-exec-10] INFO  c.g.r.p.h.w.s.a.SessionService - Session ended: id=339df2c6-8791-4c53-ab55-49e688e05914, standalone=true, durationSeconds=0
 Hibernate: 
     update
         sessions 
@@ -1633,6 +1706,7 @@ Hibernate:
         completed_at=?,
         current_section_index=?,
         day_number=?,
+        duration_seconds=?,
         enrollment_id=?,
         last_persisted_at=?,
         paused_at=?,
@@ -1640,18 +1714,20 @@ Hibernate:
         section_progresses=?,
         started_at=?,
         status=?,
+        total_paused_seconds=?,
         user_id=?,
         week_number=?,
         workout_snapshot=? 
     where
         id=?
-17:28:32.245 [http-nio-auto-1-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: 68d66947-9721-440f-8a89-5b2f29652fc5
+05:43:21.192 [http-nio-auto-3-exec-1] DEBUG c.g.r.p.h.w.c.s.JwtAuthenticationFilter - Authenticated user: bed1afac-663a-4a98-bb42-9d8c49303a65
 Hibernate: 
     select
         sje1_0.id,
         sje1_0.completed_at,
         sje1_0.current_section_index,
         sje1_0.day_number,
+        sje1_0.duration_seconds,
         sje1_0.enrollment_id,
         sje1_0.last_persisted_at,
         sje1_0.paused_at,
@@ -1659,6 +1735,7 @@ Hibernate:
         sje1_0.section_progresses,
         sje1_0.started_at,
         sje1_0.status,
+        sje1_0.total_paused_seconds,
         sje1_0.user_id,
         sje1_0.week_number,
         sje1_0.workout_snapshot 
@@ -1666,10 +1743,10 @@ Hibernate:
         sessions sje1_0 
     where
         sje1_0.id=?
-17:28:32.250 [http-nio-auto-1-exec-1] ERROR c.g.r.p.h.w.c.e.GlobalExceptionHandler - Unhandled exception on POST /api/v1/sessions/ac4ad231-a484-4ab1-9f3f-f86e177d246c/end
+05:43:21.198 [http-nio-auto-3-exec-1] ERROR c.g.r.p.h.w.c.e.GlobalExceptionHandler - Unhandled exception on POST /api/v1/sessions/339df2c6-8791-4c53-ab55-49e688e05914/end
 java.lang.IllegalStateException: Session is already completed
-	at com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.Session.end(Session.java:166)
-	at com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.application.SessionService.endSession(SessionService.java:215)
+	at com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.Session.end(Session.java:172)
+	at com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.application.SessionService.endSession(SessionService.java:264)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -1682,7 +1759,7 @@ java.lang.IllegalStateException: Session is already completed
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)
 	at com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.application.SessionService$$SpringCGLIB$$0.endSession(<generated>)
-	at com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.adapters.inbound.SessionController.endSession(SessionController.java:136)
+	at com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.adapters.inbound.SessionController.endSession(SessionController.java:168)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

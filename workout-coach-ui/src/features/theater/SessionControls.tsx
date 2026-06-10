@@ -1,8 +1,11 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { EmptySessionGuard, hasPerformanceData } from "./EmptySessionGuard";
+import type { SectionProgress } from "../../types/session";
 
 interface SessionControlsProps {
   isPaused: boolean;
+  sectionProgresses: SectionProgress[];
   onPause: () => Promise<void>;
   onResume: () => Promise<void>;
   onEnd: () => Promise<void>;
@@ -86,12 +89,14 @@ type ConfirmAction = "end" | "leave" | null;
 
 export function SessionControls({
   isPaused,
+  sectionProgresses,
   onPause,
   onResume,
   onEnd,
 }: SessionControlsProps) {
   const navigate = useNavigate();
   const [confirmAction, setConfirmAction] = useState<ConfirmAction>(null);
+  const [showEmptyGuard, setShowEmptyGuard] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handlePauseResume = useCallback(async () => {
@@ -107,6 +112,15 @@ export function SessionControls({
     }
   }, [isPaused, onPause, onResume]);
 
+  const handleEndClick = useCallback(() => {
+    // Check if session has performance data before showing end confirmation
+    if (!hasPerformanceData(sectionProgresses)) {
+      setShowEmptyGuard(true);
+    } else {
+      setConfirmAction("end");
+    }
+  }, [sectionProgresses]);
+
   const handleConfirmEnd = useCallback(async () => {
     setIsProcessing(true);
     try {
@@ -117,6 +131,21 @@ export function SessionControls({
       setIsProcessing(false);
     }
   }, [onEnd, navigate]);
+
+  const handleEmptyGuardConfirm = useCallback(async () => {
+    setIsProcessing(true);
+    try {
+      await onEnd();
+      setShowEmptyGuard(false);
+      navigate("/", { replace: true });
+    } finally {
+      setIsProcessing(false);
+    }
+  }, [onEnd, navigate]);
+
+  const handleEmptyGuardCancel = useCallback(() => {
+    setShowEmptyGuard(false);
+  }, []);
 
   const handleConfirmLeave = useCallback(async () => {
     // Pause persists state, then navigate away
@@ -147,7 +176,7 @@ export function SessionControls({
         <button
           type="button"
           style={endButtonStyle}
-          onClick={() => setConfirmAction("end")}
+          onClick={handleEndClick}
           disabled={isProcessing}
         >
           End Workout
@@ -163,7 +192,16 @@ export function SessionControls({
         </button>
       </div>
 
-      {/* Confirmation dialog */}
+      {/* Empty session guard — shown when ending with no performance data */}
+      {showEmptyGuard && (
+        <EmptySessionGuard
+          sectionProgresses={sectionProgresses}
+          onConfirmEnd={handleEmptyGuardConfirm}
+          onCancel={handleEmptyGuardCancel}
+        />
+      )}
+
+      {/* Standard confirmation dialog for end/leave */}
       {confirmAction && (
         <div
           style={confirmOverlayStyle}

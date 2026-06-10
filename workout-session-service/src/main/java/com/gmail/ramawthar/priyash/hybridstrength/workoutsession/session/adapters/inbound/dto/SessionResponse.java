@@ -1,5 +1,6 @@
 package com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.adapters.inbound.dto;
 
+import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.CrossFitScore;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.ExerciseLog;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.SectionProgress;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutsession.session.domain.Session;
@@ -19,7 +20,8 @@ public record SessionResponse(
         Object workoutSnapshot,
         Instant startedAt,
         Instant pausedAt,
-        Instant completedAt
+        Instant completedAt,
+        Integer durationSeconds
 ) {
 
     /**
@@ -38,7 +40,8 @@ public record SessionResponse(
                 session.getWorkoutSnapshot(),
                 session.getStartedAt(),
                 session.getPausedAt(),
-                session.getCompletedAt()
+                session.getCompletedAt(),
+                session.getDurationSeconds()
         );
     }
 
@@ -47,22 +50,46 @@ public record SessionResponse(
                 .map(SessionResponse::mapExerciseLog)
                 .toList();
 
+        CrossFitScoreResponse scoreResponse = null;
+        if (sp.getCrossFitScore() != null) {
+            var score = sp.getCrossFitScore();
+            scoreResponse = new CrossFitScoreResponse(
+                    score.getRounds(),
+                    score.getAdditionalReps(),
+                    score.getTotalTimeSeconds(),
+                    score.getLoggedAt()
+            );
+        }
+
         return new SectionProgressResponse(
                 sp.getSectionIndex(),
                 sp.getSectionName(),
                 sp.getSectionType().name(),
                 logs,
-                sp.isCompleted()
+                sp.isCompleted(),
+                scoreResponse,
+                sp.getRoundCount()
         );
     }
 
     private static ExerciseLogResponse mapExerciseLog(ExerciseLog el) {
+        List<SetLogResponse> setLogs = el.getSetLogs().stream()
+                .map(s -> new SetLogResponse(
+                        s.getSetNumber(),
+                        s.getWeight(),
+                        s.getRepetitions(),
+                        s.getRpe(),
+                        s.getLoggedAt()
+                ))
+                .toList();
+
         return new ExerciseLogResponse(
                 el.getExerciseIndex(),
                 el.getExerciseName(),
                 el.getRestSeconds(),
                 el.isCompleted(),
-                el.getCompletedAt()
+                el.getCompletedAt(),
+                setLogs
         );
     }
 }
