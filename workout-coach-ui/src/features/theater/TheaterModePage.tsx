@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSession } from "../../hooks/useSession";
+import { useRecommendations } from "../../hooks/useRecommendations";
 import { SectionNavigator } from "./SectionNavigator";
 import { SectionHeader } from "./SectionHeader";
 import { ElapsedTimer } from "./ElapsedTimer";
@@ -171,6 +172,12 @@ export function TheaterModePage() {
     logCrossFitScore,
   } = useSession(sessionId ?? "");
 
+  const {
+    recommendations,
+    isLoading: recommendationsLoading,
+    error: recommendationsError,
+  } = useRecommendations(sessionId ?? "", session?.currentSectionIndex ?? 0);
+
   const [restTimerDuration, setRestTimerDuration] = useState<number | null>(null);
 
   const handleRestTimerStart = useCallback((restSeconds: number) => {
@@ -318,6 +325,9 @@ export function TheaterModePage() {
             onCompleteExercise={completeExercise}
             onRestTimerStart={handleRestTimerStart}
             onLogSet={handleLogSet}
+            recommendations={recommendations}
+            recommendationsLoading={recommendationsLoading}
+            recommendationsError={!!recommendationsError}
           />
         )}
 

@@ -14,3 +14,4 @@ export { ExercisePrescription } from "./ExercisePrescription";
 export { SectionHeader } from "./SectionHeader";
 export { ElapsedTimer } from "./ElapsedTimer";
 export { EmptySessionGuard, hasPerformanceData } from "./EmptySessionGuard";
+export { RecommendationBadge } from "./RecommendationBadge";

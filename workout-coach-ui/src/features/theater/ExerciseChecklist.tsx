@@ -1,5 +1,7 @@
 import type { ExerciseLog, LogSetRequest, SessionStatus, SectionType } from "../../types/session";
+import type { ExerciseRecommendationDto } from "../../types/recommendation";
 import { ExercisePrescription } from "./ExercisePrescription";
+import { RecommendationBadge } from "./RecommendationBadge";
 import { SetLogForm } from "./SetLogForm";
 import { SetLogList } from "./SetLogList";
 
@@ -24,6 +26,12 @@ interface ExerciseChecklistProps {
   onRestTimerStart: (restSeconds: number) => void;
   /** Called to log a strength set */
   onLogSet: (request: LogSetRequest) => Promise<void>;
+  /** Recommendations for exercises in the current section */
+  recommendations?: ExerciseRecommendationDto[];
+  /** Whether recommendations are currently being loaded */
+  recommendationsLoading?: boolean;
+  /** Whether recommendations failed to load (hides badge area) */
+  recommendationsError?: boolean;
 }
 
 const listStyle: React.CSSProperties = {
@@ -87,6 +95,9 @@ export function ExerciseChecklist({
   onCompleteExercise,
   onRestTimerStart,
   onLogSet,
+  recommendations = [],
+  recommendationsLoading = false,
+  recommendationsError = false,
 }: ExerciseChecklistProps) {
   const isStrength = sectionType === "STRENGTH";
 
@@ -112,6 +123,21 @@ export function ExerciseChecklist({
             key={log.exerciseIndex}
             style={log.completed ? completedItemStyle : itemStyle}
           >
+            {/* Recommendation Badge — hidden on error, positioned above set-logging */}
+            {!recommendationsError && (() => {
+              const rec = recommendations.find(
+                (r) => r.exerciseIndex === index
+              );
+              return (
+                <RecommendationBadge
+                  prescribedWeight={rec?.prescribedWeight ?? null}
+                  prescribedReps={rec?.prescribedReps ?? null}
+                  prescribedSets={rec?.prescribedSets ?? null}
+                  isLoading={recommendationsLoading}
+                />
+              );
+            })()}
+
             {/* Prescription display for STRENGTH sections */}
             {isStrength && def && (
               <ExercisePrescription

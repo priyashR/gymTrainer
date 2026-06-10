@@ -20,6 +20,7 @@ com/gmail/ramawthar/priyash/hybridstrength/workoutsession/session/adapters/inbou
 com/gmail/ramawthar/priyash/hybridstrength/workoutsession/session/application/package-info.class
 com/gmail/ramawthar/priyash/hybridstrength/workoutsession/progression/adapters/outbound/JpaEnrollmentRepository.class
 com/gmail/ramawthar/priyash/hybridstrength/workoutsession/session/adapters/inbound/SessionController.class
+com/gmail/ramawthar/priyash/hybridstrength/workoutsession/session/domain/SnapshotParseException.class
 com/gmail/ramawthar/priyash/hybridstrength/workoutsession/common/security/JwtAuthenticationFilter.class
 com/gmail/ramawthar/priyash/hybridstrength/workoutsession/common/exception/SessionNotFoundException.class
 com/gmail/ramawthar/priyash/hybridstrength/workoutsession/common/exception/GlobalExceptionHandler.class

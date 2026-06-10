@@ -7,8 +7,10 @@
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/integration/package-info.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/property/CrossFitScorePropertyTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/property/DurationPropertyTest.java
+/Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/property/ExerciseRecommendationPropertyTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/property/NavigationPropertyTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/property/ProgressionPropertyTest.java
+/Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/property/RecommendationEnginePropertyTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/property/SessionPerformancePropertyTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/property/SessionPropertyTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/property/SetLogPropertyTest.java
@@ -17,9 +19,13 @@
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/ExerciseLogTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/ProgramEnrollmentTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/ProgressionServiceTest.java
+/Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/RecommendationControllerTest.java
+/Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/RecommendationEngineTest.java
+/Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/RecommendationServiceTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/SectionProgressTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/SessionPerformanceTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/SessionServiceTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/SessionTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/SetLogTest.java
+/Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/StompSessionNotifierTest.java
 /Users/priyashr/git/gymApp/workout-session-service/src/test/java/com/gmail/ramawthar/priyash/hybridstrength/workoutsession/unit/package-info.java
