@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HybridStrength — Theater Mode (Tablet, Dark Mode)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-surface: #161616;
+      --bg-card: #1e1e1e;
+      --text-primary: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --accent: #4fc3f7;
+      --accent-hover: #29b6f6;
+      --success: #66bb6a;
+      --error: #ef5350;
+      --warning: #ffa726;
+      --border: #2a2a2a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* Header */
+    .theater-header {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .tier-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .tier-nav-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 20px;
+      color: var(--text-primary);
+      font-size: 14px;
+      cursor: pointer;
+      min-width: 48px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tier-nav-btn:hover { border-color: var(--accent); }
+    .tier-nav-btn.disabled { opacity: 0.3; cursor: not-allowed; }
+    .tier-info { text-align: center; }
+    .tier-label { font-size: 22px; font-weight: 700; }
+    .tier-type { font-size: 14px; color: var(--accent); margin-top: 2px; }
+
+    .stopwatch {
+      font-size: 96px;
+      font-weight: 300;
+      font-variant-numeric: tabular-nums;
+      color: var(--text-primary);
+      letter-spacing: 4px;
+    }
+
+    /* Main Content — Side by side on tablet */
+    .theater-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      height: calc(100vh - 90px);
+    }
+
+    /* Exercise List Panel */
+    .exercise-panel {
+      padding: 24px 32px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+    }
+    .exercise-panel h2 {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .exercise-row {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.2s;
+    }
+    .exercise-row.active { border-color: var(--accent); background: #0d2a3a; }
+    .exercise-row.completed { opacity: 0.5; border-color: var(--success); }
+
+    .exercise-checkbox {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .exercise-checkbox.checked { background: var(--success); border-color: var(--success); color: white; font-size: 16px; }
+
+    .exercise-details { flex: 1; }
+    .exercise-name { font-size: 22px; font-weight: 600; }
+    .exercise-prescription {
+      font-size: 18px;
+      color: var(--accent);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    .move-btn {
+      background: var(--accent);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      min-width: 48px;
+      min-height: 48px;
+    }
+    .move-btn:hover { background: var(--accent-hover); }
+
+    /* Logging Panel */
+    .logging-panel {
+      padding: 24px 32px;
+      overflow-y: auto;
+      background: var(--bg-surface);
+    }
+    .logging-panel h2 {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .current-exercise-header {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .current-exercise-rx {
+      font-size: 15px;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .log-form { display: flex; flex-direction: column; gap: 16px; }
+    .log-field { display: flex; flex-direction: column; gap: 6px; }
+    .log-field label { font-size: 13px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+    .log-field input {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 18px;
+      color: var(--text-primary);
+      outline: none;
+      min-height: 48px;
+    }
+    .log-field input:focus { border-color: var(--accent); }
+    .log-field input::placeholder { color: #555; }
+
+    .log-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Set History */
+    .set-history { margin-top: 24px; }
+    .set-history h3 { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; }
+    .set-entry {
+      display: grid;
+      grid-template-columns: 40px 1fr 1fr 1fr;
+      gap: 8px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      align-items: center;
+    }
+    .set-entry .set-num { color: var(--text-secondary); font-weight: 600; }
+    .set-entry .set-val { color: var(--text-primary); }
+
+    .log-set-btn {
+      background: var(--success);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 16px;
+      min-height: 48px;
+    }
+    .log-set-btn:hover { background: #4caf50; }
+
+    @media (max-width: 900px) {
+      .theater-main { grid-template-columns: 1fr; }
+      .exercise-panel { border-right: none; border-bottom: 1px solid var(--border); max-height: 40vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="theater-header">
+    <div class="stopwatch">00:12:34</div>
+    <div class="tier-nav">
+      <button class="tier-nav-btn disabled">◀ Prev</button>
+      <div class="tier-info">
+        <div class="tier-label">Tier 1: Compound</div>
+        <div class="tier-type">Strength</div>
+      </div>
+      <button class="tier-nav-btn">Next ▶</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="theater-main">
+
+    <!-- Left: Exercise List -->
+    <div class="exercise-panel">
+      <h2>Exercises</h2>
+
+      <div class="exercise-row completed">
+        <div class="exercise-checkbox checked">✓</div>
+        <div class="exercise-details">
+          <div class="exercise-name">Back Squat</div>
+          <div class="exercise-prescription">4 × 6 @ 120kg · RPE 8</div>
+        </div>
+      </div>
+
+      <div class="exercise-row active">
+        <div class="exercise-checkbox"></div>
+        <div class="exercise-details">
+          <div class="exercise-name">Romanian Deadlift</div>
+          <div class="exercise-prescription">3 × 10 @ 80kg · RPE 7</div>
+        </div>
+        <button class="move-btn">Move ↓</button>
+      </div>
+
+      <div class="exercise-row">
+        <div class="exercise-checkbox"></div>
+        <div class="exercise-details">
+          <div class="exercise-name">Barbell Hip Thrust</div>
+          <div class="exercise-prescription">3 × 12 @ 100kg · RPE 7</div>
+        </div>
+      </div>
+
+      <div class="exercise-row">
+        <div class="exercise-checkbox"></div>
+        <div class="exercise-details">
+          <div class="exercise-name">Walking Lunges</div>
+          <div class="exercise-prescription">3 × 12 each @ 20kg DBs</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Performance Logging -->
+    <div class="logging-panel">
+      <h2>Log Performance</h2>
+
+      <div class="current-exercise-header">Romanian Deadlift</div>
+      <div class="current-exercise-rx">Prescribed: 3 × 10 @ 80kg · RPE 7</div>
+
+      <div class="log-form">
+        <div class="log-row">
+          <div class="log-field">
+            <label>Reps</label>
+            <input type="number" placeholder="10" value="10">
+          </div>
+          <div class="log-field">
+            <label>Weight (kg)</label>
+            <input type="number" placeholder="80" value="80">
+          </div>
+          <div class="log-field">
+            <label>RPE</label>
+            <input type="number" placeholder="7" value="7.5" step="0.5">
+          </div>
+        </div>
+
+        <button class="log-set-btn">✓ Log Set</button>
+      </div>
+
+      <!-- Set History -->
+      <div class="set-history">
+        <h3>Sets Logged</h3>
+        <div class="set-entry">
+          <span class="set-num">#1</span>
+          <span class="set-val">10 reps</span>
+          <span class="set-val">80 kg</span>
+          <span class="set-val">RPE 7</span>
+        </div>
+        <div class="set-entry">
+          <span class="set-num">#2</span>
+          <span class="set-val">10 reps</span>
+          <span class="set-val">80 kg</span>
+          <span class="set-val">RPE 7.5</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

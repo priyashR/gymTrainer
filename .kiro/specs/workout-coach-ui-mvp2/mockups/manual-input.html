@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HybridStrength — Manual Input (Dark Mode)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-primary: #121212;
+      --bg-surface: #1e1e1e;
+      --bg-card: #2a2a2a;
+      --bg-editor: #0d1117;
+      --text-primary: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --accent: #4fc3f7;
+      --accent-hover: #29b6f6;
+      --success: #66bb6a;
+      --error: #ef5350;
+      --border: #333333;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+    h2 { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+    .subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; }
+
+    .back-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    /* Tabs for Edit / Preview mode */
+    .mode-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mode-tab {
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .mode-tab:hover { color: var(--text-primary); }
+    .mode-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* JSON Editor */
+    .editor-container {
+      background: var(--bg-editor);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .editor-toolbar {
+      background: var(--bg-surface);
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .editor-textarea {
+      width: 100%;
+      min-height: 400px;
+      background: var(--bg-editor);
+      border: none;
+      padding: 20px;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #c9d1d9;
+      resize: vertical;
+      outline: none;
+    }
+    .editor-textarea::placeholder { color: #484f58; }
+
+    /* Error display */
+    .error-banner {
+      background: #2d1b1b;
+      border: 1px solid var(--error);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .error-banner .icon { color: var(--error); font-size: 18px; flex-shrink: 0; }
+    .error-banner .message { font-size: 13px; color: #ffa0a0; line-height: 1.5; }
+
+    /* Action Buttons */
+    .action-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .btn {
+      border: none;
+      border-radius: 10px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 48px;
+    }
+    .btn-primary { background: var(--accent); color: var(--bg-primary); }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary { background: var(--bg-surface); color: var(--text-primary); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--accent); }
+    .btn-success { background: var(--success); color: white; }
+    .btn-success:hover { background: #4caf50; }
+
+    /* Preview Mode */
+    .preview-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: none;
+    }
+    .preview-container.visible { display: block; }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .preview-title { font-size: 20px; font-weight: 700; }
+    .preview-meta { font-size: 13px; color: var(--text-secondary); }
+
+    .preview-section {
+      background: var(--bg-card);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+    }
+    .preview-section .section-name { font-size: 16px; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
+    .preview-section .section-type { font-size: 12px; color: var(--text-secondary); margin-bottom: 12px; text-transform: uppercase; }
+
+    .preview-exercise {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .preview-exercise:last-child { border-bottom: none; }
+    .preview-exercise .name { font-size: 14px; }
+    .preview-exercise .prescription { font-size: 13px; color: var(--text-secondary); }
+
+    /* Success state */
+    .success-banner {
+      background: #1a3a2a;
+      border: 1px solid var(--success);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      display: none;
+    }
+    .success-banner.visible { display: block; }
+    .success-banner .icon { font-size: 32px; margin-bottom: 8px; }
+    .success-banner .message { font-size: 16px; font-weight: 600; color: var(--success); }
+    .success-banner .sub { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+    .success-banner .link { color: var(--accent); text-decoration: none; margin-top: 12px; display: inline-block; }
+  </style>
+</head>
+<body>
+
+  <a href="#" class="back-link">← Home</a>
+  <h1>Manual Input</h1>
+  <p class="subtitle">Type or paste your workout JSON below. It will be validated against the Upload Schema before saving.</p>
+
+  <!-- Mode Tabs -->
+  <div class="mode-tabs">
+    <div class="mode-tab active">✏️ Edit</div>
+    <div class="mode-tab">👁 Preview</div>
+  </div>
+
+  <!-- Editor Mode -->
+  <div class="editor-container">
+    <div class="editor-toolbar">
+      <span>application/json</span>
+      <span>Upload Schema v1.0</span>
+    </div>
+    <textarea class="editor-textarea" placeholder='{
+  "version": "1.0",
+  "program_metadata": {
+    "program_name": "My Workout",
+    "goal": "Hypertrophy",
+    "duration_weeks": 1,
+    "equipment_profile": ["barbell", "dumbbells"]
+  },
+  "program_structure": [...]
+}'>{
+  "version": "1.0",
+  "program_metadata": {
+    "program_name": "Quick Push Day",
+    "goal": "Hypertrophy",
+    "duration_weeks": 1,
+    "equipment_profile": ["barbell", "dumbbells", "cable"]
+  },
+  "program_structure": [
+    {
+      "week_number": 1,
+      "days": [
+        {
+          "day_number": 1,
+          "focus_area": "Push",
+          "modality": "Hypertrophy",
+          "blocks": [
+            {
+              "block_name": "Compounds",
+              "movements": [
+                { "name": "Barbell Bench Press", "sets": 4, "reps": "8-10", "weight": "80kg" },
+                { "name": "Overhead Press", "sets": 3, "reps": "8-10", "weight": "50kg" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}</textarea>
+  </div>
+
+  <!-- Error (hidden by default, shown on validation failure) -->
+  <!--
+  <div class="error-banner">
+    <span class="icon">⚠</span>
+    <div class="message">
+      <strong>Validation Error:</strong> program_structure[0].days[0].blocks[0].movements[1] — missing required field "name"
+    </div>
+  </div>
+  -->
+
+  <!-- Action Buttons (Edit mode) -->
+  <div class="action-row">
+    <button class="btn btn-primary">Validate & Preview</button>
+    <button class="btn btn-secondary">Clear</button>
+  </div>
+
+  <!-- Preview Mode (shown after successful validation) -->
+  <div class="preview-container visible">
+    <div class="preview-header">
+      <div>
+        <div class="preview-title">Quick Push Day</div>
+        <div class="preview-meta">Hypertrophy · 1 week · barbell, dumbbells, cable</div>
+      </div>
+    </div>
+
+    <div class="preview-section">
+      <div class="section-name">Compounds</div>
+      <div class="section-type">Day 1 — Push · Hypertrophy</div>
+      <div class="preview-exercise">
+        <span class="name">Barbell Bench Press</span>
+        <span class="prescription">4 × 8-10 @ 80kg</span>
+      </div>
+      <div class="preview-exercise">
+        <span class="name">Overhead Press</span>
+        <span class="prescription">3 × 8-10 @ 50kg</span>
+      </div>
+    </div>
+
+    <div class="action-row" style="margin-top: 20px;">
+      <button class="btn btn-success">Upload to Vault</button>
+      <button class="btn btn-secondary">← Back to Edit</button>
+    </div>
+  </div>
+
+  <!-- Success state (shown after upload) -->
+  <!--
+  <div class="success-banner visible">
+    <div class="icon">✅</div>
+    <div class="message">"Quick Push Day" uploaded successfully!</div>
+    <div class="sub">It's now available in your Vault.</div>
+    <a href="#" class="link">View in Vault →</a>
+  </div>
+  -->
+
+</body>
+</html>

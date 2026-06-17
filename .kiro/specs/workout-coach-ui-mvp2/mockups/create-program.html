@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HybridStrength — Create Program (Dark Mode)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-primary: #121212;
+      --bg-surface: #1e1e1e;
+      --bg-card: #2a2a2a;
+      --text-primary: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --accent: #4fc3f7;
+      --accent-hover: #29b6f6;
+      --success: #66bb6a;
+      --error: #ef5350;
+      --border: #333333;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+    h2 { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+    h3 { font-size: 14px; font-weight: 600; color: var(--text-secondary); margin-bottom: 12px; }
+
+    .back-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    /* Program Name Input */
+    .program-name-input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 18px;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+      outline: none;
+    }
+    .program-name-input:focus { border-color: var(--accent); }
+    .program-name-input::placeholder { color: var(--text-secondary); }
+
+    /* Day Tiles Grid */
+    .day-tiles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .day-tile {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .day-tile:hover { border-color: var(--accent); background: #1a2a3a; }
+    .day-tile.active { border-color: var(--accent); background: #1a2a3a; box-shadow: 0 0 0 2px rgba(79, 195, 247, 0.2); }
+    .day-tile .day-number { font-size: 24px; font-weight: 700; color: var(--accent); }
+    .day-tile .day-label { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+    .day-tile .exercise-count { font-size: 11px; color: var(--text-secondary); margin-top: 8px; }
+
+    .add-day-tile {
+      background: var(--bg-card);
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    .add-day-tile:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Day Editor Panel */
+    .day-editor {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 24px;
+    }
+    .day-editor-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .day-editor-header h2 { margin-bottom: 0; }
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Search Input */
+    .search-input {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      outline: none;
+    }
+    .search-input:focus { border-color: var(--accent); }
+    .search-input::placeholder { color: var(--text-secondary); }
+
+    /* Exercise Cards */
+    .exercise-list { display: flex; flex-direction: column; gap: 8px; }
+    .exercise-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .exercise-card .exercise-info { flex: 1; }
+    .exercise-card .exercise-name { font-size: 15px; font-weight: 500; }
+    .exercise-card .exercise-meta { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+    .exercise-card .add-btn {
+      background: var(--accent);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      min-width: 56px;
+    }
+    .exercise-card .add-btn:hover { background: var(--accent-hover); }
+
+    /* Added exercises */
+    .added-section { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .added-exercise {
+      background: #1a3a2a;
+      border: 1px solid #2e7d32;
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .added-exercise .name { font-size: 14px; color: var(--success); }
+    .added-exercise .remove-btn {
+      background: none;
+      border: none;
+      color: var(--error);
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Save Button */
+    .save-btn {
+      background: var(--accent);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 12px;
+      padding: 16px 32px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 24px;
+    }
+    .save-btn:hover { background: var(--accent-hover); }
+  </style>
+</head>
+<body>
+
+  <a href="#" class="back-link">← Back to Home</a>
+  <h1>Create Program</h1>
+
+  <!-- Program Name -->
+  <input type="text" class="program-name-input" placeholder="Program name (e.g., Push Pull Legs)" value="PPL Hypertrophy">
+
+  <!-- Day Tiles -->
+  <h3>Training Days</h3>
+  <div class="day-tiles-grid">
+    <div class="day-tile">
+      <div class="day-number">1</div>
+      <div class="day-label">Day 1</div>
+      <div class="exercise-count">Pull Day — Back & Biceps</div>
+    </div>
+    <div class="day-tile active">
+      <div class="day-number">2</div>
+      <div class="day-label">Day 2</div>
+      <div class="exercise-count">Push Day — Chest & Shoulders</div>
+    </div>
+    <div class="day-tile">
+      <div class="day-number">3</div>
+      <div class="day-label">Day 3</div>
+      <div class="exercise-count">⚽ Soccer</div>
+    </div>
+    <div class="day-tile">
+      <div class="day-number">4</div>
+      <div class="day-label">Day 4</div>
+      <div class="exercise-count">No workout assigned</div>
+    </div>
+    <div class="day-tile">
+      <div class="day-number">5</div>
+      <div class="day-label">Day 5</div>
+      <div class="exercise-count">No workout assigned</div>
+    </div>
+    <div class="add-day-tile">＋ Add Day</div>
+  </div>
+
+  <!-- Day Editor (shown when a day tile is tapped) -->
+  <div class="day-editor">
+    <div class="day-editor-header">
+      <h2>Day 2 — Assign</h2>
+      <button class="close-btn">✕</button>
+    </div>
+
+    <!-- Option tabs -->
+    <div style="display: flex; gap: 0; margin-bottom: 16px; border-bottom: 1px solid var(--border);">
+      <div style="padding: 12px 20px; font-size: 14px; font-weight: 600; color: var(--accent); border-bottom: 2px solid var(--accent); cursor: pointer;">💪 Workout</div>
+      <div style="padding: 12px 20px; font-size: 14px; font-weight: 600; color: var(--text-secondary); cursor: pointer;">🏃 Activity</div>
+    </div>
+
+    <input type="text" class="search-input" placeholder="Search your Vault workouts...">
+
+    <div class="exercise-list">
+      <div class="exercise-card">
+        <div class="exercise-info">
+          <div class="exercise-name">Push Day — Chest & Shoulders</div>
+          <div class="exercise-meta">Hypertrophy · 5 exercises · ~55 min</div>
+        </div>
+        <button class="add-btn">Assign</button>
+      </div>
+      <div class="exercise-card">
+        <div class="exercise-info">
+          <div class="exercise-name">Pull Day — Back & Biceps</div>
+          <div class="exercise-meta">Hypertrophy · 6 exercises · ~60 min</div>
+        </div>
+        <button class="add-btn">Assign</button>
+      </div>
+      <div class="exercise-card">
+        <div class="exercise-info">
+          <div class="exercise-name">Leg Day — Quads & Glutes</div>
+          <div class="exercise-meta">Strength · 5 exercises · ~50 min</div>
+        </div>
+        <button class="add-btn">Assign</button>
+      </div>
+    </div>
+
+    <!-- Activity tab content (hidden in this state, shown when Activity tab is active) -->
+    <!--
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; cursor: pointer;">⚽ Soccer</div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; cursor: pointer;">🏸 Squash</div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; cursor: pointer;">🏃 Running</div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; cursor: pointer;">🎾 Padel</div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; cursor: pointer;">⛳ Golf</div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; cursor: pointer;">🏊 Swimming</div>
+    </div>
+    -->
+
+    <!-- Currently Assigned -->
+    <div class="added-section">
+      <h3>Assigned to Day 2</h3>
+      <div class="added-exercise">
+        <span class="name">✓ Push Day — Chest & Shoulders</span>
+        <button class="remove-btn">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Save Button -->
+  <button class="save-btn">Save Program</button>
+
+</body>
+</html>
