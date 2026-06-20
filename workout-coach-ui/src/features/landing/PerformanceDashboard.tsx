@@ -113,32 +113,7 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
 }) => {
   return (
     <div style={styles.container} data-testid="performance-dashboard">
-      {/* Top 10 Exercises — left panel */}
-      <div style={styles.section} data-testid="top-exercises-section">
-        <h3 style={styles.sectionTitle}>Top 10 Exercises by Weight (12 months)</h3>
-        {topExercises == null ? (
-          <EmptyState
-            icon="🏋️"
-            title="Performance data coming soon"
-            subtitle="Top exercise data will appear once the Progress Tracker is available"
-          />
-        ) : (
-          <div style={styles.scrollArea}>
-            <div style={styles.chartContent} role="list" aria-label="Top 10 exercises by weight">
-              {topExercises.slice(0, 10).map((entry, index) => (
-                <div key={index} style={styles.exerciseRow} role="listitem">
-                  <span style={styles.exerciseName}>{entry.exerciseName}</span>
-                  <span style={styles.exerciseWeight}>
-                    {entry.maxWeight} {entry.unit}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Monthly Frequency — right panel */}
+      {/* Monthly Frequency — left panel */}
       <div style={styles.section} data-testid="monthly-frequency-section">
         <h3 style={styles.sectionTitle}>Workouts Per Month (12 months)</h3>
         {monthlyFrequency == null ? (
@@ -176,6 +151,31 @@ export const PerformanceDashboard: React.FC<PerformanceDashboardProps> = ({
                   </div>
                 );
               })}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Top 10 Exercises — right panel */}
+      <div style={styles.section} data-testid="top-exercises-section">
+        <h3 style={styles.sectionTitle}>Top 10 Exercises by Weight (12 months)</h3>
+        {topExercises == null ? (
+          <EmptyState
+            icon="🏋️"
+            title="Performance data coming soon"
+            subtitle="Top exercise data will appear once the Progress Tracker is available"
+          />
+        ) : (
+          <div style={styles.scrollArea}>
+            <div style={styles.chartContent} role="list" aria-label="Top 10 exercises by weight">
+              {topExercises.slice(0, 10).map((entry, index) => (
+                <div key={index} style={styles.exerciseRow} role="listitem">
+                  <span style={styles.exerciseName}>{entry.exerciseName}</span>
+                  <span style={styles.exerciseWeight}>
+                    {entry.maxWeight} {entry.unit}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         )}
