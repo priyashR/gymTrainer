@@ -187,9 +187,15 @@ export const LandingPage: React.FC = () => {
 
     const fetchActiveSession = async () => {
       try {
-        const res = await apiClient.get<ActiveSession>("/sessions/active");
-        if (!cancelled) {
-          setActiveSession(res.data);
+        const res = await apiClient.get<{ id: string; status: string; workoutSnapshot?: { name?: string } }>("/sessions/active");
+        if (!cancelled && res.data) {
+          const data = res.data;
+          setActiveSession({
+            sessionId: data.id,
+            workoutName: (data.workoutSnapshot as { name?: string })?.name ?? "Workout",
+            status: data.status === "PAUSED" ? "paused" : "active",
+            progress: 0,
+          });
         }
       } catch {
         if (!cancelled) {
@@ -255,9 +261,9 @@ export const LandingPage: React.FC = () => {
               style={styles.newWorkoutButton}
               onClick={() => navigate("/vault/search")}
               data-testid="new-workout-button"
-              aria-label="New Workout"
+              aria-label="Start Workout"
             >
-              New Workout
+              Start Workout
             </button>
             <button
               type="button"
@@ -348,9 +354,9 @@ export const LandingPage: React.FC = () => {
           style={styles.newWorkoutButton}
           onClick={() => navigate("/vault/search")}
           data-testid="new-workout-button"
-          aria-label="New Workout"
+          aria-label="Start Workout"
         >
-          New Workout
+          Start Workout
         </button>
         <button
           type="button"

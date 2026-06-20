@@ -91,7 +91,7 @@ describe("LandingPage", () => {
     expect(screen.getByTestId("log-activity-button")).toBeInTheDocument();
   });
 
-  it("navigates to /vault/search when New Workout is clicked", async () => {
+  it("navigates to /vault/search when Start Workout is clicked", async () => {
     const user = userEvent.setup();
     renderLandingPage();
 
@@ -118,10 +118,9 @@ describe("LandingPage", () => {
       if (url === "/sessions/active") {
         return Promise.resolve({
           data: {
-            sessionId: "session-1",
-            workoutName: "Push Day A",
-            status: "active",
-            progress: 45,
+            id: "session-1",
+            status: "IN_PROGRESS",
+            workoutSnapshot: { name: "Push Day A" },
           },
         });
       }

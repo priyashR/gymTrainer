@@ -477,7 +477,8 @@ export function TheaterModePage() {
   const handleFinishWorkout = useCallback(async () => {
     await release();
     await endSession();
-  }, [release, endSession]);
+    navigate("/");
+  }, [release, endSession, navigate]);
 
   // --- Loading state ---
   if (loading) {

@@ -253,9 +253,14 @@ export const CreateProgramPage: React.FC = () => {
     } catch (err: unknown) {
       let message = "Failed to save program. Please try again.";
       if (err && typeof err === "object" && "response" in err) {
-        const axiosErr = err as { response?: { data?: { message?: string } } };
-        if (axiosErr.response?.data?.message) {
-          message = axiosErr.response.data.message;
+        const axiosErr = err as { response?: { status?: number; data?: { message?: string } } };
+        const status = axiosErr.response?.status;
+        const serverMessage = axiosErr.response?.data?.message;
+
+        if (status === 405 || status === 404 || status === 500) {
+          message = "The manual program creation endpoint is not yet available on the backend. This feature will work once the endpoint is deployed.";
+        } else if (serverMessage) {
+          message = serverMessage;
         }
       }
       setState((prev) => ({ ...prev, saving: false, error: message }));
