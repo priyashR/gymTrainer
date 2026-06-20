@@ -33,6 +33,16 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      "/api/v1/stats": {
+        target: "http://localhost:8084",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/api/v1/activities": {
+        target: "http://localhost:8084",
+        changeOrigin: true,
+        secure: false,
+      },
       "/ws/sessions": {
         target: "http://localhost:8083",
         changeOrigin: true,

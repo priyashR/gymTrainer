@@ -4,10 +4,13 @@ import { useAuth } from "./features/auth/useAuth";
 import { ProtectedRoute } from "./components/layout/ProtectedRoute";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
-import Home from "./pages/Home";
 import ComingSoon from "./pages/ComingSoon";
+import { LandingPage } from "./pages/LandingPage";
+import { CreateProgramPage } from "./pages/CreateProgramPage";
+import { ManualInputPage } from "./pages/ManualInputPage";
+import { ActivityLogPage } from "./pages/ActivityLogPage";
+import { SearchPage } from "./pages/SearchPage";
 import { UploadPage } from "./features/upload/UploadPage";
-import { VaultSearchPage } from "./features/vault/VaultSearchPage";
 import { ProgramDetailPage } from "./features/vault/ProgramDetailPage";
 import { TheaterModePage } from "./features/theater/TheaterModePage";
 
@@ -28,13 +31,16 @@ export default function App() {
         <Route path="/register" element={<PublicOnly><Register /></PublicOnly>} />
 
         {/* Protected routes */}
-        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-        <Route path="/new-workout" element={<ProtectedRoute><ComingSoon title="New Workout" /></ProtectedRoute>} />
-        <Route path="/my-performance" element={<ProtectedRoute><ComingSoon title="My Performance" /></ProtectedRoute>} />
-        <Route path="/vault/search" element={<ProtectedRoute><VaultSearchPage /></ProtectedRoute>} />
+        <Route path="/" element={<ProtectedRoute><LandingPage /></ProtectedRoute>} />
+        <Route path="/programs/create" element={<ProtectedRoute><CreateProgramPage /></ProtectedRoute>} />
+        <Route path="/manual-input" element={<ProtectedRoute><ManualInputPage /></ProtectedRoute>} />
+        <Route path="/log-activity" element={<ProtectedRoute><ActivityLogPage /></ProtectedRoute>} />
+        <Route path="/vault/search" element={<ProtectedRoute><SearchPage /></ProtectedRoute>} />
         <Route path="/vault/programs/:id" element={<ProtectedRoute><ProgramDetailPage /></ProtectedRoute>} />
         <Route path="/upload" element={<ProtectedRoute><UploadPage /></ProtectedRoute>} />
         <Route path="/workout/session/:sessionId" element={<ProtectedRoute><TheaterModePage /></ProtectedRoute>} />
+        <Route path="/new-workout" element={<ProtectedRoute><ComingSoon title="AI Generation" /></ProtectedRoute>} />
+        <Route path="/coming-soon/:feature" element={<ProtectedRoute><ComingSoon /></ProtectedRoute>} />
       </Routes>
     </AuthProvider>
   );
