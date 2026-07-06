@@ -101,4 +101,59 @@ describe("DayTile", () => {
     render(<DayTile {...defaultProps} dayNumber={3} />);
     expect(screen.getByTestId("day-tile-3")).toBeInTheDocument();
   });
+
+  describe("copied_day assignment", () => {
+    const copiedDayAssignment: DayAssignment = {
+      type: "copied_day",
+      sourceProgramId: "prog-uuid-456",
+      sourceProgramName: "PPL Hypertrophy",
+      sourceWeekNumber: 2,
+      sourceDayNumber: 3,
+      dayLabel: "Push Day",
+      focusArea: "Push",
+    };
+
+    it("renders source program name and day label", () => {
+      render(<DayTile {...defaultProps} assignment={copiedDayAssignment} />);
+      expect(screen.getByTestId("day-tile-1-name")).toHaveTextContent(
+        "📋 PPL Hypertrophy — Push Day"
+      );
+    });
+
+    it("falls back to week/day format when dayLabel is missing", () => {
+      const assignmentWithoutLabel: DayAssignment = {
+        type: "copied_day",
+        sourceProgramId: "prog-uuid-789",
+        sourceProgramName: "Full Body Program",
+        sourceWeekNumber: 1,
+        sourceDayNumber: 4,
+      };
+      render(<DayTile {...defaultProps} assignment={assignmentWithoutLabel} />);
+      expect(screen.getByTestId("day-tile-1-name")).toHaveTextContent(
+        "📋 Full Body Program — Week 1 Day 4"
+      );
+    });
+
+    it("renders a Copied Day badge for visual distinction", () => {
+      render(<DayTile {...defaultProps} assignment={copiedDayAssignment} />);
+      const badge = screen.getByTestId("day-tile-1-copied-badge");
+      expect(badge).toBeInTheDocument();
+      expect(badge).toHaveTextContent("Copied Day");
+    });
+
+    it("applies distinct tile styling with accent border", () => {
+      render(<DayTile {...defaultProps} assignment={copiedDayAssignment} />);
+      const tile = screen.getByTestId("day-tile-1");
+      expect(tile.style.borderLeft).toContain("3px solid");
+    });
+
+    it("does not render Copied Day badge for activity assignments", () => {
+      const activityAssignment: DayAssignment = {
+        type: "activity",
+        activityType: "Running",
+      };
+      render(<DayTile {...defaultProps} assignment={activityAssignment} />);
+      expect(screen.queryByTestId("day-tile-1-copied-badge")).not.toBeInTheDocument();
+    });
+  });
 });

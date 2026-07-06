@@ -1,14 +1,16 @@
 package com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.adapters.inbound;
 
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.dto.ErrorResponse;
-import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.adapters.inbound.dto.PaginatedResponse;
-import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.adapters.inbound.dto.VaultItemResponse;
-import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.adapters.inbound.dto.VaultProgramDetailResponse;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.adapters.inbound.dto.*;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.DayAssignment;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.DayAssignmentType;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.DaySummary;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.SearchCriteria;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.VaultItem;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.VaultProgram;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.ports.inbound.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +22,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -50,19 +55,25 @@ public class VaultController {
     private final DeleteProgramUseCase deleteProgramUseCase;
     private final CopyProgramUseCase copyProgramUseCase;
     private final SearchProgramsUseCase searchProgramsUseCase;
+    private final CreateManualProgramUseCase createManualProgramUseCase;
+    private final GetProgramDaysUseCase getProgramDaysUseCase;
 
     public VaultController(ListProgramsUseCase listProgramsUseCase,
                            GetProgramUseCase getProgramUseCase,
                            UpdateProgramUseCase updateProgramUseCase,
                            DeleteProgramUseCase deleteProgramUseCase,
                            CopyProgramUseCase copyProgramUseCase,
-                           SearchProgramsUseCase searchProgramsUseCase) {
+                           SearchProgramsUseCase searchProgramsUseCase,
+                           CreateManualProgramUseCase createManualProgramUseCase,
+                           GetProgramDaysUseCase getProgramDaysUseCase) {
         this.listProgramsUseCase = listProgramsUseCase;
         this.getProgramUseCase = getProgramUseCase;
         this.updateProgramUseCase = updateProgramUseCase;
         this.deleteProgramUseCase = deleteProgramUseCase;
         this.copyProgramUseCase = copyProgramUseCase;
         this.searchProgramsUseCase = searchProgramsUseCase;
+        this.createManualProgramUseCase = createManualProgramUseCase;
+        this.getProgramDaysUseCase = getProgramDaysUseCase;
     }
 
     /**
@@ -91,6 +102,32 @@ public class VaultController {
     }
 
     /**
+     * Create a manual program by assigning existing vault workouts or external activities
+     * to numbered training days.
+     *
+     * @param request the creation request containing program name and day assignments
+     * @param httpRequest the HTTP servlet request (for error response path)
+     * @return 201 Created with {@link CreateProgramResponse}, or 400 on validation failure
+     */
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+                 produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createManualProgram(
+            @Valid @RequestBody CreateManualProgramRequest request,
+            HttpServletRequest httpRequest) {
+
+        // Custom validation: conditional required fields and duplicate day numbers
+        ResponseEntity<?> validationError = validateDayAssignments(request.days(), httpRequest);
+        if (validationError != null) return validationError;
+
+        String ownerUserId = resolveOwnerUserId();
+        CreateManualProgramCommand command = mapToCommand(request, ownerUserId);
+        UUID programId = createManualProgramUseCase.createManualProgram(command);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new CreateProgramResponse(programId.toString()));
+    }
+
+    /**
      * Get the full detail of a single program.
      *
      * @param id program UUID
@@ -107,6 +144,27 @@ public class VaultController {
         VaultProgram program = getProgramUseCase.getProgram(programId, ownerUserId);
 
         VaultProgramDetailResponse response = VaultProgramDetailResponse.from(program);
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Browse available days within a vault program.
+     * Returns days grouped by week number for the copy-day picker UI.
+     *
+     * @param id program UUID
+     * @return 200 OK with {@link ProgramDaysResponse}, 400 for invalid UUID, 404 if not found/not owned
+     */
+    @GetMapping(path = "/{id}/days", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getProgramDays(@PathVariable String id, HttpServletRequest request) {
+        UUID programId = parseUuid(id);
+        if (programId == null) {
+            return badRequest("Invalid program ID format", request);
+        }
+
+        String ownerUserId = resolveOwnerUserId();
+        List<DaySummary> days = getProgramDaysUseCase.getProgramDays(programId, ownerUserId);
+
+        ProgramDaysResponse response = ProgramDaysResponse.from(days);
         return ResponseEntity.ok(response);
     }
 
@@ -253,5 +311,77 @@ public class VaultController {
                 Instant.now()
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(body);
+    }
+
+    /**
+     * Custom validation for day assignments: checks conditional required fields and duplicate day numbers.
+     * Only activity-type day assignments are allowed.
+     *
+     * @return a 400 response if validation fails, null if all checks pass
+     */
+    private ResponseEntity<?> validateDayAssignments(List<DayAssignmentRequest> days, HttpServletRequest request) {
+        Set<Integer> seenDayNumbers = new HashSet<>();
+
+        for (DayAssignmentRequest day : days) {
+            String type = day.type();
+
+            // Validate type is one of the supported values
+            if (!"activity".equalsIgnoreCase(type) && !"copied_day".equalsIgnoreCase(type)) {
+                return badRequest(
+                        "Invalid day type '" + type + "'. Valid types are: activity, copied_day",
+                        request);
+            }
+
+            // Conditional required field: activityType for activity type
+            if ("activity".equalsIgnoreCase(type)) {
+                if (day.activityType() == null || day.activityType().isBlank()) {
+                    return badRequest("Activity type is required for activity-type days", request);
+                }
+            }
+
+            // Conditional required fields for copied_day type
+            if ("copied_day".equalsIgnoreCase(type)) {
+                if (day.sourceProgramId() == null || day.sourceProgramId().isBlank()) {
+                    return badRequest("sourceProgramId is required for copied_day assignments", request);
+                }
+                if (day.sourceWeekNumber() == null || day.sourceWeekNumber() < 1) {
+                    return badRequest("sourceWeekNumber must be a positive integer for copied_day assignments", request);
+                }
+                if (day.sourceDayNumber() == null || day.sourceDayNumber() < 1) {
+                    return badRequest("sourceDayNumber must be a positive integer for copied_day assignments", request);
+                }
+            }
+
+            // Duplicate day number check
+            if (!seenDayNumbers.add(day.dayNumber())) {
+                return badRequest("Day numbers must be unique", request);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Maps the validated request DTO to a domain command.
+     * Converts type strings to {@link DayAssignmentType} enum and parses workoutId strings to UUIDs.
+     */
+    private CreateManualProgramCommand mapToCommand(CreateManualProgramRequest request, String ownerUserId) {
+        List<DayAssignment> dayAssignments = request.days().stream()
+                .map(day -> {
+                    DayAssignmentType type = DayAssignmentType.valueOf(day.type().toUpperCase());
+                    if (type == DayAssignmentType.COPIED_DAY) {
+                        UUID sourceProgramId = UUID.fromString(day.sourceProgramId());
+                        return new DayAssignment(day.dayNumber(), type, null, null,
+                                null, sourceProgramId, day.sourceWeekNumber(), day.sourceDayNumber());
+                    }
+                    String activityType = (type == DayAssignmentType.ACTIVITY) ? day.activityType() : null;
+                    UUID workoutId = (type == DayAssignmentType.WORKOUT && day.workoutId() != null)
+                            ? UUID.fromString(day.workoutId())
+                            : null;
+                    return new DayAssignment(day.dayNumber(), type, workoutId, activityType);
+                })
+                .toList();
+
+        return new CreateManualProgramCommand(request.programName(), ownerUserId, dayAssignments);
     }
 }

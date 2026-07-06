@@ -1,5 +1,9 @@
 package com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.adapters.outbound;
 
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.model.ContentSource;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.DayAssignment;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.DayAssignmentType;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.ManualProgram;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.SearchCriteria;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.VaultItem;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.VaultProgram;
@@ -10,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,10 +30,14 @@ import java.util.UUID;
 public class JpaVaultProgramRepository implements VaultProgramRepository {
 
     private final ProgramSpringDataRepository programRepo;
+    private final DayAssignmentSpringDataRepository dayAssignmentRepo;
     private final EntityManager entityManager;
 
-    public JpaVaultProgramRepository(ProgramSpringDataRepository programRepo, EntityManager entityManager) {
+    public JpaVaultProgramRepository(ProgramSpringDataRepository programRepo,
+                                     DayAssignmentSpringDataRepository dayAssignmentRepo,
+                                     EntityManager entityManager) {
         this.programRepo = programRepo;
+        this.dayAssignmentRepo = dayAssignmentRepo;
         this.entityManager = entityManager;
     }
 
@@ -41,7 +50,27 @@ public class JpaVaultProgramRepository implements VaultProgramRepository {
     @Override
     public Optional<VaultProgram> findByIdAndOwner(UUID id, String ownerUserId) {
         return programRepo.findByIdAndOwnerUserId(id, ownerUserId)
-                .map(ProgramEntityMapper::toVaultProgram);
+                .map(entity -> {
+                    VaultProgram base = ProgramEntityMapper.toVaultProgram(entity);
+                    if (entity.getContentSource() == ContentSource.MANUAL) {
+                        List<DayAssignment> dayAssignments = dayAssignmentRepo
+                                .findByProgramIdOrderByDayNumberAsc(entity.getId())
+                                .stream()
+                                .map(da -> new DayAssignment(
+                                        da.getDayNumber(),
+                                        DayAssignmentType.valueOf(da.getAssignmentType()),
+                                        da.getWorkoutId(),
+                                        da.getActivityType(),
+                                        da.getSnapshotData(),
+                                        da.getSourceProgramId(),
+                                        da.getSourceWeekNumber(),
+                                        da.getSourceDayNumber()))
+                                .toList();
+                        return new VaultProgram(base.id(), base.program(), base.ownerUserId(),
+                                base.contentSource(), base.createdAt(), base.updatedAt(), dayAssignments);
+                    }
+                    return base;
+                });
     }
 
     @Override
@@ -89,5 +118,42 @@ public class JpaVaultProgramRepository implements VaultProgramRepository {
 
         return programRepo.searchPrograms(ownerUserId, query, focusArea, modality, pageable)
                 .map(ProgramEntityMapper::toVaultItem);
+    }
+
+    @Override
+    @Transactional
+    public void saveManualProgram(ManualProgram program) {
+        // Create and persist the program entity with manual program sentinel values
+        ProgramJpaEntity programEntity = new ProgramJpaEntity();
+        programEntity.setId(program.id());
+        programEntity.setName(program.name());
+        programEntity.setDurationWeeks(0);
+        programEntity.setGoal("Manual Program");
+        programEntity.setEquipmentProfile("[]");
+        programEntity.setOwnerUserId(program.ownerUserId());
+        programEntity.setContentSource(ContentSource.MANUAL);
+        programEntity.setCreatedAt(program.createdAt());
+        programEntity.setUpdatedAt(program.updatedAt());
+
+        ProgramJpaEntity savedProgram = programRepo.save(programEntity);
+
+        // Batch-insert day assignment entities
+        List<DayAssignmentJpaEntity> dayAssignmentEntities = program.dayAssignments().stream()
+                .map(da -> {
+                    DayAssignmentJpaEntity entity = new DayAssignmentJpaEntity();
+                    entity.setProgram(savedProgram);
+                    entity.setDayNumber(da.dayNumber());
+                    entity.setAssignmentType(da.type().name());
+                    entity.setWorkoutId(da.workoutId());
+                    entity.setActivityType(da.activityType());
+                    entity.setSnapshotData(da.snapshotData());
+                    entity.setSourceProgramId(da.sourceProgramId());
+                    entity.setSourceWeekNumber(da.sourceWeekNumber());
+                    entity.setSourceDayNumber(da.sourceDayNumber());
+                    return entity;
+                })
+                .toList();
+
+        dayAssignmentRepo.saveAll(dayAssignmentEntities);
     }
 }

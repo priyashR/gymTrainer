@@ -117,11 +117,10 @@ public final class ProgramEntityMapper {
         entity.setGoal(program.getGoal());
         entity.setEquipmentProfile(String.join(",", program.getEquipmentProfile()));
 
-        List<WeekJpaEntity> weekEntities = new ArrayList<>();
+        entity.getWeeks().clear();
         for (Week week : program.getWeeks()) {
-            weekEntities.add(toWeekEntity(week, entity));
+            entity.getWeeks().add(toWeekEntity(week, entity));
         }
-        entity.getWeeks().addAll(weekEntities);
     }
 
     // -------------------------------------------------------------------------

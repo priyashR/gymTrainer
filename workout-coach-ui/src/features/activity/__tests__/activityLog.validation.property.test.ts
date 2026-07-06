@@ -122,19 +122,8 @@ const missingDateFormArb: fc.Arbitrary<ActivityFormState> = fc.record({
 
 /** Generate a form state with at least one mandatory field missing */
 const invalidFormStateArb: fc.Arbitrary<ActivityFormState> = fc.oneof(
-  // Activity type missing (date may or may not be present)
-  fc.record({
-    selectedActivityType: missingActivityTypeArb,
-    date: fc.oneof(validDateArb, missingDateArb),
-  }),
-  // Date missing (activity type may or may not be present)
-  fc.record({
-    selectedActivityType: fc.oneof(
-      validActivityTypeArb,
-      missingActivityTypeArb
-    ) as fc.Arbitrary<string | null>,
-    date: missingDateArb,
-  })
+  missingActivityTypeFormArb,
+  missingDateFormArb
 );
 
 /** Generate an arbitrary form state (mix of valid and invalid) */

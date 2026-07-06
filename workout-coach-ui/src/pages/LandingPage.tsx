@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../lib/apiClient";
+import { startSession } from "../lib/sessionApi";
+import { getProgram } from "../lib/vaultApi";
 import { ResumeWorkoutCard } from "../features/landing/ResumeWorkoutCard";
 import { WeeklyStatsChart } from "../features/landing/WeeklyStatsChart";
 import { PerformanceDashboard } from "../features/landing/PerformanceDashboard";
@@ -14,6 +16,19 @@ interface ActiveSession {
   workoutName: string;
   status: "active" | "paused";
   progress: number;
+}
+
+interface ActiveEnrollment {
+  id: string;
+  programId: string;
+  programName: string;
+  currentWeek: number;
+  currentDay: number;
+  totalWeeks: number;
+  totalDaysPerWeek: number;
+  status: string;
+  enrolledAt: string;
+  completedAt: string | null;
 }
 
 const styles: Record<string, React.CSSProperties> = {
@@ -155,6 +170,50 @@ const styles: Record<string, React.CSSProperties> = {
     color: "var(--color-text-primary)",
     margin: 0,
   },
+  programProgressCard: {
+    background: "var(--color-bg-surface)",
+    borderRadius: "var(--radius-md)",
+    padding: "var(--spacing-md) var(--spacing-lg)",
+    border: "1px solid var(--color-border)",
+    display: "flex",
+    alignItems: "center",
+    gap: "var(--spacing-md)",
+    flexWrap: "wrap",
+  },
+  programProgressInfo: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "2px",
+    flex: 1,
+    minWidth: 0,
+  },
+  programName: {
+    fontSize: "14px",
+    fontWeight: 600,
+    color: "var(--color-text-primary)",
+    margin: 0,
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+  },
+  programProgressText: {
+    fontSize: "13px",
+    color: "var(--color-text-secondary)",
+    margin: 0,
+  },
+  programContinueButton: {
+    padding: "var(--spacing-xs) var(--spacing-md)",
+    borderRadius: "var(--radius-md)",
+    border: "none",
+    background: "var(--color-accent)",
+    color: "var(--color-fab-text)",
+    fontSize: "13px",
+    fontWeight: 600,
+    cursor: "pointer",
+    minHeight: "var(--tap-target-min)",
+    transition: "background 0.15s ease",
+    whiteSpace: "nowrap",
+  },
 };
 
 function useIsWideViewport(breakpoint = 900): boolean {
@@ -177,6 +236,7 @@ export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const isWide = useIsWideViewport(900);
   const [activeSession, setActiveSession] = useState<ActiveSession | null>(null);
+  const [activeEnrollment, setActiveEnrollment] = useState<ActiveEnrollment | null>(null);
   const [actionSheetOpen, setActionSheetOpen] = useState(false);
 
   const { data: weeklyStats } = useWeeklyStats();
@@ -206,9 +266,14 @@ export const LandingPage: React.FC = () => {
 
     const fetchActiveEnrollment = async () => {
       try {
-        await apiClient.get("/enrollments/active");
+        const res = await apiClient.get<ActiveEnrollment>("/enrollments/active");
+        if (!cancelled && res.status === 200 && res.data && res.data.status === "ACTIVE") {
+          setActiveEnrollment(res.data);
+        }
       } catch {
-        // no-op
+        if (!cancelled) {
+          setActiveEnrollment(null);
+        }
       }
     };
 
@@ -222,6 +287,54 @@ export const LandingPage: React.FC = () => {
 
   const handleResume = (sessionId: string) => {
     navigate(`/workout/session/${sessionId}`);
+  };
+
+  const handleContinueProgram = async () => {
+    if (!activeEnrollment) return;
+    // If there's already an active/paused session, resume it
+    if (activeSession) {
+      navigate(`/workout/session/${activeSession.sessionId}`);
+      return;
+    }
+    // Fetch program details to check day types
+    try {
+      const program = await getProgram(activeEnrollment.programId);
+      const dayAssignments = program.dayAssignments ?? [];
+
+      // Find the next copied_day starting from currentDay
+      const currentDayIndex = activeEnrollment.currentDay;
+      let targetDay = dayAssignments.find(
+        (da) => da.dayNumber >= currentDayIndex && da.type === "copied_day"
+      );
+
+      // If no copied_day found from current position, program is effectively complete
+      if (!targetDay) {
+        // Check if there are any remaining copied_day days at all
+        const hasMoreWorkouts = dayAssignments.some(
+          (da) => da.dayNumber > currentDayIndex && da.type === "copied_day"
+        );
+        if (!hasMoreWorkouts) {
+          setActiveEnrollment(null);
+          return;
+        }
+      }
+
+      if (targetDay) {
+        const session = await startSession({
+          programId: activeEnrollment.programId,
+          weekNumber: activeEnrollment.currentWeek,
+          dayNumber: targetDay.dayNumber,
+          standalone: false,
+        });
+        navigate(`/workout/session/${session.id}`);
+      } else {
+        // No workout days left — hide the enrollment card
+        setActiveEnrollment(null);
+      }
+    } catch {
+      // Fallback: navigate to program detail page
+      navigate(`/vault/programs/${activeEnrollment.programId}`);
+    }
   };
 
   const handleFabClick = () => {
@@ -244,6 +357,25 @@ export const LandingPage: React.FC = () => {
         {/* Top bar: heading + action buttons + resume card */}
         <div style={styles.topBar}>
           <h1 style={styles.heading}>HybridStrength</h1>
+          {activeEnrollment && (
+            <div style={styles.programProgressCard} data-testid="program-progress-card">
+              <div style={styles.programProgressInfo}>
+                <p style={styles.programName}>{activeEnrollment.programName}</p>
+                <p style={styles.programProgressText}>
+                  Day {activeEnrollment.currentDay} of {activeEnrollment.totalDaysPerWeek} · Week {activeEnrollment.currentWeek} of {activeEnrollment.totalWeeks}
+                </p>
+              </div>
+              <button
+                type="button"
+                style={styles.programContinueButton}
+                onClick={handleContinueProgram}
+                data-testid="program-continue-button"
+                aria-label={`Continue program: ${activeEnrollment.programName}`}
+              >
+                Continue
+              </button>
+            </div>
+          )}
           <div style={styles.buttonRow}>
             {activeSession && (
               <button
@@ -337,6 +469,26 @@ export const LandingPage: React.FC = () => {
   return (
     <main style={styles.pageMobile} data-testid="landing-page">
       <h1 style={styles.heading}>HybridStrength</h1>
+
+      {activeEnrollment && (
+        <div style={styles.programProgressCard} data-testid="program-progress-card">
+          <div style={styles.programProgressInfo}>
+            <p style={styles.programName}>{activeEnrollment.programName}</p>
+            <p style={styles.programProgressText}>
+              Day {activeEnrollment.currentDay} of {activeEnrollment.totalDaysPerWeek} · Week {activeEnrollment.currentWeek} of {activeEnrollment.totalWeeks}
+            </p>
+          </div>
+          <button
+            type="button"
+            style={styles.programContinueButton}
+            onClick={handleContinueProgram}
+            data-testid="program-continue-button"
+            aria-label={`Continue program: ${activeEnrollment.programName}`}
+          >
+            Continue
+          </button>
+        </div>
+      )}
 
       {activeSession && (
         <ResumeWorkoutCard

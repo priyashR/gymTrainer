@@ -3,7 +3,14 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useProgram } from './useProgram';
 import { ProgramJsonEditor } from './ProgramJsonEditor';
 import { enrollProgram, getActiveEnrollment, startSession } from '../../lib/sessionApi';
-import type { VaultDay, VaultProgramDetail, VaultSection, VaultWeek } from '../../types/vault';
+import type {
+  DayAssignmentDetail,
+  SnapshotSection,
+  VaultDay,
+  VaultProgramDetail,
+  VaultSection,
+  VaultWeek,
+} from '../../types/vault';
 
 /**
  * Program detail page displaying metadata, collapsible week/day breakdown,
@@ -53,11 +60,18 @@ export function ProgramDetailPage() {
     setConfirmReplace(false);
     setShowProgramActions(false);
     try {
+      // For manual programs (durationWeeks = 0), treat as 1 week with N days
+      const isManual = program.contentSource === 'MANUAL';
+      const totalWeeks = isManual ? 1 : program.durationWeeks;
+      const totalDaysPerWeek = isManual
+        ? Math.max(program.dayAssignments?.length ?? 1, 1)
+        : Math.max(...(program.weeks?.map(w => w.days?.length ?? 0) ?? [1]), 1);
+
       await enrollProgram({
         programId: id,
         programName: program.name,
-        totalWeeks: program.durationWeeks,
-        totalDaysPerWeek: Math.max(...(program.weeks?.map(w => w.days?.length ?? 0) ?? [1]), 1),
+        totalWeeks,
+        totalDaysPerWeek,
       });
       // Start the first day of the program
       const session = await startSession({
@@ -423,6 +437,16 @@ export function ProgramDetailPage() {
           />
         ))}
       </section>
+
+      {/* Day assignments for manual programs with copied days */}
+      {prog.dayAssignments && prog.dayAssignments.length > 0 && (
+        <section style={{ marginTop: '1.5rem' }}>
+          <h2 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: 'var(--color-text-primary)' }}>Day Assignments</h2>
+          {prog.dayAssignments.map((assignment) => (
+            <DayAssignmentBlock key={assignment.dayNumber} assignment={assignment} />
+          ))}
+        </section>
+      )}
     </main>
   );
 }
@@ -625,6 +649,195 @@ function SectionBlock({ section }: { section: VaultSection }) {
       </table>
     </div>
   );
+}
+
+function DayAssignmentBlock({ assignment }: { assignment: DayAssignmentDetail }) {
+  const [expanded, setExpanded] = useState(false);
+
+  if (assignment.type === 'copied_day') {
+    return (
+      <CopiedDayBlock
+        assignment={assignment}
+        expanded={expanded}
+        onToggle={() => setExpanded(!expanded)}
+      />
+    );
+  }
+
+  // Activity-type assignment — simple display
+  if (assignment.type === 'activity') {
+    return (
+      <div style={{ marginBottom: '0.5rem' }}>
+        <div
+          style={{
+            padding: '0.75rem 1rem',
+            background: 'var(--color-bg-surface)',
+            border: '1px solid var(--color-border)',
+            borderRadius: 'var(--radius-sm)',
+            color: 'var(--color-text-primary)',
+          }}
+        >
+          <strong>Day {assignment.dayNumber}:</strong> 🏃 {assignment.activityType ?? 'Activity'}
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
+
+function CopiedDayBlock({
+  assignment,
+  expanded,
+  onToggle,
+}: {
+  assignment: DayAssignmentDetail;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
+  const snapshot = assignment.snapshotData;
+  const provenanceText = getProvenanceText(assignment);
+
+  return (
+    <div style={{ marginBottom: '0.5rem' }} data-testid={`copied-day-${assignment.dayNumber}`}>
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={expanded}
+        style={{
+          width: '100%',
+          textAlign: 'left',
+          padding: '0.75rem 1rem',
+          fontSize: '0.95rem',
+          background: 'var(--color-bg-surface)',
+          border: '1px solid var(--color-accent, #3b82f6)',
+          borderLeft: '3px solid var(--color-accent, #3b82f6)',
+          borderRadius: 'var(--radius-sm)',
+          cursor: 'pointer',
+          color: 'var(--color-text-primary)',
+          minHeight: 'var(--tap-target-min)',
+        }}
+      >
+        <span style={{ fontWeight: 600 }}>Day {assignment.dayNumber}:</span>{' '}
+        📋 {snapshot?.label ?? `Copied Day`}
+        {snapshot?.focusArea && (
+          <span style={{ color: 'var(--color-text-secondary)', marginLeft: '0.5rem' }}>
+            ({snapshot.focusArea})
+          </span>
+        )}
+        <span style={{ float: 'right' }}>{expanded ? '▲' : '▼'}</span>
+      </button>
+
+      {expanded && (
+        <div style={{ paddingLeft: '1rem', marginTop: '0.5rem', fontSize: '0.9rem', color: 'var(--color-text-primary)' }}>
+          {/* Provenance */}
+          <p
+            style={{
+              margin: '0 0 0.75rem',
+              fontSize: '0.85rem',
+              color: 'var(--color-text-secondary)',
+              fontStyle: 'italic',
+            }}
+            data-testid={`copied-day-${assignment.dayNumber}-provenance`}
+          >
+            {provenanceText}
+          </p>
+
+          {/* Day metadata */}
+          {snapshot && (
+            <>
+              <div style={{ marginBottom: '0.5rem' }}>
+                {snapshot.focusArea && <p style={{ margin: '0 0 0.25rem' }}><strong>Focus Area:</strong> {snapshot.focusArea}</p>}
+                {snapshot.modality && <p style={{ margin: '0' }}><strong>Modality:</strong> {snapshot.modality}</p>}
+              </div>
+
+              {/* Warm-up */}
+              {snapshot.warmUp && snapshot.warmUp.length > 0 && (
+                <div style={{ marginBottom: '0.5rem' }}>
+                  <strong>Warm-Up:</strong>
+                  <ul style={{ margin: '0.25rem 0', paddingLeft: '1.25rem' }}>
+                    {snapshot.warmUp.map((entry, i) => (
+                      <li key={i}>{entry.movement} — {entry.instruction}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Sections */}
+              {snapshot.sections && snapshot.sections.map((section, i) => (
+                <SnapshotSectionBlock key={i} section={section} />
+              ))}
+
+              {/* Cool-down */}
+              {snapshot.coolDown && snapshot.coolDown.length > 0 && (
+                <div style={{ marginTop: '0.5rem' }}>
+                  <strong>Cool-Down:</strong>
+                  <ul style={{ margin: '0.25rem 0', paddingLeft: '1.25rem' }}>
+                    {snapshot.coolDown.map((entry, i) => (
+                      <li key={i}>{entry.movement} — {entry.instruction}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SnapshotSectionBlock({ section }: { section: SnapshotSection }) {
+  return (
+    <div style={{ marginBottom: '0.75rem', paddingLeft: '0.5rem', borderLeft: '3px solid var(--color-border)' }}>
+      <p style={{ margin: '0 0 0.25rem', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+        {section.name ?? 'Section'}
+        {section.format && <span style={{ fontWeight: 400, color: 'var(--color-text-secondary)' }}> ({section.format})</span>}
+        {section.timeCap && <span style={{ fontWeight: 400, color: 'var(--color-text-secondary)' }}> — {section.timeCap} min cap</span>}
+      </p>
+      {section.exercises && section.exercises.length > 0 && (
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
+          <thead>
+            <tr style={{ borderBottom: '1px solid var(--color-border)', textAlign: 'left' }}>
+              <th style={{ padding: '0.25rem 0.5rem', color: 'var(--color-text-secondary)' }}>Exercise</th>
+              <th style={{ padding: '0.25rem 0.5rem', color: 'var(--color-text-secondary)' }}>Sets</th>
+              <th style={{ padding: '0.25rem 0.5rem', color: 'var(--color-text-secondary)' }}>Reps</th>
+              <th style={{ padding: '0.25rem 0.5rem', color: 'var(--color-text-secondary)' }}>Weight</th>
+              <th style={{ padding: '0.25rem 0.5rem', color: 'var(--color-text-secondary)' }}>Rest</th>
+              <th style={{ padding: '0.25rem 0.5rem', color: 'var(--color-text-secondary)' }}>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {section.exercises.map((ex, i) => (
+              <tr key={i} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                <td style={{ padding: '0.25rem 0.5rem', color: 'var(--color-text-primary)' }}>{ex.name}</td>
+                <td style={{ padding: '0.25rem 0.5rem', color: 'var(--color-text-primary)' }}>{ex.sets ?? '—'}</td>
+                <td style={{ padding: '0.25rem 0.5rem', color: 'var(--color-text-primary)' }}>{ex.reps ?? '—'}</td>
+                <td style={{ padding: '0.25rem 0.5rem', color: 'var(--color-text-primary)' }}>{ex.weight ?? '—'}</td>
+                <td style={{ padding: '0.25rem 0.5rem', color: 'var(--color-text-primary)' }}>{ex.restSeconds ? `${ex.restSeconds}s` : '—'}</td>
+                <td style={{ padding: '0.25rem 0.5rem', color: 'var(--color-text-primary)' }}>{ex.notes ?? '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Generates the provenance text for a copied day assignment.
+ * Shows "Copied from [Program Name] — Week X, Day Y" or "Deleted Program" if source is gone.
+ */
+function getProvenanceText(assignment: DayAssignmentDetail): string {
+  const programName = assignment.sourceProgramName || 'Deleted Program';
+  const weekNum = assignment.sourceWeekNumber;
+  const dayNum = assignment.sourceDayNumber;
+
+  if (weekNum != null && dayNum != null) {
+    return `Copied from ${programName} — Week ${weekNum}, Day ${dayNum}`;
+  }
+  return `Copied from ${programName}`;
 }
 
 // ---------------------------------------------------------------------------

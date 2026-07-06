@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -117,6 +118,84 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleIllegalArgument(
             IllegalArgumentException ex, HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ErrorResponse body = new ErrorResponse(
+                status.value(),
+                status.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI(),
+                Instant.now()
+        );
+        return ResponseEntity.status(status).body(body);
+    }
+
+    /**
+     * Handles referenced workout not found in user's vault — returns 400 Bad Request.
+     * The error message identifies which workout ID was not found.
+     */
+    @ExceptionHandler(WorkoutNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleWorkoutNotFound(
+            WorkoutNotFoundException ex, HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ErrorResponse body = new ErrorResponse(
+                status.value(),
+                status.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI(),
+                Instant.now()
+        );
+        return ResponseEntity.status(status).body(body);
+    }
+
+    /**
+     * Handles bean validation failures (e.g. @NotBlank, @Size, @Valid) — returns 400
+     * with per-field error details in a {@code ValidationErrorResponse}.
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ValidationErrorResponse> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex, HttpServletRequest request) {
+
+        List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors().stream()
+                .map(e -> new FieldError(e.getField(), e.getDefaultMessage()))
+                .toList();
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ValidationErrorResponse body = new ValidationErrorResponse(
+                status.value(),
+                "Validation Failed",
+                fieldErrors,
+                request.getRequestURI(),
+                Instant.now()
+        );
+        return ResponseEntity.status(status).body(body);
+    }
+
+    /**
+     * Handles source program not found in user's vault during copy-day — returns 400 Bad Request.
+     */
+    @ExceptionHandler(SourceProgramNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleSourceProgramNotFound(
+            SourceProgramNotFoundException ex, HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ErrorResponse body = new ErrorResponse(
+                status.value(),
+                status.getReasonPhrase(),
+                "Source program not found",
+                request.getRequestURI(),
+                Instant.now()
+        );
+        return ResponseEntity.status(status).body(body);
+    }
+
+    /**
+     * Handles source day not found in the specified program during copy-day — returns 400 Bad Request.
+     */
+    @ExceptionHandler(SourceDayNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleSourceDayNotFound(
+            SourceDayNotFoundException ex, HttpServletRequest request) {
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
         ErrorResponse body = new ErrorResponse(

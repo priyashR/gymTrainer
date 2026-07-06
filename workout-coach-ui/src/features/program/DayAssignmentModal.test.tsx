@@ -3,22 +3,30 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 import { DayAssignmentModal } from "./DayAssignmentModal";
 
-// Mock WorkoutSelector and ActivitySelector to avoid API calls
-vi.mock("./WorkoutSelector", () => ({
-  WorkoutSelector: ({ onSelect }: { onSelect: (id: string, name: string) => void }) => (
-    <div data-testid="mock-workout-selector">
-      <button onClick={() => onSelect("workout-1", "Push Day")}>
-        Assign Push Day
-      </button>
-    </div>
-  ),
-}));
-
+// Mock ActivitySelector and CopyDaySelector to avoid API calls
 vi.mock("./ActivitySelector", () => ({
   ActivitySelector: ({ onSelect }: { onSelect: (type: string) => void }) => (
     <div data-testid="mock-activity-selector">
       <button onClick={() => onSelect("⚽ Soccer")}>
         Select Soccer
+      </button>
+    </div>
+  ),
+}));
+
+vi.mock("./CopyDaySelector", () => ({
+  CopyDaySelector: ({ onSelect }: { onSelect: (assignment: any) => void }) => (
+    <div data-testid="mock-copy-day-selector">
+      <button onClick={() => onSelect({
+        type: "copied_day",
+        sourceProgramId: "prog-1",
+        sourceProgramName: "Push Pull Legs",
+        sourceWeekNumber: 1,
+        sourceDayNumber: 1,
+        dayLabel: "Push Day",
+        focusArea: "Push",
+      })}>
+        Select Push Day
       </button>
     </div>
   ),
@@ -44,49 +52,63 @@ describe("DayAssignmentModal", () => {
     expect(screen.getByText("Assign Day 3")).toBeInTheDocument();
   });
 
-  it("renders workout tab as active by default", () => {
+  it("renders activity tab as active by default", () => {
     render(<DayAssignmentModal {...defaultProps} />);
-    const workoutTab = screen.getByTestId("tab-workout");
-    expect(workoutTab).toHaveAttribute("aria-selected", "true");
+    const activityTab = screen.getByTestId("tab-activity");
+    expect(activityTab).toHaveAttribute("aria-selected", "true");
   });
 
-  it("renders WorkoutSelector when workout tab is active", () => {
+  it("renders ActivitySelector when activity tab is active by default", () => {
     render(<DayAssignmentModal {...defaultProps} />);
-    expect(screen.getByTestId("mock-workout-selector")).toBeInTheDocument();
-  });
-
-  it("switches to activity tab and renders ActivitySelector", async () => {
-    const user = userEvent.setup();
-    render(<DayAssignmentModal {...defaultProps} />);
-
-    await user.click(screen.getByTestId("tab-activity"));
     expect(screen.getByTestId("mock-activity-selector")).toBeInTheDocument();
-    expect(screen.queryByTestId("mock-workout-selector")).not.toBeInTheDocument();
   });
 
-  it("calls onAssign with workout type when a workout is selected", async () => {
-    const user = userEvent.setup();
-    const onAssign = vi.fn();
-    render(<DayAssignmentModal {...defaultProps} onAssign={onAssign} />);
+  it("does not render a Workout tab", () => {
+    render(<DayAssignmentModal {...defaultProps} />);
+    expect(screen.queryByTestId("tab-workout")).not.toBeInTheDocument();
+  });
 
-    await user.click(screen.getByText("Assign Push Day"));
-    expect(onAssign).toHaveBeenCalledWith({
-      type: "workout",
-      workoutId: "workout-1",
-      workoutName: "Push Day",
-    });
+  it("renders Copy Day tab", () => {
+    render(<DayAssignmentModal {...defaultProps} />);
+    expect(screen.getByTestId("tab-copy-day")).toBeInTheDocument();
+    expect(screen.getByText("📋 Copy Day")).toBeInTheDocument();
+  });
+
+  it("switches to Copy Day tab and renders CopyDaySelector", async () => {
+    const user = userEvent.setup();
+    render(<DayAssignmentModal {...defaultProps} />);
+
+    await user.click(screen.getByTestId("tab-copy-day"));
+    expect(screen.getByTestId("mock-copy-day-selector")).toBeInTheDocument();
+    expect(screen.queryByTestId("mock-activity-selector")).not.toBeInTheDocument();
   });
 
   it("calls onAssign with activity type when an activity is selected", async () => {
+    const onAssign = vi.fn();
+    render(<DayAssignmentModal {...defaultProps} onAssign={onAssign} />);
+
+    await userEvent.click(screen.getByText("Select Soccer"));
+    expect(onAssign).toHaveBeenCalledWith({
+      type: "activity",
+      activityType: "⚽ Soccer",
+    });
+  });
+
+  it("calls onAssign with copied_day assignment when a day is selected", async () => {
     const user = userEvent.setup();
     const onAssign = vi.fn();
     render(<DayAssignmentModal {...defaultProps} onAssign={onAssign} />);
 
-    await user.click(screen.getByTestId("tab-activity"));
-    await user.click(screen.getByText("Select Soccer"));
+    await user.click(screen.getByTestId("tab-copy-day"));
+    await user.click(screen.getByText("Select Push Day"));
     expect(onAssign).toHaveBeenCalledWith({
-      type: "activity",
-      activityType: "⚽ Soccer",
+      type: "copied_day",
+      sourceProgramId: "prog-1",
+      sourceProgramName: "Push Pull Legs",
+      sourceWeekNumber: 1,
+      sourceDayNumber: 1,
+      dayLabel: "Push Day",
+      focusArea: "Push",
     });
   });
 

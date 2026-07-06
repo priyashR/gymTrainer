@@ -31,7 +31,7 @@ class VaultOwnershipPropertyTest {
 
     private final VaultProgramRepository repository = Mockito.mock(VaultProgramRepository.class);
     private final UploadParser uploadParser = Mockito.mock(UploadParser.class);
-    private final VaultService service = new VaultService(repository, uploadParser);
+    private final VaultService service = new VaultService(repository, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
 
     /**
      * Property 1: For any program owned by user A, getProgram by user B (B ≠ A)

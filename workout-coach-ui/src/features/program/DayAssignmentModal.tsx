@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DayAssignment } from "./DayTile";
-import { WorkoutSelector } from "./WorkoutSelector";
 import { ActivitySelector } from "./ActivitySelector";
+import { CopyDaySelector } from "./CopyDaySelector";
 
 export interface DayAssignmentModalProps {
   isOpen: boolean;
@@ -10,7 +10,7 @@ export interface DayAssignmentModalProps {
   onClose: () => void;
 }
 
-type Tab = "workout" | "activity";
+type Tab = "activity" | "copyDay";
 
 const styles: Record<string, React.CSSProperties> = {
   backdrop: {
@@ -107,25 +107,21 @@ export const DayAssignmentModal: React.FC<DayAssignmentModalProps> = ({
   onAssign,
   onClose,
 }) => {
-  const [activeTab, setActiveTab] = useState<Tab>("workout");
+  const [activeTab, setActiveTab] = useState<Tab>("activity");
 
   if (!isOpen) {
     return null;
   }
-
-  const handleWorkoutSelect = (workoutId: string, workoutName: string) => {
-    onAssign({
-      type: "workout",
-      workoutId,
-      workoutName,
-    });
-  };
 
   const handleActivitySelect = (activityType: string) => {
     onAssign({
       type: "activity",
       activityType,
     });
+  };
+
+  const handleCopyDaySelect = (assignment: DayAssignment) => {
+    onAssign(assignment);
   };
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -160,17 +156,6 @@ export const DayAssignmentModal: React.FC<DayAssignmentModalProps> = ({
         <div style={styles.tabs} role="tablist">
           <button
             type="button"
-            style={activeTab === "workout" ? styles.tabActive : styles.tab}
-            onClick={() => setActiveTab("workout")}
-            role="tab"
-            aria-selected={activeTab === "workout"}
-            aria-controls="tab-panel-workout"
-            data-testid="tab-workout"
-          >
-            💪 Workout
-          </button>
-          <button
-            type="button"
             style={activeTab === "activity" ? styles.tabActive : styles.tab}
             onClick={() => setActiveTab("activity")}
             role="tab"
@@ -180,18 +165,20 @@ export const DayAssignmentModal: React.FC<DayAssignmentModalProps> = ({
           >
             🏃 Activity
           </button>
+          <button
+            type="button"
+            style={activeTab === "copyDay" ? styles.tabActive : styles.tab}
+            onClick={() => setActiveTab("copyDay")}
+            role="tab"
+            aria-selected={activeTab === "copyDay"}
+            aria-controls="tab-panel-copy-day"
+            data-testid="tab-copy-day"
+          >
+            📋 Copy Day
+          </button>
         </div>
 
         <div style={styles.content}>
-          {activeTab === "workout" && (
-            <div
-              id="tab-panel-workout"
-              role="tabpanel"
-              data-testid="tab-panel-workout"
-            >
-              <WorkoutSelector onSelect={handleWorkoutSelect} />
-            </div>
-          )}
           {activeTab === "activity" && (
             <div
               id="tab-panel-activity"
@@ -199,6 +186,15 @@ export const DayAssignmentModal: React.FC<DayAssignmentModalProps> = ({
               data-testid="tab-panel-activity"
             >
               <ActivitySelector onSelect={handleActivitySelect} />
+            </div>
+          )}
+          {activeTab === "copyDay" && (
+            <div
+              id="tab-panel-copy-day"
+              role="tabpanel"
+              data-testid="tab-panel-copy-day"
+            >
+              <CopyDaySelector onSelect={handleCopyDaySelect} />
             </div>
           )}
         </div>

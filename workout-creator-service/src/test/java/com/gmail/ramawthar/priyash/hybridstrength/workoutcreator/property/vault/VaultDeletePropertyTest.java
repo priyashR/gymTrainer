@@ -40,7 +40,7 @@ class VaultDeletePropertyTest {
 
         VaultProgramRepository repository = Mockito.mock(VaultProgramRepository.class);
         UploadParser uploadParser = Mockito.mock(UploadParser.class);
-        VaultService service = new VaultService(repository, uploadParser);
+        VaultService service = new VaultService(repository, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
 
         // Setup: program exists and can be deleted
         when(repository.existsByIdAndOwner(eq(programId), eq(owner))).thenReturn(true);

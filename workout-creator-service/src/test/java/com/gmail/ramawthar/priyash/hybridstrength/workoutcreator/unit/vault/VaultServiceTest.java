@@ -1,5 +1,6 @@
 package com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.unit.vault;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.exception.ProgramAccessDeniedException;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.exception.UploadValidationException;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.model.*;
@@ -57,7 +58,7 @@ class VaultServiceTest {
 
     @BeforeEach
     void setUp() {
-        service = new VaultService(vaultProgramRepository, uploadParser);
+        service = new VaultService(vaultProgramRepository, uploadParser, new ObjectMapper());
     }
 
     // ── helpers ───────────────────────────────────────────────────────────────

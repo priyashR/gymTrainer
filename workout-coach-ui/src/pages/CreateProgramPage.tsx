@@ -238,6 +238,15 @@ export const CreateProgramPage: React.FC = () => {
               activityType: day.activityType,
             };
           }
+          if (day.type === "copied_day") {
+            return {
+              dayNumber: index + 1,
+              type: "copied_day" as const,
+              sourceProgramId: day.sourceProgramId,
+              sourceWeekNumber: day.sourceWeekNumber,
+              sourceDayNumber: day.sourceDayNumber,
+            };
+          }
           return null;
         })
         .filter(Boolean),

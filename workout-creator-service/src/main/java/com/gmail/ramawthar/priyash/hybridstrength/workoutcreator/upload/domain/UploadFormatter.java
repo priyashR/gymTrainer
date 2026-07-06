@@ -117,6 +117,7 @@ public class UploadFormatter {
         return switch (modality) {
             case CROSSFIT    -> "CrossFit";
             case HYPERTROPHY -> "Hypertrophy";
+            case STRENGTH    -> "Strength";
         };
     }
 

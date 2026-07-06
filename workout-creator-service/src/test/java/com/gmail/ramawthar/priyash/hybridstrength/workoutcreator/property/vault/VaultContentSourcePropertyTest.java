@@ -57,7 +57,7 @@ class VaultContentSourcePropertyTest {
 
         VaultProgramRepository repository = Mockito.mock(VaultProgramRepository.class);
         UploadParser uploadParser = Mockito.mock(UploadParser.class);
-        VaultService service = new VaultService(repository, uploadParser);
+        VaultService service = new VaultService(repository, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
 
         when(repository.findByIdAndOwner(eq(idA), eq(owner))).thenReturn(Optional.of(programA));
         when(repository.findByIdAndOwner(eq(idB), eq(owner))).thenReturn(Optional.of(programB));
@@ -100,8 +100,8 @@ class VaultContentSourcePropertyTest {
         VaultProgramRepository repositoryA = Mockito.mock(VaultProgramRepository.class);
         VaultProgramRepository repositoryB = Mockito.mock(VaultProgramRepository.class);
         UploadParser uploadParser = Mockito.mock(UploadParser.class);
-        VaultService serviceA = new VaultService(repositoryA, uploadParser);
-        VaultService serviceB = new VaultService(repositoryB, uploadParser);
+        VaultService serviceA = new VaultService(repositoryA, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
+        VaultService serviceB = new VaultService(repositoryB, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
 
         when(repositoryA.findByIdAndOwner(eq(idA), eq(owner))).thenReturn(Optional.of(programA));
         when(repositoryA.save(any(VaultProgram.class))).thenAnswer(inv -> {

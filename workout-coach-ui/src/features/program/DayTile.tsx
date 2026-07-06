@@ -1,10 +1,17 @@
 import React from "react";
 
 export interface DayAssignment {
-  type: "workout" | "activity" | null;
+  type: "workout" | "activity" | "copied_day" | null;
   workoutId?: string;
   workoutName?: string;
   activityType?: string;
+  // Copied day fields
+  sourceProgramId?: string;
+  sourceProgramName?: string;
+  sourceWeekNumber?: number;
+  sourceDayNumber?: number;
+  dayLabel?: string;
+  focusArea?: string;
 }
 
 export interface DayTileProps {
@@ -93,9 +100,38 @@ const styles: Record<string, React.CSSProperties> = {
     transition: "background 0.15s ease",
     width: "100%",
   },
+  copiedDayBadge: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "4px",
+    fontSize: "11px",
+    fontWeight: 600,
+    color: "var(--color-accent)",
+    background: "var(--color-accent-subtle, rgba(59, 130, 246, 0.1))",
+    borderRadius: "var(--radius-sm)",
+    padding: "2px 8px",
+    width: "fit-content",
+    textTransform: "uppercase" as const,
+    letterSpacing: "0.3px",
+  },
+  copiedDayTile: {
+    background: "var(--color-bg-card)",
+    borderRadius: "var(--radius-md)",
+    border: "1px solid var(--color-accent, #3b82f6)",
+    borderLeft: "3px solid var(--color-accent, #3b82f6)",
+    padding: "var(--spacing-md)",
+    display: "flex",
+    flexDirection: "column" as const,
+    gap: "var(--spacing-sm)",
+    minHeight: "120px",
+  },
 };
 
 function getDisplayName(assignment: DayAssignment): string {
+  if (assignment.type === "copied_day") {
+    const label = assignment.dayLabel || `Week ${assignment.sourceWeekNumber} Day ${assignment.sourceDayNumber}`;
+    return `📋 ${assignment.sourceProgramName} — ${label}`;
+  }
   if (assignment.type === "workout" && assignment.workoutName) {
     return assignment.workoutName;
   }
@@ -113,10 +149,18 @@ export const DayTile: React.FC<DayTileProps> = ({
 }) => {
   const hasAssignment = assignment !== null && assignment.type !== null;
   const displayName = hasAssignment ? getDisplayName(assignment!) : null;
+  const isCopiedDay = assignment?.type === "copied_day";
+  const tileStyle = isCopiedDay ? styles.copiedDayTile : styles.tile;
 
   return (
-    <div style={styles.tile} data-testid={`day-tile-${dayNumber}`}>
+    <div style={tileStyle} data-testid={`day-tile-${dayNumber}`}>
       <p style={styles.dayLabel}>Day {dayNumber}</p>
+
+      {isCopiedDay && (
+        <span style={styles.copiedDayBadge} data-testid={`day-tile-${dayNumber}-copied-badge`}>
+          Copied Day
+        </span>
+      )}
 
       {hasAssignment ? (
         <p style={styles.assignmentName} data-testid={`day-tile-${dayNumber}-name`}>
