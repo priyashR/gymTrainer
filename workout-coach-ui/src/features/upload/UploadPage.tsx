@@ -19,6 +19,9 @@ export function UploadPage() {
 
   return (
     <main style={{ maxWidth: 900, margin: '0 auto', padding: '2rem 1rem', color: 'var(--color-text-primary)' }}>
+      <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', color: 'var(--color-accent)', textDecoration: 'none', fontSize: '15px', fontWeight: 500, marginBottom: '1rem' }}>
+        ← Home
+      </Link>
       <h1 style={{ marginBottom: '1.5rem', color: 'var(--color-text-primary)' }}>Upload Program</h1>
 
       {/* Idle — show file picker */}

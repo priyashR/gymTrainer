@@ -142,3 +142,13 @@ export function getActiveEnrollment(): Promise<EnrollmentResponse | null> {
     .then((res) => (res.status === 204 ? null : res.data));
 }
 
+/**
+ * Skip the current day of an enrollment, advancing the pointer.
+ * If the enrollment is on the last day of the last week, this will mark it as COMPLETED.
+ */
+export function skipEnrollmentDay(enrollmentId: string): Promise<EnrollmentResponse> {
+  return apiClient
+    .post<EnrollmentResponse>(`/enrollments/${enrollmentId}/skip`)
+    .then((res) => res.data);
+}
+

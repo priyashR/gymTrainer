@@ -91,6 +91,7 @@ const mockSession: SessionResponse = {
   pausedAt: null,
   completedAt: null,
   durationSeconds: null,
+  totalPausedSeconds: 0,
 };
 
 describe("useSession", () => {

@@ -274,10 +274,13 @@ export function TheaterModePage() {
     }
   }, [isPaused, pauseSession, resumeSession]);
 
-  const handleLeave = useCallback(() => {
+  const handleLeave = useCallback(async () => {
+    if (!isPaused) {
+      await pauseSession();
+    }
     release();
     navigate("/");
-  }, [release, navigate]);
+  }, [isPaused, pauseSession, release, navigate]);
 
   const currentSectionIndex = session?.currentSectionIndex ?? 0;
 
@@ -313,26 +316,43 @@ export function TheaterModePage() {
   useEffect(() => {
     if (!session) return;
 
-    const isPaused = session.status === "PAUSED";
-    const isCompleted = session.status === "COMPLETED";
+    // Clear any existing interval
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
 
-    if (isPaused || isCompleted) {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
+    const startedAtMs = new Date(session.startedAt).getTime();
+    const totalPausedMs = (session.totalPausedSeconds ?? 0) * 1000;
+
+    if (session.status === "PAUSED") {
+      // Freeze at the moment of pause
+      if (session.pausedAt) {
+        const pausedAtMs = new Date(session.pausedAt).getTime();
+        const frozen = Math.max(0, Math.floor((pausedAtMs - startedAtMs - totalPausedMs) / 1000));
+        setElapsedSeconds(frozen);
       }
       return;
     }
 
-    // Calculate initial elapsed from startedAt
-    const startedAt = new Date(session.startedAt).getTime();
-    const now = Date.now();
-    const initialElapsed = Math.floor((now - startedAt) / 1000);
-    setElapsedSeconds(Math.max(0, initialElapsed));
+    if (session.status === "COMPLETED") {
+      // Freeze at final duration
+      if (session.completedAt) {
+        const completedAtMs = new Date(session.completedAt).getTime();
+        const final = Math.max(0, Math.floor((completedAtMs - startedAtMs - totalPausedMs) / 1000));
+        setElapsedSeconds(final);
+      }
+      return;
+    }
 
+    // IN_PROGRESS — tick every second using server-authoritative totalPausedSeconds
+    const computeElapsed = () => {
+      return Math.max(0, Math.floor((Date.now() - startedAtMs - totalPausedMs) / 1000));
+    };
+
+    setElapsedSeconds(computeElapsed());
     timerRef.current = setInterval(() => {
-      const elapsed = Math.floor((Date.now() - startedAt) / 1000);
-      setElapsedSeconds(Math.max(0, elapsed));
+      setElapsedSeconds(computeElapsed());
     }, 1000);
 
     return () => {
@@ -341,7 +361,7 @@ export function TheaterModePage() {
         timerRef.current = null;
       }
     };
-  }, [session?.startedAt, session?.status]);
+  }, [session?.startedAt, session?.status, session?.pausedAt, session?.totalPausedSeconds, session?.completedAt]);
 
   // --- Wake lock: acquire on mount, release on unmount/pause/finish ---
   useEffect(() => {
@@ -515,7 +535,7 @@ export function TheaterModePage() {
   const timerConfig = getTimerConfig(workoutSnapshot, currentTierIndex);
 
   const tierLabel = currentSection
-    ? `Tier ${currentTierIndex + 1}: ${currentSection.sectionName}`
+    ? currentSection.sectionName
     : `Tier ${currentTierIndex + 1}`;
   const sectionType: SectionType = currentSection?.sectionType ?? "STRENGTH";
   const sectionTypeLabel = getSectionTypeLabel(sectionType);

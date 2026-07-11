@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../lib/apiClient";
-import { startSession } from "../lib/sessionApi";
+import { startSession, skipEnrollmentDay } from "../lib/sessionApi";
 import { getProgram } from "../lib/vaultApi";
 import { ResumeWorkoutCard } from "../features/landing/ResumeWorkoutCard";
 import { WeeklyStatsChart } from "../features/landing/WeeklyStatsChart";
@@ -314,6 +314,12 @@ export const LandingPage: React.FC = () => {
           (da) => da.dayNumber > currentDayIndex && da.type === "copied_day"
         );
         if (!hasMoreWorkouts) {
+          // Tell the backend to advance (skip) the enrollment so it gets marked COMPLETED
+          try {
+            await skipEnrollmentDay(activeEnrollment.id);
+          } catch {
+            // Best-effort: even if skip fails, hide the card locally
+          }
           setActiveEnrollment(null);
           return;
         }
@@ -328,7 +334,12 @@ export const LandingPage: React.FC = () => {
         });
         navigate(`/workout/session/${session.id}`);
       } else {
-        // No workout days left — hide the enrollment card
+        // No workout days left — skip on backend and hide the enrollment card
+        try {
+          await skipEnrollmentDay(activeEnrollment.id);
+        } catch {
+          // Best-effort
+        }
         setActiveEnrollment(null);
       }
     } catch {

@@ -92,11 +92,11 @@ export function ProgramDetailPage() {
     setWorkoutError(null);
     try {
       const activeEnrollment = await getActiveEnrollment();
-      if (activeEnrollment) {
+      if (activeEnrollment && activeEnrollment.status === "ACTIVE") {
         // Show confirmation prompt
         setConfirmReplace(true);
       } else {
-        // No active program — start directly
+        // No active program (or completed/replaced) — start directly
         await handleStartNewProgram();
       }
     } catch {
@@ -443,7 +443,7 @@ export function ProgramDetailPage() {
         <section style={{ marginTop: '1.5rem' }}>
           <h2 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: 'var(--color-text-primary)' }}>Day Assignments</h2>
           {prog.dayAssignments.map((assignment) => (
-            <DayAssignmentBlock key={assignment.dayNumber} assignment={assignment} />
+            <DayAssignmentBlock key={assignment.dayNumber} assignment={assignment} onStartStandalone={handleStartStandalone} startingWorkout={startingWorkout} />
           ))}
         </section>
       )}
@@ -651,7 +651,7 @@ function SectionBlock({ section }: { section: VaultSection }) {
   );
 }
 
-function DayAssignmentBlock({ assignment }: { assignment: DayAssignmentDetail }) {
+function DayAssignmentBlock({ assignment, onStartStandalone, startingWorkout }: { assignment: DayAssignmentDetail; onStartStandalone: (weekNumber: number, dayNumber: number) => void; startingWorkout: boolean }) {
   const [expanded, setExpanded] = useState(false);
 
   if (assignment.type === 'copied_day') {
@@ -660,6 +660,8 @@ function DayAssignmentBlock({ assignment }: { assignment: DayAssignmentDetail })
         assignment={assignment}
         expanded={expanded}
         onToggle={() => setExpanded(!expanded)}
+        onStartStandalone={onStartStandalone}
+        startingWorkout={startingWorkout}
       />
     );
   }
@@ -690,43 +692,69 @@ function CopiedDayBlock({
   assignment,
   expanded,
   onToggle,
+  onStartStandalone,
+  startingWorkout,
 }: {
   assignment: DayAssignmentDetail;
   expanded: boolean;
   onToggle: () => void;
+  onStartStandalone: (weekNumber: number, dayNumber: number) => void;
+  startingWorkout: boolean;
 }) {
   const snapshot = assignment.snapshotData;
   const provenanceText = getProvenanceText(assignment);
 
   return (
     <div style={{ marginBottom: '0.5rem' }} data-testid={`copied-day-${assignment.dayNumber}`}>
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={expanded}
-        style={{
-          width: '100%',
-          textAlign: 'left',
-          padding: '0.75rem 1rem',
-          fontSize: '0.95rem',
-          background: 'var(--color-bg-surface)',
-          border: '1px solid var(--color-accent, #3b82f6)',
-          borderLeft: '3px solid var(--color-accent, #3b82f6)',
-          borderRadius: 'var(--radius-sm)',
-          cursor: 'pointer',
-          color: 'var(--color-text-primary)',
-          minHeight: 'var(--tap-target-min)',
-        }}
-      >
-        <span style={{ fontWeight: 600 }}>Day {assignment.dayNumber}:</span>{' '}
-        📋 {snapshot?.label ?? `Copied Day`}
-        {snapshot?.focusArea && (
-          <span style={{ color: 'var(--color-text-secondary)', marginLeft: '0.5rem' }}>
-            ({snapshot.focusArea})
-          </span>
-        )}
-        <span style={{ float: 'right' }}>{expanded ? '▲' : '▼'}</span>
-      </button>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={expanded}
+          style={{
+            flex: 1,
+            textAlign: 'left',
+            padding: '0.75rem 1rem',
+            fontSize: '0.95rem',
+            background: 'var(--color-bg-surface)',
+            border: '1px solid var(--color-accent, #3b82f6)',
+            borderLeft: '3px solid var(--color-accent, #3b82f6)',
+            borderRadius: 'var(--radius-sm)',
+            cursor: 'pointer',
+            color: 'var(--color-text-primary)',
+            minHeight: 'var(--tap-target-min)',
+          }}
+        >
+          <span style={{ fontWeight: 600 }}>Day {assignment.dayNumber}:</span>{' '}
+          📋 {snapshot?.label ?? `Copied Day`}
+          {snapshot?.focusArea && (
+            <span style={{ color: 'var(--color-text-secondary)', marginLeft: '0.5rem' }}>
+              ({snapshot.focusArea})
+            </span>
+          )}
+          <span style={{ float: 'right' }}>{expanded ? '▲' : '▼'}</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => onStartStandalone(1, assignment.dayNumber)}
+          disabled={startingWorkout}
+          style={{
+            padding: '0.4rem 0.75rem',
+            background: 'var(--color-accent)',
+            color: 'var(--color-bg-primary)',
+            border: 'none',
+            borderRadius: 'var(--radius-sm)',
+            cursor: startingWorkout ? 'default' : 'pointer',
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            opacity: startingWorkout ? 0.7 : 1,
+            whiteSpace: 'nowrap',
+            minHeight: 'var(--tap-target-min)',
+          }}
+        >
+          ▶ Start
+        </button>
+      </div>
 
       {expanded && (
         <div style={{ paddingLeft: '1rem', marginTop: '0.5rem', fontSize: '0.9rem', color: 'var(--color-text-primary)' }}>
