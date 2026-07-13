@@ -3,6 +3,7 @@ package com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.property.vault
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.model.*;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.upload.domain.UploadParser;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.application.VaultService;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.ManualProgram;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.SearchCriteria;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.VaultItem;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.VaultProgram;
@@ -54,7 +55,7 @@ class VaultSearchPropertyTest {
         repository.store(otherUserMatching);
 
         UploadParser uploadParser = Mockito.mock(UploadParser.class);
-        VaultService service = new VaultService(repository, uploadParser);
+        VaultService service = new VaultService(repository, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
 
         SearchCriteria criteria = new SearchCriteria(keyword, null, null);
         Pageable pageable = PageRequest.of(0, 100);
@@ -86,7 +87,7 @@ class VaultSearchPropertyTest {
 
         VaultProgramRepository repository = Mockito.mock(VaultProgramRepository.class);
         UploadParser uploadParser = Mockito.mock(UploadParser.class);
-        VaultService service = new VaultService(repository, uploadParser);
+        VaultService service = new VaultService(repository, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
 
         SearchCriteria criteria = new SearchCriteria(blankQuery, null, null);
         Pageable pageable = PageRequest.of(0, 20);
@@ -128,7 +129,7 @@ class VaultSearchPropertyTest {
         repository.store(nameMatch2);
 
         UploadParser uploadParser = Mockito.mock(UploadParser.class);
-        VaultService service = new VaultService(repository, uploadParser);
+        VaultService service = new VaultService(repository, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
 
         SearchCriteria criteria = new SearchCriteria(keyword, null, null);
         Pageable pageable = PageRequest.of(0, 100);
@@ -180,7 +181,7 @@ class VaultSearchPropertyTest {
         repository.store(noMatch);
 
         UploadParser uploadParser = Mockito.mock(UploadParser.class);
-        VaultService service = new VaultService(repository, uploadParser);
+        VaultService service = new VaultService(repository, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
 
         SearchCriteria criteria = new SearchCriteria(null, focusArea, modality.name());
         Pageable pageable = PageRequest.of(0, 100);
@@ -333,6 +334,11 @@ class VaultSearchPropertyTest {
             return p.program().getWeeks().stream()
                     .flatMap(w -> w.getDays().stream())
                     .anyMatch(d -> d.getModality().name().toLowerCase().equals(filter));
+        }
+
+        @Override
+        public void saveManualProgram(ManualProgram program) {
+            // no-op for search tests
         }
 
         private VaultItem toVaultItem(VaultProgram p) {

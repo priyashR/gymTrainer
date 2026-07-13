@@ -1,5 +1,6 @@
 package com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.ports.outbound;
 
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.ManualProgram;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.SearchCriteria;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.VaultItem;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.VaultProgram;
@@ -26,4 +27,6 @@ public interface VaultProgramRepository {
     boolean existsByIdAndOwner(UUID id, String ownerUserId);
 
     Page<VaultItem> search(SearchCriteria criteria, String ownerUserId, Pageable pageable);
+
+    void saveManualProgram(ManualProgram program);
 }

@@ -47,7 +47,7 @@ class VaultUpdatePropertyTest {
 
         VaultProgramRepository repository = Mockito.mock(VaultProgramRepository.class);
         UploadParser uploadParser = Mockito.mock(UploadParser.class);
-        VaultService service = new VaultService(repository, uploadParser);
+        VaultService service = new VaultService(repository, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
 
         UUID programId = UUID.randomUUID();
         String owner = "owner-user";
@@ -91,7 +91,7 @@ class VaultUpdatePropertyTest {
 
         VaultProgramRepository repository = Mockito.mock(VaultProgramRepository.class);
         UploadParser uploadParser = Mockito.mock(UploadParser.class);
-        VaultService service = new VaultService(repository, uploadParser);
+        VaultService service = new VaultService(repository, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
 
         UUID programId = UUID.randomUUID();
         String owner = "immutable-owner";
@@ -138,7 +138,7 @@ class VaultUpdatePropertyTest {
 
         VaultProgramRepository repository = Mockito.mock(VaultProgramRepository.class);
         UploadParser uploadParser = Mockito.mock(UploadParser.class);
-        VaultService service = new VaultService(repository, uploadParser);
+        VaultService service = new VaultService(repository, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
 
         UUID programId = UUID.randomUUID();
         String owner = "owner-user";

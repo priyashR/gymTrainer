@@ -485,7 +485,21 @@ public class SessionService implements StartSessionUseCase, GetSessionUseCase,
             }
         }
 
-        // Structure 2: root is the day itself (single workout)
+        // Structure 2: Manual program with dayAssignments containing snapshotData
+        // { "contentSource": "MANUAL", "dayAssignments": [ { "dayNumber": 1, "type": "copied_day", "snapshotData": {...} } ] }
+        JsonNode dayAssignmentsNode = root.get("dayAssignments");
+        if (dayAssignmentsNode != null && dayAssignmentsNode.isArray()) {
+            for (JsonNode assignment : dayAssignmentsNode) {
+                if (assignment.has("dayNumber") && assignment.get("dayNumber").asInt() == dayNumber) {
+                    JsonNode snapshotData = assignment.get("snapshotData");
+                    if (snapshotData != null && snapshotData.has("sections")) {
+                        return snapshotData;
+                    }
+                }
+            }
+        }
+
+        // Structure 3: root is the day itself (single workout)
         if (root.has("sections")) {
             return root;
         }

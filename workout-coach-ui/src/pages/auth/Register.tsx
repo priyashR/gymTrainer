@@ -63,18 +63,26 @@ export default function Register() {
   }
 
   return (
-    <main style={{ maxWidth: 400, margin: "2rem auto", padding: "0 1rem" }}>
-      <h1>Create an account</h1>
+    <main style={{
+      maxWidth: 400,
+      margin: "2rem auto",
+      padding: "var(--spacing-lg)",
+      background: "var(--color-bg-surface)",
+      borderRadius: "var(--radius-md)",
+      border: "1px solid var(--color-border)",
+      fontFamily: "var(--font-sans)",
+    }}>
+      <h1 style={{ color: "var(--color-text-primary)", marginBottom: "var(--spacing-lg)" }}>Create an account</h1>
 
       {serverError && (
-        <div role="alert" style={{ color: "crimson", marginBottom: "1rem" }}>
+        <div role="alert" style={{ color: "var(--color-error)", marginBottom: "var(--spacing-md)" }}>
           {serverError}
         </div>
       )}
 
       <form onSubmit={handleSubmit} noValidate>
-        <div style={{ marginBottom: "1rem" }}>
-          <label htmlFor="email">Email</label>
+        <div style={{ marginBottom: "var(--spacing-md)" }}>
+          <label htmlFor="email" style={{ color: "var(--color-text-primary)", display: "block", marginBottom: "var(--spacing-xs)" }}>Email</label>
           <input
             id="email"
             type="email"
@@ -85,17 +93,26 @@ export default function Register() {
             }}
             aria-invalid={!!fieldErrors.email || undefined}
             aria-describedby={fieldErrors.email ? "email-error" : undefined}
-            style={{ display: "block", width: "100%" }}
+            style={{
+              display: "block",
+              width: "100%",
+              padding: "var(--spacing-sm) var(--spacing-md)",
+              background: "var(--color-bg-card)",
+              color: "var(--color-text-primary)",
+              border: "1px solid var(--color-border)",
+              borderRadius: "var(--radius-sm)",
+              fontSize: "1rem",
+            }}
           />
           {fieldErrors.email && (
-            <span id="email-error" style={{ color: "crimson", fontSize: "0.875rem" }}>
+            <span id="email-error" style={{ color: "var(--color-error)", fontSize: "0.875rem" }}>
               {fieldErrors.email}
             </span>
           )}
         </div>
 
-        <div style={{ marginBottom: "1rem" }}>
-          <label htmlFor="password">Password</label>
+        <div style={{ marginBottom: "var(--spacing-md)" }}>
+          <label htmlFor="password" style={{ color: "var(--color-text-primary)", display: "block", marginBottom: "var(--spacing-xs)" }}>Password</label>
           <input
             id="password"
             type="password"
@@ -106,22 +123,48 @@ export default function Register() {
             }}
             aria-invalid={!!fieldErrors.password || undefined}
             aria-describedby={fieldErrors.password ? "password-error" : undefined}
-            style={{ display: "block", width: "100%" }}
+            style={{
+              display: "block",
+              width: "100%",
+              padding: "var(--spacing-sm) var(--spacing-md)",
+              background: "var(--color-bg-card)",
+              color: "var(--color-text-primary)",
+              border: "1px solid var(--color-border)",
+              borderRadius: "var(--radius-sm)",
+              fontSize: "1rem",
+            }}
           />
           {fieldErrors.password && (
-            <span id="password-error" style={{ color: "crimson", fontSize: "0.875rem" }}>
+            <span id="password-error" style={{ color: "var(--color-error)", fontSize: "0.875rem" }}>
               {fieldErrors.password}
             </span>
           )}
         </div>
 
-        <button type="submit" disabled={submitting} style={{ width: "100%" }}>
+        <button
+          type="submit"
+          disabled={submitting}
+          style={{
+            width: "100%",
+            padding: "var(--spacing-sm) var(--spacing-md)",
+            background: "var(--color-accent)",
+            color: "var(--color-bg-primary)",
+            border: "none",
+            borderRadius: "var(--radius-sm)",
+            fontSize: "1rem",
+            fontWeight: 600,
+            cursor: submitting ? "default" : "pointer",
+            opacity: submitting ? 0.7 : 1,
+            minHeight: "var(--tap-target-min)",
+          }}
+        >
           {submitting ? "Creating account…" : "Register"}
         </button>
       </form>
 
-      <p style={{ marginTop: "1rem", textAlign: "center" }}>
-        Already have an account? <Link to="/login">Log in</Link>
+      <p style={{ marginTop: "var(--spacing-md)", textAlign: "center", color: "var(--color-text-secondary)" }}>
+        Already have an account?{" "}
+        <Link to="/login" style={{ color: "var(--color-accent)" }}>Log in</Link>
       </p>
     </main>
   );

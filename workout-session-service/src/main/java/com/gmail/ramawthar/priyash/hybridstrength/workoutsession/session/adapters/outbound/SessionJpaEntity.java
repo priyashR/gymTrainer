@@ -10,6 +10,8 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.util.List;
@@ -48,10 +50,11 @@ class SessionJpaEntity {
     @Column(name = "current_section_index", nullable = false)
     private int currentSectionIndex;
 
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "workout_snapshot", nullable = false, columnDefinition = "jsonb")
     private String workoutSnapshot;
 
-    @Convert(converter = SectionProgressListConverter.class)
+    @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "section_progresses", nullable = false, columnDefinition = "jsonb")
     private List<SectionProgressDto> sectionProgresses;
 

@@ -5,6 +5,23 @@ import type {
   VaultProgramDetail,
 } from "../types/vault";
 
+// --- Program Days (Browse) Types ---
+
+export interface DayEntry {
+  dayNumber: number;
+  label: string;
+  focusArea: string;
+}
+
+export interface WeekDays {
+  weekNumber: number;
+  days: DayEntry[];
+}
+
+export interface ProgramDaysResponse {
+  weeks: WeekDays[];
+}
+
 /**
  * List all programs in the authenticated user's vault (paginated).
  */
@@ -75,5 +92,16 @@ export function searchPrograms(
         size,
       },
     })
+    .then((res) => res.data);
+}
+
+/**
+ * Get available days for a program, grouped by week.
+ */
+export function getProgramDays(
+  programId: string
+): Promise<ProgramDaysResponse> {
+  return apiClient
+    .get<ProgramDaysResponse>(`/vault/programs/${programId}/days`)
     .then((res) => res.data);
 }

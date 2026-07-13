@@ -364,8 +364,9 @@ public class UploadParser {
         return switch (value) {
             case "CrossFit"    -> Modality.CROSSFIT;
             case "Hypertrophy" -> Modality.HYPERTROPHY;
+            case "Strength"    -> Modality.STRENGTH;
             default -> {
-                errors.add(new UploadValidationError(errorPath, "modality must be one of: CrossFit, Hypertrophy"));
+                errors.add(new UploadValidationError(errorPath, "modality must be one of: CrossFit, Hypertrophy, Strength"));
                 yield null;
             }
         };

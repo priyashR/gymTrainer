@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/hybridstrength_dev
+    url: jdbc:postgresql://localhost:30432/hybridstrength_dev
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
@@ -11,6 +11,8 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+    out-of-order: true
+    validate-on-migrate: false
 
 # JWT public key is intentionally absent here.
 # The integration test generates its own RSA key pair and registers the public key

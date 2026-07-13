@@ -61,24 +61,32 @@ export default function Login() {
   }
 
   return (
-    <main style={{ maxWidth: 400, margin: "2rem auto", padding: "0 1rem" }}>
-      <h1>Log in</h1>
+    <main style={{
+      maxWidth: 400,
+      margin: "2rem auto",
+      padding: "var(--spacing-lg)",
+      background: "var(--color-bg-surface)",
+      borderRadius: "var(--radius-md)",
+      border: "1px solid var(--color-border)",
+      fontFamily: "var(--font-sans)",
+    }}>
+      <h1 style={{ color: "var(--color-text-primary)", marginBottom: "var(--spacing-lg)" }}>Log in</h1>
 
       {justRegistered && (
-        <div role="status" style={{ color: "green", marginBottom: "1rem" }}>
+        <div role="status" style={{ color: "var(--color-success)", marginBottom: "var(--spacing-md)" }}>
           Registration successful. Please log in.
         </div>
       )}
 
       {serverError && (
-        <div role="alert" style={{ color: "crimson", marginBottom: "1rem" }}>
+        <div role="alert" style={{ color: "var(--color-error)", marginBottom: "var(--spacing-md)" }}>
           {serverError}
         </div>
       )}
 
       <form onSubmit={handleSubmit} noValidate>
-        <div style={{ marginBottom: "1rem" }}>
-          <label htmlFor="email">Email</label>
+        <div style={{ marginBottom: "var(--spacing-md)" }}>
+          <label htmlFor="email" style={{ color: "var(--color-text-primary)", display: "block", marginBottom: "var(--spacing-xs)" }}>Email</label>
           <input
             id="email"
             type="email"
@@ -89,17 +97,26 @@ export default function Login() {
             }}
             aria-invalid={!!fieldErrors.email || undefined}
             aria-describedby={fieldErrors.email ? "email-error" : undefined}
-            style={{ display: "block", width: "100%" }}
+            style={{
+              display: "block",
+              width: "100%",
+              padding: "var(--spacing-sm) var(--spacing-md)",
+              background: "var(--color-bg-card)",
+              color: "var(--color-text-primary)",
+              border: "1px solid var(--color-border)",
+              borderRadius: "var(--radius-sm)",
+              fontSize: "1rem",
+            }}
           />
           {fieldErrors.email && (
-            <span id="email-error" style={{ color: "crimson", fontSize: "0.875rem" }}>
+            <span id="email-error" style={{ color: "var(--color-error)", fontSize: "0.875rem" }}>
               {fieldErrors.email}
             </span>
           )}
         </div>
 
-        <div style={{ marginBottom: "1rem" }}>
-          <label htmlFor="password">Password</label>
+        <div style={{ marginBottom: "var(--spacing-md)" }}>
+          <label htmlFor="password" style={{ color: "var(--color-text-primary)", display: "block", marginBottom: "var(--spacing-xs)" }}>Password</label>
           <input
             id="password"
             type="password"
@@ -110,22 +127,48 @@ export default function Login() {
             }}
             aria-invalid={!!fieldErrors.password || undefined}
             aria-describedby={fieldErrors.password ? "password-error" : undefined}
-            style={{ display: "block", width: "100%" }}
+            style={{
+              display: "block",
+              width: "100%",
+              padding: "var(--spacing-sm) var(--spacing-md)",
+              background: "var(--color-bg-card)",
+              color: "var(--color-text-primary)",
+              border: "1px solid var(--color-border)",
+              borderRadius: "var(--radius-sm)",
+              fontSize: "1rem",
+            }}
           />
           {fieldErrors.password && (
-            <span id="password-error" style={{ color: "crimson", fontSize: "0.875rem" }}>
+            <span id="password-error" style={{ color: "var(--color-error)", fontSize: "0.875rem" }}>
               {fieldErrors.password}
             </span>
           )}
         </div>
 
-        <button type="submit" disabled={submitting} style={{ width: "100%" }}>
+        <button
+          type="submit"
+          disabled={submitting}
+          style={{
+            width: "100%",
+            padding: "var(--spacing-sm) var(--spacing-md)",
+            background: "var(--color-accent)",
+            color: "var(--color-bg-primary)",
+            border: "none",
+            borderRadius: "var(--radius-sm)",
+            fontSize: "1rem",
+            fontWeight: 600,
+            cursor: submitting ? "default" : "pointer",
+            opacity: submitting ? 0.7 : 1,
+            minHeight: "var(--tap-target-min)",
+          }}
+        >
           {submitting ? "Logging in…" : "Log in"}
         </button>
       </form>
 
-      <p style={{ marginTop: "1rem", textAlign: "center" }}>
-        Don&apos;t have an account? <Link to="/register">Register</Link>
+      <p style={{ marginTop: "var(--spacing-md)", textAlign: "center", color: "var(--color-text-secondary)" }}>
+        Don&apos;t have an account?{" "}
+        <Link to="/register" style={{ color: "var(--color-accent)" }}>Register</Link>
       </p>
     </main>
   );

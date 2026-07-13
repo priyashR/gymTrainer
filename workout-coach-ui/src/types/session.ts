@@ -156,6 +156,7 @@ export interface SessionResponse {
   pausedAt: string | null; // ISO-8601
   completedAt: string | null; // ISO-8601
   durationSeconds: number | null;
+  totalPausedSeconds: number; // Total seconds accumulated in paused state from previous pause/resume cycles
 }
 
 export interface EnrollmentResponse {

@@ -3,6 +3,7 @@ package com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.property.vault
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.model.*;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.upload.domain.UploadParser;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.application.VaultService;
+import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.ManualProgram;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.SearchCriteria;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.VaultItem;
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.vault.domain.VaultProgram;
@@ -45,7 +46,7 @@ class VaultPaginationPropertyTest {
         programs.forEach(repository::store);
 
         UploadParser uploadParser = Mockito.mock(UploadParser.class);
-        VaultService service = new VaultService(repository, uploadParser);
+        VaultService service = new VaultService(repository, uploadParser, new com.fasterxml.jackson.databind.ObjectMapper());
 
         // Collect all items across all pages
         List<VaultItem> allItems = new ArrayList<>();
@@ -152,6 +153,11 @@ class VaultPaginationPropertyTest {
         @Override
         public Page<VaultItem> search(SearchCriteria criteria, String ownerUserId, Pageable pageable) {
             return Page.empty(pageable);
+        }
+
+        @Override
+        public void saveManualProgram(ManualProgram program) {
+            // no-op for pagination tests
         }
 
         private VaultItem toVaultItem(VaultProgram p) {

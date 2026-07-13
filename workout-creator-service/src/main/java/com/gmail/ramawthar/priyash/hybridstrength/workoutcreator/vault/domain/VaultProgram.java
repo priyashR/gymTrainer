@@ -4,6 +4,7 @@ import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.model.Co
 import com.gmail.ramawthar.priyash.hybridstrength.workoutcreator.common.model.Program;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -17,5 +18,14 @@ public record VaultProgram(
         String ownerUserId,
         ContentSource contentSource,
         Instant createdAt,
-        Instant updatedAt
-) {}
+        Instant updatedAt,
+        List<DayAssignment> dayAssignments
+) {
+    /**
+     * Backwards-compatible constructor for programs without day assignments (AI/Uploaded).
+     */
+    public VaultProgram(UUID id, Program program, String ownerUserId,
+                        ContentSource contentSource, Instant createdAt, Instant updatedAt) {
+        this(id, program, ownerUserId, contentSource, createdAt, updatedAt, List.of());
+    }
+}

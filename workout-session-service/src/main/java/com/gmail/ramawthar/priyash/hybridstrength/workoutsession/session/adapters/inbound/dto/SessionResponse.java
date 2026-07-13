@@ -21,7 +21,8 @@ public record SessionResponse(
         Instant startedAt,
         Instant pausedAt,
         Instant completedAt,
-        Integer durationSeconds
+        Integer durationSeconds,
+        long totalPausedSeconds
 ) {
 
     /**
@@ -41,7 +42,8 @@ public record SessionResponse(
                 session.getStartedAt(),
                 session.getPausedAt(),
                 session.getCompletedAt(),
-                session.getDurationSeconds()
+                session.getDurationSeconds(),
+                session.getTotalPausedSeconds()
         );
     }
 
