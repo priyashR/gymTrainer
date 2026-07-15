@@ -1,0 +1,95 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: workout-creator-service-config
+  namespace: prod
+data:
+  SPRING_PROFILES_ACTIVE: prod
+  DB_URL: jdbc:postgresql://postgres:5432/hybridstrength_prod
+  SERVER_PORT: "8082"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: workout-creator-service-secret
+  namespace: prod
+type: Opaque
+stringData:
+  DB_USERNAME: hybridstrength
+  DB_PASSWORD: changeme-use-strong-password
+  JWT_PUBLICKEYPEM: |
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwXWJKWsQX+a3oEd4Q1LM
+    GcQYhld3V7qZFXDAIJRvqHbHIexpinO0FS8+kqYM0A5MYk0DjWNDZS7/CzpbFFl7
+    Zd/CKV65aW7ErUH/MQ3XkrV3bJb7clR743r0sku3/yILMMZ5df/hEVoPCnt6xI4Y
+    t/dDhA+k3/HQ0vosxWSkicW6SqNFGYHyfXgFubQb/t92cu4BkXLjgoiUydvSoNLC
+    GkAsyuVRl5UcPR7fGmzDIzmdE5233Ix4jUMaD2iT7kZS2XVtx4KuvmdUKiz26zlC
+    Qz22YeK8mjsef1L6KrYzTJhMDxDo8OoVrQrp3dQQ1i10JoF9PtDirFNMeNA3F4jI
+    2wIDAQAB
+    -----END PUBLIC KEY-----
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workout-creator-service
+  namespace: prod
+  labels:
+    app: workout-creator-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: workout-creator-service
+  template:
+    metadata:
+      labels:
+        app: workout-creator-service
+    spec:
+      containers:
+        - name: workout-creator-service
+          image: priyash/gym-app:workout-creator-service-latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8082
+          envFrom:
+            - configMapRef:
+                name: workout-creator-service-config
+            - secretRef:
+                name: workout-creator-service-secret
+          env:
+            - name: JWT_PUBLICKEYPEM
+              valueFrom:
+                secretKeyRef:
+                  name: workout-creator-service-secret
+                  key: JWT_PUBLICKEYPEM
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8082
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8082
+            initialDelaySeconds: 90
+            periodSeconds: 15
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: workout-creator-service
+  namespace: prod
+spec:
+  selector:
+    app: workout-creator-service
+  ports:
+    - port: 8082
+      targetPort: 8082
